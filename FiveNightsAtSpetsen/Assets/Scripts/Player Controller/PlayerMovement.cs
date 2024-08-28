@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
-    public float moveDrag;
 
     public Transform orientation;
 
@@ -25,8 +24,6 @@ public class PlayerMovement : MonoBehaviour
         SetInput();
 
         SpeedControl();
-
-        rb.drag = moveDrag;
     }
 
     void FixedUpdate()
