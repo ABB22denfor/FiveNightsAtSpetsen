@@ -3,20 +3,20 @@ using System.Collections.Generic;
 
 public class TeacherMovement : MonoBehaviour
 {
-    public List<Vector3> targets = new();
-    public Vector3 currentTarget;
-    public float moveSpeed = 5.0f;
-    int posMod = -1;
+    public TeacherPath path;
 
+    public Vector3 target;
+    public float moveSpeed = 5.0f;
     Vector3 startPosition;
 
     Rigidbody rb;
 
-
     void Start()
     {
         startPosition = transform.position;
-        currentTarget = targets[0];
+
+        path.Next();
+        target = path.GetPos();
 
         rb = GetComponent<Rigidbody>();
 
@@ -24,7 +24,7 @@ public class TeacherMovement : MonoBehaviour
     }
     void Update()
     {
-        Vector3 direction = currentTarget - transform.position;
+        Vector3 direction = target - transform.position;
         float distanceToTarget = direction.magnitude;
 
         if (distanceToTarget > 0.1f)
@@ -36,14 +36,10 @@ public class TeacherMovement : MonoBehaviour
         else
         {
             rb.velocity = Vector3.zero;
+            startPosition = target;
 
-            startPosition = currentTarget;
-
-            int index = targets.IndexOf(currentTarget);
-            if (index == targets.Count - 1 || index == 0)
-                posMod *= -1;
-
-            currentTarget = targets[index + posMod];
+            path.Next();
+            target = path.GetPos();
         }
     }
 
