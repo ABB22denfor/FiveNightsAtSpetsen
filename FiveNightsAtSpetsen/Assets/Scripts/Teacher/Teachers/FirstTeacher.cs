@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class FirstTeacher : Teacher
 {
-    void Start()
+    protected override void Init()
     {
         delays = new() {
             ("Start", 2f),

@@ -12,21 +12,22 @@ public class TeacherMovement : MonoBehaviour
     Rigidbody rb;
 
     public bool idling = false;
+    public bool chasingPlayer = false;
 
     void Start()
     {
         startPosition = transform.position;
 
-        teacher.path.Next();
-        target = teacher.path.GetPos();
+        target = transform.position;
 
         rb = GetComponent<Rigidbody>();
 
         rb.isKinematic = false;
     }
+
     void Update()
     {
-        if (idling) return;
+        if (startPosition == target) return;
 
         Vector3 direction = target - transform.position;
         float distanceToTarget = direction.magnitude;
@@ -42,21 +43,16 @@ public class TeacherMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
             startPosition = target;
 
-            teacher.ReachedNewWaypoint();
-            idling = true;
+            teacher.ReachedTarget();
         }
     }
 
-    public System.Collections.IEnumerator MoveToNext(float delay)
+    public void SetTarget(Vector3 target)
     {
-        yield return new WaitForSeconds(delay);
-        idling = false;
-
-        teacher.path.Next();
-        target = teacher.path.GetPos();
+        this.target = target;
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         if (target == null) return;
 

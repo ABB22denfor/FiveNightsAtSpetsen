@@ -37,7 +37,7 @@ public class TeacherPath : MonoBehaviour
         return waypoints.waypoints[path[pathIndex]];
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         if (waypoints == null || waypoints.waypoints.Contains(null)) return;
 
