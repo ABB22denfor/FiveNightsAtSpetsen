@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class TeacherPath : MonoBehaviour
 {
-    public TeacherWaypoints waypoints;
+    public TeacherWaypointsManager waypoints;
     public List<int> path = new() { 0, 1, 4, 6, 1 };
     public PathingType pathing = PathingType.Repeating;
     public int pathIndex = 0;
@@ -29,11 +29,18 @@ public class TeacherPath : MonoBehaviour
 
     public Vector3 GetPos()
     {
-        return waypoints.points[path[pathIndex]].position;
+        return waypoints.waypoints[path[pathIndex]].transform.position;
+    }
+
+    public TeacherWaypoint GetWaypoint()
+    {
+        return waypoints.waypoints[path[pathIndex]];
     }
 
     void OnDrawGizmos()
     {
+        if (waypoints == null || waypoints.waypoints.Contains(null)) return;
+
         for (int i = 0; i < path.Count - 1; i++)
         {
             Vector3 start = GizmoGetPos(i);
@@ -47,6 +54,6 @@ public class TeacherPath : MonoBehaviour
 
     Vector3 GizmoGetPos(int i)
     {
-        return waypoints.points[path[i]].position;
+        return waypoints.waypoints[path[i]].transform.position;
     }
 }

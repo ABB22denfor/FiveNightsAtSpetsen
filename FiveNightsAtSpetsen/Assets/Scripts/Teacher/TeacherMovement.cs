@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class TeacherMovement : MonoBehaviour
 {
-    public TeacherPath path;
+    public Teacher teacher;
 
     public Vector3 target;
     public float moveSpeed = 5.0f;
@@ -11,12 +11,14 @@ public class TeacherMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    public bool idling = false;
+
     void Start()
     {
         startPosition = transform.position;
 
-        path.Next();
-        target = path.GetPos();
+        teacher.path.Next();
+        target = teacher.path.GetPos();
 
         rb = GetComponent<Rigidbody>();
 
@@ -24,6 +26,8 @@ public class TeacherMovement : MonoBehaviour
     }
     void Update()
     {
+        if (idling) return;
+
         Vector3 direction = target - transform.position;
         float distanceToTarget = direction.magnitude;
 
@@ -38,9 +42,25 @@ public class TeacherMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
             startPosition = target;
 
-            path.Next();
-            target = path.GetPos();
+            teacher.ReachedNewWaypoint();
+            idling = true;
         }
     }
 
+    public System.Collections.IEnumerator MoveToNext(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        idling = false;
+
+        teacher.path.Next();
+        target = teacher.path.GetPos();
+    }
+
+    void OnDrawGizmos()
+    {
+        if (target == null) return;
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(target, 0.5f);
+    }
 }
