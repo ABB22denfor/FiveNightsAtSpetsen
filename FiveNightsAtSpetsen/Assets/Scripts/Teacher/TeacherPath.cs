@@ -10,6 +10,7 @@ public class TeacherPath : MonoBehaviour
     int pathIndexMod = 1;
 
     public Color lineColor = Color.yellow;
+    public Color finalLineColor = Color.red;
 
     public void Next()
     {
@@ -49,6 +50,13 @@ public class TeacherPath : MonoBehaviour
             Gizmos.color = lineColor;
 
             Gizmos.DrawLine(start, end);
+        }
+
+        if (pathing == PathingType.Repeating)
+        {
+            Gizmos.color = finalLineColor;
+
+            Gizmos.DrawLine(GizmoGetPos(0), GizmoGetPos(path.Count - 1));
         }
     }
 

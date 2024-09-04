@@ -30,13 +30,16 @@ public abstract class Teacher : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        path.Next();
-        movement.SetTarget(path.GetPos());
+        if (raycaster.player == null)
+        {
+            path.Next();
+            movement.SetTarget(path.GetPos());
+        }
     }
 
     public void PlayerSpotted(Vector3 position)
     {
-        movement.SetTarget(position);
+        movement.SetTarget(position, true);
     }
 
     public void PlayerNotSpotted()

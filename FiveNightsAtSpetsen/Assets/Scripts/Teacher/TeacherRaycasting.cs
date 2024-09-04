@@ -10,8 +10,12 @@ public class TeacherRaycasting : MonoBehaviour
 
     public GameObject player;
 
+    public float timeSincePlayerSpotted = 0;
+
     void Update()
     {
+        timeSincePlayerSpotted += Time.deltaTime;
+
         Vector3 directionToTarget = target.transform.position - transform.position;
 
         if (directionToTarget.magnitude <= detectionRange)
@@ -25,8 +29,12 @@ public class TeacherRaycasting : MonoBehaviour
                     if (directionToTarget.magnitude < 2f)
                         Debug.Log("Player has been caught");
 
-                    player = target;
-                    teacher.PlayerSpotted(player.transform.position);
+                    if (timeSincePlayerSpotted >= 0.5f)
+                    {
+                        timeSincePlayerSpotted = 0f;
+                        player = target;
+                        teacher.PlayerSpotted(player.transform.position);
+                    }
                 }
                 else
                 {

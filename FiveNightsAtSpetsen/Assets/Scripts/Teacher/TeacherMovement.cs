@@ -11,8 +11,9 @@ public class TeacherMovement : MonoBehaviour
 
     Rigidbody rb;
 
-    public bool idling = false;
     public bool chasingPlayer = false;
+
+    public List<Vector3> steps;
 
     void Start()
     {
@@ -27,28 +28,57 @@ public class TeacherMovement : MonoBehaviour
 
     void Update()
     {
-        if (startPosition == target) return;
-
-        Vector3 direction = target - transform.position;
-        float distanceToTarget = direction.magnitude;
-
-        if (distanceToTarget > 0.1f)
+        if (steps.Count > 0 && !chasingPlayer)
         {
-            direction.Normalize();
+            if (startPosition == steps[^1]) return;
 
-            rb.velocity = direction * moveSpeed * Time.deltaTime * 100f;
+            Vector3 direction = steps[^1] - transform.position;
+            float distanceToTarget = direction.magnitude;
+
+            if (distanceToTarget > 0.1f)
+            {
+                direction.Normalize();
+
+                rb.velocity = direction * moveSpeed * Time.deltaTime * 100f;
+            }
+            else
+            {
+                rb.velocity = Vector3.zero;
+                startPosition = steps[^1];
+
+                steps.RemoveAt(steps.Count - 1);
+            }
         }
         else
         {
-            rb.velocity = Vector3.zero;
-            startPosition = target;
+            if (startPosition == target) return;
 
-            teacher.ReachedTarget();
+            Vector3 direction = target - transform.position;
+            float distanceToTarget = direction.magnitude;
+
+            if (distanceToTarget > 0.1f)
+            {
+                direction.Normalize();
+
+                rb.velocity = direction * moveSpeed * Time.deltaTime * 100f;
+            }
+            else
+            {
+                rb.velocity = Vector3.zero;
+                startPosition = target;
+
+                teacher.ReachedTarget();
+            }
         }
     }
 
-    public void SetTarget(Vector3 target)
+    public void SetTarget(Vector3 target, bool isPlayer = false)
     {
+        chasingPlayer = isPlayer;
+
+        if (chasingPlayer)
+            steps.Add(transform.position);
+
         this.target = target;
     }
 
