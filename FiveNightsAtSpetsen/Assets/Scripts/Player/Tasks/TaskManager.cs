@@ -5,6 +5,8 @@ public class TaskManager : MonoBehaviour
 {
     public List<TaskStep> steps = new();
     public Color lineColor = Color.blue;
+    public Color firstColor = Color.yellow;
+    public Color lastColor = Color.red;
 
     void OnEnable()
     {
@@ -50,7 +52,7 @@ public class TaskManager : MonoBehaviour
             Vector3 start = steps[i].transform.position;
             Vector3 end = steps[i + 1].transform.position;
 
-            Gizmos.color = lineColor;
+            Gizmos.color = (i == 0 ? firstColor : (i == steps.Count - 2 ? lastColor : lineColor));
 
             Gizmos.DrawLine(start, end);
         }
