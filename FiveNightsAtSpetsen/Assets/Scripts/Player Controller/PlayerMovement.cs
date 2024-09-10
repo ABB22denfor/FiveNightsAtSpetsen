@@ -6,12 +6,26 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform orientation;
 
+    public bool immobile;
+
     float horizontalInput;
     float verticalInput;
 
     Vector3 moveDirection;
 
     Rigidbody rb;
+
+    void OnEnable()
+    {
+        EventsManager.Instance.playerEvents.OnPlayerHid += HidePlayer;
+        EventsManager.Instance.playerEvents.OnPlayerRevealed += RevealPlayer;
+    }
+
+    void OnDisable()
+    {
+        EventsManager.Instance.playerEvents.OnPlayerHid -= HidePlayer;
+        EventsManager.Instance.playerEvents.OnPlayerRevealed -= RevealPlayer;
+    }
 
     void Start()
     {
@@ -21,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (immobile) return;
+
         SetInput();
 
         SpeedControl();
@@ -28,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (immobile) return;
+
         MovePlayer();
     }
 
@@ -52,5 +70,15 @@ public class PlayerMovement : MonoBehaviour
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
+    }
+
+    void HidePlayer(GameObject location)
+    {
+        immobile = true;
+    }
+
+    void RevealPlayer(GameObject location)
+    {
+        immobile = false;
     }
 }

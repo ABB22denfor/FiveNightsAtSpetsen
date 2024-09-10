@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class TeacherRaycasting : MonoBehaviour
 {
+    public bool drawVision = true;
     public Teacher teacher;
 
     public GameObject target;
     public float detectionRange = 10f;
     public LayerMask detectionLayer;
+    Renderer targetRenderer;
 
     public GameObject player;
 
     public float timeSincePlayerSpotted = 0;
+
+    void Start()
+    {
+        targetRenderer = target.GetComponentInChildren<Renderer>();
+    }
 
     void Update()
     {
@@ -24,7 +31,7 @@ public class TeacherRaycasting : MonoBehaviour
 
             if (Physics.Raycast(transform.position, directionToTarget.normalized, out hit, detectionRange, detectionLayer))
             {
-                if (hit.collider.gameObject == target)
+                if (hit.collider.gameObject == target && targetRenderer.enabled)
                 {
                     if (directionToTarget.magnitude < 2f)
                         Debug.Log("Player has been caught");
@@ -66,6 +73,7 @@ public class TeacherRaycasting : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
+        if (!drawVision) return;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
