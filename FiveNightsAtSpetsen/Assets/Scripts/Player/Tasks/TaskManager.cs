@@ -35,7 +35,13 @@ public class TaskManager : MonoBehaviour
             Destroy(step.gameObject);
 
             if (steps.Count == 0)
+            {
                 Debug.Log("All task steps completed");
+            }
+            else
+            {
+                steps[0].gameObject.SetActive(true);
+            }
         }
         else
         {
