@@ -5,6 +5,7 @@ public class EventsManager : MonoBehaviour
 {
     public static EventsManager Instance { get; private set; }
     public PlayerEvents playerEvents;
+    public TaskEvents taskEvents;
 
     private void Awake()
     {
@@ -15,5 +16,6 @@ public class EventsManager : MonoBehaviour
         Instance = this;
 
         playerEvents = new();
+        taskEvents = new();
     }
 }

@@ -11,7 +11,11 @@ public abstract class Interactable : MonoBehaviour
         objectRenderer = GetComponent<Renderer>();
         if (objectRenderer != null)
             originalColor = objectRenderer.material.color;
+
+        Init();
     }
+
+    protected virtual void Init() { }
 
     public virtual void HighlightObject(bool highlight)
     {

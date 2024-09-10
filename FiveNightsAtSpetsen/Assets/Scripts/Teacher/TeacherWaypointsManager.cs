@@ -5,13 +5,11 @@ public class TeacherWaypointsManager : MonoBehaviour
 {
     public List<TeacherWaypoint> waypoints = new();
 
-    private void OnValidate()
+    void OnValidate()
     {
         waypoints.Clear();
 
-        foreach (Transform child in gameObject.transform)
-        {
+        foreach (Transform child in transform)
             waypoints.Add(child.GetComponent<TeacherWaypoint>());
-        }
     }
 }

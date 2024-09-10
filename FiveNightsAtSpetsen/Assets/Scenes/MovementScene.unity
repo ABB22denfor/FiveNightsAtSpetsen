@@ -540,7 +540,7 @@ PrefabInstance:
     - target: {fileID: 4510401185908501142, guid: 5e4f291c1c8823e4b811fe141de98702,
         type: 3}
       propertyPath: m_Name
-      value: Interactable
+      value: HidingSpot
       objectReference: {fileID: 0}
     - target: {fileID: 5850171984357317487, guid: 5e4f291c1c8823e4b811fe141de98702,
         type: 3}
