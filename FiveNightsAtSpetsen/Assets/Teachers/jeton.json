@@ -1,0 +1,45 @@
+{
+  "name": "jeton",
+  "room-lines": {
+    "classroom-1": [
+      {
+        "text":  "Jag heter Jeton och är i Klassrum 1",
+        "voice": "jeton-classroom-1-line-1.mov"
+      },
+      {
+        "text":  "Jag heter Jeton och är i Klassrum 1, igen",
+        "voice": "jeton-classroom-1-line-2.mov"
+      }
+    ],
+    "classroom-2": [
+      {
+        "text":  "Jag heter Jeton och är i Klassrum 2",
+        "voice": "jeton-classroom-2-line-1.mov"
+      },
+      {
+        "text":  "Jag heter Jeton och är i Klassrum 2, igen",
+        "voice": "jeton-classroom-2-line-2.mov"
+      }
+    ]
+  },
+  "general-lines": [
+    {
+      "text":  "Jag heter Jeton och säger bara något",
+      "voice": "jeton-line-1.mov"
+    },
+    {
+      "text":  "Jag heter Jeton och säger bara något, igen",
+      "voice": "jeton-line-2.mov"
+    }
+  ],
+  "alert-lines": [
+    {
+      "text":  "Jag heter Jeton. Vem där?",
+      "voice": "jeton-alert-line-1.move"
+    },
+    {
+      "text":  "Jag heter Jeton. Vem var det?",
+      "voice": "jeton-alert-line-2.move"
+    }
+  ]
+}

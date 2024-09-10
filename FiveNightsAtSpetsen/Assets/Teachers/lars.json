@@ -1,0 +1,45 @@
+{
+  "name": "lars",
+  "room-lines": {
+    "classroom-1": [
+      {
+        "text":  "Jag heter Lars och är i Klassrum 1",
+        "voice": "lars-classroom-1-line-1.mov"
+      },
+      {
+        "text":  "Jag heter Lars och är i Klassrum 1, igen",
+        "voice": "lars-classroom-1-line-2.mov"
+      }
+    ],
+    "classroom-2": [
+      {
+        "text":  "Jag heter Lars och är i Klassrum 2",
+        "voice": "lars-classroom-2-line-1.mov"
+      },
+      {
+        "text":  "Jag heter Lars och är i Klassrum 2, igen",
+        "voice": "lars-classroom-2-line-2.mov"
+      }
+    ]
+  },
+  "general-lines": [
+    {
+      "text":  "Jag heter Lars och säger bara något",
+      "voice": "lars-line-1.mov"
+    },
+    {
+      "text":  "Jag heter Lars och säger bara något, igen",
+      "voice": "lars-line-2.mov"
+    }
+  ],
+  "alert-lines": [
+    {
+      "text":  "Jag heter Lars. Vem där?",
+      "voice": "lars-alert-line-1.move"
+    },
+    {
+      "text":  "Jag heter Lars. Vem var det?",
+      "voice": "lars-alert-line-2.move"
+    }
+  ]
+}
