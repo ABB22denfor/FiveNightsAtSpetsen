@@ -8,7 +8,7 @@ public class PlayerCamera : MonoBehaviour
     public Transform orientation;
 
     float xRotation;
-    float yRotation;
+    float yRotation = -180f;
 
     void Start()
     {

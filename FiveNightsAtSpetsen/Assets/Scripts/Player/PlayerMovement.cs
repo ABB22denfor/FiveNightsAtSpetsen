@@ -3,9 +3,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
-    public float moveDrag;
 
     public Transform orientation;
+
+    public bool immobile;
 
     float horizontalInput;
     float verticalInput;
@@ -13,6 +14,18 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+
+    void OnEnable()
+    {
+        EventsManager.Instance.playerEvents.OnPlayerHid += HidePlayer;
+        EventsManager.Instance.playerEvents.OnPlayerRevealed += RevealPlayer;
+    }
+
+    void OnDisable()
+    {
+        EventsManager.Instance.playerEvents.OnPlayerHid -= HidePlayer;
+        EventsManager.Instance.playerEvents.OnPlayerRevealed -= RevealPlayer;
+    }
 
     void Start()
     {
@@ -22,15 +35,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (immobile) return;
+
         SetInput();
 
         SpeedControl();
-
-        rb.drag = moveDrag;
     }
 
     void FixedUpdate()
     {
+        if (immobile) return;
+
         MovePlayer();
     }
 
@@ -55,5 +70,15 @@ public class PlayerMovement : MonoBehaviour
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
+    }
+
+    void HidePlayer(GameObject location)
+    {
+        immobile = true;
+    }
+
+    void RevealPlayer(GameObject location)
+    {
+        immobile = false;
     }
 }
