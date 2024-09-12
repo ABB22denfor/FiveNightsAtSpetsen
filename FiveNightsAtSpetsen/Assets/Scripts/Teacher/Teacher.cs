@@ -13,7 +13,8 @@ public abstract class Teacher : MonoBehaviour
     {
         Init();
 
-        ReachedTarget();
+        path.Next();
+        movement.SetTarget(path.GetPos());
     }
 
     protected abstract void Init();
@@ -22,6 +23,7 @@ public abstract class Teacher : MonoBehaviour
     {
         if (raycaster.player == null)
         {
+            EventsManager.Instance.teacherEvents.WaypointReached(path.GetWaypoint());
             StartCoroutine(MoveToNext(GetDelay()));
         }
     }
@@ -39,6 +41,8 @@ public abstract class Teacher : MonoBehaviour
 
     public void PlayerSpotted(Vector3 position)
     {
+        if (!movement.chasingPlayer)
+            EventsManager.Instance.teacherEvents.PlayerSpotted();
         movement.SetTarget(position, true);
     }
 
