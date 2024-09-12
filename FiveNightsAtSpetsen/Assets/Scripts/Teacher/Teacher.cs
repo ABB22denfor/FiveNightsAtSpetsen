@@ -9,6 +9,16 @@ public abstract class Teacher : MonoBehaviour
     public TeacherRaycasting raycaster;
     public List<(string id, float delay)> delays;
 
+    void OnEnable()
+    {
+        EventsManager.Instance.teacherEvents.OnPlayerMadeSound += PlayerMadeSound;
+    }
+
+    void OnDisable()
+    {
+        EventsManager.Instance.teacherEvents.OnPlayerMadeSound -= PlayerMadeSound;
+    }
+
     void Start()
     {
         Init();
@@ -69,5 +79,10 @@ public abstract class Teacher : MonoBehaviour
 
             return 0;
         }
+    }
+
+    void PlayerMadeSound(TeacherRoomPath room)
+    {
+        Debug.Log("Teacher heard a sound coming from " + room.gameObject.name);
     }
 }

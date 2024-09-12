@@ -13,4 +13,10 @@ public class TeacherEvents
     {
         OnPlayerSpotted?.Invoke();
     }
+
+    public event Action<TeacherRoomPath> OnPlayerMadeSound;
+    public void PlayerMadeSound(TeacherRoomPath room)
+    {
+        OnPlayerMadeSound.Invoke(room);
+    }
 }
