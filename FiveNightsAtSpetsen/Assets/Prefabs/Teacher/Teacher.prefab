@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4253633807342040710}
   - component: {fileID: 1011969166804942572}
   - component: {fileID: 8288388981843304445}
-  - component: {fileID: 2895818377229365644}
   - component: {fileID: 7864517937106545867}
   m_Layer: 0
   m_Name: Teacher
@@ -76,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3546d0fd8a84374ea2ff2d37a848de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: {fileID: 2895818377229365644}
+  pathManager: {fileID: 0}
   movement: {fileID: 8288388981843304445}
   raycaster: {fileID: 7864517937106545867}
 --- !u!114 &8288388981843304445
@@ -96,24 +95,6 @@ MonoBehaviour:
   moveSpeed: 20
   chasingPlayer: 0
   steps: []
---- !u!114 &2895818377229365644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 566564891133530414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8450e59fc3a86114c9a25e82698a7e47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: {fileID: 0}
-  path: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000010000000130000000100000014000000
-  pathing: 0
-  pathIndex: 0
-  lineColor: {r: 0.8477117, g: 1, b: 0.023584902, a: 1}
-  finalLineColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &7864517937106545867
 MonoBehaviour:
   m_ObjectHideFlags: 0

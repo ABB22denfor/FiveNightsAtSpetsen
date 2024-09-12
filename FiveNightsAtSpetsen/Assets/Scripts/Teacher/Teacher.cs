@@ -4,7 +4,7 @@ using System.Linq;
 
 public abstract class Teacher : MonoBehaviour
 {
-    public TeacherPath path;
+    public TeacherPathManager pathManager;
     public TeacherMovement movement;
     public TeacherRaycasting raycaster;
     public List<(string id, float delay)> delays;
@@ -13,8 +13,8 @@ public abstract class Teacher : MonoBehaviour
     {
         Init();
 
-        path.Next();
-        movement.SetTarget(path.GetPos());
+        pathManager.Next();
+        movement.SetTarget(pathManager.GetPos());
     }
 
     protected abstract void Init();
@@ -23,7 +23,7 @@ public abstract class Teacher : MonoBehaviour
     {
         if (raycaster.player == null)
         {
-            EventsManager.Instance.teacherEvents.WaypointReached(path.GetWaypoint());
+            EventsManager.Instance.teacherEvents.WaypointReached(pathManager.GetWaypoint());
             StartCoroutine(MoveToNext(GetDelay()));
         }
     }
@@ -34,8 +34,8 @@ public abstract class Teacher : MonoBehaviour
 
         if (raycaster.player == null)
         {
-            path.Next();
-            movement.SetTarget(path.GetPos());
+            pathManager.Next();
+            movement.SetTarget(pathManager.GetPos());
         }
     }
 
@@ -48,12 +48,12 @@ public abstract class Teacher : MonoBehaviour
 
     public void PlayerNotSpotted()
     {
-        movement.SetTarget(path.GetPos());
+        movement.SetTarget(pathManager.GetPos());
     }
 
     public float GetDelay()
     {
-        TeacherWaypoint waypoint = path.GetWaypoint();
+        TeacherWaypoint waypoint = pathManager.GetWaypoint();
 
         if (waypoint.id == "")
         {
