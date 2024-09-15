@@ -3,22 +3,20 @@
   "room-lines": {
     "classroom-1": [
       {
-        "text":  "Jag heter Jeton och är i Klassrum 1",
+        "text":  "Åh, en MQTT-server! Det påminner mig om att jag måste sätta upp en ny server hemma. Det är dags för lite uppgraderingar.”",
         "voice": "jeton-classroom-1-line-1.mov"
-      },
-      {
-        "text":  "Jag heter Jeton och är i Klassrum 1, igen",
-        "voice": "jeton-classroom-1-line-2.mov"
       }
     ],
     "classroom-2": [
       {
-        "text":  "Jag heter Jeton och är i Klassrum 2",
+        "text":  "Jag förstår inte varför så mycket kläder alltid hänger kvar. Och hur kan man glömma sina ytterskor?",
         "voice": "jeton-classroom-2-line-1.mov"
-      },
+      }
+    ],
+    "grouproom-1": [
       {
-        "text":  "Jag heter Jeton och är i Klassrum 2, igen",
-        "voice": "jeton-classroom-2-line-2.mov"
+        "text":  "Jaha, godispapper bland växterna igen. Hur svårt kan det vara att slänga skräpet på rätt ställe?",
+        "voice": "jeton-classroom-2-line-1.mov"
       }
     ]
   },
@@ -34,11 +32,15 @@
   ],
   "alert-lines": [
     {
-      "text":  "Jag heter Jeton. Vem där?",
+      "text":  "Vad var det där? Är det… Kalle Kula? Nej, det kan inte vara möjligt, eller?",
       "voice": "jeton-alert-line-1.move"
     },
     {
-      "text":  "Jag heter Jeton. Vem var det?",
+      "text":  "Hörde jag rätt? Någon där? Kalle, är det du?",
+      "voice": "jeton-alert-line-2.move"
+    },
+    {
+      "text":  "Vem är där? Kalle Kula? Om det är du, visa dig!",
       "voice": "jeton-alert-line-2.move"
     }
   ]

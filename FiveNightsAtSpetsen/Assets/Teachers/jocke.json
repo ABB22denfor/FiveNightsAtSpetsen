@@ -1,0 +1,53 @@
+{
+  "name": "jocke",
+  "room-lines": {
+    "classroom-1": [
+      {
+        "text":  “De här eleverna är verkligen något speciellt. Deras kreativitet och nyfikenhet inspirerar mig varje dag.”,
+        "voice": "lars-classroom-1-line-1.mov"
+      },
+      {
+        "text":  “Det är frustrerande att vi inte fick tillåtelse att låta eleverna skapa sina egna språkmodeller. Det hade varit en fantastisk möjlighet för dem att lära sig mer om AI.”
+,
+        "voice": "lars-classroom-1-line-2.mov"
+      }
+    ]
+  },
+  "general-lines": [
+    {
+      "text":  “Ibland undrar jag om vi verkligen kan lyckas med EHT Kollen, men då tänker jag på alla framsteg vi redan har gjort. Vi är på rätt väg.”,
+      "voice": "lars-line-1.mov"
+    },
+    {
+      "text":  “Just det, jag måste komma ihåg att uppdatera superdatorns firmware nästa vecka. Det får inte glömmas bort.”,
+      "voice": "lars-line-2.mov"
+    }
+
+ {
+      "text":  “Jag kallar dem ‘hackerman’ på skoj, men tänk om det finns en riktig ‘hackerman’ där ute?”,
+      "voice": "lars-line-2.mov"
+    }
+ {
+      "text":  “Våra elever bygger riktiga appar och spel, medan NTI-elever bara gör PowerPoint-presentationer.”
+      "voice": "lars-line-2.mov"
+    }
+ {
+      "text":  “Byggare Bob verkar alltid arbeta för det gemensamma bästa och inte för egen vinning. Kan han vara en kommunist?”,
+      "voice": "lars-line-2.mov"
+    }
+{
+      "text":  "Men han driver ju också sitt eget företag och tar på sig olika projekt. Är han en kapitalist då?",
+      "voice": "lars-line-2.mov"
+    }
+  ],
+  "alert-lines": [
+    {
+      "text":  "Jag heter Lars. Vem där?",
+      "voice": "lars-alert-line-1.move"
+    },
+    {
+      "text":  "Jag heter Lars. Vem var det?",
+      "voice": "lars-alert-line-2.move"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "name": "jonas",
+  "room-lines": {
+    "entrence": [
+      {
+        "text":  "Det är så tyst här nu… nästan som om historien själv viskar i väggarna.",
+        "voice": "jonas-entrence-line-1.mov"
+      }
+    ],
+    "library": [
+      {
+        "text":  "Det är något magiskt med att vara ensam här, omgiven av alla dessa böcker och kartor.",
+        "voice": "jonas-library-line-1.mov"
+      }
+    ],
+    "classroom-1": [
+      {
+        "text":  "Det känns som om väggarna kryper närmare för varje dag.",
+        "voice": "jonas-classroom-1-line-1.mov"
+      },
+      {
+        "text":  "Hur ska jag kunna röra mig runt här och hjälpa alla när det är så trångt?",
+        "voice": "jonas-classroom-1-line-2.mov"
+      }
+    ],
+    "classroom-2": [
+      {
+        "text":  "Jag kan åtminstone röra mig runt lite mer här, men det är fortfarande inte optimalt.",
+        "voice": "jonas-classroom-2-line-1.mov"
+      },
+      {
+        "text":  "Det är bättre än det trånga klassrummet, men fortfarande inte tillräckligt med utrymme.",
+        "voice": "jonas-classroom-2-line-2.mov"
+      }
+    ],
+    "classroom-3": [
+      {
+        "text":  "Jag älskar hur mycket utrymme vi har för kreativa aktiviteter och diskussioner.",
+        "voice": "jonas-classroom-3-line-1.mov"
+      },
+      {
+        "text":  "Äntligen, ett klassrum där jag kan röra mig fritt och interagera med alla elever!",
+        "voice": "jonas-classroom-3-line-2.mov"
+      }
+    ],
+    "grouproom-1": [
+      {
+        "text":  "Här, i detta tysta rum, kan jag nästan höra ekot av historiens revolutionära röster.",
+        "voice": "jonas-grouproom-1-line-1.mov"
+      }
+    ],
+    "techlab": [
+      {
+        "text":  "Teknik i all ära, men det är människorna bakom innovationerna som verkligen fascinerar mig.",
+        "voice": "jonas-techlab-line-1.mov"
+      }
+    ]
+  },
+  "general-lines": [
+    {
+      "text":  "Kamrater, även när jag är ensam, är jag aldrig riktigt ensam, för jag bär med mig era röster och vår gemensamma vision.",
+      "voice": "jonas-line-1.mov"
+    },
+    {
+      "text":  "Historien upprepar sig verkligen, det är fascinerande och skrämmande på samma gång.",
+      "voice": "jonas-line-2.mov"
+    },
+    {
+      "text":  "Det är fascinerande att tänka på hur historien alltid har en tendens att upprepa sig.",
+      "voice": "jonas-line-3.mov"
+    },
+    {
+      "text":  "Hur mycket jag än funderar på det, kommer jag inte på vad mer mexikaner är kända för förutom droger, karteller och tacos.",
+      "voice": "jonas-line-4.mov"
+    },
+    {
+      "text":  "Om bara mina elever kunde förstå vikten av kollektivets styrka över individens ambitioner.",
+      "voice": "jonas-line-5.mov"
+    },
+    {
+      "text":  "En dag kommer mina elever att vara de som formar framtiden. Det vågar jag inte tänka på än.",
+      "voice": "jonas-line-6.mov"
+    }
+  ],
+  "alert-lines": [
+    {
+      "text":  "",
+      "voice": "jonas-alert-line-1.mov"
+    }
+  ],
+  "sounds": [
+    {
+      "text":  "[Hostar]",
+      "sound": "jonas-sound-1.move"
+    },
+    {
+      "text":  "[Harklar sig]",
+      "sound": "jonas-sound-2.move"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "lars",
+  "room-lines": {
+    "classroom-1": [
+      {
+        "text":  “Dessa 3D-skrivare är verkligen fantastiska. Eleverna kan förvandla sina idéer till verklighet på nolltid. Det är som att ha en liten fabrik i klassrummet.”,
+        "voice": "lars-classroom-1-line-1.mov"
+      },
+      {
+        "text":  "Jag heter Lars och är i Klassrum 1, igen",
+        "voice": "lars-classroom-1-line-2.mov"
+      }
+    ],
+    "classroom-2": [
+      {
+        "text":  “Jag älskar hur varje liten bit kan bli en del av något stort. LEGO är verkligen en ingenjörs dröm.”,
+        "voice": "lars-classroom-2-line-1.mov"
+      },
+      {
+        "text":  “Med LEGO kan jag visa mina elever hur man går från idé till verklighet. Det är som att ha en hel värld av möjligheter i mina händer.”,
+        "voice": "lars-classroom-2-line-2.mov"
+      }
+    ]
+"classroom-2": [
+      {
+        "text":  “Som vanligt är disken inte gjord. Disciplin och ordning, det är vad saknas i den nya generationens vokabulär.”
+        "voice": "lars-classroom-2-line-1.mov"
+      }
+    ]
+  },
+  "general-lines": [
+    {
+      "text":  Jag har alltid sagt att med rätt lärare kan eleverna nå hur långt som helst, ja till och med till CAD-SM.",
+      "voice": "lars-line-1.mov"
+    },
+    {
+      "text":  “Vad ska jag äta imorgon?... Kanske sushi? Nej, vem försöker jag lura, det blir ju BK så klart.”,
+      "voice": "lars-line-2.mov"
+    }
+  ],
+  "alert-lines": [
+    {
+      "text":  "Jag heter Lars. Vem där?",
+      "voice": "lars-alert-line-1.move"
+    },
+    {
+      "text":  "Jag heter Lars. Vem var det?",
+      "voice": "lars-alert-line-2.move"
+    }
+  ]
+}
