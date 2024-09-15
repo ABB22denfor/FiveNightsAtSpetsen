@@ -1,84 +1,57 @@
 {
-  "name": "lars",
-  "room-lines": {
+  "rooms": {
     "classroom-1": [
       {
-        "text":  "Det här rummet behöver verkligen en makeover. Dags att mobilisera Lars logistiska legionärer för att få det skinande rent!",
-        "voice": "lars-line-2.mov"
+        "text": "Det här rummet behöver verkligen en makeover. Dags att mobilisera Lars logistiska legionärer för att få det skinande rent!",
+        "voice": "lars-rooms-classroom-1-line-0.mov"
       },
       {
-        "text":  "Oj, det här rummet behöver verkligen en uppfräschning. Lars logistiska legionärer, var är ni när man behöver er?",
-        "voice": "lars-line-2.mov"
+        "text": "Oj, det här rummet behöver verkligen en uppfräschning. Lars logistiska legionärer, var är ni när man behöver er?",
+        "voice": "lars-rooms-classroom-1-line-1.mov"
       }
     ],
     "classroom-2": [
       {
-        "text":  "Det ser ut som om jag har schemalagt två mattelektioner på fredagsmorgonen. Kan det räcka, eller ska jag smacka in en tredje på eftermiddagen?",
-        "voice": "lars-classroom-2-line-1.mov"
+        "text": "Det ser ut som om jag har schemalagt två mattelektioner på fredagsmorgonen. Kan det räcka, eller ska jag smacka in en tredje på eftermiddagen?",
+        "voice": "lars-rooms-classroom-2-line-0.mov"
       }
     ]
   },
-  "general-lines": [
+  "general": [
     {
-      "text":  "Kom ihåg, cos står för cozy! Den närliggande kateten är alltid den mysiga sidan.",
-      "voice": "lars-line-1.mov"
+      "text": "Kom ihåg, cos står för cozy! Den närliggande kateten är alltid den mysiga sidan.",
+      "voice": "lars-general-line-0.mov"
     },
     {
-      "text":  "När jag tänker på cos, tänker jag på cozy. Den närliggande kateten är alltid nära och bekväm.",
-      "voice": "lars-line-2.mov"
+      "text": "När jag tänker på cos, tänker jag på cozy. Den närliggande kateten är alltid nära och bekväm.",
+      "voice": "lars-general-line-1.mov"
     },
     {
-      "text":  "Sin är sinful, så den motstående kateten är den syndiga sidan som vi bör distansera oss till.",
-      "voice": "lars-line-2.mov"
+      "text": "Sin är sinful, så den motstående kateten är den syndiga sidan som vi bör distansera oss till.",
+      "voice": "lars-general-line-2.mov"
     },
     {
-      "text":  "För att minnas sin, tänk sinful. Den motstående kateten är den syndiga sidan som vi bör hålla oss ifrån.",
-      "voice": "lars-line-2.mov"
-    },
-   
-    {
-      "text":  "",
-      "voice": "lars-line-2.mov"
-    },
-    {
-      "text":  "",
-      "voice": "lars-line-2.mov"
-    },
-    {
-      "text":  "",
-      "voice": "lars-line-2.mov"
-    },
-    {
-      "text":  "",
-      "voice": "lars-line-2.mov"
+      "text": "För att minnas sin, tänk sinful. Den motstående kateten är den syndiga sidan som vi bör hålla oss ifrån.",
+      "voice": "lars-general-line-3.mov"
     }
   ],
-  "alert-lines": [
+  "alert": [],
+  "moving": [
     {
-      "text":  "Jag heter Lars. Vem där?",
-      "voice": "lars-alert-line-1.move"
+      "text": "[Hostar]",
+      "voice": "lars-moving-line-0.mov"
     },
     {
-      "text":  "Jag heter Lars. Vem var det?",
-      "voice": "lars-alert-line-2.move"
-    }
-  ],
-  "sounds": [
-    {
-      "text":  "[Hostar]",
-      "sound": "jonas-sound-1.move"
+      "text": "[Harklar sig]",
+      "voice": "lars-moving-line-1.mov"
     },
     {
-      "text":  "[Harklar sig]",
-      "sound": "jonas-sound-2.move"
+      "text": "Whop Whop",
+      "voice": "lars-moving-line-2.mov"
     },
     {
-      "text":  "whop whop",
-      "sound": "jonas-sound-2.move"
-    },
-    {
-      "text":  "Men vad är det som skaver? Något i strumpan igen… det var lite typiskt oskönt!",
-      "sound": "jonas-sound-2.move"
+      "text": "Men vad är det som skaver? Något i strumpan igen… det var lite typiskt oskönt!",
+      "voice": "lars-moving-line-3.mov"
     }
   ]
 }
