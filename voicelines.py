@@ -10,9 +10,7 @@ from os import listdir
 from os.path import isfile, join
 from pathlib import Path
 import json
-import sys
-
-debug = False
+from sys import argv
 
 teacher_dir = "FiveNightsAtSpetsen/Assets/Teachers/"
 
@@ -214,7 +212,7 @@ def menu_teacher_command_print_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
-        print("Teacher '%s' has no information" % teacher_name)
+        print("Teacher '%s' doesn't exist" % teacher_name)
         return
 
 
@@ -341,6 +339,7 @@ def teacher_room_lines_line_import(room_name, room_lines, generic_lines, command
         line_index_string = input("Index: ").strip().lower()
 
         if(not line_index_string):
+            print("No inputted index")
             return room_lines
 
 
@@ -348,23 +347,21 @@ def teacher_room_lines_line_import(room_name, room_lines, generic_lines, command
         line_index = int(line_index_string)
 
     except Exception as exception:
-        if(debug):
-            print(exception)
         print("Index must be an integer")
         return room_lines
 
 
-    try:
-        line_text = generic_lines[line_index]
+    if(line_index < 0 or line_index >= len(generic_lines)):
+        print("Index out of range")
+        return room_lines
 
-        room_lines.append({"text": line_text, "voice": ""})
 
-        print("Imported line: '%s'" % line_text)
+    line_text = generic_lines[line_index]
 
-    except Exception as exception:
-        if(debug):
-            print(exception)
-        print("No line with index [%d]" % line_index)
+    room_lines.append({"text": line_text, "voice": ""})
+
+    print("Imported line: '%s'" % line_text)
+
 
     return room_lines
 
@@ -377,6 +374,7 @@ def teacher_rooms_json_line_import(rooms_json, command_strings):
     room_name = room_name_input(room_names, command_strings)
 
     if(not room_name):
+        print("No inputted room")
         return rooms_json
 
     if(room_name not in room_names):
@@ -409,6 +407,7 @@ def teacher_other_lines_line_import(line_type, other_lines, generic_lines, comma
         line_index_string = input("Index: ").strip().lower()
 
         if(not line_index_string):
+            print("No inputted index")
             return other_lines
 
     
@@ -416,23 +415,21 @@ def teacher_other_lines_line_import(line_type, other_lines, generic_lines, comma
         line_index = int(line_index_string)
 
     except Exception as exception:
-        if(debug):
-            print(exception)
         print("Index must be an integer")
         return other_lines
 
 
-    try:
-        line_text = generic_lines[line_index]
+    if(line_index < 0 or line_index >= len(generic_lines)):
+        print("Index out of range")
+        return other_lines
 
-        other_lines.append({"text": line_text, "voice": ""})
 
-        print("Imported line: '%s'" % line_text)
+    line_text = generic_lines[line_index]
 
-    except Exception as exception:
-        if(debug):
-            print(exception)
-        print("No line with index [%d]" % line_index)
+    other_lines.append({"text": line_text, "voice": ""})
+
+    print("Imported line: '%s'" % line_text)
+
 
     return other_lines
 
@@ -443,6 +440,7 @@ def menu_teacher_command_import_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
+        print("Teacher '%s' doesn't exist" % teacher_name)
         return
 
     line_types = generic_line_types_get()
@@ -450,6 +448,7 @@ def menu_teacher_command_import_handler(teacher_name, command_strings):
     line_type = line_type_input(line_types, command_strings)
 
     if(not line_type):
+        print("No inputted line type")
         return
 
     if(line_type not in line_types):
@@ -482,6 +481,7 @@ def teacher_rooms_json_line_add(rooms_json, command_strings, line_text):
     room_name = room_name_input(room_names, command_strings)
 
     if(not room_name):
+        print("No inputted room")
         return rooms_json
 
     if(room_name not in room_names):
@@ -517,12 +517,14 @@ def menu_teacher_command_add_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
+        print("Teacher '%s' doesn't exist" % teacher_name)
         return
 
 
     line_text = input("Text: ").strip()
 
     if(not line_text):
+        print("No inputted line text")
         return
 
 
@@ -531,6 +533,7 @@ def menu_teacher_command_add_handler(teacher_name, command_strings):
     line_type = line_type_input(line_types, command_strings)
 
     if(not line_type):
+        print("No inputted line type")
         return
 
     if(line_type not in line_types):
@@ -629,6 +632,7 @@ def teacher_room_lines_line_set(room_name, room_lines, command_strings):
         line_index_string = input("Index: ").strip().lower()
 
         if(not line_index_string):
+            print("No inputted index")
             return room_lines
 
 
@@ -636,25 +640,23 @@ def teacher_room_lines_line_set(room_name, room_lines, command_strings):
         line_index = int(line_index_string)
 
     except Exception as exception:
-        if(debug):
-            print(exception)
         print("Index must be an integer")
+        return room_lines
+
+
+    if(line_index < 0 or line_index >= len(room_lines)):
+        print("Index out of range")
         return room_lines
 
 
     line_text = input("Text: ").strip()
 
     if(not line_text):
+        print("No inputted line text")
         return room_lines
 
 
-    try:
-        room_lines[line_index]["text"] = line_text
-
-    except Exception as exception:
-        if(debug):
-            print(exception)
-        print("No line with index [%d]" % line_index)
+    room_lines[line_index]["text"] = line_text
 
     return room_lines
 
@@ -667,6 +669,7 @@ def teacher_rooms_json_line_set(rooms_json, command_strings):
     room_name = room_name_input(room_names, command_strings)
 
     if(not room_name):
+        print("No inputted room")
         return rooms_json
 
     if(room_name not in room_names):
@@ -678,7 +681,6 @@ def teacher_rooms_json_line_set(rooms_json, command_strings):
 
 
     rooms_json[room_name] = teacher_room_lines_line_set(room_name, rooms_json[room_name], next_command_strings)
-
 
     return rooms_json
 
@@ -695,6 +697,7 @@ def teacher_other_lines_line_set(line_type, other_lines, command_strings):
         line_index_string = input("Index: ").strip().lower()
 
         if(not line_index_string):
+            print("No inputted index")
             return other_lines
 
 
@@ -702,25 +705,23 @@ def teacher_other_lines_line_set(line_type, other_lines, command_strings):
         line_index = int(line_index_string)
 
     except Exception as exception:
-        if(debug):
-            print(exception)
         print("Index must be an integer")
+        return other_lines
+
+
+    if(line_index < 0 or line_index >= len(other_lines)):
+        print("Index out of range")
         return other_lines
 
 
     line_text = input("Text: ").strip()
 
     if(not line_text):
+        print("No inputted line text")
         return other_lines
 
 
-    try:
-        other_lines[line_index]["text"] = line_text
-
-    except Exception as exception:
-        if(debug):
-            print(exception)
-        print("No line with index [%d]" % line_index)
+    other_lines[line_index]["text"] = line_text
 
     return other_lines
 
@@ -737,6 +738,7 @@ def teacher_room_lines_line_del(room_name, room_lines, command_strings):
         line_index_string = input("Index: ").strip().lower()
 
         if(not line_index_string):
+            print("No inputted index")
             return room_lines
 
 
@@ -744,23 +746,21 @@ def teacher_room_lines_line_del(room_name, room_lines, command_strings):
         line_index = int(line_index_string)
 
     except Exception as exception:
-        if(debug):
-            print(exception)
         print("Index must be an integer")
         return room_lines
 
 
-    try:
-        line_text = room_lines[line_index]["text"]
+    if(line_index < 0 or line_index >= len(room_lines)):
+        print("Index out of range")
+        return room_lines
 
-        del room_lines[line_index]
 
-        print("Deleted line: '%s'" % line_text)
+    line_text = room_lines[line_index]["text"]
 
-    except Exception as exception:
-        if(debug):
-            print(exception)
-        print("No line with index [%d]" % line_index)
+    del room_lines[line_index]
+
+    print("Deleted line: '%s'" % line_text)
+
 
     return room_lines
 
@@ -773,6 +773,7 @@ def teacher_rooms_json_line_del(rooms_json, command_strings):
     room_name = room_name_input(room_names, command_strings)
 
     if(not room_name):
+        print("No inputted room")
         return rooms_json
 
     if(room_name not in room_names):
@@ -784,7 +785,6 @@ def teacher_rooms_json_line_del(rooms_json, command_strings):
 
 
     rooms_json[room_name] = teacher_room_lines_line_del(room_name, rooms_json[room_name], next_command_strings)
-
 
     return rooms_json
 
@@ -801,6 +801,7 @@ def teacher_other_lines_line_del(line_type, other_lines, command_strings):
         line_index_string = input("Index: ").strip().lower()
 
         if(not line_index_string):
+            print("No inputted index")
             return other_lines
 
 
@@ -808,23 +809,21 @@ def teacher_other_lines_line_del(line_type, other_lines, command_strings):
         line_index = int(line_index_string)
 
     except Exception as exception:
-        if(debug):
-            print(exception)
         print("Index must be an integer")
         return other_lines
 
+    
+    if(line_index < 0 or line_index >= len(other_lines)):
+        print("Index out of range")
+        return other_lines
 
-    try:
-        line_text = other_lines[line_index]["text"]
 
-        del other_lines[line_index]
+    line_text = other_lines[line_index]["text"]
 
-        print("Deleted line: '%s'" % line_text)
+    del other_lines[line_index]
 
-    except Exception as exception:
-        if(debug):
-            print(exception)
-        print("No line with index [%d]" % line_index)
+    print("Deleted line: '%s'" % line_text)
+
 
     return other_lines
 
@@ -835,6 +834,7 @@ def menu_teacher_command_set_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
+        print("Teacher '%s' doesn't exist" % teacher_name)
         return
 
 
@@ -843,6 +843,7 @@ def menu_teacher_command_set_handler(teacher_name, command_strings):
     line_type = line_type_input(line_types, command_strings)
 
     if(not line_type):
+        print("No inputted line type")
         return
 
     if(line_type not in line_types):
@@ -868,6 +869,7 @@ def menu_teacher_command_del_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
+        print("Teacher '%s' doesn't exist" % teacher_name)
         return
 
 
@@ -876,6 +878,7 @@ def menu_teacher_command_del_handler(teacher_name, command_strings):
     line_type = line_type_input(line_types, command_strings)
 
     if(not line_type):
+        print("No inputted line type")
         return
 
     if(line_type not in line_types):
@@ -899,21 +902,22 @@ def menu_teacher_command_del_handler(teacher_name, command_strings):
 # List all the available commands for the teacher menu
 #
 def menu_teacher_command_help_handler():
-    print("- print  | Display teacher's lines")
-    print("- format | Format json file")
-    print("- add    | Add a line")
-    print("- del    | Delete a line")
-    print("- set    | Set a line")
-    print("- import | Import a line")
+    print("- print  | Print lines")
+    print("- add    | Add line")
+    print("- del    | Delete line")
+    print("- set    | Set line")
     print("- tips   | Print line tips")
+    print("- import | Import line")
     print("- select | Select another teacher")
+    print("- format | Format json file")
     print("- back   | Unselect teacher")
-    print("- quit   | Quit the program")
+    print("- quit   | Quit")
 
 def menu_teacher_command_format_handler(teacher_name):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
+        print("Teacher '%s' doesn't exist" % teacher_name)
         return
 
     teacher_json_save(teacher_name, teacher_json)
@@ -931,6 +935,8 @@ def menu_teacher_command_parse(teacher_name, command_string):
         exit()
 
     elif(command_strings[0] == "back"):
+        print("Unselected teacher: %s" % teacher_name)
+
         menu_teachers()
 
     elif(command_strings[0] == "help"):
@@ -990,15 +996,17 @@ def menu_teachers_command_list_handler():
 #
 def menu_teachers_command_select_handler(command_strings):
     teacher_names = teacher_names_get()
-    
 
     teacher_name = teacher_name_input(command_strings)
 
     if(not teacher_name):
+        print("No inputted teacher")
         return
 
 
     if(teacher_name in teacher_names):
+        print("Selected teacher: %s" % teacher_name)
+
         menu_teacher(teacher_name)
 
     else:
@@ -1032,6 +1040,7 @@ def menu_teachers_command_set_handler(command_strings):
     teacher_name = teacher_name_input(command_strings)
 
     if(not teacher_name):
+        print("No inputted teacher")
         return
         
 
@@ -1053,6 +1062,7 @@ def menu_teachers_command_del_handler(command_strings):
     teacher_name = teacher_name_input(command_strings)
 
     if(not teacher_name):
+        print("No inputted teacher")
         return
 
         
@@ -1074,6 +1084,7 @@ def menu_teachers_command_import_handler(command_strings):
     teacher_name = teacher_name_input(command_strings)
 
     if(not teacher_name):
+        print("No inputted teacher")
         return
 
 
@@ -1093,6 +1104,7 @@ def menu_teachers_command_add_handler(command_strings):
     teacher_name = teacher_name_input(command_strings)
 
     if(not teacher_name):
+        print("No inputted teacher")
         return
 
         
@@ -1114,6 +1126,7 @@ def menu_teachers_command_print_handler(command_strings):
     teacher_name = teacher_name_input(command_strings)
 
     if(not teacher_name):
+        print("No inputted teacher")
         return
 
         
@@ -1133,15 +1146,15 @@ def menu_teachers_command_print_handler(command_strings):
 #
 def menu_teachers_command_help_handler():
     print("- list   | List teachers")
-    print("- select | Select a teacher")
-    print("- format | Format json files")
-    print("- print  | Display teacher's lines")
+    print("- select | Select teacher")
+    print("- print  | Print lines")
+    print("- add    | Add line")
+    print("- del    | Delete line")
+    print("- set    | Set line")
     print("- tips   | Print line tips")
-    print("- import | Import a line")
-    print("- add    | Add a line")
-    print("- del    | Delete a line")
-    print("- set    | Set a line")
-    print("- quit   | Quit the program")
+    print("- import | Import line")
+    print("- format | Format json files")
+    print("- quit   | Quit")
 
 #
 # Parse the inputted command in the teachers menu
@@ -1202,12 +1215,8 @@ def menu_teachers():
 # This is like the main function
 #
 if(__name__ == "__main__"):
-    args = sys.argv[1:]
-
-    debug = True
-
-    if(len(args) > 0):
-        menu_teacher(args[0])
+    if(len(argv) > 1):
+        menu_teacher(argv[1])
 
     else:
         menu_teachers()
