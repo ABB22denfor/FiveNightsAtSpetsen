@@ -17,6 +17,57 @@ debug = False
 teacher_dir = "FiveNightsAtSpetsen/Assets/Teachers/"
 
 #
+# Get a list of generic voicelines in specified room
+#
+def generic_room_lines_get(command_strings):
+    if(len(command_strings) >= 1):
+        room_name = command_strings[0]
+
+    else:
+        room_name = input("Room: ").strip().lower()
+
+    file_path = join(teacher_dir, "Generic", "Rooms", room_name + ".txt")
+
+    try:
+        with open(file_path, "r") as file:
+            return [line.strip() for line in file.readlines()]
+
+    except (ValueError, FileNotFoundError):
+        return []
+
+#
+# Get a list of other generic voicelines
+#
+def generic_other_lines_get(line_type):
+    file_path = join(teacher_dir, "Generic", line_type + ".txt")
+
+    try:
+        with open(file_path, "r") as file:
+            return [line.strip() for line in file.readlines()]
+
+    except (ValueError, FileNotFoundError):
+        return []
+
+#
+# Get a list of generic voicelines
+#
+def generic_lines_get(command_strings):
+    if(len(command_strings) >= 1):
+        line_type = command_strings[0]
+    
+    else:
+        line_type = input("Type: ").strip().lower()
+
+
+    next_command_strings = command_strings[1:] if len(command_strings) >= 2 else {}
+
+    if(line_type == "rooms"):
+        return generic_room_lines_get(next_command_strings)
+
+    else:
+        return generic_other_lines_get(line_type)
+
+#
 # Get an array of the teacher names
 #
 def teacher_names_get():
@@ -146,17 +197,154 @@ def menu_teacher_command_print_handler(teacher_name, command_strings):
             print("Unknown line type: '%s'." % line_type)
 
 #
+# Import a generic voiceline to teacher's specified room
+#
+def teacher_room_lines_line_import(room_lines, generic_lines, command_strings):
+    if(len(command_strings) >= 1):
+        line_index_string = command_strings[0]
+
+    else:
+        line_index_string = input("Index: ").strip().lower()
+
+
+    try:
+        room_lines.append(generic_lines[int(line_index_string)])
+
+    except Exception as exception:
+        if(debug):
+            print(exception)
+        print("No line with index [%s]" % line_index_string)
+
+    return room_lines
+
+#
+# Import a generic voiceline to one of teacher's rooms
+#
+def teacher_rooms_json_line_import(teacher_name, command_strings):
+    if(len(command_strings) >= 1):
+        room_name = command_strings[0]
+
+    else:
+        room_name = input("Room: ").strip().lower()
+
+    next_command_strings = command_strings[1:] if len(command_strings) >= 2 else {}
+
+    try:
+        generic_lines = generic_lines_get(["rooms"])
+
+        rooms_json[room_name] = teacher_room_lines_line_import(rooms_json[room_name], generic_lines, next_command_strings)
+
+    except Exception as exception:
+        if(debug):
+            print(exception)
+        print("Unknown room: '%s'." % room_name)
+
+    return rooms_json
+
+#
+# Import a generic voiceline to one of teacher's other lines
+#
+def teacher_other_lines_line_import(teacher_name, command_strings):
+    if(len(command_strings) >= 1):
+        line_index_string = command_strings[0]
+
+    else:
+        line_index_string = input("Index: ").strip().lower()
+
+    try:
+        room_lines.append(generic_lines[int(line_index_string)])
+
+    except Exception as exception:
+        if(debug):
+            print(exception)
+        print("No line with index [%s]" % line_index_string)
+
+    return other_lines
+
+#
+# Import a voiceline for a specified teacher
+#
+def menu_teacher_command_import_handler(teacher_name, command_strings):
+    teacher_json = teacher_json_load(teacher_name)
+
+    if(len(command_strings) >= 1):
+        line_type = command_strings[0]
+
+    else:
+        line_type = input("Type: ").strip().lower()
+
+    next_command_strings = command_strings[1:] if len(command_strings) >= 2 else {}
+
+    try:
+        if(line_type == "rooms"):
+            teacher_json["rooms"] = teacher_rooms_json_line_import(teacher_json["rooms"], next_command_strings)
+
+        else:
+            teacher_json[line_type] = teacher_other_lines_line_import(teacher_json[line_type], next_command_strings)
+
+    except Exception as exception:
+        if(debug):
+            print(exception)
+        print("Unknown line type: '%s'." % line_type)
+
+    teacher_json_save(teacher_name, teacher_json)
+
+#
+# Add a voiceline to one of teacher's rooms
+#
+def teacher_rooms_json_line_add(rooms_json, command_strings, line_text):
+    if(len(command_strings) >= 1):
+        room_name = command_strings[0]
+
+    else:
+        room_name = input("Room: ").strip().lower()
+
+
+    try:
+        line_json = {
+            "text" : line_text,
+            "voice": ""
+        }
+
+        teacher_json["rooms"][room_name].append(line_json)
+
+        print("Added line in room '%s'." % room_name)
+
+    except Exception as exception:
+        if(debug):
+            print(exception)
+        print("Unknown room: '%s'." % room_name)
+
+    return rooms_json
+
+#
+# Add another voiceline to teacher
+#
+def teacher_other_lines_line_add(other_lines, line_text):
+    try:
+        line_json = {
+            "text" : line_text,
+            "voice": ""
+        }
+
+        teacher_json[line_type].append(line_json)
+
+        print("Added line in '%s'." % line_type)
+
+    except Exception as exception:
+        if(debug):
+            print(exception)
+        print("Unknown line type: '%s'." % line_type)
+
+    return other_lines
+
+#
 # Add a voiceline for a specified teacher
 #
 def menu_teacher_command_add_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     line_text = input("Text: ").strip()
-
-    line_json = {
-        "text" : line_text,
-        "voice": ""
-    }
 
     if(len(command_strings) >= 1):
         line_type = command_strings[0]
@@ -165,37 +353,15 @@ def menu_teacher_command_add_handler(teacher_name, command_strings):
         line_type = input("Type: ").strip().lower()
 
 
+    next_command_strings = command_strings[1:] if len(command_strings) >= 2 else {}
+
     if(line_type == "rooms"):
-        if(len(command_strings) >= 2):
-            room_name = command_strings[1]
-
-        else:
-            room_name = input("Room: ").strip().lower()
-
-        try:
-            teacher_json["rooms"][room_name].append(line_json)
-
-            print("Added line in room '%s'." % room_name)
-
-            teacher_json_save(teacher_name, teacher_json)
-
-        except Exception as exception:
-            if(debug):
-                print(exception)
-            print("Unknown room: '%s'." % room_name)
+        teacher_json["rooms"] = teacher_rooms_json_line_add(teacher_json["rooms"], next_command_strings, line_text)
 
     else:
-        try:
-            teacher_json[line_type].append(line_json)
+        teacher_json[line_type] = teacher_other_lines_line_add(teacher_json[line_type], line_text)
 
-            print("Added line in '%s'." % line_type)
-
-            teacher_json_save(teacher_name, teacher_json)
-
-        except Exception as exception:
-            if(debug):
-                print(exception)
-            print("Unknown line type: '%s'." % line_type)
+    teacher_json_save(teacher_name, teacher_json)
 
 #
 # Correctly format the teacher's voicelines in a specified room
@@ -435,6 +601,7 @@ def menu_teacher_command_help_handler():
     print("- add    | Add a line")
     print("- del    | Delete a line")
     print("- set    | Edit a line")
+    print("- import | Import a line")
     print("- select | Select another teacher")
     print("- back   | Unselect teacher")
     print("- quit   | Quit the program")
@@ -468,6 +635,9 @@ def menu_teacher_command_parse(teacher_name, command_string):
     elif(command_strings[0] == "add"):
         menu_teacher_command_add_handler(teacher_name, next_command_strings)
 
+    elif(command_strings[0] == "import"):
+        menu_teacher_command_import_handler(teacher_name, next_command_strings)
+
     elif(command_strings[0] == "format"):
         menu_teacher_command_format_handler(teacher_name)
 
@@ -481,7 +651,7 @@ def menu_teacher_command_parse(teacher_name, command_string):
         menu_teachers_command_select_handler(next_command_strings)
 
     else:
-        print("Unknown command '%s'. Type 'help' for tips." % command_string)
+        print("Unknown command '%s'. Type 'help' for help." % command_string)
 
 #
 # This is the routine for the teacher menu
@@ -578,6 +748,23 @@ def menu_teachers_command_del_handler(command_strings):
 
     menu_teacher_command_del_handler(teacher_name, next_command_strings)
 
+def menu_teachers_command_add_handler(command_strings):
+    if(len(command_strings) >= 1):
+        teacher_name = command_strings[0]
+
+    else:
+        teacher_name = input("Teacher: ").strip().lower()
+        
+    teacher_names = teacher_names_get()
+
+    if(teacher_name not in teacher_names):
+        print("Teacher '%s' doesn't exist" % teacher_name)
+        return
+
+    next_command_strings = command_strings[1:] if len(command_strings) >= 2 else {}
+
+    menu_teacher_command_add_handler(teacher_name, next_command_strings)
+
 def menu_teachers_command_print_handler(command_strings):
     if(len(command_strings) >= 1):
         teacher_name = command_strings[0]
@@ -635,14 +822,23 @@ def menu_teachers_command_parse(command_string):
     elif(command_strings[0] == "del"):
         menu_teachers_command_del_handler(next_command_strings)
 
+    elif(command_strings[0] == "add"):
+        menu_teachers_command_add_handler(next_command_strings)
+
     elif(command_strings[0] == "set"):
         menu_teachers_command_set_handler(next_command_strings)
 
     elif(command_strings[0] == "print"):
         menu_teachers_command_print_handler(next_command_strings)
 
+    elif(command_strings[0] == "tips"):
+        generic_lines = generic_lines_get(next_command_strings)
+
+        for index, line in enumerate(generic_lines):
+            print("%01d: %s" % (index, line))
+
     else:
-        print("Unknown command '%s'. Type 'help' for tips." % command_strings[0])
+        print("Unknown command '%s'. Type 'help' for help." % command_strings[0])
 
 #
 # This is the routine for the teachers menu

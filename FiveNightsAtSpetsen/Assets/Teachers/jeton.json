@@ -19,7 +19,12 @@
       }
     ]
   },
-  "general": [],
+  "general": [
+    {
+      "text": "Måste fixa med tekniken så allt fungerar smidigt för morgondagen.",
+      "voice": "jeton-general-line-0.mov"
+    }
+  ],
   "alert": [
     {
       "text": "Vad var det där? Är det… Kalle Kula? Nej, det kan inte vara möjligt, eller?",

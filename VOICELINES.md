@@ -1,9 +1,5 @@
 # Voicelines
 
-["line-1", "line-2", "line-3", "line-4", "line-5"]
-
-["classroom-2-line-1", "classroom-2-line-2", "classroom-2-line-3"]
-
 At start of game:
 1. Initialize arrays of lines for every room, "room-lines"
 2. Initialize array of general lines, "general-lines"
