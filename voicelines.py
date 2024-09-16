@@ -100,7 +100,7 @@ def command_parse(command, next_command_strings):
         command_add_handler(next_command_strings)
 
     elif(command == "del"):
-        command_del_handler(next_command_strings)
+        command_delete_handler(next_command_strings)
 
     elif(command == "edit"):
         command_edit_handler(next_command_strings)
@@ -465,17 +465,18 @@ def command_import_handler(command_strings):
 
     next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
 
-    teacher_command_import_handler(teacher_name, next_command_strings)
+    command_import_teacher_handler(teacher_name, next_command_strings)
 
 #
 # Import a voiceline for a specified teacher
 #
-def teacher_command_import_handler(teacher_name, command_strings):
+def command_import_teacher_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
         print("\nTeacher '%s' doesn't exist\n" % teacher_name)
         return
+
 
     line_types = generic_line_types_get()
 
@@ -494,14 +495,14 @@ def teacher_command_import_handler(teacher_name, command_strings):
 
 
     if(line_type == "rooms"):
-        teacher_json["rooms"] = teacher_rooms_json_line_import(teacher_json["rooms"], next_command_strings)
+        teacher_json["rooms"] = command_import_rooms_handler(teacher_json["rooms"], next_command_strings)
 
     else:
         generic_lines = generic_lines_get(line_type)
 
         other_lines = teacher_json.get(line_type, [])
 
-        teacher_json[line_type] = teacher_other_lines_line_import(line_type, other_lines, generic_lines, next_command_strings)
+        teacher_json[line_type] = command_import_other_lines_handler(line_type, other_lines, generic_lines, next_command_strings)
 
 
     teacher_json_save(teacher_name, teacher_json)
@@ -511,7 +512,7 @@ def teacher_command_import_handler(teacher_name, command_strings):
 #
 # Maybe: Remove generic_lines as argument and create local variable instead
 #
-def teacher_room_lines_line_import(room_name, room_lines, generic_lines, command_strings):
+def command_import_room_lines_handler(room_name, room_lines, generic_lines, command_strings):
     if(len(command_strings) >= 1):
         line_index_string = command_strings[0]
 
@@ -555,7 +556,7 @@ def teacher_room_lines_line_import(room_name, room_lines, generic_lines, command
 #
 # Import a generic voiceline to one of teacher's rooms
 #
-def teacher_rooms_json_line_import(rooms_json, command_strings):
+def command_import_rooms_handler(rooms_json, command_strings):
     room_names = generic_room_names_get()
 
     room_name = room_name_input(room_names, command_strings)
@@ -576,7 +577,7 @@ def teacher_rooms_json_line_import(rooms_json, command_strings):
 
     room_lines = rooms_json.get(room_name, [])
 
-    rooms_json[room_name] = teacher_room_lines_line_import(room_name, room_lines, generic_lines, next_command_strings)
+    rooms_json[room_name] = command_import_room_lines_handler(room_name, room_lines, generic_lines, next_command_strings)
 
 
     return rooms_json
@@ -584,7 +585,7 @@ def teacher_rooms_json_line_import(rooms_json, command_strings):
 #
 # Import a generic voiceline to one of teacher's other lines
 #
-def teacher_other_lines_line_import(line_type, other_lines, generic_lines, command_strings):
+def command_import_other_lines_handler(line_type, other_lines, generic_lines, command_strings):
     if(len(command_strings) >= 1):
         line_index_string = command_strings[0]
 
@@ -648,12 +649,12 @@ def command_add_handler(command_strings):
 
     next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
 
-    teacher_command_add_handler(teacher_name, next_command_strings)
+    command_add_teacher_handler(teacher_name, next_command_strings)
 
 #
 # Add a voiceline for a specified teacher
 #
-def teacher_command_add_handler(teacher_name, command_strings):
+def command_add_teacher_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
@@ -678,12 +679,12 @@ def teacher_command_add_handler(teacher_name, command_strings):
 
 
     if(line_type == "rooms"):
-        teacher_json["rooms"] = teacher_rooms_json_line_add(teacher_name, teacher_json["rooms"], next_command_strings)
+        teacher_json["rooms"] = command_add_rooms_handler(teacher_name, teacher_json["rooms"], next_command_strings)
 
     else:
         other_lines = teacher_json.get(line_type, [])
 
-        teacher_json[line_type] = teacher_other_lines_line_add(teacher_name, line_type, other_lines)
+        teacher_json[line_type] = command_add_other_lines_handler(teacher_name, line_type, other_lines)
 
 
     teacher_json_save(teacher_name, teacher_json)
@@ -691,7 +692,7 @@ def teacher_command_add_handler(teacher_name, command_strings):
 #
 # Add a voiceline to one of teacher's rooms
 #
-def teacher_rooms_json_line_add(teacher_name, rooms_json, command_strings):
+def command_add_rooms_handler(teacher_name, rooms_json, command_strings):
     room_names = generic_room_names_get()
 
     room_name = room_name_input(room_names, command_strings)
@@ -740,7 +741,7 @@ def teacher_rooms_json_line_add(teacher_name, rooms_json, command_strings):
 #
 # Add another voiceline to teacher
 #
-def teacher_other_lines_line_add(teacher_name, line_type, other_lines):
+def command_add_other_lines_handler(teacher_name, line_type, other_lines):
     print("")
 
     if(other_lines):
@@ -790,12 +791,12 @@ def command_edit_handler(command_strings):
 
     next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
 
-    teacher_command_edit_handler(teacher_name, next_command_strings)
+    command_edit_teacher_handler(teacher_name, next_command_strings)
 
 #
 # Edit one of the teacher's voicelines
 #
-def teacher_command_edit_handler(teacher_name, command_strings):
+def command_edit_teacher_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
@@ -812,6 +813,10 @@ def teacher_command_edit_handler(teacher_name, command_strings):
         return
 
     if(line_type not in line_types):
+        if(line_type in generic_line_types_get()):
+            print("\n%s doesn't have any %s voicelines.\n" % (teacher_name, line_type))
+            return
+
         print("\nUnknown voiceline type: '%s'.\n" % line_type)
         return
 
@@ -819,10 +824,10 @@ def teacher_command_edit_handler(teacher_name, command_strings):
     next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
 
     if(line_type == "rooms"):
-        teacher_json["rooms"] = teacher_rooms_json_line_edit(teacher_name, teacher_json["rooms"], next_command_strings)
+        teacher_json["rooms"] = command_edit_rooms_handler(teacher_name, teacher_json["rooms"], next_command_strings)
 
     else:
-        teacher_json[line_type] = teacher_other_lines_line_edit(teacher_name, line_type, teacher_json[line_type], next_command_strings)
+        teacher_json[line_type] = command_edit_other_lines_handler(teacher_name, line_type, teacher_json[line_type], next_command_strings)
 
 
     teacher_json_save(teacher_name, teacher_json)
@@ -830,9 +835,7 @@ def teacher_command_edit_handler(teacher_name, command_strings):
 #
 # Edit one of the teacher's voicelines in a room
 #
-# Rename this function
-#
-def teacher_rooms_json_line_edit(teacher_name, rooms_json, command_strings):
+def command_edit_rooms_handler(teacher_name, rooms_json, command_strings):
     room_names = rooms_json.keys()
 
     room_name = room_name_input(room_names, command_strings)
@@ -842,23 +845,24 @@ def teacher_rooms_json_line_edit(teacher_name, rooms_json, command_strings):
         return rooms_json
 
     if(room_name not in room_names):
+        if(room_name in generic_room_names_get()):
+            print("\n%s doesn't have any room %s voicelines.\n" % (teacher_name, room_name))
+            return rooms_json
+
         print("\nUnknown room: '%s'.\n" % room_name)
-        return
+        return rooms_json
 
 
     next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
 
-
-    rooms_json[room_name] = teacher_room_lines_line_edit(teacher_name, room_name, rooms_json[room_name], next_command_strings)
+    rooms_json[room_name] = command_edit_room_lines_handler(teacher_name, room_name, rooms_json[room_name], next_command_strings)
 
     return rooms_json
 
 #
 # Edit one of the teacher's voicelines in a specified room
 #
-# Rename this function
-#
-def teacher_room_lines_line_edit(teacher_name, room_name, room_lines, command_strings):
+def command_edit_room_lines_handler(teacher_name, room_name, room_lines, command_strings):
     if(len(command_strings) >= 1):
         line_index_string = command_strings[0]
 
@@ -906,9 +910,7 @@ def teacher_room_lines_line_edit(teacher_name, room_name, room_lines, command_st
 #
 # Edit one of the teacher's other voicelines of a specified type
 #
-# Rename this function
-#
-def teacher_other_lines_line_edit(teacher_name, line_type, other_lines, command_strings):
+def command_edit_other_lines_handler(teacher_name, line_type, other_lines, command_strings):
     if(len(command_strings) >= 1):
         line_index_string = command_strings[0]
 
@@ -959,7 +961,7 @@ def teacher_other_lines_line_edit(teacher_name, line_type, other_lines, command_
 #
 #
 #
-def command_del_handler(command_strings):
+def command_delete_handler(command_strings):
     teacher_names = teacher_names_get()
 
     teacher_name = teacher_name_input(teacher_names, command_strings)
@@ -976,12 +978,12 @@ def command_del_handler(command_strings):
 
     next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
 
-    teacher_command_del_handler(teacher_name, next_command_strings)
+    command_delete_teacher_handler(teacher_name, next_command_strings)
 
 #
 # Delete one of the teacher's voicelines
 #
-def teacher_command_del_handler(teacher_name, command_strings):
+def command_delete_teacher_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
@@ -998,6 +1000,10 @@ def teacher_command_del_handler(teacher_name, command_strings):
         return
 
     if(line_type not in line_types):
+        if(line_type in generic_line_types_get()):
+            print("\n%s doesn't have any %s voicelines.\n" % (teacher_name, line_type))
+            return
+
         print("\nUnknown voiceline type: '%s'.\n" % line_type)
         return
 
@@ -1006,10 +1012,10 @@ def teacher_command_del_handler(teacher_name, command_strings):
 
 
     if(line_type == "rooms"):
-        teacher_json["rooms"] = teacher_rooms_json_line_del(teacher_name, teacher_json["rooms"], next_command_strings)
+        teacher_json["rooms"] = command_delete_rooms_handler(teacher_name, teacher_json["rooms"], next_command_strings)
 
     else:
-        teacher_json[line_type] = teacher_other_lines_line_del(teacher_name, line_type, teacher_json[line_type], next_command_strings)
+        teacher_json[line_type] = command_delete_other_lines_handler(teacher_name, line_type, teacher_json[line_type], next_command_strings)
 
 
     teacher_json_save(teacher_name, teacher_json)
@@ -1017,11 +1023,9 @@ def teacher_command_del_handler(teacher_name, command_strings):
 #
 # Delete one of the teacher's voicelines in a room
 #
-# Rename this function
-#
 # Fix: Tell the user the teacher doesn't have lines if lines is empty
 #
-def teacher_rooms_json_line_del(teacher_name, rooms_json, command_strings):
+def command_delete_rooms_handler(teacher_name, rooms_json, command_strings):
     room_names = rooms_json.keys()
 
     room_name = room_name_input(room_names, command_strings)
@@ -1031,22 +1035,24 @@ def teacher_rooms_json_line_del(teacher_name, rooms_json, command_strings):
         return rooms_json
 
     if(room_name not in room_names):
+        if(room_name in generic_room_names_get()):
+            print("\n%s doesn't have any room %s voicelines.\n" % (teacher_name, room_name))
+            return rooms_json
+
         print("\nUnknown room: '%s'.\n" % room_name)
         return rooms_json
 
 
     next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
 
-    rooms_json[room_name] = teacher_room_lines_line_del(teacher_name, room_name, rooms_json[room_name], next_command_strings)
+    rooms_json[room_name] = command_delete_room_lines_handler(teacher_name, room_name, rooms_json[room_name], next_command_strings)
 
     return rooms_json
 
 #
 # Delete one of the teacher's voicelines in a specified room
 #
-# Rename this function
-#
-def teacher_room_lines_line_del(teacher_name, room_name, room_lines, command_strings):
+def command_delete_room_lines_handler(teacher_name, room_name, room_lines, command_strings):
     if(len(command_strings) >= 1):
         line_index_string = command_strings[0]
 
@@ -1089,9 +1095,7 @@ def teacher_room_lines_line_del(teacher_name, room_name, room_lines, command_str
 #
 # Delete one of the teacher's other voicelines of a specified type
 #
-# Rename this function
-#
-def teacher_other_lines_line_del(teacher_name, line_type, other_lines, command_strings):
+def command_delete_other_lines_handler(teacher_name, line_type, other_lines, command_strings):
     if(len(command_strings) >= 1):
         line_index_string = command_strings[0]
 
@@ -1153,7 +1157,7 @@ def command_select_handler(command_strings):
 
     next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
 
-    teacher_command_select_handler(teacher_name, next_command_strings)
+    command_select_teacher_handler(teacher_name, next_command_strings)
 
 
     print("\nSelected teacher: '%s'\n" % teacher_name)
@@ -1163,7 +1167,7 @@ def command_select_handler(command_strings):
 #
 #
 #
-def teacher_command_select_handler(teacher_name, command_strings):
+def command_select_teacher_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     line_types = teacher_json.keys()
@@ -1182,7 +1186,7 @@ def teacher_command_select_handler(teacher_name, command_strings):
     if(line_type == "rooms"):
         next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
 
-        teacher_rooms_command_select_handler(teacher_name, next_command_strings)
+        command_select_rooms_handler(teacher_name, next_command_strings)
 
 
     print("\nSelected teacher '%s's '%s' voicelines\n" % (teacher_name, line_type))
@@ -1192,7 +1196,7 @@ def teacher_command_select_handler(teacher_name, command_strings):
 #
 #
 #
-def teacher_rooms_command_select_handler(teacher_name, command_strings):
+def command_select_rooms_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     room_names = teacher_json["rooms"].keys()
