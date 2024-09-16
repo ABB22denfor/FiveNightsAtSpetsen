@@ -20,7 +20,9 @@ teacher_dir = "FiveNightsAtSpetsen/Assets/Teachers/"
 # List all the available commands for the teacher menu
 #
 def menu_teacher_command_help_handler(teacher_name):
-    print("- select | Select line type")
+    print("\nYou have selected the teacher '%s'\n" % teacher_name)
+
+    print("- select | Select voiceline type")
     print("- print  | Print %s's voicelines"     % teacher_name)
     print("- add    | Add voiceline")
     print("- del    | Delete voiceline")
@@ -30,10 +32,14 @@ def menu_teacher_command_help_handler(teacher_name):
     print("- back   | Unselect %s"               % teacher_name)
     print("- quit   | Quit")
 
+    print("")
+
 #
 # List all the available commands for the room menu
 #
 def menu_room_command_help_handler(teacher_name, room_name):
+    print("\nYou have selected the teacher '%s's room '%s'\n" % (teacher_name, room_name))
+
     print("- print  | Print %s's %s voicelines"     % (teacher_name, room_name))
     print("- add    | Add %s voiceline"             % room_name)
     print("- del    | Delete %s voiceline"          % room_name)
@@ -43,10 +49,14 @@ def menu_room_command_help_handler(teacher_name, room_name):
     print("- back   | Unselect %s"                  % room_name)
     print("- quit   | Quit")
 
+    print("")
+
 #
 # List all the available commands for the teachers menu
 #
 def menu_line_type_command_help_handler(teacher_name, line_type):
+    print("\nYou have selected the teacher '%s's voiceline type '%s'\n" % (teacher_name, line_type))
+
     if(line_type == "rooms"):
         print("- select | Select room")
 
@@ -59,10 +69,14 @@ def menu_line_type_command_help_handler(teacher_name, line_type):
     print("- back   | Unselect %s"                  % line_type)
     print("- quit   | Quit")
 
+    print("")
+
 #
 # List all the available commands for the teachers menu
 #
 def menu_teachers_command_help_handler():
+    print("\nYou have not selected a teacher\n")
+
     print("- select | Select teacher")
     print("- print  | Print teacher's voicelines")
     print("- add    | Add voiceline")
@@ -71,6 +85,8 @@ def menu_teachers_command_help_handler():
     print("- tips   | Print tips for voicelines")
     print("- import | Import voiceline")
     print("- quit   | Quit")
+
+    print("")
 
 #
 # command and next_command_strings are divided,
@@ -96,7 +112,7 @@ def command_handler(command, next_command_strings):
         command_import_handler(next_command_strings)
 
     else:
-        print("Unknown command '%s'. Type 'help' for help." % command)
+        print("\nUnknown command '%s'. Type 'help' for help.\n" % command)
 
 
 # Section 02: Input functions
@@ -109,8 +125,12 @@ def line_type_input(line_types, command_strings):
         line_type = command_strings[0]
 
     else:
+        print("\nThese are the voiceline types you can select:")
+
         for line_type in line_types:
             print("- %s" % line_type)
+
+        print("")
 
         line_type = input("Type: ").strip().lower()
 
@@ -124,8 +144,12 @@ def room_name_input(room_names, command_strings):
         room_name = command_strings[0]
 
     else:
+        print("\nThese are the rooms you can select:")
+
         for room_name in room_names:
             print("- %s" % room_name)
+
+        print("")
 
         room_name = input("Room: ").strip().lower()
 
@@ -139,8 +163,12 @@ def teacher_name_input(teacher_names, command_strings):
         teacher_name = command_strings[0]
 
     else:
+        print("\nThese are the teachers you can select:")
+
         for teacher_name in teacher_names:
             print("- %s" % teacher_name)
+
+        print("")
 
         teacher_name = input("Teacher: ").strip().lower()
 
@@ -158,12 +186,11 @@ def command_print_handler(command_strings):
     teacher_name = teacher_name_input(teacher_names, command_strings)
 
     if(not teacher_name):
-        print("No inputted teacher")
+        print("\nNo inputted teacher\n")
         return
-
         
     if(teacher_name not in teacher_names):
-        print("Teacher '%s' doesn't exist" % teacher_name)
+        print("\nTeacher '%s' doesn't exist\n" % teacher_name)
         return
 
 
@@ -180,18 +207,18 @@ def teacher_command_print_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
-        print("Teacher '%s' doesn't exist" % teacher_name)
+        print("\nTeacher '%s' doesn't exist\n" % teacher_name)
         return
 
 
     if(len(command_strings) == 0):
-        teacher_json_print(teacher_json)
+        teacher_json_print(teacher_name, teacher_json)
 
     else:
         line_type = command_strings[0]
 
         if(line_type not in teacher_json.keys()):
-            print("Unknown line type: '%s'." % line_type)
+            print("\nUnknown voiceline type: '%s'.\n" % line_type)
             return
 
 
@@ -199,19 +226,12 @@ def teacher_command_print_handler(teacher_name, command_strings):
 
 
         if(line_type == "rooms"):
+            print("")
             teacher_rooms_json_print(teacher_json["rooms"], next_command_strings)
 
         else:
+            print("")
             teacher_other_lines_print(line_type, teacher_json[line_type])
-
-#
-# Print the teacher's voicelines in specified room
-#
-def teacher_room_lines_print(room_name, room_lines):
-    print("  - %s" % room_name)
-    
-    for index, room_line in enumerate(room_lines):
-        print("    - %01d: %s" % (index, room_line["text"]))
 
 #
 # Print the teacher's voicelines in the different rooms
@@ -221,34 +241,49 @@ def teacher_rooms_json_print(rooms_json, command_strings):
         room_name = command_strings[0]
 
         if(room_name not in rooms_json.keys()):
-            print("Unknown room '%s'." % room_name)
+            print("\nUnknown room '%s'.\n" % room_name)
             return
 
         room_lines = rooms_json[room_name]
 
-        print("- rooms")
+        print("rooms")
 
         teacher_room_lines_print(room_name, room_lines)
 
     else:
-        print("- rooms")
+        print("rooms")
 
         for room_name, room_lines in rooms_json.items():
             teacher_room_lines_print(room_name, room_lines)
 
 #
+# Print the teacher's voicelines in specified room
+#
+def teacher_room_lines_print(room_name, room_lines):
+    print("* %s" % room_name)
+    
+    for index, room_line in enumerate(room_lines):
+        print("  - %02d: %s" % (index, room_line["text"]))
+
+    print("")
+
+#
 # Print the teacher's other voicelines of specified type
 #
 def teacher_other_lines_print(line_type, other_lines):
-    print("- %s" % line_type)
+    print("%s" % line_type)
 
-    for index, line_json in enumerate(other_lines):
-        print("  - %01d: %s" % (index, line_json["text"]))
+    for index, other_line in enumerate(other_lines):
+        print("- %02d: %s" % (index, other_line["text"]))
+
+    print("")
 
 #
 # Print all of the teacher's voicelines
 #
-def teacher_json_print(teacher_json):
+def teacher_json_print(teacher_name, teacher_json):
+    print("\nThese are %s's voicelines:\n" % teacher_name)
+
     for line_type, type_json in teacher_json.items():
         if(line_type == "rooms"):
             teacher_rooms_json_print(type_json, [])
@@ -260,79 +295,20 @@ def teacher_json_print(teacher_json):
 # Section 04: Command tips
 
 #
-# Print tips for room
-#
-def room_tips_print(room_name, generic_lines):
-    print("  - %s" % room_name)
-
-    for index, line in enumerate(generic_lines):
-        print("    - %02d: %s" % (index, line))
-
-#
-# Print tips for all rooms
-#
-def rooms_tips_print(command_strings):
-    room_names = generic_room_names_get()
-
-    if(len(command_strings) >= 1):
-        room_name = command_strings[0]
-
-        if(room_name not in room_names):
-            print("Unknown room '%s'." % command)
-            return
-
-        generic_lines = generic_lines_get("rooms", room_name)
-    
-        print("- rooms")
-
-        room_tips_print(room_name, generic_lines)
-
-    else:
-        print("- rooms")
-
-        for room_name in room_names:
-            generic_lines = generic_lines_get("rooms", room_name)
-        
-            room_tips_print(room_name, generic_lines)
-
-#
-# Print tips for other lines
-#
-def other_tips_print(line_type, generic_lines):
-    print("- %s" % line_type)
-
-    for index, line in enumerate(generic_lines):
-        print("  - %02d: %s" % (index, line))
-
-#
-# Print all tips
-#
-def all_tips_print():
-    line_types = generic_line_types_get()
-
-    for line_type in line_types:
-        if(line_type == "rooms"):
-            rooms_tips_print([])
-
-        else:
-            generic_lines = generic_lines_get(line_type)
-
-            other_tips_print(line_type, generic_lines)
-
-#
 # Print out tips for voicelines
 #
 def command_tips_handler(command_strings):
     line_types = generic_line_types_get()
 
     if(len(command_strings) == 0):
-        all_tips_print()
+        print("\nSpecify voiceline type for tips\n")
+        return
 
     else:
         line_type = command_strings[0]
 
         if(line_type not in line_types):
-            print("Unknown line type: '%s'." % line_type)
+            print("\nUnknown voiceline type: '%s'.\n" % line_type)
             return
 
 
@@ -345,7 +321,55 @@ def command_tips_handler(command_strings):
         else:
             generic_lines = generic_lines_get(line_type)
 
-            other_tips_print(line_type, generic_lines)
+            if(not generic_lines):
+                print("\nThere are no voiceline tips for %s" % line_type)
+                return
+
+            print("\nThese are some voiceline tips for %s:" % line_type)
+
+            for index, line in enumerate(generic_lines):
+                print("- %02d: %s" % (index, line))
+
+            print("")
+
+#
+# Print tips for all rooms
+#
+def rooms_tips_print(command_strings):
+    room_names = generic_room_names_get()
+
+    if(len(command_strings) >= 1):
+        room_name = command_strings[0]
+
+        if(room_name not in room_names):
+            print("\nUnknown room '%s'.\n" % room_name)
+            return
+
+        generic_lines = generic_lines_get("rooms", room_name)
+    
+        if(not generic_lines):
+            print("\nThere are no voiceline tips for room %s" % room_name)
+            return
+
+        print("\nThese are some voiceline tips for room %s:" % room_name)
+
+        for index, line in enumerate(generic_lines):
+            print("- %02d: %s" % (index, line))
+
+        print("")
+
+    else:
+        print("\nThese are some voiceline tips for rooms:\n")
+
+        for room_name in room_names:
+            generic_lines = generic_lines_get("rooms", room_name)
+        
+            print("* %s" % room_name)
+
+            for index, line in enumerate(generic_lines):
+                print("  - %02d: %s" % (index, line))
+
+            print("")
 
 
 # Section 05: Command import
@@ -359,12 +383,12 @@ def command_import_handler(command_strings):
     teacher_name = teacher_name_input(teacher_names, command_strings)
 
     if(not teacher_name):
-        print("No inputted teacher")
+        print("\nNo inputted teacher\n")
         return
 
 
     if(teacher_name not in teacher_names):
-        print("Teacher '%s' doesn't exist" % teacher_name)
+        print("\nTeacher '%s' doesn't exist\n" % teacher_name)
         return
 
 
@@ -379,7 +403,7 @@ def teacher_command_import_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
-        print("Teacher '%s' doesn't exist" % teacher_name)
+        print("\nTeacher '%s' doesn't exist\n" % teacher_name)
         return
 
     line_types = generic_line_types_get()
@@ -387,11 +411,11 @@ def teacher_command_import_handler(teacher_name, command_strings):
     line_type = line_type_input(line_types, command_strings)
 
     if(not line_type):
-        print("No inputted line type")
+        print("\nNo inputted voiceline type\n")
         return
 
     if(line_type not in line_types):
-        print("Unknown line type: '%s'." % line_type)
+        print("\nUnknown voiceline type: '%s'.\n" % line_type)
         return
 
 
@@ -421,14 +445,17 @@ def teacher_room_lines_line_import(room_name, room_lines, generic_lines, command
         line_index_string = command_strings[0]
 
     else:
-        print("- rooms")
+        print("\nSelect a generic %s voiceline to import:" % room_name)
 
-        room_tips_print(room_name, generic_lines)
+        for index, line in enumerate(generic_lines):
+            print("- %02d: %s" % (index, line))
+
+        print("")
 
         line_index_string = input("Index: ").strip().lower()
 
         if(not line_index_string):
-            print("No inputted index")
+            print("\nNo inputted index\n")
             return room_lines
 
 
@@ -436,12 +463,12 @@ def teacher_room_lines_line_import(room_name, room_lines, generic_lines, command
         line_index = int(line_index_string)
 
     except Exception as exception:
-        print("Index must be an integer")
+        print("\nIndex must be an integer\n")
         return room_lines
 
 
     if(line_index < 0 or line_index >= len(generic_lines)):
-        print("Index out of range")
+        print("\nIndex out of range\n")
         return room_lines
 
 
@@ -449,7 +476,7 @@ def teacher_room_lines_line_import(room_name, room_lines, generic_lines, command
 
     room_lines.append({"text": line_text})
 
-    print("Imported line: '%s'" % line_text)
+    print("\nImported voiceline: '%s'\n" % line_text)
 
 
     return room_lines
@@ -463,11 +490,11 @@ def teacher_rooms_json_line_import(rooms_json, command_strings):
     room_name = room_name_input(room_names, command_strings)
 
     if(not room_name):
-        print("No inputted room")
+        print("\nNo inputted room\n")
         return rooms_json
 
     if(room_name not in room_names):
-        print("Unknown room: '%s'." % room_name)
+        print("\nUnknown room: '%s'.\n" % room_name)
         return rooms_json
 
 
@@ -491,12 +518,17 @@ def teacher_other_lines_line_import(line_type, other_lines, generic_lines, comma
         line_index_string = command_strings[0]
 
     else:
-        other_tips_print(line_type, generic_lines)
+        print("\nSelect a generic %s voiceline to import:" % line_type)
+
+        for index, line in enumerate(generic_lines):
+            print("- %02d: %s" % (index, line))
+
+        print("")
         
         line_index_string = input("Index: ").strip().lower()
 
         if(not line_index_string):
-            print("No inputted index")
+            print("\nNo inputted index\n")
             return other_lines
 
     
@@ -504,12 +536,12 @@ def teacher_other_lines_line_import(line_type, other_lines, generic_lines, comma
         line_index = int(line_index_string)
 
     except Exception as exception:
-        print("Index must be an integer")
+        print("\nIndex must be an integer\n")
         return other_lines
 
 
     if(line_index < 0 or line_index >= len(generic_lines)):
-        print("Index out of range")
+        print("\nIndex out of range\n")
         return other_lines
 
 
@@ -517,7 +549,7 @@ def teacher_other_lines_line_import(line_type, other_lines, generic_lines, comma
 
     other_lines.append({"text": line_text})
 
-    print("Imported line: '%s'" % line_text)
+    print("\nImported voiceline: '%s'\n" % line_text)
 
 
     return other_lines
@@ -534,12 +566,12 @@ def command_add_handler(command_strings):
     teacher_name = teacher_name_input(teacher_names, command_strings)
 
     if(not teacher_name):
-        print("No inputted teacher")
+        print("\nNo inputted teacher\n")
         return
 
         
     if(teacher_name not in teacher_names):
-        print("Teacher '%s' doesn't exist" % teacher_name)
+        print("\nTeacher '%s' doesn't exist\n" % teacher_name)
         return
 
 
@@ -554,7 +586,7 @@ def teacher_command_add_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
-        print("Teacher '%s' doesn't exist" % teacher_name)
+        print("\nTeacher '%s' doesn't exist\n" % teacher_name)
         return
 
 
@@ -563,11 +595,11 @@ def teacher_command_add_handler(teacher_name, command_strings):
     line_type = line_type_input(line_types, command_strings)
 
     if(not line_type):
-        print("No inputted line type")
+        print("\nNo inputted voiceline type\n")
         return
 
     if(line_type not in line_types):
-        print("Unknown line type: '%s'." % line_type)
+        print("\nUnknown voiceline type: '%s'.\n" % line_type)
         return
 
 
@@ -594,24 +626,33 @@ def teacher_rooms_json_line_add(teacher_name, rooms_json, command_strings):
     room_name = room_name_input(room_names, command_strings)
 
     if(not room_name):
-        print("No inputted room")
+        print("\nNo inputted room\n")
         return rooms_json
 
     if(room_name not in room_names):
-        print("Unknown room: '%s'." % room_name)
+        print("\nUnknown room: '%s'.\n" % room_name)
         return rooms_json
 
 
     room_lines = rooms_json.get(room_name, [])
 
-    print("- rooms")
+    print("")
 
-    teacher_room_lines_print(room_name, room_lines)
+    if(room_lines):
+        print("These are %s's existing %s voicelines:" % (teacher_name, room_name))
+
+        for index, room_line in enumerate(room_lines):
+            print("- %02d: %s" % (index, room_line["text"]))
+
+    else:
+        print("%s have no existing %s voicelines" % (teacher_name, room_name))
+
+    print("")
 
     line_text = input("Text: ").strip()
 
     if(not line_text):
-        print("No inputted text")
+        print("\nNo inputted text\n")
         return rooms_json
 
 
@@ -621,8 +662,7 @@ def teacher_rooms_json_line_add(teacher_name, rooms_json, command_strings):
 
     rooms_json[room_name] = room_lines
 
-    print("Added line: '%s'" % line_text)
-
+    print("\nAdded voiceline: '%s'\n" % line_text)
 
     return rooms_json
 
@@ -630,19 +670,29 @@ def teacher_rooms_json_line_add(teacher_name, rooms_json, command_strings):
 # Add another voiceline to teacher
 #
 def teacher_other_lines_line_add(teacher_name, line_type, other_lines):
+    print("")
 
-    teacher_other_lines_print(line_type, other_lines)
+    if(other_lines):
+        print("These are %s's existing %s voicelines:" % (teacher_name, line_type))
+
+        for index, other_line in enumerate(other_lines):
+            print("- %02d: %s" % (index, other_line["text"]))
+
+    else:
+        print("%s have no existing %s voicelines" % (teacher_name, line_type))
+
+    print("")
 
     line_text = input("Text: ").strip()
 
     if(not line_text):
-        print("No inputted text")
+        print("\nNo inputted text\n")
         return other_lines
 
 
     other_lines.append({"text": line_text})
 
-    print("Added line: '%s'" % line_text)
+    print("\nAdded voiceline: '%s'\n" % line_text)
 
     return other_lines
 
@@ -658,12 +708,12 @@ def command_edit_handler(command_strings):
     teacher_name = teacher_name_input(teacher_names, command_strings)
 
     if(not teacher_name):
-        print("No inputted teacher")
+        print("\nNo inputted teacher\n")
         return
         
 
     if(teacher_name not in teacher_names):
-        print("Teacher '%s' doesn't exist" % teacher_name)
+        print("\nTeacher '%s' doesn't exist\n" % teacher_name)
         return
 
 
@@ -678,7 +728,7 @@ def teacher_command_edit_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
-        print("Teacher '%s' doesn't exist" % teacher_name)
+        print("\nTeacher '%s' doesn't exist\n" % teacher_name)
         return
 
 
@@ -687,43 +737,72 @@ def teacher_command_edit_handler(teacher_name, command_strings):
     line_type = line_type_input(line_types, command_strings)
 
     if(not line_type):
-        print("No inputted line type")
+        print("\nNo inputted voiceline type\n")
         return
 
     if(line_type not in line_types):
-        print("Unknown line type: '%s'." % line_type)
+        print("\nUnknown voiceline type: '%s'.\n" % line_type)
         return
 
 
     next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
 
     if(line_type == "rooms"):
-        teacher_json["rooms"] = teacher_rooms_json_line_edit(teacher_json["rooms"], next_command_strings)
+        teacher_json["rooms"] = teacher_rooms_json_line_edit(teacher_name, teacher_json["rooms"], next_command_strings)
 
     else:
-        teacher_json[line_type] = teacher_other_lines_line_edit(line_type, teacher_json[line_type], next_command_strings)
+        teacher_json[line_type] = teacher_other_lines_line_edit(teacher_name, line_type, teacher_json[line_type], next_command_strings)
 
 
     teacher_json_save(teacher_name, teacher_json)
+
+#
+# Edit one of the teacher's voicelines in a room
+#
+# Rename this function
+#
+def teacher_rooms_json_line_edit(teacher_name, rooms_json, command_strings):
+    room_names = rooms_json.keys()
+
+    room_name = room_name_input(room_names, command_strings)
+
+    if(not room_name):
+        print("\nNo inputted room\n")
+        return rooms_json
+
+    if(room_name not in room_names):
+        print("\nUnknown room: '%s'.\n" % room_name)
+        return
+
+
+    next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
+
+
+    rooms_json[room_name] = teacher_room_lines_line_edit(teacher_name, room_name, rooms_json[room_name], next_command_strings)
+
+    return rooms_json
 
 #
 # Edit one of the teacher's voicelines in a specified room
 #
 # Rename this function
 #
-def teacher_room_lines_line_edit(room_name, room_lines, command_strings):
+def teacher_room_lines_line_edit(teacher_name, room_name, room_lines, command_strings):
     if(len(command_strings) >= 1):
         line_index_string = command_strings[0]
 
     else:
-        print("- rooms")
+        print("\nSelect one of %s's %s voicelines to edit:" % (teacher_name, room_name))
 
-        teacher_room_lines_print(room_name, room_lines)
+        for index, room_line in enumerate(room_lines):
+            print("- %02d: %s" % (index, room_line["text"]))
+
+        print("")
 
         line_index_string = input("Index: ").strip().lower()
 
         if(not line_index_string):
-            print("No inputted index")
+            print("\nNo inputted index\n")
             return room_lines
 
 
@@ -731,70 +810,49 @@ def teacher_room_lines_line_edit(room_name, room_lines, command_strings):
         line_index = int(line_index_string)
 
     except Exception as exception:
-        print("Index must be an integer")
+        print("\nIndex must be an integer\n")
         return room_lines
 
 
     if(line_index < 0 or line_index >= len(room_lines)):
-        print("Index out of range")
+        print("\nIndex out of range\n")
         return room_lines
 
 
     line_text = input("Text: ").strip()
 
     if(not line_text):
-        print("No inputted text")
+        print("\nNo inputted text\n")
         return room_lines
 
 
     room_lines[line_index]["text"] = line_text
 
-    print("Edited line: '%s'" % line_text)
+    print("\nEdited voiceline: '%s'\n" % line_text)
 
     return room_lines
-
-#
-# Edit one of the teacher's voicelines in a room
-#
-# Rename this function
-#
-def teacher_rooms_json_line_edit(rooms_json, command_strings):
-    room_names = rooms_json.keys()
-
-    room_name = room_name_input(room_names, command_strings)
-
-    if(not room_name):
-        print("No inputted room")
-        return rooms_json
-
-    if(room_name not in room_names):
-        print("Unknown room: '%s'." % room_name)
-        return
-
-
-    next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
-
-
-    rooms_json[room_name] = teacher_room_lines_line_edit(room_name, rooms_json[room_name], next_command_strings)
-
-    return rooms_json
 
 #
 # Edit one of the teacher's other voicelines of a specified type
 #
 # Rename this function
 #
-def teacher_other_lines_line_edit(line_type, other_lines, command_strings):
+def teacher_other_lines_line_edit(teacher_name, line_type, other_lines, command_strings):
     if(len(command_strings) >= 1):
         line_index_string = command_strings[0]
 
     else:
-        teacher_other_lines_print(line_type, other_lines)
+        print("\nSelect one of %s's %s voicelines to edit:" % (teacher_name, line_type))
+
+        for index, other_line in enumerate(other_lines):
+            print("- %02d: %s" % (index, other_line["text"]))
+
+        print("")
 
         line_index_string = input("Index: ").strip().lower()
 
         if(not line_index_string):
-            print("No inputted index")
+            print("\nNo inputted index\n")
             return other_lines
 
 
@@ -802,25 +860,25 @@ def teacher_other_lines_line_edit(line_type, other_lines, command_strings):
         line_index = int(line_index_string)
 
     except Exception as exception:
-        print("Index must be an integer")
+        print("\nIndex must be an integer\n")
         return other_lines
 
 
     if(line_index < 0 or line_index >= len(other_lines)):
-        print("Index out of range")
+        print("\nIndex out of range\n")
         return other_lines
 
 
     line_text = input("Text: ").strip()
 
     if(not line_text):
-        print("No inputted text")
+        print("\nNo inputted text\n")
         return other_lines
 
 
     other_lines[line_index]["text"] = line_text
 
-    print("Edited line: '%s'" % line_text)
+    print("\nEdited voiceline: '%s'\n" % line_text)
 
     return other_lines
 
@@ -836,12 +894,12 @@ def command_del_handler(command_strings):
     teacher_name = teacher_name_input(teacher_names, command_strings)
 
     if(not teacher_name):
-        print("No inputted teacher")
+        print("\nNo inputted teacher\n")
         return
 
         
     if(teacher_name not in teacher_names):
-        print("Teacher '%s' doesn't exist" % teacher_name)
+        print("\nTeacher '%s' doesn't exist\n" % teacher_name)
         return
 
 
@@ -856,7 +914,7 @@ def teacher_command_del_handler(teacher_name, command_strings):
     teacher_json = teacher_json_load(teacher_name)
 
     if(not teacher_json):
-        print("Teacher '%s' doesn't exist" % teacher_name)
+        print("\nTeacher '%s' doesn't exist\n" % teacher_name)
         return
 
 
@@ -865,11 +923,11 @@ def teacher_command_del_handler(teacher_name, command_strings):
     line_type = line_type_input(line_types, command_strings)
 
     if(not line_type):
-        print("No inputted line type")
+        print("\nNo inputted voiceline type\n")
         return
 
     if(line_type not in line_types):
-        print("Unknown line type: '%s'." % line_type)
+        print("\nUnknown voiceline type: '%s'.\n" % line_type)
         return
 
 
@@ -877,13 +935,38 @@ def teacher_command_del_handler(teacher_name, command_strings):
 
 
     if(line_type == "rooms"):
-        teacher_json["rooms"] = teacher_rooms_json_line_del(teacher_json["rooms"], next_command_strings)
+        teacher_json["rooms"] = teacher_rooms_json_line_del(teacher_name, teacher_json["rooms"], next_command_strings)
 
     else:
-        teacher_json[line_type] = teacher_other_lines_line_del(line_type, teacher_json[line_type], next_command_strings)
+        teacher_json[line_type] = teacher_other_lines_line_del(teacher_name, line_type, teacher_json[line_type], next_command_strings)
 
 
     teacher_json_save(teacher_name, teacher_json)
+
+#
+# Delete one of the teacher's voicelines in a room
+#
+# Rename this function
+#
+def teacher_rooms_json_line_del(teacher_name, rooms_json, command_strings):
+    room_names = rooms_json.keys()
+
+    room_name = room_name_input(room_names, command_strings)
+
+    if(not room_name):
+        print("\nNo inputted room\n")
+        return rooms_json
+
+    if(room_name not in room_names):
+        print("\nUnknown room: '%s'.\n" % room_name)
+        return rooms_json
+
+
+    next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
+
+    rooms_json[room_name] = teacher_room_lines_line_del(teacher_name, room_name, rooms_json[room_name], next_command_strings)
+
+    return rooms_json
 
 #
 # Delete one of the teacher's voicelines in a specified room
@@ -895,14 +978,17 @@ def teacher_room_lines_line_del(room_name, room_lines, command_strings):
         line_index_string = command_strings[0]
 
     else:
-        print("- rooms")
+        print("\nSelect one of %s's %s voicelines to delete:" % (teacher_name, room_name))
 
-        teacher_room_lines_print(room_name, room_lines)
+        for index, room_line in enumerate(room_lines):
+            print("- %02d: %s" % (index, room_line["text"]))
+
+        print("")
 
         line_index_string = input("Index: ").strip().lower()
 
         if(not line_index_string):
-            print("No inputted index")
+            print("\nNo inputted index\n")
             return room_lines
 
 
@@ -910,12 +996,12 @@ def teacher_room_lines_line_del(room_name, room_lines, command_strings):
         line_index = int(line_index_string)
 
     except Exception as exception:
-        print("Index must be an integer")
+        print("\nIndex must be an integer\n")
         return room_lines
 
 
     if(line_index < 0 or line_index >= len(room_lines)):
-        print("Index out of range")
+        print("\nIndex out of range\n")
         return room_lines
 
 
@@ -923,52 +1009,31 @@ def teacher_room_lines_line_del(room_name, room_lines, command_strings):
 
     del room_lines[line_index]
 
-    print("Deleted line: '%s'" % line_text)
-
+    print("\nDeleted voiceline: '%s'\n" % line_text)
 
     return room_lines
-
-#
-# Delete one of the teacher's voicelines in a room
-#
-# Rename this function
-#
-def teacher_rooms_json_line_del(rooms_json, command_strings):
-    room_names = rooms_json.keys()
-
-    room_name = room_name_input(room_names, command_strings)
-
-    if(not room_name):
-        print("No inputted room")
-        return rooms_json
-
-    if(room_name not in room_names):
-        print("Unknown room: '%s'." % room_name)
-        return rooms_json
-
-
-    next_command_strings = command_strings[1:] if len(command_strings) >= 2 else []
-
-    rooms_json[room_name] = teacher_room_lines_line_del(room_name, rooms_json[room_name], next_command_strings)
-
-    return rooms_json
 
 #
 # Delete one of the teacher's other voicelines of a specified type
 #
 # Rename this function
 #
-def teacher_other_lines_line_del(line_type, other_lines, command_strings):
+def teacher_other_lines_line_del(teacher_name, line_type, other_lines, command_strings):
     if(len(command_strings) >= 1):
         line_index_string = command_strings[0]
 
     else:
-        teacher_other_lines_print(line_type, other_lines)
+        print("\nSelect one of %s's %s voicelines to delete:" % (teacher_name, line_type))
+
+        for index, other_line in enumerate(other_lines):
+            print("- %02d: %s" % (index, other_line["text"]))
+
+        print("")
 
         line_index_string = input("Index: ").strip().lower()
 
         if(not line_index_string):
-            print("No inputted index")
+            print("\nNo inputted index\n")
             return other_lines
 
 
@@ -976,12 +1041,12 @@ def teacher_other_lines_line_del(line_type, other_lines, command_strings):
         line_index = int(line_index_string)
 
     except Exception as exception:
-        print("Index must be an integer")
+        print("\nIndex must be an integer\n")
         return other_lines
 
     
     if(line_index < 0 or line_index >= len(other_lines)):
-        print("Index out of range")
+        print("\nIndex out of range\n")
         return other_lines
 
 
@@ -989,8 +1054,7 @@ def teacher_other_lines_line_del(line_type, other_lines, command_strings):
 
     del other_lines[line_index]
 
-    print("Deleted line: '%s'" % line_text)
-
+    print("\nDeleted voiceline: '%s'\n" % line_text)
 
     return other_lines
 
@@ -1006,11 +1070,11 @@ def command_select_handler(command_strings):
     teacher_name = teacher_name_input(teacher_names, command_strings)
 
     if(not teacher_name):
-        print("No inputted teacher")
+        print("\nNo inputted teacher\n")
         return
 
     if(teacher_name not in teacher_names):
-        print("Teacher '%s' doesn't exist" % teacher_name)
+        print("\nTeacher '%s' doesn't exist\n" % teacher_name)
         return
 
 
@@ -1019,7 +1083,8 @@ def command_select_handler(command_strings):
     teacher_command_select_handler(teacher_name, next_command_strings)
 
 
-    print("Selected teacher: %s" % teacher_name)
+    print("\nSelected teacher: '%s'\n" % teacher_name)
+
     menu_teacher_routine(teacher_name)
 
 #
@@ -1033,11 +1098,11 @@ def teacher_command_select_handler(teacher_name, command_strings):
     line_type = line_type_input(line_types, command_strings)
 
     if(not line_type):
-        print("No inputted line type")
+        print("\nNo inputted voiceline type")
         return
 
     if(line_type not in line_types):
-        print("Unknown line type: '%s'." % line_type)
+        print("\nUnknown voiceline type: '%s'." % line_type)
         return
 
 
@@ -1047,7 +1112,8 @@ def teacher_command_select_handler(teacher_name, command_strings):
         teacher_rooms_command_select_handler(teacher_name, next_command_strings)
 
 
-    print("Selected %s's %s voicelines" % (teacher_name, line_type))
+    print("\nSelected teacher '%s's '%s' voicelines\n" % (teacher_name, line_type))
+
     menu_line_type_routine(teacher_name, line_type)
 
 #
@@ -1061,14 +1127,15 @@ def teacher_rooms_command_select_handler(teacher_name, command_strings):
     room_name = room_name_input(room_names, command_strings)
 
     if(not room_name):
-        print("No inputted room")
+        print("\nNo inputted room")
         return
 
     if(room_name not in room_names):
-        print("Unknown room: '%s'." % room_name)
+        print("\nUnknown room: '%s'." % room_name)
         return
 
-    print("Selected %s's %s voicelines" % (teacher_name, room_name))
+    print("\nSelected teacher '%s's '%s' voicelines\n" % (teacher_name, room_name))
+
     menu_room_routine(teacher_name, room_name)
 
 
@@ -1201,11 +1268,11 @@ def teacher_rooms_json_format(teacher_name, rooms_json):
 # Correctly format the teacher's other voicelines of a specified type
 #
 def teacher_other_lines_format(teacher_name, line_type, other_lines):
-    for index, line_json in enumerate(other_lines):
+    for index, other_line in enumerate(other_lines):
         line_voice = "%s-%s-line-%d.mov" % (teacher_name, line_type, index)
 
         other_lines[index]["voice"] = line_voice
-        other_lines[index]["text"]  = other_lines[index]["text"].strip()
+        other_lines[index]["text"]  = other_line["text"].strip()
 
     return other_lines
 
@@ -1259,7 +1326,7 @@ def menu_teachers_command_parse(command_string):
         exit()
 
     elif(command == "back"):
-        print("You can't go any further back");
+        print("\nYou can't go any further back\n");
 
     elif(command == "help"):
         menu_teachers_command_help_handler()
@@ -1295,7 +1362,7 @@ def menu_teacher_command_parse(teacher_name, command_string):
         exit()
 
     elif(command == "back"):
-        print("Unselected %s" % teacher_name)
+        print("\nUnselected %s\n" % teacher_name)
 
         menu_teachers_routine()
 
@@ -1335,7 +1402,7 @@ def menu_line_type_command_parse(teacher_name, line_type, command_string):
         exit()
 
     elif(command == "back"):
-        print("Unselected %s voicelines" % line_type)
+        print("\nUnselected %s voicelines\n" % line_type)
 
         menu_teacher_routine(teacher_name)
 
@@ -1377,7 +1444,7 @@ def menu_room_command_parse(teacher_name, room_name, command_string):
         exit()
 
     if(command == "back"):
-        print("Unselected %s" % room_name)
+        print("\nUnselected %s\n" % room_name)
 
         menu_line_type_routine(teacher_name, "rooms")
 
