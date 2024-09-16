@@ -125,7 +125,11 @@ def line_type_input(line_types, command_strings):
         print("\nThese are the voiceline types you can select:")
 
         for line_type in line_types:
-            print("- %s" % line_type)
+            if(line_type == "rooms"):
+                print("- \033[0;32m%s\033[0m" % "rooms")
+
+            else:
+                print("- \033[0;31m%s\033[0m" % line_type)
 
         print("")
 
@@ -144,7 +148,7 @@ def room_name_input(room_names, command_strings):
         print("\nThese are the rooms you can select:")
 
         for room_name in room_names:
-            print("- %s" % room_name)
+            print("- \033[0;31m%s\033[0m" % room_name)
 
         print("")
 
@@ -163,7 +167,7 @@ def teacher_name_input(teacher_names, command_strings):
         print("\nThese are the teachers you can select:")
 
         for teacher_name in teacher_names:
-            print("- %s" % teacher_name)
+            print("- \033[0;33m%s\033[0m" % teacher_name)
 
         print("")
 
@@ -258,11 +262,13 @@ def command_print_rooms_handler(teacher_name, rooms_json, command_strings):
 def command_print_rooms_all_print(teacher_name, rooms_json):
     print("\nThese are %s's voicelines for rooms:\n" % teacher_name)
 
+    print("\033[0;32m%s\033[0m" % "rooms")
+
     for room_name, room_lines in rooms_json.items():
-        print("* %s" % room_name)
+        print("* \033[0;31m%s\033[0m" % room_name)
         
         for index, room_line in enumerate(room_lines):
-            print("  - %02d: %s" % (index, room_line["text"]))
+            print("  - \033[0;36m%02d\033[0m: %s" % (index, room_line["text"]))
 
         print("")
 
@@ -274,10 +280,12 @@ def command_print_room_handler(teacher_name, room_name, room_lines):
         print("\n%s doesn't have any room %s voicelines.\n" % (teacher_name, room_name))
         return
 
-    print("\nThese are %s's room %s voicelines:" % (teacher_name, room_name))
+    print("\nThese are %s's room %s voicelines:\n" % (teacher_name, room_name))
     
+    print("\033[0;31m%s\033[0m" % room_name)
+        
     for index, room_line in enumerate(room_lines):
-        print("- %02d: %s" % (index, room_line["text"]))
+        print("- \033[0;36m%02d\033[0m: %s" % (index, room_line["text"]))
 
     print("")
 
@@ -289,10 +297,12 @@ def command_print_other_lines_handler(teacher_name, line_type, other_lines):
         print("\n%s doesn't have any %s voicelines.\n" % (teacher_name, line_type))
         return
 
-    print("\nThese are %s's %s voicelines:" % (teacher_name, line_type))
+    print("\nThese are %s's %s voicelines:\n" % (teacher_name, line_type))
+
+    print("\033[0;31m%s\033[0m" % line_type)
 
     for index, other_line in enumerate(other_lines):
-        print("- %02d: %s" % (index, other_line["text"]))
+        print("- \033[0;36m%02d\033[0m: %s" % (index, other_line["text"]))
 
     print("")
 
@@ -313,13 +323,13 @@ def command_print_all_print(teacher_name, teacher_json):
 #
 #
 def command_print_all_rooms_print(rooms_json):
-    print("rooms")
+    print("\033[0;32m%s\033[0m" % "rooms")
 
     for room_name, room_lines in rooms_json.items():
-        print("* %s" % room_name)
+        print("* \033[0;31m%s\033[0m" % room_name)
         
         for index, room_line in enumerate(room_lines):
-            print("  - %02d: %s" % (index, room_line["text"]))
+            print("  - \033[0;36m%02d\033[0m: %s" % (index, room_line["text"]))
 
         print("")
 
@@ -327,10 +337,10 @@ def command_print_all_rooms_print(rooms_json):
 #
 #
 def command_print_all_other_lines_print(line_type, other_lines):
-    print("%s" % line_type)
+    print("\033[0;31m%s\033[0m" % line_type)
 
     for index, other_line in enumerate(other_lines):
-        print("- %02d: %s" % (index, other_line["text"]))
+        print("- \033[0;36m%02d\033[0m: %s" % (index, other_line["text"]))
 
     print("")
 
@@ -375,7 +385,7 @@ def command_tips_other_lines_handler(line_type):
     print("\nThese are some voiceline tips for %s:" % line_type)
 
     for index, line in enumerate(generic_lines):
-        print("- %02d: %s" % (index, line))
+        print("- \033[0;36m%02d\033[0m: %s" % (index, line))
 
     print("")
 
@@ -410,7 +420,7 @@ def command_tips_room_handler(room_name):
     print("\nThese are some voiceline tips for room %s:" % room_name)
 
     for index, line in enumerate(generic_lines):
-        print("- %02d: %s" % (index, line))
+        print("- \033[0;36m%02d\033[0m: %s" % (index, line))
 
     print("")
 
@@ -428,7 +438,7 @@ def command_tips_all_rooms_print():
         print("* %s" % room_name)
 
         for index, line in enumerate(generic_lines):
-            print("  - %02d: %s" % (index, line))
+            print("  - \033[0;36m%02d\033[0m: %s" % (index, line))
 
         print("")
 
@@ -509,7 +519,7 @@ def teacher_room_lines_line_import(room_name, room_lines, generic_lines, command
         print("\nSelect a generic %s voiceline to import:" % room_name)
 
         for index, line in enumerate(generic_lines):
-            print("- %02d: %s" % (index, line))
+            print("- \033[0;36m%02d\033[0m: %s" % (index, line))
 
         print("")
 
@@ -582,7 +592,7 @@ def teacher_other_lines_line_import(line_type, other_lines, generic_lines, comma
         print("\nSelect a generic %s voiceline to import:" % line_type)
 
         for index, line in enumerate(generic_lines):
-            print("- %02d: %s" % (index, line))
+            print("- \033[0;36m%02d\033[0m: %s" % (index, line))
 
         print("")
         
@@ -703,7 +713,7 @@ def teacher_rooms_json_line_add(teacher_name, rooms_json, command_strings):
         print("These are %s's existing %s voicelines:" % (teacher_name, room_name))
 
         for index, room_line in enumerate(room_lines):
-            print("- %02d: %s" % (index, room_line["text"]))
+            print("- \033[0;36m%02d\033[0m: %s" % (index, room_line["text"]))
 
     else:
         print("%s have no existing %s voicelines" % (teacher_name, room_name))
@@ -737,7 +747,7 @@ def teacher_other_lines_line_add(teacher_name, line_type, other_lines):
         print("These are %s's existing %s voicelines:" % (teacher_name, line_type))
 
         for index, other_line in enumerate(other_lines):
-            print("- %02d: %s" % (index, other_line["text"]))
+            print("- \033[0;36m%02d\033[0m: %s" % (index, other_line["text"]))
 
     else:
         print("%s have no existing %s voicelines" % (teacher_name, line_type))
@@ -856,7 +866,7 @@ def teacher_room_lines_line_edit(teacher_name, room_name, room_lines, command_st
         print("\nSelect one of %s's %s voicelines to edit:" % (teacher_name, room_name))
 
         for index, room_line in enumerate(room_lines):
-            print("- %02d: %s" % (index, room_line["text"]))
+            print("- \033[0;36m%02d\033[0m: %s" % (index, room_line["text"]))
 
         print("")
 
@@ -906,7 +916,7 @@ def teacher_other_lines_line_edit(teacher_name, line_type, other_lines, command_
         print("\nSelect one of %s's %s voicelines to edit:" % (teacher_name, line_type))
 
         for index, other_line in enumerate(other_lines):
-            print("- %02d: %s" % (index, other_line["text"]))
+            print("- \033[0;36m%02d\033[0m: %s" % (index, other_line["text"]))
 
         print("")
 
@@ -1044,7 +1054,7 @@ def teacher_room_lines_line_del(teacher_name, room_name, room_lines, command_str
         print("\nSelect one of %s's %s voicelines to delete:" % (teacher_name, room_name))
 
         for index, room_line in enumerate(room_lines):
-            print("- %02d: %s" % (index, room_line["text"]))
+            print("- \033[0;36m%02d\033[0m: %s" % (index, room_line["text"]))
 
         print("")
 
@@ -1089,7 +1099,7 @@ def teacher_other_lines_line_del(teacher_name, line_type, other_lines, command_s
         print("\nSelect one of %s's %s voicelines to delete:" % (teacher_name, line_type))
 
         for index, other_line in enumerate(other_lines):
-            print("- %02d: %s" % (index, other_line["text"]))
+            print("- \033[0;36m%02d\033[0m: %s" % (index, other_line["text"]))
 
         print("")
 
@@ -1369,7 +1379,7 @@ def teacher_json_format(teacher_name, teacher_json):
 #
 def menu_teachers_routine():
     while True:
-        command_string = input("\033[33m$ \033[0m").strip().lower()
+        command_string = input("\033[0m$ \033[0m").strip().lower()
 
         if(command_string != ""):
             menu_teachers_command_parse(command_string)
@@ -1408,7 +1418,7 @@ def menu_teachers_command_parse(command_string):
 #
 def menu_teacher_routine(teacher_name):
     while True:
-        command_string = input("\033[32m$ \033[0m").strip().lower()
+        command_string = input("\033[0;33m$ \033[0m").strip().lower()
 
         if(command_string != ""):
             menu_teacher_command_parse(teacher_name, command_string)
@@ -1455,10 +1465,10 @@ def menu_teacher_command_parse(teacher_name, command_string):
 def menu_line_type_routine(teacher_name, line_type):
     while True:
         if(line_type == "rooms"):
-            command_string = input("\033[35m$ \033[0m").strip().lower()
+            command_string = input("\033[0;32m$ \033[0m").strip().lower()
 
         else:
-            command_string = input("\033[31m$ \033[0m").strip().lower()
+            command_string = input("\033[0;31m$ \033[0m").strip().lower()
 
         if(command_string != ""):
             menu_line_type_command_parse(teacher_name, line_type, command_string)
@@ -1509,7 +1519,7 @@ def menu_line_type_command_parse(teacher_name, line_type, command_string):
 #
 def menu_room_routine(teacher_name, room_name):
     while True:
-        command_string = input("\033[31m$ \033[0m").strip().lower()
+        command_string = input("\033[0;31m$ \033[0m").strip().lower()
 
         if(command_string != ""):
             menu_room_command_parse(teacher_name, room_name, command_string)
