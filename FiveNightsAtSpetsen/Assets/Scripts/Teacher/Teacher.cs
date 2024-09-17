@@ -2,26 +2,37 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public abstract class Teacher : MonoBehaviour
+public class Teacher : MonoBehaviour
 {
-    public TeacherPath path;
+    public TeacherPathManager pathManager;
     public TeacherMovement movement;
     public TeacherRaycasting raycaster;
-    public List<(string id, float delay)> delays;
+    public TextAsset delaysJson;
+    Dictionary<string, float> delays;
+
+    void OnEnable()
+    {
+        EventsManager.Instance.teacherEvents.OnPlayerMadeSound += PlayerMadeSound;
+    }
+
+    void OnDisable()
+    {
+        EventsManager.Instance.teacherEvents.OnPlayerMadeSound -= PlayerMadeSound;
+    }
 
     void Start()
     {
-        Init();
+        // pathManager.Next();
+        movement.SetTarget(pathManager.GetPos());
 
-        ReachedTarget();
+        delays = TeacherDelayParser.Parse(delaysJson);
     }
 
-    protected abstract void Init();
-
-    public virtual void ReachedTarget()
+    public void ReachedTarget()
     {
         if (raycaster.player == null)
         {
+            EventsManager.Instance.teacherEvents.WaypointReached(pathManager.GetWaypoint());
             StartCoroutine(MoveToNext(GetDelay()));
         }
     }
@@ -32,38 +43,36 @@ public abstract class Teacher : MonoBehaviour
 
         if (raycaster.player == null)
         {
-            path.Next();
-            movement.SetTarget(path.GetPos());
+            pathManager.Next();
+            movement.SetTarget(pathManager.GetPos());
         }
     }
 
     public void PlayerSpotted(Vector3 position)
     {
+        if (!movement.chasingPlayer)
+            EventsManager.Instance.teacherEvents.PlayerSpotted();
         movement.SetTarget(position, true);
     }
 
     public void PlayerNotSpotted()
     {
-        movement.SetTarget(path.GetPos());
+        movement.SetTarget(pathManager.GetPos());
     }
 
     public float GetDelay()
     {
-        TeacherWaypoint waypoint = path.GetWaypoint();
+        TeacherWaypoint waypoint = pathManager.GetWaypoint();
 
-        if (waypoint.id == "")
-        {
-            return 0;
-        }
+        if (delays.ContainsKey(waypoint.id))
+            return delays[waypoint.id];
         else
-        {
-            foreach ((string id, float delay) item in delays)
-            {
-                if (item.id == waypoint.id)
-                    return item.delay;
-            }
-
             return 0;
-        }
+    }
+
+    void PlayerMadeSound(TeacherRoomPath room)
+    {
+        Debug.Log("Teacher heard a sound coming from " + room.gameObject.name);
+        pathManager.TargetRoom(room);
     }
 }
