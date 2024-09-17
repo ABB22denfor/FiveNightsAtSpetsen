@@ -7,7 +7,7 @@ public class Teacher : MonoBehaviour
     public TeacherPathManager pathManager;
     public TeacherMovement movement;
     public TeacherRaycasting raycaster;
-    public TextAsset delaysJson;
+    public TextAsset dataJson;
     Dictionary<string, float> delays;
 
     void OnEnable()
@@ -25,7 +25,9 @@ public class Teacher : MonoBehaviour
         // pathManager.Next();
         movement.SetTarget(pathManager.GetPos());
 
-        delays = TeacherDelayParser.Parse(delaysJson);
+        TeacherDataParser dataParser = new(dataJson);
+        delays = dataParser.GetDelays();
+        pathManager.SetRoute(dataParser.GetRoute());
     }
 
     public void ReachedTarget()
@@ -72,7 +74,7 @@ public class Teacher : MonoBehaviour
 
     void PlayerMadeSound(TeacherRoomPath room)
     {
-        Debug.Log("Teacher heard a sound coming from " + room.gameObject.name);
+        Debug.Log("Teacher heard a sound coming from " + room.id);
         pathManager.TargetRoom(room);
     }
 }

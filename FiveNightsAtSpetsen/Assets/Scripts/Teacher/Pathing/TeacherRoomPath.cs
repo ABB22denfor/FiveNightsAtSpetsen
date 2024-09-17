@@ -3,10 +3,13 @@ using System.Collections.Generic;
 
 public class TeacherRoomPath : MonoBehaviour
 {
+    public string id;
     public TeacherPathManager manager;
     public List<int> path = new() { 0, 1, 2, 3, 1 };
     public int exitPoint = 5;
     public int pathIndex = 0;
+
+    public int repetitions = 0;
 
     public Color lineColor = Color.blue;
     public Color exitColor = Color.red;
@@ -15,8 +18,11 @@ public class TeacherRoomPath : MonoBehaviour
     {
         if (pathIndex >= path.Count - 1)
         {
-            pathIndex = -1;
-            manager.RoomFinished(this);
+            pathIndex = (path[0] == path[^1] ? 0 : -1);
+            if (repetitions == 0)
+                manager.RoomFinished(this);
+            else
+                repetitions -= 1;
         }
 
         pathIndex++;

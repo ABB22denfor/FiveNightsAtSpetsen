@@ -19,6 +19,9 @@ public class TeacherPathManager : MonoBehaviour
 
     public Color interRoomColor = Color.blue;
 
+    List<(TeacherRoomPath room, int repetitions)> route = new();
+    public int routeIndex = 0;
+
     void OnValidate()
     {
         rooms.Clear();
@@ -27,21 +30,35 @@ public class TeacherPathManager : MonoBehaviour
             rooms.Add(child.GetComponent<TeacherRoomPath>());
     }
 
+    public void SetRoute(List<(string rid, int reps)> routeData)
+    {
+        routeData.ForEach(e => route.Add((GetRoom(e.rid), e.reps)));
+    }
+
     public void Next()
     {
         if (!inRoom)
         {
             if (target == null)
             {
-                foreach (TeacherRoomPath room in rooms)
+                // foreach (TeacherRoomPath room in rooms)
+                // {
+                //     if (room == lastRoom) continue;
+                //     if (room.exitPoint == interRoomPath[interRoomIndex] && Random.value < roomEntryChance)
+                //     {
+                //         inRoom = true;
+                //         currentRoom = rooms.IndexOf(room);
+                //         return;
+                //     }
+                // }
+
+                if (route[routeIndex].room.exitPoint == interRoomPath[interRoomIndex])
                 {
-                    if (room == lastRoom) continue;
-                    if (room.exitPoint == interRoomPath[interRoomIndex] && Random.value < roomEntryChance)
-                    {
-                        inRoom = true;
-                        currentRoom = rooms.IndexOf(room);
-                        return;
-                    }
+                    inRoom = true;
+                    currentRoom = rooms.IndexOf(route[routeIndex].room);
+                    rooms[currentRoom].repetitions = route[routeIndex].repetitions;
+                    routeIndex = (routeIndex + 1) % route.Count;
+                    return;
                 }
             }
             else
@@ -68,9 +85,14 @@ public class TeacherPathManager : MonoBehaviour
         }
     }
 
-    public void TargetRoom(TeacherRoomPath room)
+    public void TargetRoom(TeacherRoomPath room, bool isRoute = false)
     {
-        target = room;
+        if (!isRoute)
+        {
+            target = room;
+            if (inRoom)
+                rooms[currentRoom].repetitions = 0;
+        }
 
         int i = interRoomIndex;
         int ti = interRoomPath.IndexOf(room.exitPoint);
@@ -83,6 +105,7 @@ public class TeacherPathManager : MonoBehaviour
         lastRoom = room;
         inRoom = false;
         interRoomIndex = interRoomPath.IndexOf(room.exitPoint);
+        TargetRoom(route[routeIndex].room, true);
     }
 
     public Vector3 GetPos()
@@ -99,6 +122,13 @@ public class TeacherPathManager : MonoBehaviour
             return waypoints.waypoints[interRoomPath[interRoomIndex]];
         else
             return rooms[currentRoom].GetWaypoint();
+    }
+
+    public TeacherRoomPath GetRoom(string id)
+    {
+        foreach (TeacherRoomPath room in rooms)
+            if (id == room.id) return room;
+        return null;
     }
 
     void OnDrawGizmosSelected()
