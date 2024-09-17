@@ -52,9 +52,8 @@ public class TeacherMovement : MonoBehaviour
             if (startPosition == target) return;
 
             Vector3 direction = target - transform.position;
-            float distanceToTarget = direction.magnitude;
 
-            if (distanceToTarget > 0.1f)
+            if (direction.magnitude > 0.1f)
             {
                 direction.Normalize();
 
@@ -77,7 +76,7 @@ public class TeacherMovement : MonoBehaviour
         if (chasingPlayer)
             steps.Add(transform.position);
 
-        this.target = target;
+        this.target = new Vector3(target.x, startPosition.y, target.z);
     }
 
     void OnDrawGizmosSelected()

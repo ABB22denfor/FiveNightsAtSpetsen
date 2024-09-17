@@ -7,7 +7,8 @@ public class Teacher : MonoBehaviour
     public TeacherPathManager pathManager;
     public TeacherMovement movement;
     public TeacherRaycasting raycaster;
-    public List<(string id, float delay)> delays;
+    public TextAsset delaysJson;
+    Dictionary<string, float> delays;
 
     void OnEnable()
     {
@@ -24,10 +25,7 @@ public class Teacher : MonoBehaviour
         // pathManager.Next();
         movement.SetTarget(pathManager.GetPos());
 
-        delays = new() {
-            ("Start", 2f),
-            ("wawa", 0.5f)
-        };
+        delays = TeacherDelayParser.Parse(delaysJson);
     }
 
     public void ReachedTarget()
@@ -66,20 +64,10 @@ public class Teacher : MonoBehaviour
     {
         TeacherWaypoint waypoint = pathManager.GetWaypoint();
 
-        if (waypoint.id == "")
-        {
-            return 0;
-        }
+        if (delays.ContainsKey(waypoint.id))
+            return delays[waypoint.id];
         else
-        {
-            foreach ((string id, float delay) item in delays)
-            {
-                if (item.id == waypoint.id)
-                    return item.delay;
-            }
-
             return 0;
-        }
     }
 
     void PlayerMadeSound(TeacherRoomPath room)

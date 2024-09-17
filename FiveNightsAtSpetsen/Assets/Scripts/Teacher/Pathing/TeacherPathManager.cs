@@ -10,7 +10,7 @@ public class TeacherPathManager : MonoBehaviour
 
     public bool inRoom = false;
     public List<int> interRoomPath = new() { 0, 1, 2, 3 };
-    public int interRoomIndex = -1;
+    public int interRoomIndex = 0;
     public int roomDir = 1;
 
     public TeacherRoomPath target;
@@ -55,10 +55,10 @@ public class TeacherPathManager : MonoBehaviour
                 }
             }
 
-            if (roomDir == 1 && interRoomIndex >= interRoomPath.Count - 1)
-                interRoomIndex = -1;
+            if (roomDir == 1 && interRoomIndex == interRoomPath.Count - 1)
+                roomDir = -1;
             else if (roomDir == -1 && interRoomIndex == 0)
-                interRoomIndex = interRoomPath.Count;
+                roomDir = 1;
 
             interRoomIndex += roomDir;
         }
@@ -74,9 +74,8 @@ public class TeacherPathManager : MonoBehaviour
 
         int i = interRoomIndex;
         int ti = interRoomPath.IndexOf(room.exitPoint);
-        int c = interRoomPath.Count;
 
-        roomDir = (((ti - i + c) % c) <= ((i - ti + c) % c) ? 1 : -1);
+        roomDir = ((ti >= i) ? 1 : -1);
     }
 
     public void RoomFinished(TeacherRoomPath room)

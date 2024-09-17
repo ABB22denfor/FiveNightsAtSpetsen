@@ -506,6 +506,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7221680901188712411, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      propertyPath: pathManager
+      value: 
+      objectReference: {fileID: 1762101574}
     - target: {fileID: 7864517937106545867, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
       propertyPath: target
@@ -1735,13 +1740,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: {fileID: 473392181}
-  paths:
+  rooms:
   - {fileID: 1161286816}
   - {fileID: 1042822893}
-  currentPath: 0
-  interRoom: 1
+  currentRoom: 0
+  inRoom: 0
   interRoomPath: 03000000010000000500000007000000
   interRoomIndex: 0
+  roomDir: 1
+  target: {fileID: 0}
   lastRoom: {fileID: 0}
   roomEntryChance: 0.8
   interRoomColor: {r: 0, g: 1, b: 0, a: 1}
