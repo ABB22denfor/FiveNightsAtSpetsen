@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4098747617046200090}
   - component: {fileID: 4253633807342040710}
-  - component: {fileID: 1011969166804942572}
+  - component: {fileID: 7221680901188712411}
   - component: {fileID: 8288388981843304445}
   - component: {fileID: 7864517937106545867}
   m_Layer: 0
@@ -63,7 +63,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &1011969166804942572
+--- !u!114 &7221680901188712411
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 566564891133530414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3546d0fd8a84374ea2ff2d37a848de6, type: 3}
+  m_Script: {fileID: 11500000, guid: 20d58804bc487cd43812bbedda44302d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pathManager: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e097b7f709f3b324094be9be9f42a757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teacher: {fileID: 1011969166804942572}
+  teacher: {fileID: 7221680901188712411}
   target: {x: 0, y: 0, z: 0}
   moveSpeed: 20
   chasingPlayer: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawVision: 0
-  teacher: {fileID: 1011969166804942572}
+  teacher: {fileID: 7221680901188712411}
   target: {fileID: 0}
   detectionRange: 12
   detectionLayer:

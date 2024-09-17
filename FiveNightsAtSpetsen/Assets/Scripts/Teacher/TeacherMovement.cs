@@ -19,8 +19,6 @@ public class TeacherMovement : MonoBehaviour
     {
         startPosition = transform.position;
 
-        target = transform.position;
-
         rb = GetComponent<Rigidbody>();
 
         rb.isKinematic = false;

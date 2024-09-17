@@ -4,12 +4,16 @@ using System.Collections.Generic;
 public class TeacherPathManager : MonoBehaviour
 {
     public TeacherWaypointsManager waypoints;
-    public List<TeacherRoomPath> paths = new();
-    public int currentPath = 0;
 
-    public bool interRoom = true;
+    public List<TeacherRoomPath> rooms = new();
+    public int currentRoom = 0;
+
+    public bool inRoom = false;
     public List<int> interRoomPath = new() { 0, 1, 2, 3 };
-    public int interRoomIndex = 0;
+    public int interRoomIndex = -1;
+    public int roomDir = 1;
+
+    public TeacherRoomPath target;
     public TeacherRoomPath lastRoom;
     public float roomEntryChance = 0.8f;
 
@@ -17,59 +21,85 @@ public class TeacherPathManager : MonoBehaviour
 
     void OnValidate()
     {
-        paths.Clear();
+        rooms.Clear();
 
         foreach (Transform child in transform)
-            paths.Add(child.GetComponent<TeacherRoomPath>());
+            rooms.Add(child.GetComponent<TeacherRoomPath>());
     }
 
     public void Next()
     {
-        if (interRoom)
+        if (!inRoom)
         {
-            foreach (TeacherRoomPath room in paths)
+            if (target == null)
             {
-                if (room == lastRoom) continue;
-                if (room.exitPoint == interRoomPath[interRoomIndex] && Random.value < roomEntryChance)
+                foreach (TeacherRoomPath room in rooms)
                 {
-                    interRoom = false;
-                    currentPath = paths.IndexOf(room);
+                    if (room == lastRoom) continue;
+                    if (room.exitPoint == interRoomPath[interRoomIndex] && Random.value < roomEntryChance)
+                    {
+                        inRoom = true;
+                        currentRoom = rooms.IndexOf(room);
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                if (target.exitPoint == interRoomPath[interRoomIndex])
+                {
+                    inRoom = true;
+                    currentRoom = rooms.IndexOf(target);
+                    target = null;
                     return;
                 }
             }
 
-            if (interRoomIndex >= interRoomPath.Count - 1)
+            if (roomDir == 1 && interRoomIndex >= interRoomPath.Count - 1)
                 interRoomIndex = -1;
+            else if (roomDir == -1 && interRoomIndex == 0)
+                interRoomIndex = interRoomPath.Count;
 
-            interRoomIndex++;
+            interRoomIndex += roomDir;
         }
         else
         {
-            paths[currentPath].Next();
+            rooms[currentRoom].Next();
         }
+    }
+
+    public void TargetRoom(TeacherRoomPath room)
+    {
+        target = room;
+
+        int i = interRoomIndex;
+        int ti = interRoomPath.IndexOf(room.exitPoint);
+        int c = interRoomPath.Count;
+
+        roomDir = (((ti - i + c) % c) <= ((i - ti + c) % c) ? 1 : -1);
     }
 
     public void RoomFinished(TeacherRoomPath room)
     {
         lastRoom = room;
-        interRoom = true;
+        inRoom = false;
         interRoomIndex = interRoomPath.IndexOf(room.exitPoint);
     }
 
     public Vector3 GetPos()
     {
-        if (interRoom)
+        if (!inRoom)
             return waypoints.waypoints[interRoomPath[interRoomIndex]].transform.position;
         else
-            return paths[currentPath].GetPos();
+            return rooms[currentRoom].GetPos();
     }
 
     public TeacherWaypoint GetWaypoint()
     {
-        if (interRoom)
+        if (!inRoom)
             return waypoints.waypoints[interRoomPath[interRoomIndex]];
         else
-            return paths[currentPath].GetWaypoint();
+            return rooms[currentRoom].GetWaypoint();
     }
 
     void OnDrawGizmosSelected()

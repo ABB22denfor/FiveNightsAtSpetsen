@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public abstract class Teacher : MonoBehaviour
+public class Teacher : MonoBehaviour
 {
     public TeacherPathManager pathManager;
     public TeacherMovement movement;
@@ -21,15 +21,16 @@ public abstract class Teacher : MonoBehaviour
 
     void Start()
     {
-        Init();
-
-        pathManager.Next();
+        // pathManager.Next();
         movement.SetTarget(pathManager.GetPos());
+
+        delays = new() {
+            ("Start", 2f),
+            ("wawa", 0.5f)
+        };
     }
 
-    protected abstract void Init();
-
-    public virtual void ReachedTarget()
+    public void ReachedTarget()
     {
         if (raycaster.player == null)
         {
@@ -84,5 +85,6 @@ public abstract class Teacher : MonoBehaviour
     void PlayerMadeSound(TeacherRoomPath room)
     {
         Debug.Log("Teacher heard a sound coming from " + room.gameObject.name);
+        pathManager.TargetRoom(room);
     }
 }
