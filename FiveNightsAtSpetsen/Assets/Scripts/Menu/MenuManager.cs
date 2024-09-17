@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public GameObject Image;
+    public GameObject ImageBackground;
+    public GameObject Background;
     public GameObject Title;
     public GameObject MainMenu;
     public GameObject OptionsMenu;
@@ -23,7 +24,8 @@ public class MenuManager : MonoBehaviour
         StaticEffect.SetActive(true);
         MainMenu.SetActive(true);
         Title.SetActive(true);
-        Image.SetActive(true);
+        Background.SetActive(false);
+        ImageBackground.SetActive(true);
     }
 
     public void StartGame()
@@ -51,7 +53,8 @@ public class MenuManager : MonoBehaviour
                 OptionsMenu.SetActive(false);
                 MainMenu.SetActive(true);
                 Title.SetActive(true);
-                Image.SetActive(true);
+                ImageBackground.SetActive(true);
+                Background.SetActive(false);
             }
             else if (Confirm.activeSelf == true)
             {
@@ -62,7 +65,8 @@ public class MenuManager : MonoBehaviour
                 LevelSelect.SetActive(false);
                 MainMenu.SetActive(true);
                 Title.SetActive(true);
-                Image.SetActive(true);
+                ImageBackground.SetActive(true);
+                Background.SetActive(false);
             }
         }
     }
