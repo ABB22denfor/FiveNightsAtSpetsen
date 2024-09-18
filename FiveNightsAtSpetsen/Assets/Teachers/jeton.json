@@ -3,40 +3,40 @@
     "classroom-1": [
       {
         "text": "Åh, en MQTT-server! Det påminner mig om att jag måste sätta upp en ny server hemma. Det är dags för lite uppgraderingar.",
-        "voice": "jeton-rooms-classroom-1-line-0.mov"
+        "voice": ""
       }
     ],
     "classroom-2": [
       {
         "text": "Jag förstår inte varför så mycket kläder alltid hänger kvar. Och hur kan man glömma sina ytterskor?",
-        "voice": "jeton-rooms-classroom-2-line-0.mov"
+        "voice": ""
       }
     ],
     "grouproom-1": [
       {
         "text": "Jaha, godispapper bland växterna igen. Hur svårt kan det vara att slänga skräpet på rätt ställe?",
-        "voice": "jeton-rooms-grouproom-1-line-0.mov"
+        "voice": ""
       }
     ]
   },
   "general": [
     {
       "text": "Måste fixa med tekniken så allt fungerar smidigt för morgondagen.",
-      "voice": "jeton-general-line-0.mov"
+      "voice": ""
     }
   ],
   "alert": [
     {
       "text": "Vad var det där? Är det… Kalle Kula? Nej, det kan inte vara möjligt, eller?",
-      "voice": "jeton-alert-line-0.mov"
+      "voice": ""
     },
     {
       "text": "Hörde jag rätt? Någon där? Kalle, är det du?",
-      "voice": "jeton-alert-line-1.mov"
+      "voice": ""
     },
     {
       "text": "Vem är där? Kalle Kula? Om det är du, visa dig!",
-      "voice": "jeton-alert-line-2.mov"
+      "voice": ""
     }
   ]
 }

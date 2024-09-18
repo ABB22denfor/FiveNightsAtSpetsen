@@ -3,52 +3,52 @@
     "classroom-1": [
       {
         "text": "De här eleverna är verkligen något speciellt. Deras kreativitet och nyfikenhet inspirerar mig varje dag.",
-        "voice": "jocke-rooms-classroom-1-line-0.mov"
+        "voice": ""
       },
       {
         "text": "Det är frustrerande att vi inte fick tillåtelse att låta eleverna skapa sina egna språkmodeller. Det hade varit en fantastisk möjlighet för dem att lära sig mer om AI.",
-        "voice": "jocke-rooms-classroom-1-line-1.mov"
+        "voice": ""
       }
     ],
     "corridor": [
       {
         "text": "Kanske jag ska överväga att använda digitala anslagstavlor för att göra det mer interaktivt.",
-        "voice": "jocke-rooms-corridor-line-0.mov"
+        "voice": ""
       }
     ]
   },
   "general": [
     {
       "text": "Ibland undrar jag om vi verkligen kan lyckas med EHT Kollen, men då tänker jag på alla framsteg vi redan har gjort. Vi är på rätt väg.",
-      "voice": "jocke-general-line-0.mov"
+      "voice": ""
     },
     {
       "text": "Just det, jag måste komma ihåg att uppdatera superdatorns firmware nästa vecka. Det får inte glömmas bort.",
-      "voice": "jocke-general-line-1.mov"
+      "voice": ""
     },
     {
       "text": "Jag kallar dem ‘hackerman’ på skoj, men tänk om det finns en riktig ‘hackerman’ där ute?",
-      "voice": "jocke-general-line-2.mov"
+      "voice": ""
     },
     {
       "text": "Byggare Bob verkar alltid arbeta för det gemensamma bästa och inte för egen vinning. Kan han vara en kommunist?",
-      "voice": "jocke-general-line-3.mov"
+      "voice": ""
     },
     {
       "text": "Men han driver ju också sitt eget företag och tar på sig olika projekt. Är han en kapitalist då?",
-      "voice": "jocke-general-line-4.mov"
+      "voice": ""
     },
     {
       "text": "Våra elever bygger riktiga appar och spel, medan NTI-elever bara gör PowerPoint-presentationer.",
-      "voice": "jocke-general-line-5.mov"
+      "voice": ""
     },
     {
       "text": "Måste fixa med tekniken så allt fungerar smidigt för morgondagen.",
-      "voice": "jocke-general-line-6.mov"
+      "voice": ""
     },
     {
       "text": "Hoppas att våra planerade projekt verkligen engagerar alla elever.",
-      "voice": "jocke-general-line-7.mov"
+      "voice": ""
     }
   ]
 }

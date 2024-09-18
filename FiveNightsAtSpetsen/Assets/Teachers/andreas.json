@@ -3,38 +3,38 @@
     "classroom-1": [
       {
         "text": "Dessa 3D-skrivare är verkligen fantastiska. Eleverna kan förvandla sina idéer till verklighet på nolltid. Det är som att ha en liten fabrik i klassrummet.",
-        "voice": "andreas-rooms-classroom-1-line-0.mov"
+        "voice": ""
       },
       {
         "text": "Jag heter Lars och är i Klassrum 1, igen",
-        "voice": "andreas-rooms-classroom-1-line-1.mov"
+        "voice": ""
       }
     ],
     "techlab": [
       {
         "text": "Jag älskar hur varje liten bit kan bli en del av något stort. LEGO är verkligen en ingenjörs dröm.",
-        "voice": "andreas-rooms-techlab-line-0.mov"
+        "voice": ""
       },
       {
         "text": "Med LEGO kan jag visa mina elever hur man går från idé till verklighet. Det är som att ha en hel värld av möjligheter i mina händer.",
-        "voice": "andreas-rooms-techlab-line-1.mov"
+        "voice": ""
       }
     ],
     "kitchen": [
       {
         "text": "Som vanligt är disken inte gjord. Disciplin och ordning, det är vad saknas i den nya generationens vokabulär.",
-        "voice": "andreas-rooms-kitchen-line-0.mov"
+        "voice": ""
       }
     ]
   },
   "general": [
     {
       "text": "Jag har alltid sagt att med rätt lärare kan eleverna nå hur långt som helst, ja till och med till CAD-SM.",
-      "voice": "andreas-general-line-0.mov"
+      "voice": ""
     },
     {
       "text": "Vad ska jag äta imorgon?... Kanske sushi? Nej, vem försöker jag lura, det blir ju BK så klart.",
-      "voice": "andreas-general-line-1.mov"
+      "voice": ""
     }
   ]
 }

@@ -3,58 +3,58 @@
     "classroom-1": [
       {
         "text": "Det här rummet behöver verkligen en makeover. Dags att mobilisera Lars logistiska legionärer för att få det skinande rent!",
-        "voice": "lars-rooms-classroom-1-line-0.mov"
+        "voice": ""
       },
       {
         "text": "Oj, det här rummet behöver verkligen en uppfräschning. Lars logistiska legionärer, var är ni när man behöver er?",
-        "voice": "lars-rooms-classroom-1-line-1.mov"
+        "voice": ""
       }
     ],
     "classroom-2": [
       {
         "text": "Det ser ut som om jag har schemalagt två mattelektioner på fredagsmorgonen. Kan det räcka, eller ska jag smacka in en tredje på eftermiddagen?",
-        "voice": "lars-rooms-classroom-2-line-0.mov"
+        "voice": ""
       }
     ]
   },
   "general": [
     {
       "text": "Kom ihåg, cos står för cozy! Den närliggande kateten är alltid den mysiga sidan.",
-      "voice": "lars-general-line-0.mov"
+      "voice": ""
     },
     {
       "text": "När jag tänker på cos, tänker jag på cozy. Den närliggande kateten är alltid nära och bekväm.",
-      "voice": "lars-general-line-1.mov"
+      "voice": ""
     },
     {
       "text": "Sin är sinful, så den motstående kateten är den syndiga sidan som vi bör distansera oss till.",
-      "voice": "lars-general-line-2.mov"
+      "voice": ""
     },
     {
       "text": "För att minnas sin, tänk sinful. Den motstående kateten är den syndiga sidan som vi bör hålla oss ifrån.",
-      "voice": "lars-general-line-3.mov"
+      "voice": ""
     },
     {
       "text": "Jag hoppas att den nya lektionsplanen verkligen kommer att fungera.",
-      "voice": "lars-general-line-4.mov"
+      "voice": ""
     }
   ],
   "moving": [
     {
       "text": "[Hostar]",
-      "voice": "lars-moving-line-0.mov"
+      "voice": ""
     },
     {
       "text": "[Harklar sig]",
-      "voice": "lars-moving-line-1.mov"
+      "voice": ""
     },
     {
       "text": "Whop Whop",
-      "voice": "lars-moving-line-2.mov"
+      "voice": ""
     },
     {
       "text": "Men vad är det som skaver? Något i strumpan igen… det var lite typiskt oskönt!",
-      "voice": "lars-moving-line-3.mov"
+      "voice": ""
     }
   ]
 }
