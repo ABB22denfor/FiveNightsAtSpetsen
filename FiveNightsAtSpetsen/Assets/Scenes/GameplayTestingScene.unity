@@ -1317,6 +1317,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7221680901188712411, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
+      propertyPath: dataJson
+      value: 
+      objectReference: {fileID: 4900000, guid: d257c28af313b85479e7dde8670930a9, type: 3}
+    - target: {fileID: 7221680901188712411, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      propertyPath: delaysJson
+      value: 
+      objectReference: {fileID: 4900000, guid: d257c28af313b85479e7dde8670930a9, type: 3}
+    - target: {fileID: 7221680901188712411, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
       propertyPath: pathManager
       value: 
       objectReference: {fileID: 1316967608}
@@ -1891,6 +1901,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Klassrummet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147734393435137407, guid: 18c63b84125c16f488ffbb60a27ece69,
+        type: 3}
+      propertyPath: id
+      value: klassrummet
       objectReference: {fileID: 0}
     - target: {fileID: 8147734393435137407, guid: 18c63b84125c16f488ffbb60a27ece69,
         type: 3}
@@ -3117,6 +3132,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8147734393435137407, guid: 18c63b84125c16f488ffbb60a27ece69,
         type: 3}
+      propertyPath: id
+      value: lararrummet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147734393435137407, guid: 18c63b84125c16f488ffbb60a27ece69,
+        type: 3}
       propertyPath: manager
       value: 
       objectReference: {fileID: 1316967608}
@@ -3719,6 +3739,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8147734393435137407, guid: 18c63b84125c16f488ffbb60a27ece69,
         type: 3}
+      propertyPath: id
+      value: kafeterian
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147734393435137407, guid: 18c63b84125c16f488ffbb60a27ece69,
+        type: 3}
       propertyPath: manager
       value: 
       objectReference: {fileID: 1316967608}
@@ -4305,7 +4330,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 42eb70526a2063445b31e2fb47fe898f, type: 3}
 --- !u!1 &2096459910 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 154376631792719885, guid: 42eb70526a2063445b31e2fb47fe898f,
+  m_CorrespondingSourceObject: {fileID: 8539226756238543299, guid: 42eb70526a2063445b31e2fb47fe898f,
     type: 3}
   m_PrefabInstance: {fileID: 2096459909}
   m_PrefabAsset: {fileID: 0}
