@@ -1,0 +1,24 @@
+{
+    "delays": [
+        {
+            "id": "wawa",
+            "delay": 0.5
+        },
+        {
+            "id": "start",
+            "delay": 2.0
+        }
+    ],
+    "route": [
+        {
+            "room": "lararrummet",
+            "repetitions": 2
+        },
+        {
+            "room": "klassrummet"
+        },
+        {
+            "room": "kafeterian"
+        }
+    ]
+}
