@@ -32,12 +32,6 @@ public class TeacherVoiceline : MonoBehaviour
     Debug.Log("TeacherVoiceline.cs enabled");
 
     audioManager = gameObject.AddComponent<TeacherAudioManager>();
-
-    if(subtitleText)
-    {
-      subtitleText.text = "";
-      subtitleIndex = 0;
-    }
   }
 
   /*
@@ -112,6 +106,9 @@ public class TeacherVoiceline : MonoBehaviour
 
   /*
    * This is the process that is ran when the voiceline is being said
+   *
+   * Fix: Either commit to only use this Coroutine for subtitles,
+   * or add something else in it.
    */
   private IEnumerator Process(string voicelineText)
   {
@@ -129,9 +126,16 @@ public class TeacherVoiceline : MonoBehaviour
       {
         subtitleText.text += voicelineText[subtitleIndex++];
       }
+      else
+      {
+        isProcessRunning = false;
+      }
 
       yield return new WaitForSeconds((float) 0.05);
     }
+
+    // Display the subtitle for 1 extra second
+    yield return new WaitForSeconds((float) 1.0);
 
     OnProcessStopped();
   }

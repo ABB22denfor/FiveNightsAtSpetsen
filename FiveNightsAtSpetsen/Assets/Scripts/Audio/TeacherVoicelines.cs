@@ -43,7 +43,12 @@ public class TeacherVoicelines : MonoBehaviour
 
     teacherVoiceline = gameObject.AddComponent<TeacherVoiceline>();
 
-    teacherVoiceline.subtitleText = subtitleText;
+    if(subtitleText)
+    {
+      subtitleText.text = "";
+
+      teacherVoiceline.subtitleText = subtitleText;
+    }
 
     // Adding handlers for teacher's events
     EventsManager.Instance.teacherEvents.OnTeacherEnteredRoom += OnTeacherEnteredRoom;

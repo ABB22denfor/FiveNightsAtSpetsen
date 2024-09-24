@@ -94,7 +94,16 @@ public class TeacherAudioManager : MonoBehaviour
 
       AudioClip clip = Resources.Load<AudioClip>(resourcesFileName);
 
-      audioClips[fileName] = clip;
+      if(clip != null)
+      {
+        Debug.Log($"Loaded audio file: '{resourcesFileName}'");
+
+        audioClips[fileName] = clip;
+      }
+      else
+      {
+        Debug.LogError($"Failed to load audio file: '{resourcesFileName}'");
+      }
     }
   }
 
