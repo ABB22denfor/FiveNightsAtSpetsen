@@ -1,11 +1,12 @@
 /*
  * Manage teacher's voiceline audio, by
  * - loading the audio files
- * - playing up the audio on request for voiceline
+ * - start playing voiceline audio
+ * - stop  playing voiceline audio
  *
  * Written by Hampus Fridholm
  *
- * Last updated: 2024-09-18
+ * Last updated: 2024-09-24
  */
 
 using System.IO;
@@ -26,11 +27,13 @@ public class TeacherAudioManager : MonoBehaviour
    * - create an AudioSource component
    * - load AudioClips for the teacher's voicelines
    */
-  void Awake()
+  void OnEnable()
   {
-    audioSource = gameObject.AddComponent<AudioSource>();
+    Debug.Log("TeacherAudioManager.cs enabled");
 
     Teacher teacher = gameObject.GetComponent<Teacher>();
+
+    audioSource = gameObject.AddComponent<AudioSource>();
 
     // If the teacher has a name to work with, start the audio manager
     if(teacher != null && teacher.teacherName != null)
@@ -39,6 +42,17 @@ public class TeacherAudioManager : MonoBehaviour
 
       LoadAudioClips(teacher.teacherName);
     }
+  }
+
+  /*
+   * When this component is disabled,
+   * - destroy the AudioSource component
+   */
+  void OnDisable()
+  {
+    Debug.Log("TeacherAudioManager.cs disabled");
+
+    Destroy(gameObject.GetComponent<AudioSource>());
   }
 
   /*
@@ -62,19 +76,38 @@ public class TeacherAudioManager : MonoBehaviour
   }
 
   /*
-   * Play up a voiceline from the voiceline file name
+   * Start playing a voiceline from the voiceline file name
    */
   public void Play(string fileName)
   {
-    if(fileName == null) return;
+    if(fileName == null)
+    {
+      Debug.LogWarning("No voiceline audio file was supplied");
+
+      return;
+    }
 
     if(audioClips.TryGetValue(fileName, out AudioClip clip))
     {
-      audioSource.PlayOneShot(clip);
+      Debug.Log("Started playing voiceline audio");
+
+      audioSource.clip = clip;
+
+      audioSource.Play();
     }
     else
     {
       Debug.LogWarning($"Audio clip '{fileName}' not found");
     }
+  }
+
+  /*
+   * Stop playing the voiceline
+   */
+  public void Stop()
+  {
+    Debug.Log("Stopped playing voiceline audio");
+
+    audioSource.Stop();
   }
 }

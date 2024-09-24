@@ -1685,6 +1685,11 @@ PrefabInstance:
       propertyPath: pathManager
       value: 
       objectReference: {fileID: 1316967608}
+    - target: {fileID: 7221680901188712411, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      propertyPath: teacherName
+      value: lars
+      objectReference: {fileID: 0}
     - target: {fileID: 7864517937106545867, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
       propertyPath: target
@@ -1708,7 +1713,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 566564891133530414, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1793295929}
   m_SourcePrefab: {fileID: 100100000, guid: 53ea1ad0507c5434392aa68d1516acce, type: 3}
 --- !u!1001 &637430001
 PrefabInstance:
@@ -2081,6 +2090,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1435052250349970210, guid: 01cabe32bad9cf64bb723a06479da275,
     type: 3}
   m_PrefabInstance: {fileID: 695798528}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &722725248 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 566564891133530414, guid: 53ea1ad0507c5434392aa68d1516acce,
+    type: 3}
+  m_PrefabInstance: {fileID: 623597616}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &726043470
 PrefabInstance:
@@ -5058,6 +5073,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 623597616}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1793295929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722725248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deba6941c9eeade4dab7c66147b1b81e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1843144413
 PrefabInstance:
   m_ObjectHideFlags: 0

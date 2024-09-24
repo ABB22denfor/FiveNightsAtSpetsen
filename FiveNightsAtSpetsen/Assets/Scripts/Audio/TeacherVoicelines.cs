@@ -25,7 +25,7 @@ public class TeacherVoicelines : MonoBehaviour
   private Teacher teacher;
 
   private TeacherLinesManager linesManager;
-  private TeacherAudioManager audioManager;
+  private TeacherVoiceline    teacherVoiceline;
 
   /*
    * When the script is enabled,
@@ -33,8 +33,11 @@ public class TeacherVoicelines : MonoBehaviour
    */
   void OnEnable()
   {
-    teacher      = gameObject.GetComponent<Teacher>();
-    audioManager = gameObject.GetComponent<TeacherAudioManager>();
+    Debug.Log("TeacherVoicelines.cs enabled");
+
+    teacher = gameObject.GetComponent<Teacher>();
+
+    teacherVoiceline = gameObject.AddComponent<TeacherVoiceline>();
 
     // Adding handlers for teacher's events
     EventsManager.Instance.teacherEvents.OnTeacherEnteredRoom += OnTeacherEnteredRoom;
@@ -51,29 +54,15 @@ public class TeacherVoicelines : MonoBehaviour
    */
   void OnDisable()
   {
+    Debug.Log("TeacherVoicelines.cs disabled");
+
+    Destroy(gameObject.GetComponent<TeacherVoiceline>());
+
     // Removing handlers for teacher's events
     EventsManager.Instance.teacherEvents.OnTeacherEnteredRoom -= OnTeacherEnteredRoom;
     EventsManager.Instance.teacherEvents.OnPlayerSpotted      -= OnPlayerSpotted;
     EventsManager.Instance.teacherEvents.OnPlayerCaptured     -= OnPlayerCaptured;
     EventsManager.Instance.teacherEvents.OnPlayerMadeSound    -= OnPlayerMadeSound;
-  }
-
-  /*
-   * Say a voiceline, by both playing up the audio and writing the text
-   *
-   * Start the talking animation, when the voiceline is being said
-   *
-   * Stop the talking animation, after the voiceline is said
-   */
-  private void SayVoiceline(Voiceline voiceline)
-  {
-    audioManager.Play(voiceline.audio);
-
-    // animator.isTalking = true;
-
-    Debug.Log("Voiceline: " + voiceline.text);
-
-    // animator.isTalking = false;
   }
 
   /*
@@ -100,7 +89,9 @@ public class TeacherVoicelines : MonoBehaviour
 
     if(voiceline != null)
     {
-      SayVoiceline(voiceline);
+      teacherVoiceline.StopVoiceline();
+
+      teacherVoiceline.StartVoiceline(voiceline);
     }
   }
 
@@ -115,7 +106,9 @@ public class TeacherVoicelines : MonoBehaviour
 
     if(voiceline != null)
     {
-      SayVoiceline(voiceline);
+      teacherVoiceline.StopVoiceline();
+
+      teacherVoiceline.StartVoiceline(voiceline);
     }
   }
 
@@ -136,7 +129,9 @@ public class TeacherVoicelines : MonoBehaviour
 
     if(voiceline != null)
     {
-      SayVoiceline(voiceline);
+      teacherVoiceline.StopVoiceline();
+
+      teacherVoiceline.StartVoiceline(voiceline);
     }
   }
 
@@ -157,7 +152,9 @@ public class TeacherVoicelines : MonoBehaviour
 
     if(voiceline != null)
     {
-      SayVoiceline(voiceline);
+      teacherVoiceline.StopVoiceline();
+
+      teacherVoiceline.StartVoiceline(voiceline);
     }
   }
 }

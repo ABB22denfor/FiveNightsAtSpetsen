@@ -5,7 +5,7 @@
  *
  * Written by Hampus Fridholm
  *
- * Last updated: 2024-09-18
+ * Last updated: 2024-09-24
  */
 
 using System.IO;
@@ -16,12 +16,12 @@ using UnityEngine;
 public class TeacherLinesManager
 {
   private TeacherLinesObject teacherLines;
-
   private TeacherLinesObject workingLines;
 
-
   /*
-   *
+   * Initialize the voicelines manager
+   * - load teacher's voicelines
+   * - initialize working voicelines variable
    */
   public TeacherLinesManager(string teacherName)
   {
