@@ -18,10 +18,14 @@
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TeacherVoicelines : MonoBehaviour
 {
+  [SerializeField]
+  private TextMeshProUGUI subtitleText = default;
+
   private Teacher teacher;
 
   private TeacherLinesManager linesManager;
@@ -38,6 +42,8 @@ public class TeacherVoicelines : MonoBehaviour
     teacher = gameObject.GetComponent<Teacher>();
 
     teacherVoiceline = gameObject.AddComponent<TeacherVoiceline>();
+
+    teacherVoiceline.subtitleText = subtitleText;
 
     // Adding handlers for teacher's events
     EventsManager.Instance.teacherEvents.OnTeacherEnteredRoom += OnTeacherEnteredRoom;
@@ -112,6 +118,8 @@ public class TeacherVoicelines : MonoBehaviour
     }
   }
 
+  private bool playerHasBeenCaptured = false;
+
   /*
    * When the teacher captures the player
    *
@@ -121,7 +129,10 @@ public class TeacherVoicelines : MonoBehaviour
   private void OnPlayerCaptured()
   {
     // If teacher already has captured the player
-    // if()
+    if(playerHasBeenCaptured) return;
+
+    playerHasBeenCaptured = true;
+
 
     Debug.Log("Teacher captured player");
 

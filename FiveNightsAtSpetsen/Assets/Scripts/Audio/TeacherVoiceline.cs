@@ -9,11 +9,15 @@
  * Last updated: 2024-09-24
  */
 
+using TMPro;
 using UnityEngine;
 using System.Collections;
 
 public class TeacherVoiceline : MonoBehaviour
 {
+  public  TextMeshProUGUI subtitleText  = null;
+  private int             subtitleIndex = 0;
+
   private TeacherAudioManager audioManager;
 
   private Coroutine processCoroutine;
@@ -28,6 +32,12 @@ public class TeacherVoiceline : MonoBehaviour
     Debug.Log("TeacherVoiceline.cs enabled");
 
     audioManager = gameObject.AddComponent<TeacherAudioManager>();
+
+    if(subtitleText)
+    {
+      subtitleText.text = "";
+      subtitleIndex = 0;
+    }
   }
 
   /*
@@ -72,7 +82,13 @@ public class TeacherVoiceline : MonoBehaviour
 
     Debug.Log("Voiceline: " + voiceline.text);
 
-    processCoroutine = StartCoroutine(Process());
+    // If subtitles has been setup, assign the voiceline text to it
+    if(subtitleText)
+    {
+      subtitleText.text = voiceline.text;
+    }
+
+    processCoroutine = StartCoroutine(Process(voiceline.text));
   }
 
   /*
@@ -80,10 +96,10 @@ public class TeacherVoiceline : MonoBehaviour
    */
   public void StopVoiceline()
   {
+    Debug.Log("Stopping voiceline");
+
     if (processCoroutine != null)
     {
-      Debug.Log("Stopping voiceline");
-
       isProcessRunning = false;
 
       StopCoroutine(processCoroutine);
@@ -97,14 +113,24 @@ public class TeacherVoiceline : MonoBehaviour
   /*
    * This is the process that is ran when the voiceline is being said
    */
-  private IEnumerator Process()
+  private IEnumerator Process(string voicelineText)
   {
     isProcessRunning = true;
 
-    while (isProcessRunning)
+    if(subtitleText)
     {
-      // Your process code here
-      yield return null;
+      subtitleText.text = "";
+      subtitleIndex = 0;
+    }
+
+    while(isProcessRunning)
+    {
+      if(subtitleText && subtitleIndex < voicelineText.Length)
+      {
+        subtitleText.text += voicelineText[subtitleIndex++];
+      }
+
+      yield return new WaitForSeconds((float) 0.05);
     }
 
     OnProcessStopped();
@@ -121,5 +147,11 @@ public class TeacherVoiceline : MonoBehaviour
     audioManager.Stop();
 
     // animator.isTalking = false;
+    
+    if(subtitleText)
+    {
+      subtitleText.text = "";
+      subtitleIndex = 0;
+    }
   }
 }
