@@ -16,11 +16,11 @@ using UnityEngine;
 
 public class TeacherAudioManager : MonoBehaviour
 {
+  private string audioFileExtension = "*.mp3";
+
   private AudioSource audioSource;
 
   private Dictionary<string, AudioClip> audioClips;
-
-  private string teacherFolder = "Audio/Sound/Teachers";
 
   /*
    * When this script is activated,
@@ -60,18 +60,41 @@ public class TeacherAudioManager : MonoBehaviour
    */
   private void LoadAudioClips(string teacherName)
   {
+    // Audio/Sound/Teachers/lars
+    string teacherResourcesFolder = "Audio/Sound/Teachers/" + teacherName;
+
+    string audioFolderPath = Application.dataPath + "/Resources/" + teacherResourcesFolder;
+
+
+    Debug.Log($"Searching for audio files in: '{audioFolderPath}'");
+
+    if(!Directory.Exists(audioFolderPath))
+    {
+      Debug.LogWarning($"'{teacherName}' doesn't have an audio folder");
+
+      return;
+    }
+
+
+    Debug.Log($"Loading '{teacherName}'s audio files");
+
     audioClips = new Dictionary<string, AudioClip>();
 
 
-    string audioFolderPath = Path.Combine(Application.dataPath, teacherFolder, teacherName);
-
-    string[] files = Directory.GetFiles(audioFolderPath, "*.wav");
+    string[] files = Directory.GetFiles(audioFolderPath, audioFileExtension);
     
     foreach(string file in files)
     {
       string fileName = Path.GetFileNameWithoutExtension(file);
 
-      audioClips[fileName] = Resources.Load<AudioClip>(file);
+      // Audio/Sound/Teachers/lars/test
+      string resourcesFileName = teacherResourcesFolder + "/" + fileName;
+
+      Debug.Log($"Loading audio file: '{resourcesFileName}'");
+
+      AudioClip clip = Resources.Load<AudioClip>(resourcesFileName);
+
+      audioClips[fileName] = clip;
     }
   }
 
@@ -89,7 +112,7 @@ public class TeacherAudioManager : MonoBehaviour
 
     if(audioClips.TryGetValue(fileName, out AudioClip clip))
     {
-      Debug.Log("Started playing voiceline audio");
+      Debug.Log($"Started playing voiceline audio: '{fileName}'");
 
       audioSource.clip = clip;
 
@@ -106,7 +129,7 @@ public class TeacherAudioManager : MonoBehaviour
    */
   public void Stop()
   {
-    Debug.Log("Stopped playing voiceline audio");
+    Debug.Log($"Stopped playing voiceline audio: '{audioSource.clip}'");
 
     audioSource.Stop();
   }

@@ -65,7 +65,8 @@ public class TeacherVoiceline : MonoBehaviour
 
     Debug.Log("Starting voiceline");
 
-    audioManager.Play(voiceline.audio);
+    // audioManager.Play(voiceline.audio);
+    audioManager.Play("test");
 
     // animator.isTalking = true;
 

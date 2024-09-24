@@ -42,12 +42,12 @@ public class TeacherLinesObject
   /*
    * This is the load method, to load a teacher's json voicelines
    */
-  private static string teachersFolder  = "Teachers/";
+  private static string teachersFolder  = "Teachers";
 
   public static TeacherLinesObject Load(string teacherName)
   {
     string fileName = teacherName + ".json";
-    string filePath = Path.Combine(Application.dataPath, teachersFolder + fileName);
+    string filePath = Path.Combine(Application.dataPath, teachersFolder, fileName).Replace('\\', '/');
 
     if(File.Exists(filePath))
     {
