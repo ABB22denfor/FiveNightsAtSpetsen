@@ -3,74 +3,74 @@
     "classroom-1": [
       {
         "text": "Det här rummet behöver verkligen en makeover. Dags att mobilisera Lars logistiska legionärer för att få det skinande rent!",
-        "voice": ""
+        "voice": "lars-rooms-classroom-1-line-0.mp3"
       },
       {
         "text": "Oj, det här rummet behöver verkligen en uppfräschning. Lars logistiska legionärer, var är ni när man behöver er?",
-        "voice": ""
+        "voice": "lars-rooms-classroom-1-line-1.mp3"
       }
     ],
     "classroom-2": [
       {
         "text": "Det ser ut som om jag har schemalagt två mattelektioner på fredagsmorgonen. Kan det räcka, eller ska jag smacka in en tredje på eftermiddagen?",
-        "voice": ""
+        "voice": "lars-rooms-classroom-2-line-0.mp3"
       }
     ]
   },
   "general": [
     {
       "text": "Kom ihåg, cos står för cozy! Den närliggande kateten är alltid den mysiga sidan.",
-      "voice": ""
+      "voice": "lars-general-line-0.mp3"
     },
     {
       "text": "När jag tänker på cos, tänker jag på cozy. Den närliggande kateten är alltid nära och bekväm.",
-      "voice": ""
+      "voice": "lars-general-line-1.mp3"
     },
     {
       "text": "Sin är sinful, så den motstående kateten är den syndiga sidan som vi bör distansera oss till.",
-      "voice": ""
+      "voice": "lars-general-line-2.mp3"
     },
     {
       "text": "För att minnas sin, tänk sinful. Den motstående kateten är den syndiga sidan som vi bör hålla oss ifrån.",
-      "voice": ""
+      "voice": "lars-general-line-3.mp3"
     },
     {
       "text": "Jag hoppas att den nya lektionsplanen verkligen kommer att fungera.",
-      "voice": ""
+      "voice": "lars-general-line-4.mp3"
     }
   ],
   "moving": [
     {
       "text": "[Hostar]",
-      "voice": ""
+      "voice": "lars-moving-line-0.mp3"
     },
     {
       "text": "[Harklar sig]",
-      "voice": ""
+      "voice": "lars-moving-line-1.mp3"
     },
     {
       "text": "Whop Whop",
-      "voice": ""
+      "voice": "lars-moving-line-2.mp3"
     },
     {
       "text": "Men vad är det som skaver? Något i strumpan igen… det var lite typiskt oskönt!",
-      "voice": ""
+      "voice": "lars-moving-line-3.mp3"
     },
     {
       "text": "quit",
-      "voice": ""
+      "voice": "lars-moving-line-4.mp3"
     }
   ],
   "spotting": [
     {
       "text": "Ser ut som jag har fått sällskap. Jag går för att kolla vem det är.",
-      "voice": ""
+      "voice": "lars-spotting-line-0.mp3"
     }
   ],
   "capturing": [
     {
       "text": "Jag visste inte att någon var kvar här. Vad gör du här så sent? Gå hem nu.",
-      "voice": ""
+      "voice": "lars-capturing-line-0.mp3"
     }
   ]
 }
