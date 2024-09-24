@@ -41,22 +41,13 @@ public class TeacherPathManager : MonoBehaviour
         {
             if (target == null)
             {
-                // foreach (TeacherRoomPath room in rooms)
-                // {
-                //     if (room == lastRoom) continue;
-                //     if (room.exitPoint == interRoomPath[interRoomIndex] && Random.value < roomEntryChance)
-                //     {
-                //         inRoom = true;
-                //         currentRoom = rooms.IndexOf(room);
-                //         return;
-                //     }
-                // }
-
                 if (route[routeIndex].room.exitPoint == interRoomPath[interRoomIndex])
                 {
                     inRoom = true;
                     currentRoom = rooms.IndexOf(route[routeIndex].room);
                     rooms[currentRoom].repetitions = route[routeIndex].repetitions;
+                    EventsManager.Instance.teacherEvents.TeacherEnteredRoom(route[routeIndex].room, false);
+
                     routeIndex = (routeIndex + 1) % route.Count;
                     return;
                 }
@@ -67,6 +58,7 @@ public class TeacherPathManager : MonoBehaviour
                 {
                     inRoom = true;
                     currentRoom = rooms.IndexOf(target);
+                    EventsManager.Instance.teacherEvents.TeacherEnteredRoom(rooms[currentRoom], true);
                     target = null;
                     return;
                 }
