@@ -19,6 +19,9 @@
         },
         {
             "room": "kafeterian"
+        },
+        {
+            "room": "random"
         }
     ]
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class TeacherPathManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class TeacherPathManager : MonoBehaviour
 
     List<(TeacherRoomPath room, int repetitions)> route = new();
     public int routeIndex = 0;
+    public TeacherRoomPath tempRoomTarget;
 
     void OnValidate()
     {
@@ -41,7 +43,21 @@ public class TeacherPathManager : MonoBehaviour
         {
             if (target == null)
             {
-                if (route[routeIndex].room.exitPoint == interRoomPath[interRoomIndex])
+                if (tempRoomTarget != null)
+                {
+                    if (tempRoomTarget.exitPoint == interRoomPath[interRoomIndex])
+                    {
+                        inRoom = true;
+                        currentRoom = rooms.IndexOf(tempRoomTarget);
+                        rooms[currentRoom].repetitions = route[routeIndex].repetitions;
+                        EventsManager.Instance.teacherEvents.TeacherEnteredRoom(tempRoomTarget, false);
+
+                        routeIndex = (routeIndex + 1) % route.Count;
+                        tempRoomTarget = null;
+                        return;
+                    }
+                }
+                else if (route[routeIndex].room.exitPoint == interRoomPath[interRoomIndex])
                 {
                     inRoom = true;
                     currentRoom = rooms.IndexOf(route[routeIndex].room);
@@ -77,19 +93,22 @@ public class TeacherPathManager : MonoBehaviour
         }
     }
 
-    public void TargetRoom(TeacherRoomPath room, bool isRoute = false)
+    public void TargetRoom((TeacherRoomPath room, bool isRandom) room, bool isRoute = false)
     {
         if (!isRoute)
         {
-            target = room;
+            target = room.room;
             if (inRoom)
                 rooms[currentRoom].repetitions = 0;
         }
 
         int i = interRoomIndex;
-        int ti = interRoomPath.IndexOf(room.exitPoint);
+        int ti = interRoomPath.IndexOf(room.room.exitPoint);
 
         roomDir = ((ti >= i) ? 1 : -1);
+
+        if (room.isRandom)
+            tempRoomTarget = room.room;
     }
 
     public void RoomFinished(TeacherRoomPath room)
@@ -97,7 +116,7 @@ public class TeacherPathManager : MonoBehaviour
         lastRoom = room;
         inRoom = false;
         interRoomIndex = interRoomPath.IndexOf(room.exitPoint);
-        TargetRoom(route[routeIndex].room, true);
+        TargetRoom(GetRouteTarget(), true);
     }
 
     public Vector3 GetPos()
@@ -121,6 +140,51 @@ public class TeacherPathManager : MonoBehaviour
         foreach (TeacherRoomPath room in rooms)
             if (id == room.id) return room;
         return null;
+    }
+
+    (TeacherRoomPath room, bool isRandom) GetRouteTarget()
+    {
+        if (route[routeIndex].room != null)
+            return (route[routeIndex].room, false);
+
+        // pos = average of last room's exitpoint and next room's exit point,
+        // or just last room's exitpoint if the next room also is random
+        Vector3 pos = waypoints.waypoints[lastRoom.exitPoint].transform.position
+                     + (route[(routeIndex + 1) % route.Count].room == null
+                     ? waypoints.waypoints[lastRoom.exitPoint].transform.position
+                     : waypoints.waypoints[route[(routeIndex + 1) % route.Count].room.exitPoint].transform.position)
+                     / 2;
+
+        List<(TeacherRoomPath room, float distance)> dists = rooms.Select(r => (r, Vector3.Distance(pos, r.pos))).ToList();
+        dists = dists.Where(d => d.room != lastRoom).OrderByDescending(d => d.distance).ToList();
+
+        float totalWeight = dists.Sum(d => 1f / Mathf.Max(d.distance, 0.1f));
+
+        float randomPoint = Random.Range(0, totalWeight);
+        float cumulativeWeight = 0f;
+
+        TeacherRoomPath selected = null;
+        foreach (var dist in dists)
+        {
+            cumulativeWeight += 1f / Mathf.Max(dist.distance, 0.1f);
+            if (randomPoint <= cumulativeWeight)
+            {
+                selected = dist.room;
+                break;
+            }
+        }
+
+        // Fallback
+        selected ??= dists.OrderBy(d => d.distance).ToList()[0].room;
+
+        // if selected room is next on the route, ignore this random step
+        if (selected == route[(routeIndex + 1) % route.Count].room)
+        {
+            routeIndex = (routeIndex + 1) % route.Count;
+            return (selected, false);
+        }
+
+        return (selected, true);
     }
 
     void OnDrawGizmosSelected()

@@ -75,6 +75,6 @@ public class Teacher : MonoBehaviour
     void PlayerMadeSound(TeacherRoomPath room)
     {
         Debug.Log("Teacher heard a sound coming from " + room.id);
-        pathManager.TargetRoom(room);
+        pathManager.TargetRoom((room, false));
     }
 }

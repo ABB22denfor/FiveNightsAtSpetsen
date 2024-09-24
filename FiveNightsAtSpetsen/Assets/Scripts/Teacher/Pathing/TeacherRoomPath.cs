@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class TeacherRoomPath : MonoBehaviour
 {
     public string id;
+    public Vector3 pos;
+
     public TeacherPathManager manager;
     public List<int> path = new() { 0, 1, 2, 3, 1 };
     public int exitPoint = 5;
@@ -13,6 +15,13 @@ public class TeacherRoomPath : MonoBehaviour
 
     public Color lineColor = Color.blue;
     public Color exitColor = Color.red;
+
+    [ContextMenu("Set Pos")]
+    void SetPos()
+    {
+        if (manager.waypoints != null && manager.waypoints.waypoints.Count >= exitPoint)
+            pos = manager.waypoints.waypoints[exitPoint].transform.position;
+    }
 
     public void Next()
     {
