@@ -25,16 +25,23 @@ public class TeacherLinesManager
    */
   public TeacherLinesManager(string teacherName)
   {
+    if(teacherName == "")
+    {
+      Debug.LogWarning("No teacher name was supplied");
+
+      return;
+    }
+
     teacherLines = TeacherLinesObject.Load(teacherName);
 
     if(teacherLines == null)
     {
-      Debug.Log("Failed to load teacher's voicelines");
+      Debug.LogWarning("Failed to load teacher's voicelines");
+
+      return;
     }
-    else
-    {
-      workingLines = TeacherLinesObject.Load(teacherName);
-    }
+
+    workingLines = TeacherLinesObject.Load(teacherName);
   }
 
   /*
@@ -66,6 +73,20 @@ public class TeacherLinesManager
    */
   public Voiceline GetRoomVoiceline(string roomName)
   {
+    if(teacherLines == null)
+    {
+      Debug.LogWarning("Teacher's voicelines are not loaded");
+
+      return null;
+    }
+
+    if(teacherLines.rooms == null)
+    {
+      Debug.LogWarning("Teacher doesn't have rooms voicelines");
+
+      return null;
+    }
+
     List<Voiceline> teacherRoomLines;
 
     // If the teacher doesn't have voicelines for room
@@ -107,7 +128,8 @@ public class TeacherLinesManager
     }
 
     // If the teacher doesn't have general voicelines
-    if(teacherLines.general.Count == 0)
+    if(teacherLines.general == null ||
+       teacherLines.general.Count == 0)
     {
       Debug.LogWarning("Teacher doesn't have general voicelines");
       
@@ -143,7 +165,8 @@ public class TeacherLinesManager
     }
 
     // If the teacher doesn't have spotting voicelines
-    if(teacherLines.spotting.Count == 0)
+    if(teacherLines.spotting == null ||
+       teacherLines.spotting.Count == 0)
     {
       Debug.LogWarning("Teacher doesn't have spotting voicelines");
       
@@ -179,7 +202,8 @@ public class TeacherLinesManager
     }
 
     // If the teacher doesn't have capturing voicelines
-    if(teacherLines.capturing.Count == 0)
+    if(teacherLines.capturing == null ||
+       teacherLines.capturing.Count == 0)
     {
       Debug.LogWarning("Teacher doesn't have capturing voicelines");
       
@@ -234,6 +258,42 @@ public class TeacherLinesManager
     Voiceline voiceline = workingLines.hearing[index];
 
     workingLines.hearing.RemoveAt(index);
+
+    return voiceline;
+  }
+
+  /*
+   *
+   */
+  public Voiceline GetAlertVoiceline()
+  {
+    if(teacherLines == null || workingLines == null)
+    {
+      Debug.LogWarning("Teacher's voicelines are not loaded");
+
+      return null;
+    }
+
+    // If the teacher doesn't have hearing voicelines
+    if(teacherLines.alert.Count == 0)
+    {
+      Debug.LogWarning("Teacher doesn't have alert voicelines");
+      
+      return null;
+    }
+
+    // Refill the working voicelines if it is empty
+    if(workingLines.alert.Count == 0)
+    {
+      workingLines.alert.AddRange(teacherLines.alert);
+    }
+
+    // Pop a random working voiceline
+    int index = Random.Range(0, workingLines.alert.Count);
+
+    Voiceline voiceline = workingLines.alert[index];
+
+    workingLines.alert.RemoveAt(index);
 
     return voiceline;
   }

@@ -32,22 +32,4 @@ public class TeacherEvents
     {
         OnPlayerCaptured?.Invoke();
     }
-
-    public event Action OnPlayerHeard;
-    public void PlayerHeard()
-    {
-        OnPlayerHeard?.Invoke();
-    }
-
-    public event Action OnPlayerCaptured;
-    public void PlayerCaptured()
-    {
-        OnPlayerCaptured?.Invoke();
-    }
-
-    public event Action<string> OnRoomEntered;
-    public void RoomEntered(string roomName)
-    {
-        OnRoomEntered?.Invoke(roomName);
-    }
 }

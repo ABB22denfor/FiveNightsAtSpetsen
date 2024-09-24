@@ -35,6 +35,7 @@ public class TeacherLinesObject
   public List<Voiceline> general;
   public List<Voiceline> capturing;
   public List<Voiceline> hearing;
+  public List<Voiceline> alert;
 
   public Dictionary<string, List<Voiceline>> rooms;
 

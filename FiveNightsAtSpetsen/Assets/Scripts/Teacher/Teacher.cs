@@ -40,12 +40,14 @@ public class Teacher : MonoBehaviour
         {
             EventsManager.Instance.teacherEvents.WaypointReached(pathManager.GetWaypoint());
 
+            /*
             if(pathManager.inRoom)
             {
               string roomName = pathManager.rooms[pathManager.currentRoom].id;
 
               EventsManager.Instance.teacherEvents.RoomEntered(roomName);
             }
+            */
 
             StartCoroutine(MoveToNext(GetDelay()));
         }

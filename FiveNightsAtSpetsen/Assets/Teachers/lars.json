@@ -61,5 +61,16 @@
       "voice": ""
     }
   ],
-  "spotting": []
+  "spotting": [
+    {
+      "text": "Ser ut som jag har fått sällskap. Jag går för att kolla vem det är.",
+      "voice": ""
+    }
+  ],
+  "capturing": [
+    {
+      "text": "Jag visste inte att någon var kvar här. Vad gör du här så sent? Gå hem nu.",
+      "voice": ""
+    }
+  ]
 }
