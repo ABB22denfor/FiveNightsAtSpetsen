@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class TeacherEvents
 {
@@ -17,7 +18,19 @@ public class TeacherEvents
     public event Action<TeacherRoomPath> OnPlayerMadeSound;
     public void PlayerMadeSound(TeacherRoomPath room)
     {
-        OnPlayerMadeSound.Invoke(room);
+        OnPlayerMadeSound?.Invoke(room);
+    }
+
+    public event Action<TeacherRoomPath, bool> OnTeacherEnteredRoom;
+    public void TeacherEnteredRoom(TeacherRoomPath room, bool isTarget)
+    {
+        OnTeacherEnteredRoom?.Invoke(room, isTarget);
+    }
+
+    public event Action OnPlayerCaptured;
+    public void PlayerCaptured()
+    {
+        OnPlayerCaptured?.Invoke();
     }
 
     public event Action OnPlayerHeard;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6245385802270112169}
   - component: {fileID: 4791884939987920644}
   - component: {fileID: 1343881008787883988}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   orientation: {fileID: 247865735073805034}
+  immobile: 0
 --- !u!114 &4791884939987920644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 247865735073805034}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2660518818690723408}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +180,7 @@ GameObject:
   - component: {fileID: 1724831943099122860}
   - component: {fileID: 2523336358687859551}
   - component: {fileID: 7331997205912558188}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
