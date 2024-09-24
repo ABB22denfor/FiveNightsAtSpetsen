@@ -19,22 +19,22 @@ public class TeacherLinesManager
 
   private TeacherLinesObject workingLines;
 
+
   /*
    *
    */
   public TeacherLinesManager(string teacherName)
   {
-    teacherLines.Load(teacherName)
+    teacherLines = TeacherLinesObject.Load(teacherName);
 
-    if(!teacherLines)
+    if(teacherLines == null)
     {
       Debug.Log("Failed to load teacher's voicelines");
-
-      this.enabled = false;
     }
-
-    // Initializing all working lines with teacher's lines
-    workingLines = teacherLines;
+    else
+    {
+      workingLines = TeacherLinesObject.Load(teacherName);
+    }
   }
 
   /*
@@ -44,16 +44,21 @@ public class TeacherLinesManager
    */
   public Voiceline GetRoomEnteredVoiceline(string roomName)
   {
-    int randomProcent = random.Next(100);
+    int randomProcent = Random.Range(0, 100);
+
+    Voiceline voiceline = null;
 
     if(randomProcent < 60)
     {
       voiceline = GetRoomVoiceline(roomName);
     }
-    else
+
+    if(voiceline == null)
     {
       voiceline = GetGeneralVoiceline();
     }
+
+    return voiceline;
   }
 
   /*
@@ -76,15 +81,15 @@ public class TeacherLinesManager
     // Refill the working voicelines if it is empty
     if(workingLines.rooms[roomName].Count == 0)
     {
-      workingLines.rooms[roomName] = teacherLines.rooms[roomName];
+      workingLines.rooms[roomName].AddRange(teacherLines.rooms[roomName]);
     }
 
     // Pop a random working voiceline
-    int index = random.Next(workingLines.rooms[roomName].Count);
+    int index = Random.Range(0, workingLines.rooms[roomName].Count);
 
     Voiceline voiceline = workingLines.rooms[roomName][index];
 
-    workingLines.rooms[roomName].removeAt(index);
+    workingLines.rooms[roomName].RemoveAt(index);
 
     return voiceline;
   }
@@ -92,8 +97,15 @@ public class TeacherLinesManager
   /*
    *
    */
-  public Voiceline GetGeneralVoiceline(void)
+  public Voiceline GetGeneralVoiceline()
   {
+    if(teacherLines == null || workingLines == null)
+    {
+      Debug.LogWarning("Teacher's voicelines are not loaded");
+
+      return null;
+    }
+
     // If the teacher doesn't have general voicelines
     if(teacherLines.general.Count == 0)
     {
@@ -105,15 +117,15 @@ public class TeacherLinesManager
     // Refill the working voicelines if it is empty
     if(workingLines.general.Count == 0)
     {
-      workingLines.general = teacherLines.general;
+      workingLines.general.AddRange(teacherLines.general);
     }
 
     // Pop a random working voiceline
-    int index = random.Next(workingLines.general.Count);
+    int index = Random.Range(0, workingLines.general.Count);
 
     Voiceline voiceline = workingLines.general[index];
 
-    workingLines.general.removeAt(index);
+    workingLines.general.RemoveAt(index);
 
     return voiceline;
   }
@@ -121,8 +133,15 @@ public class TeacherLinesManager
   /*
    *
    */
-  public Voiceline GetSpottingVoiceline(void)
+  public Voiceline GetSpottingVoiceline()
   {
+    if(teacherLines == null || workingLines == null)
+    {
+      Debug.LogWarning("Teacher's voicelines are not loaded");
+
+      return null;
+    }
+
     // If the teacher doesn't have spotting voicelines
     if(teacherLines.spotting.Count == 0)
     {
@@ -134,15 +153,15 @@ public class TeacherLinesManager
     // Refill the working voicelines if it is empty
     if(workingLines.spotting.Count == 0)
     {
-      workingLines.spotting = teacherLines.spotting;
+      workingLines.spotting.AddRange(teacherLines.spotting);
     }
 
     // Pop a random working voiceline
-    int index = random.Next(workingLines.spotting.Count);
+    int index = Random.Range(0, workingLines.spotting.Count);
 
     Voiceline voiceline = workingLines.spotting[index];
 
-    workingLines.spotting.removeAt(index);
+    workingLines.spotting.RemoveAt(index);
 
     return voiceline;
   }
@@ -150,8 +169,15 @@ public class TeacherLinesManager
   /*
    *
    */
-  public Voiceline GetCapturingVoiceline(void)
+  public Voiceline GetCapturingVoiceline()
   {
+    if(teacherLines == null || workingLines == null)
+    {
+      Debug.LogWarning("Teacher's voicelines are not loaded");
+
+      return null;
+    }
+
     // If the teacher doesn't have capturing voicelines
     if(teacherLines.capturing.Count == 0)
     {
@@ -163,15 +189,15 @@ public class TeacherLinesManager
     // Refill the working voicelines if it is empty
     if(workingLines.capturing.Count == 0)
     {
-      workingLines.capturing = teacherLines.capturing;
+      workingLines.capturing.AddRange(teacherLines.capturing);
     }
 
     // Pop a random working voiceline
-    int index = random.Next(workingLines.capturing.Count);
+    int index = Random.Range(0, workingLines.capturing.Count);
 
     Voiceline voiceline = workingLines.capturing[index];
 
-    workingLines.capturing.removeAt(index);
+    workingLines.capturing.RemoveAt(index);
 
     return voiceline;
   }
@@ -179,8 +205,15 @@ public class TeacherLinesManager
   /*
    *
    */
-  public Voiceline GetHearingVoiceline(void)
+  public Voiceline GetHearingVoiceline()
   {
+    if(teacherLines == null || workingLines == null)
+    {
+      Debug.LogWarning("Teacher's voicelines are not loaded");
+
+      return null;
+    }
+
     // If the teacher doesn't have hearing voicelines
     if(teacherLines.hearing.Count == 0)
     {
@@ -192,15 +225,15 @@ public class TeacherLinesManager
     // Refill the working voicelines if it is empty
     if(workingLines.hearing.Count == 0)
     {
-      workingLines.hearing = teacherLines.hearing;
+      workingLines.hearing.AddRange(teacherLines.hearing);
     }
 
     // Pop a random working voiceline
-    int index = random.Next(workingLines.hearing.Count);
+    int index = Random.Range(0, workingLines.hearing.Count);
 
     Voiceline voiceline = workingLines.hearing[index];
 
-    workingLines.hearing.removeAt(index);
+    workingLines.hearing.RemoveAt(index);
 
     return voiceline;
   }

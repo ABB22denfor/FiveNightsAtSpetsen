@@ -4,6 +4,10 @@ using System.Linq;
 
 public class Teacher : MonoBehaviour
 {
+    public bool isAlert;
+    public bool hasSeenPlayer;
+    public string teacherName;
+
     public TeacherPathManager pathManager;
     public TeacherMovement movement;
     public TeacherRaycasting raycaster;
@@ -35,6 +39,14 @@ public class Teacher : MonoBehaviour
         if (raycaster.player == null)
         {
             EventsManager.Instance.teacherEvents.WaypointReached(pathManager.GetWaypoint());
+
+            if(pathManager.inRoom)
+            {
+              string roomName = pathManager.rooms[pathManager.currentRoom].id;
+
+              EventsManager.Instance.teacherEvents.RoomEntered(roomName);
+            }
+
             StartCoroutine(MoveToNext(GetDelay()));
         }
     }

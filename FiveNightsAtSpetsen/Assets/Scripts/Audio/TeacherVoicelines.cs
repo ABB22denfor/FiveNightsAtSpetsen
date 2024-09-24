@@ -33,7 +33,8 @@ public class TeacherVoicelines : MonoBehaviour
    */
   void OnEnable()
   {
-    teacher = gameObject.GetComponent<Teacher>();
+    teacher      = gameObject.GetComponent<Teacher>();
+    audioManager = gameObject.GetComponent<TeacherAudioManager>();
 
     // Adding handlers for teacher's events
     EventsManager.Instance.teacherEvents.OnRoomEntered    += OnRoomEntered;
@@ -41,9 +42,8 @@ public class TeacherVoicelines : MonoBehaviour
     EventsManager.Instance.teacherEvents.OnPlayerCaptured += OnPlayerCaptured;
     EventsManager.Instance.teacherEvents.OnPlayerHeard    += OnPlayerHeard;
 
-    // Initializing teacher's voiceline manager and audio manager
-    linesManager = new TeacherLinesManager(teacher.name);
-    audioManager = new TeacherAudioManager(teacher.name);
+    // Initializing teacher's voiceline manager
+    linesManager = new TeacherLinesManager(teacher.teacherName);
   }
 
   /*
@@ -88,7 +88,10 @@ public class TeacherVoicelines : MonoBehaviour
 
     Voiceline voiceline = linesManager.GetRoomEnteredVoiceline(roomName);
 
-    SayVoiceline(voiceline);
+    if(voiceline != null)
+    {
+      SayVoiceline(voiceline);
+    }
   }
 
   /*
@@ -100,7 +103,10 @@ public class TeacherVoicelines : MonoBehaviour
 
     Voiceline voiceline = linesManager.GetSpottingVoiceline();
 
-    SayVoiceline(voiceline);
+    if(voiceline != null)
+    {
+      SayVoiceline(voiceline);
+    }
   }
 
   /*
@@ -112,7 +118,10 @@ public class TeacherVoicelines : MonoBehaviour
 
     Voiceline voiceline = linesManager.GetCapturingVoiceline();
 
-    SayVoiceline(voiceline);
+    if(voiceline != null)
+    {
+      SayVoiceline(voiceline);
+    }
   }
 
   /*
@@ -124,6 +133,9 @@ public class TeacherVoicelines : MonoBehaviour
 
     Voiceline voiceline = linesManager.GetHearingVoiceline();
 
-    SayVoiceline(voiceline);
+    if(voiceline != null)
+    {
+      SayVoiceline(voiceline);
+    }
   }
 }

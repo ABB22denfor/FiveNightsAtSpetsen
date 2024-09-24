@@ -13,25 +13,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TeacherAudioManager
+public class TeacherAudioManager : MonoBehaviour
 {
   private AudioSource audioSource;
 
-  private Dictionary<string, AutioClip> audioClips;
+  private Dictionary<string, AudioClip> audioClips;
 
-  private static string teacherFolder = "Audio/Sound/Teachers";
+  private string teacherFolder = "Audio/Sound/Teachers";
 
   /*
-   *
+   * When this script is activated,
+   * - create an AudioSource component
+   * - load AudioClips for the teacher's voicelines
    */
-  public TeacherAudioManager(string teacherName)
+  void Awake()
   {
     audioSource = gameObject.AddComponent<AudioSource>();
 
+    Teacher teacher = gameObject.GetComponent<Teacher>();
+
+    // If the teacher has a name to work with, start the audio manager
+    if(teacher != null && teacher.teacherName != null)
+    {
+      Debug.Log("Loading audio clips for teacher: " + teacher.teacherName);
+
+      LoadAudioClips(teacher.teacherName);
+    }
+  }
+
+  /*
+   * Load AudioClips for the teacher's voicelines
+   */
+  private void LoadAudioClips(string teacherName)
+  {
     audioClips = new Dictionary<string, AudioClip>();
 
 
-    string audioFolderPath = Path.Combine(Application.Path, teacherFolder, teacherName);
+    string audioFolderPath = Path.Combine(Application.dataPath, teacherFolder, teacherName);
 
     string[] files = Directory.GetFiles(audioFolderPath, "*.wav");
     
@@ -44,17 +62,19 @@ public class TeacherAudioManager
   }
 
   /*
-   *
+   * Play up a voiceline from the voiceline file name
    */
   public void Play(string fileName)
   {
-     if (audioClips.TryGetValue(fileName, out AudioClip clip))
-     {
-       audioSource.PlayOneShot(clip);
-     }
-     else
-     {
-       Debug.LogWarning($"Audio clip '{fileName}' not found");
-     }
+    if(fileName == null) return;
+
+    if(audioClips.TryGetValue(fileName, out AudioClip clip))
+    {
+      audioSource.PlayOneShot(clip);
+    }
+    else
+    {
+      Debug.LogWarning($"Audio clip '{fileName}' not found");
+    }
   }
 }
