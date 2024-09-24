@@ -55,6 +55,11 @@
     {
       "text": "Men vad är det som skaver? Något i strumpan igen… det var lite typiskt oskönt!",
       "voice": ""
+    },
+    {
+      "text": "quit",
+      "voice": ""
     }
-  ]
+  ],
+  "spotting": []
 }

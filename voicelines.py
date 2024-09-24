@@ -1269,6 +1269,9 @@ def generic_room_names_get():
     room_names = []
 
     for file in listdir(generic_rooms_dir):
+        if(not file.endswith(".txt")):
+            continue
+
         file_path = join(generic_rooms_dir, file)
 
         if isfile(file_path):
@@ -1287,6 +1290,9 @@ def generic_line_types_get():
     line_types = []
 
     for file in listdir(generic_dir):
+        if(not file.endswith(".txt")):
+            continue
+
         file_path = join(generic_dir, file.lower())
 
         line_type = Path(file_path).stem
@@ -1353,6 +1359,9 @@ def teacher_names_get():
     teacher_names = []
 
     for file in listdir(teacher_dir):
+        if(not file.endswith(".json")):
+            continue
+
         file_path = join(teacher_dir, file)
 
         if isfile(file_path):
