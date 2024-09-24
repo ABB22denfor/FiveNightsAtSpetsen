@@ -401,7 +401,7 @@ def command_tips_other_lines_handler(line_type):
     generic_lines = generic_lines_get(line_type)
 
     if(not generic_lines):
-        print("\nThere are no voiceline tips for %s" % line_type)
+        print("\nThere are no voiceline tips for %s\n" % line_type)
         return
 
     print("\nThese are some voiceline tips for %s:" % line_type)
@@ -440,7 +440,7 @@ def command_tips_room_handler(room_name):
     generic_lines = generic_lines_get("rooms", room_name)
 
     if(not generic_lines):
-        print("\nThere are no voiceline tips for room %s" % room_name)
+        print("\nThere are no voiceline tips for room %s\n" % room_name)
         return
 
     print("\nThese are some voiceline tips for room %s:" % room_name)
@@ -530,6 +530,10 @@ def command_import_teacher_handler(teacher_name, command_strings):
     else:
         generic_lines = generic_lines_get(line_type)
 
+        if(not generic_lines):
+            print("\nThere are no voiceline tips for %s\n" % line_type)
+            return
+
         other_lines = teacher_json.get(line_type, [])
 
         teacher_json[line_type] = command_import_other_lines_handler(line_type, other_lines, generic_lines, next_command_strings)
@@ -608,6 +612,10 @@ def command_import_rooms_handler(rooms_json, command_strings):
 
 
     generic_lines = generic_lines_get("rooms", room_name)
+
+    if(not generic_lines):
+        print("\nThere are no voiceline tips for room %s\n" % room_name)
+        return
 
     room_lines = rooms_json.get(room_name, [])
 
@@ -1290,7 +1298,7 @@ def generic_line_types_get():
     line_types = []
 
     for file in listdir(generic_dir):
-        if(not file.endswith(".txt")):
+        if(file != "Rooms" and not file.endswith(".txt")):
             continue
 
         file_path = join(generic_dir, file.lower())
