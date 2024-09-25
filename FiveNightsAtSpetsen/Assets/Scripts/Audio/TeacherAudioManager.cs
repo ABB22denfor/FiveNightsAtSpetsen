@@ -112,6 +112,13 @@ public class TeacherAudioManager : MonoBehaviour
    */
   public void Play(string fileName)
   {
+    if(audioClips == null)
+    {
+      Debug.LogWarning("Audio clips not loaded");
+
+      return;
+    }
+
     if(fileName == null)
     {
       Debug.LogWarning("No voiceline audio file was supplied");

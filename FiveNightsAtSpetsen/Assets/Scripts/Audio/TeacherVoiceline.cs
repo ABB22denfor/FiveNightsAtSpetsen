@@ -19,6 +19,7 @@ public class TeacherVoiceline : MonoBehaviour
   private int             subtitleIndex = 0;
 
   private TeacherAudioManager audioManager;
+  private Animator            animator;
 
   private Coroutine processCoroutine;
   private bool      isProcessRunning = false;
@@ -32,6 +33,8 @@ public class TeacherVoiceline : MonoBehaviour
     Debug.Log("TeacherVoiceline.cs enabled");
 
     audioManager = gameObject.AddComponent<TeacherAudioManager>();
+
+    animator     = gameObject.GetComponentInChildren<Animator>();
   }
 
   /*
@@ -72,7 +75,7 @@ public class TeacherVoiceline : MonoBehaviour
     // audioManager.Play(voiceline.audio);
     audioManager.Play("test");
 
-    // animator.isTalking = true;
+    animator?.SetBool("isTalking", true);
 
     Debug.Log("Voiceline: " + voiceline.text);
 
@@ -150,7 +153,7 @@ public class TeacherVoiceline : MonoBehaviour
 
     audioManager.Stop();
 
-    // animator.isTalking = false;
+    animator?.SetBool("isTalking", false);
     
     if(subtitleText)
     {
