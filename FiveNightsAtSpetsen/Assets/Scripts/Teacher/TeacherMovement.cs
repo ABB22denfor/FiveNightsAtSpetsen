@@ -9,6 +9,7 @@ public class TeacherMovement : MonoBehaviour
     public float moveSpeed = 5.0f;
     public float rotationSpeed = 1f;
     Vector3 startPosition;
+    Quaternion targetRotation;
 
     Rigidbody rb;
 
@@ -34,11 +35,10 @@ public class TeacherMovement : MonoBehaviour
             Vector3 direction = steps[^1] - transform.position;
             float distanceToTarget = direction.magnitude;
 
-            if (distanceToTarget > 0.5f)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            }
+            if (distanceToTarget > 0.5f || targetRotation == null)
+                targetRotation = Quaternion.LookRotation(direction);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
             if (distanceToTarget > 0.1f)
             {
@@ -61,11 +61,10 @@ public class TeacherMovement : MonoBehaviour
             Vector3 direction = target - transform.position;
             float distanceToTarget = direction.magnitude;
 
-            if (direction.magnitude > 0.5f)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            }
+            if (distanceToTarget > 0.5f || targetRotation == null)
+                targetRotation = Quaternion.LookRotation(direction);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
             if (distanceToTarget > 0.1f)
             {
