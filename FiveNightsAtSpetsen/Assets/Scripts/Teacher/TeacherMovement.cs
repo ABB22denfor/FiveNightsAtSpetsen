@@ -71,6 +71,11 @@ public class TeacherMovement : MonoBehaviour
 
     public void SetTarget(Vector3 target, bool isPlayer = false)
     {
+        if (!isPlayer)
+        {
+            EventsManager.Instance.animationEvents.StartWalking();
+        }
+
         chasingPlayer = isPlayer;
 
         if (chasingPlayer)

@@ -41,6 +41,9 @@ public class Teacher : MonoBehaviour
 
     System.Collections.IEnumerator MoveToNext(float delay)
     {
+        if (delay > 0)
+            EventsManager.Instance.animationEvents.SetIdle();
+
         yield return new WaitForSeconds(delay);
 
         if (raycaster.player == null)
