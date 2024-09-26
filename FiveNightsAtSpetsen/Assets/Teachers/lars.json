@@ -85,12 +85,6 @@
       "voice": "lars-spotting-line-1.mp3"
     }
   ],
-  "capturing": [
-    {
-      "text": "Jag visste inte att någon var kvar här. Vad gör du här så sent? Gå hem nu.",
-      "voice": "lars-capturing-line-0.mp3"
-    }
-  ],
   "hearing": [
     {
       "text": "Märkligt, vad var det där för ljud?",
@@ -113,6 +107,16 @@
     {
       "text": "Din lilla råtta, kom fram, kom fram, jag kan höra dig",
       "voice": "lars-alert-line-1.mp3"
+    }
+  ],
+  "capturing": [
+    {
+      "text": "Haha, nu är du fast",
+      "voice": "lars-capturing-line-0.mp3"
+    },
+    {
+      "text": "Äntligen har jag dig",
+      "voice": "lars-capturing-line-1.mp3"
     }
   ]
 }
