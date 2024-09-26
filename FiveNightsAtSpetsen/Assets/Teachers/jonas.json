@@ -10,6 +10,18 @@
       {
         "text": "Det är något magiskt med att vara ensam här, omgiven av alla dessa böcker och kartor.",
         "voice": "jonas-rooms-library-line-0.mp3"
+      },
+      {
+        "text": "Gud, vad jag älskar böcker, inte minst historiaböcker.",
+        "voice": "jonas-rooms-library-line-1.mp3"
+      },
+      {
+        "text": "Det är superbra att det finns ett tyst rum, bara det det kunde vara just... tyst.",
+        "voice": "jonas-rooms-library-line-2.mp3"
+      },
+      {
+        "text": "Jag tycker inte jag ser några böcker av Carl Marx... helt förskräckligt.",
+        "voice": "jonas-rooms-library-line-3.mp3"
       }
     ],
     "classroom-1": [
@@ -20,6 +32,14 @@
       {
         "text": "Hur ska jag kunna röra mig runt här och hjälpa alla när det är så trångt?",
         "voice": "jonas-rooms-classroom-1-line-1.mp3"
+      },
+      {
+        "text": "De små gruppborden bara kallar på diskutioner. Jag som älskar diskutioner.",
+        "voice": "jonas-rooms-classroom-1-line-2.mp3"
+      },
+      {
+        "text": "Det är väl 1:orna som sitter här, eller är det kanske 2:orna..?",
+        "voice": "jonas-rooms-classroom-1-line-3.mp3"
       }
     ],
     "classroom-2": [
@@ -30,6 +50,14 @@
       {
         "text": "Här finns det mer utrymme än i Klarummet, men det är fortfarande inte så öppet.",
         "voice": "jonas-rooms-classroom-2-line-1.mp3"
+      },
+      {
+        "text": "Kanske jag borde skjuta bänkarna lite längre bak, så att man får plats här framme?",
+        "voice": "jonas-rooms-classroom-2-line-2.mp3"
+      },
+      {
+        "text": "Eller, är det här 2:orna sitter? Jag tycker de flyttar alldeles för ofta.",
+        "voice": "jonas-rooms-classroom-2-line-3.mp3"
       }
     ],
     "classroom-3": [
@@ -40,6 +68,14 @@
       {
         "text": "Vardagsrummet. Här kan man verkligen röra sig fritt och hjälpa alla elever.",
         "voice": "jonas-rooms-classroom-3-line-1.mp3"
+      },
+      {
+        "text": "Det här känns som det bästa klassrummet? Kan det vara 3:orna som sitter här?",
+        "voice": "jonas-rooms-classroom-3-line-2.mp3"
+      },
+      {
+        "text": "Skönt att det har blivit så öppet här. De tänkte nog på mig.",
+        "voice": "jonas-rooms-classroom-3-line-3.mp3"
       }
     ],
     "grouproom-1": [
@@ -52,6 +88,88 @@
       {
         "text": "Teknik i all ära, men det är människorna bakom innovationerna som verkligen fascinerar mig.",
         "voice": "jonas-rooms-techlab-line-0.mp3"
+      },
+      {
+        "text": "Massproduktion, det är nyckeln till ett framgångsrikt samhälle.",
+        "voice": "jonas-rooms-techlab-line-1.mp3"
+      },
+      {
+        "text": "Fy vad Lego är dyrt! Det är något jävla kapitalistsvin som ligger bakom det.",
+        "voice": "jonas-rooms-techlab-line-2.mp3"
+      }
+    ],
+    "lockers": [
+      {
+        "text": "Jag hoppas inte eleverna förvarar politiska föremål i deras skåp.",
+        "voice": "jonas-rooms-lockers-line-0.mp3"
+      },
+      {
+        "text": "Ibland funderar jag på om man ska peta in socialistiska flygblad i skåpen.",
+        "voice": "jonas-rooms-lockers-line-1.mp3"
+      },
+      {
+        "text": "Visst, man ska få låsa in sina saker, men vore det inte bättre att dela på allting?",
+        "voice": "jonas-rooms-lockers-line-2.mp3"
+      },
+      {
+        "text": "Är det verkligen så viktigt att skilja på mitt och ditt? Vad sägs som vårt?",
+        "voice": "jonas-rooms-lockers-line-3.mp3"
+      }
+    ],
+    "teachers": [
+      {
+        "text": "De andra lärarna blir så sura när jag lånar deras saker. Jag trodde vi delade med oss.",
+        "voice": "jonas-rooms-teachers-line-0.mp3"
+      },
+      {
+        "text": "Hmm... jag kanske ska fortsätta finslipa mina PowerPoints.",
+        "voice": "jonas-rooms-teachers-line-1.mp3"
+      },
+      {
+        "text": "De andra lärarna verkar inte riktigt sålda på idén om kollektivt ägande.",
+        "voice": "jonas-rooms-teachers-line-2.mp3"
+      },
+      {
+        "text": "I det här rummet brukar det faktiskt vara lugnt och tyst, kanske lite för tyst.",
+        "voice": "jonas-rooms-teachers-line-3.mp3"
+      }
+    ],
+    "grouproom-2": [
+      {
+        "text": "Man kan ju tänka sig att ett hallonrum skulle vara rött. Oh, rött, min favoritfärg.",
+        "voice": "jonas-rooms-grouproom-2-line-0.mp3"
+      },
+      {
+        "text": "Grupprum som sådana här är perfekt för att diskutera politik.",
+        "voice": "jonas-rooms-grouproom-2-line-1.mp3"
+      },
+      {
+        "text": "Ibland är det bra att kunna prata enskilt här, det är inte alla som håller med om mina åsikter.",
+        "voice": "jonas-rooms-grouproom-2-line-2.mp3"
+      },
+      {
+        "text": "Det är i tankerum som detta som revolutionära ideér skapas.",
+        "voice": "jonas-rooms-grouproom-2-line-3.mp3"
+      }
+    ],
+    "sofas": [
+      {
+        "text": "Nu blev jag nästan sugen på att slå mig ner och läsa några sidor ur manifestet.",
+        "voice": "jonas-rooms-sofas-line-0.mp3"
+      },
+      {
+        "text": "Är det bara jag, eller är det känns det som om elementen inte fungerar här?",
+        "voice": "jonas-rooms-sofas-line-1.mp3"
+      },
+      {
+        "text": "Sofforna borde skapa en trevlig miljö, men det här stället ger mig ändå kalla kårar.",
+        "voice": "jonas-rooms-sofas-line-2.mp3"
+      }
+    ],
+    "kitchen": [
+      {
+        "text": "Tråkigt att de behövde stänga ner kiosken. Att de inte lyckas följa reglerna.",
+        "voice": "jonas-rooms-kitchen-line-0.mp3"
       }
     ]
   },
@@ -127,6 +245,14 @@
     {
       "text": "Inbillar jag mig, eller... var det något som rörde sig?",
       "voice": "jonas-alert-line-4.mp3"
+    },
+    {
+      "text": "Det där ljudet... jag hörde det igen. Vad kan det vara?",
+      "voice": "jonas-alert-line-5.mp3"
+    },
+    {
+      "text": "Vad är det som låter. Det låter precis som... eller?",
+      "voice": "jonas-alert-line-6.mp3"
     }
   ],
   "capturing": [
@@ -137,6 +263,14 @@
     {
       "text": "Fångad! Nu ska jag visa dig vägen till Gulag.",
       "voice": "jonas-capturing-line-1.mp3"
+    },
+    {
+      "text": "Nu har jag dig! Försökte du sprida politiskt svammel på min skola!?",
+      "voice": "jonas-capturing-line-2.mp3"
+    },
+    {
+      "text": "Tagen! Det är farligt att sprida politiska lögner som du gör.",
+      "voice": "jonas-capturing-line-3.mp3"
     }
   ],
   "hearing": [
@@ -153,7 +287,7 @@
       "voice": "jonas-hearing-line-2.mp3"
     },
     {
-      "text": "Du vet väl vad som händer med elver som stannar kvar efter stänging? Inte, vad tror du det beror på?",
+      "text": "Har du hört om elever som stannat kvar efter skolan. Inte?",
       "voice": "jonas-hearing-line-3.mp3"
     },
     {
@@ -175,7 +309,7 @@
       "voice": "jonas-spotting-line-1.mp3"
     },
     {
-      "text": "Där är du du ju! Stanna där du är!",
+      "text": "Där är du ju! Stanna där du är, jag kommer!",
       "voice": "jonas-spotting-line-2.mp3"
     },
     {
@@ -187,7 +321,7 @@
       "voice": "jonas-spotting-line-4.mp3"
     },
     {
-      "text": "Jag ser dig...",
+      "text": "Jag ser ju dig! Du behöver inte springa ifrån mig.",
       "voice": "jonas-spotting-line-5.mp3"
     },
     {
