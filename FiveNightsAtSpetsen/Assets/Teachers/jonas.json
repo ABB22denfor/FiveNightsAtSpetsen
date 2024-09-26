@@ -14,7 +14,7 @@
     ],
     "classroom-1": [
       {
-        "text": "Det känns som om väggarna kryper närmare för varje dag.",
+        "text": "Usch! Det känns som om väggarna kryper närmare mig för varje dag.",
         "voice": "jonas-rooms-classroom-1-line-0.mp3"
       },
       {
@@ -28,7 +28,7 @@
         "voice": "jonas-rooms-classroom-2-line-0.mp3"
       },
       {
-        "text": "Det är bättre än det trånga klassrummet, men fortfarande inte tillräckligt med utrymme.",
+        "text": "Här finns det mer utrymme än i Klarummet, men det är fortfarande inte så öppet.",
         "voice": "jonas-rooms-classroom-2-line-1.mp3"
       }
     ],
@@ -38,7 +38,7 @@
         "voice": "jonas-rooms-classroom-3-line-0.mp3"
       },
       {
-        "text": "Äntligen, ett klassrum där jag kan röra mig fritt och interagera med alla elever!",
+        "text": "Vardagsrummet. Här kan man verkligen röra sig fritt och hjälpa alla elever.",
         "voice": "jonas-rooms-classroom-3-line-1.mp3"
       }
     ],
@@ -57,7 +57,7 @@
   },
   "general": [
     {
-      "text": "Kamrater, även när jag är ensam, är jag aldrig riktigt ensam, för jag bär med mig era röster och vår gemensamma vision.",
+      "text": "Även fast jag är själv, är jag aldrig riktigt ensam, kamrater.",
       "voice": "jonas-general-line-0.mp3"
     },
     {
@@ -65,20 +65,36 @@
       "voice": "jonas-general-line-1.mp3"
     },
     {
-      "text": "Det är fascinerande att tänka på hur historien alltid har en tendens att upprepa sig.",
+      "text": "Det är fascinerande att historian alltid tenderar att upprepa sig.",
       "voice": "jonas-general-line-2.mp3"
     },
     {
-      "text": "Hur mycket jag än funderar på det, kommer jag inte på vad mer mexikaner är kända för förutom droger, karteller och tacos.",
+      "text": "Mexikanerna är ju kända för: droger, karteller... och så tacos så klart.",
       "voice": "jonas-general-line-3.mp3"
     },
     {
-      "text": "Om bara mina elever kunde förstå vikten av kollektivets styrka över individens ambitioner.",
+      "text": "Jag önskar att mina elever kunde förstå vikten av kollektivt ägande.",
       "voice": "jonas-general-line-4.mp3"
     },
     {
-      "text": "En dag kommer mina elever att vara de som formar framtiden. Det vågar jag inte tänka på än.",
+      "text": "Tanken att mina elever en dag kommer forma framtiden är ärligt talat lite läskigt.",
       "voice": "jonas-general-line-5.mp3"
+    },
+    {
+      "text": "Det är ärligt talat ganska kusligt i skolan vid den här tiden.",
+      "voice": "jonas-general-line-6.mp3"
+    },
+    {
+      "text": "Visst var det klockan nio larmet sattes på, eller var vid åtta..?",
+      "voice": "jonas-general-line-7.mp3"
+    },
+    {
+      "text": "Behöver man verkligen vara kompis bara för att man är kamrat?",
+      "voice": "jonas-general-line-8.mp3"
+    },
+    {
+      "text": "Förhoppningsvis kom jag ihåg parkersingskortet. Det får inte bli en till p-bot.",
+      "voice": "jonas-general-line-9.mp3"
     }
   ],
   "moving": [
@@ -89,6 +105,102 @@
     {
       "text": "[Harklar sig]",
       "voice": "jonas-moving-line-1.mp3"
+    }
+  ],
+  "alert": [
+    {
+      "text": "Hmm... skumt. Det kändes precis som om en kapitalist var i närheten?",
+      "voice": "jonas-alert-line-0.mp3"
+    },
+    {
+      "text": "Vad var det där? Jag kan svära på att nyss hörde något.",
+      "voice": "jonas-alert-line-1.mp3"
+    },
+    {
+      "text": "Är det någon här? Hallå! Visa dig om du hör mig.",
+      "voice": "jonas-alert-line-2.mp3"
+    },
+    {
+      "text": "Vänta! Det lät precis som fotsteg. Kan det vara någon här?",
+      "voice": "jonas-alert-line-3.mp3"
+    },
+    {
+      "text": "Inbillar jag mig, eller... var det något som rörde sig?",
+      "voice": "jonas-alert-line-4.mp3"
+    }
+  ],
+  "capturing": [
+    {
+      "text": "Got ya! Förbered dig nu för att bli ett icke-bruk.",
+      "voice": "jonas-capturing-line-0.mp3"
+    },
+    {
+      "text": "Fångad! Nu ska jag visa dig vägen till Gulag.",
+      "voice": "jonas-capturing-line-1.mp3"
+    }
+  ],
+  "hearing": [
+    {
+      "text": "Du kan inte gömma dig för mig för evigt. Jag kommer hitta dig!",
+      "voice": "jonas-hearing-line-0.mp3"
+    },
+    {
+      "text": "Stanna nu för guds skull! Jag vill bara prata med dig.",
+      "voice": "jonas-hearing-line-1.mp3"
+    },
+    {
+      "text": "Jag vet du är här någonstans... Kom fram och visa dig!",
+      "voice": "jonas-hearing-line-2.mp3"
+    },
+    {
+      "text": "Du vet väl vad som händer med elver som stannar kvar efter stänging? Inte, vad tror du det beror på?",
+      "voice": "jonas-hearing-line-3.mp3"
+    },
+    {
+      "text": "Sluta gömma dig för mig! Vi är ju kompisar, eller kanske... kamrater?",
+      "voice": "jonas-hearing-line-4.mp3"
+    },
+    {
+      "text": "Även fast jag inte ser dig kan jag fortfarande höra dig.",
+      "voice": "jonas-hearing-line-5.mp3"
+    }
+  ],
+  "spotting": [
+    {
+      "text": "Vem där! Kom hit din lilla rackare!",
+      "voice": "jonas-spotting-line-0.mp3"
+    },
+    {
+      "text": "Vad gör du här!? Du får verkligen inte vara här nu!",
+      "voice": "jonas-spotting-line-1.mp3"
+    },
+    {
+      "text": "Där är du du ju! Stanna där du är!",
+      "voice": "jonas-spotting-line-2.mp3"
+    },
+    {
+      "text": "Vem fan är du!?",
+      "voice": "jonas-spotting-line-3.mp3"
+    },
+    {
+      "text": "Tjena kamrat!",
+      "voice": "jonas-spotting-line-4.mp3"
+    },
+    {
+      "text": "Jag ser dig...",
+      "voice": "jonas-spotting-line-5.mp3"
+    },
+    {
+      "text": "Tror du verkligen att du kan undkomma mig?",
+      "voice": "jonas-spotting-line-6.mp3"
+    },
+    {
+      "text": "Där är du! Jag visste att jag kunde hitta dig.",
+      "voice": "jonas-spotting-line-7.mp3"
+    },
+    {
+      "text": "Ser ut som om jag fått sällskap...",
+      "voice": "jonas-spotting-line-8.mp3"
     }
   ]
 }
