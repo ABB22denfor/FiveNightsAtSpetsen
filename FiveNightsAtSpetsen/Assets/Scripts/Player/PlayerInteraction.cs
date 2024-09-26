@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
 {
     public float interactionRange = 5f;
     public Camera playerCamera;
+    public Slider slider;
 
     Interactable currentInteractable;
     bool interacting = false;
@@ -28,9 +30,7 @@ public class PlayerInteraction : MonoBehaviour
                 if (currentInteractable != interactable)
                 {
                     if (currentInteractable != null)
-                    {
                         currentInteractable.HighlightObject(false);
-                    }
 
                     currentInteractable = interactable;
                     interacting = false;
@@ -42,6 +42,7 @@ public class PlayerInteraction : MonoBehaviour
                     if (!interacting) 
                     {
                         currentInteractable.Interact();
+                        InitSlider();
                         interacting = true;
                     }
                     currentInteractable.Interacting(Time.deltaTime);
@@ -73,5 +74,25 @@ public class PlayerInteraction : MonoBehaviour
                 currentInteractable = null;
             }
         }
+
+        UpdateSlider();
+    }
+
+    void InitSlider() {
+        if (currentInteractable.interactionDuration == 0)
+            return;
+            
+        slider.gameObject.SetActive(true);
+        slider.maxValue = currentInteractable.interactionDuration;
+        slider.value = 0;
+    }
+
+    void UpdateSlider() {
+        if (!interacting || currentInteractable.interactionProgress >= currentInteractable.interactionDuration) {
+            slider.gameObject.SetActive(false);
+            return;
+        }
+
+        slider.value = currentInteractable.interactionProgress;
     }
 }
