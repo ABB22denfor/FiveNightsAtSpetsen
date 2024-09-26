@@ -15,6 +15,24 @@
         "text": "Det ser ut som om jag har schemalagt två mattelektioner på fredagsmorgonen. Kan det räcka, eller ska jag smacka in en tredje på eftermiddagen?",
         "voice": "lars-rooms-classroom-2-line-0.mp3"
       }
+    ],
+    "kitchen": [
+      {
+        "text": "Nej, funkar inte kaffemaskinen, fy skäms Forslund",
+        "voice": "lars-rooms-kitchen-line-0.mp3"
+      }
+    ],
+    "pingis": [
+      {
+        "text": "När jag gick i gymnasiet, då var jag skolmästare på pingis, helt oslagbar",
+        "voice": "lars-rooms-pingis-line-0.mp3"
+      }
+    ],
+    "classroom-3": [
+      {
+        "text": "Nej, har 3:orna fortfarande inte städat här inne, efter alla tillsägelser!",
+        "voice": "lars-rooms-classroom-3-line-0.mp3"
+      }
     ]
   },
   "general": [
@@ -55,22 +73,46 @@
     {
       "text": "Men vad är det som skaver? Något i strumpan igen… det var lite typiskt oskönt!",
       "voice": "lars-moving-line-3.mp3"
-    },
-    {
-      "text": "quit",
-      "voice": "lars-moving-line-4.mp3"
     }
   ],
   "spotting": [
     {
-      "text": "Ser ut som jag har fått sällskap. Jag går för att kolla vem det är.",
+      "text": "Ser ut som jag har fått sällskap, tittut vem där?",
       "voice": "lars-spotting-line-0.mp3"
+    },
+    {
+      "text": "[Skrattar] jag ser ju dig, sluta lek nu.",
+      "voice": "lars-spotting-line-1.mp3"
     }
   ],
   "capturing": [
     {
       "text": "Jag visste inte att någon var kvar här. Vad gör du här så sent? Gå hem nu.",
       "voice": "lars-capturing-line-0.mp3"
+    }
+  ],
+  "hearing": [
+    {
+      "text": "Märkligt, vad var det där för ljud?",
+      "voice": "lars-hearing-line-0.mp3"
+    },
+    {
+      "text": "Nej, det här måste undersökas",
+      "voice": "lars-hearing-line-1.mp3"
+    },
+    {
+      "text": "Jag måste komma till botten med vad som gör allt ljud.",
+      "voice": "lars-hearing-line-2.mp3"
+    }
+  ],
+  "alert": [
+    {
+      "text": "Jaså, det är du som står för allt oväsen här",
+      "voice": "lars-alert-line-0.mp3"
+    },
+    {
+      "text": "Din lilla råtta, kom fram, kom fram, jag kan höra dig",
+      "voice": "lars-alert-line-1.mp3"
     }
   ]
 }
