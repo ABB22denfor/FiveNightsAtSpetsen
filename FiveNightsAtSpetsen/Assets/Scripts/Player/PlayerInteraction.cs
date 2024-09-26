@@ -6,6 +6,7 @@ public class PlayerInteraction : MonoBehaviour
     public Camera playerCamera;
 
     Interactable currentInteractable;
+    bool interacting = false;
     GameObject playerObject;
 
     void Start()
@@ -32,12 +33,23 @@ public class PlayerInteraction : MonoBehaviour
                     }
 
                     currentInteractable = interactable;
+                    interacting = false;
                     currentInteractable.HighlightObject(true);
                 }
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKey(KeyCode.E))
                 {
-                    currentInteractable.Interact();
+                    if (!interacting) 
+                    {
+                        currentInteractable.Interact();
+                        interacting = true;
+                    }
+                    currentInteractable.Interacting(Time.deltaTime);
+                } 
+                else 
+                {
+                    currentInteractable.StoppedInteracting();
+                    interacting = false;
                 }
             }
             else
@@ -45,6 +57,8 @@ public class PlayerInteraction : MonoBehaviour
                 if (currentInteractable != null)
                 {
                     currentInteractable.HighlightObject(false);
+                    currentInteractable.StoppedInteracting();
+                    interacting = false;
                     currentInteractable = null;
                 }
             }
@@ -54,6 +68,8 @@ public class PlayerInteraction : MonoBehaviour
             if (currentInteractable != null)
             {
                 currentInteractable.HighlightObject(false);
+                currentInteractable.StoppedInteracting();
+                interacting = false;
                 currentInteractable = null;
             }
         }

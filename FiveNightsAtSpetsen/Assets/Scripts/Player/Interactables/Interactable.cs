@@ -6,6 +6,9 @@ public abstract class Interactable : MonoBehaviour
     Color originalColor;
     public Color highlightColor = Color.yellow;
 
+    public float interactionDuration;
+    public float interactionProgress;
+
     void Start()
     {
         objectRenderer = GetComponent<Renderer>();
@@ -29,5 +32,22 @@ public abstract class Interactable : MonoBehaviour
         }
     }
 
-    public abstract void Interact();
+    public virtual void Interact()
+    {
+        interactionProgress = 0f;
+    }
+
+    public virtual void Interacting(float dt) {
+        interactionProgress += dt;
+
+        if (interactionProgress >= interactionDuration) {
+            InteractionCompleted();
+        }
+    }
+
+    public virtual void StoppedInteracting() {
+        interactionProgress = 0f;
+    }
+
+    public abstract void InteractionCompleted();
 }
