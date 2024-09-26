@@ -10,13 +10,18 @@ public class PlayerCamera : MonoBehaviour
     float xRotation;
     float yRotation = -180f;
 
-    bool captured = false;
+    Vector3 oldPos;
+
+    bool immobile = false;
 
     void OnEnable() {
+        EventsManager.Instance.playerEvents.OnPlayerHid += Hide;
+        EventsManager.Instance.playerEvents.OnPlayerRevealed += Emerge;
         EventsManager.Instance.teacherEvents.OnPlayerCaptured += Captured;
     }
 
     void OnDisable() {
+        EventsManager.Instance.playerEvents.OnPlayerRevealed -= Emerge;
         EventsManager.Instance.teacherEvents.OnPlayerCaptured -= Captured;
     }
 
@@ -28,7 +33,7 @@ public class PlayerCamera : MonoBehaviour
 
     void Update()
     {
-        if (captured) 
+        if (immobile) 
             return;
 
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
@@ -43,9 +48,21 @@ public class PlayerCamera : MonoBehaviour
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 
+    void Hide(GameObject go) {
+        oldPos = transform.position;
+        transform.position = go.transform.position;
+        transform.LookAt(orientation);
+        immobile = true;
+    }
+
+    void Emerge(GameObject go) {
+        transform.position = oldPos;
+        immobile = false;
+    }
+
     void Captured() {
         Vector3 teacherPos = GameObject.Find("Teacher").transform.position;
         transform.LookAt(teacherPos + new Vector3(0, 1, 0));
-        captured = true;
+        immobile = true;
     }
 }
