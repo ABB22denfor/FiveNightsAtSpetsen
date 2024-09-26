@@ -7,6 +7,10 @@ public class TeacherMovement : MonoBehaviour
 
     public Vector3 target;
     public float moveSpeed = 5.0f;
+    public float investigatingSpeedModifier = 1.25f;
+    public float spottedPlayerSpeedModifier = 1.5f;
+    public float chasingPlayerSpeedModifier = 2.0f;
+    Dictionary<Teacher.TeacherMode, float> speed;
     public float rotationSpeed = 1f;
     Vector3 startPosition;
     Quaternion targetRotation;
@@ -24,6 +28,13 @@ public class TeacherMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         rb.isKinematic = false;
+
+        speed = new() {
+            {Teacher.TeacherMode.Standard, moveSpeed},
+            {Teacher.TeacherMode.InvestigatingNoise, moveSpeed * investigatingSpeedModifier},
+            {Teacher.TeacherMode.SpottedPlayer, moveSpeed * spottedPlayerSpeedModifier},
+            {Teacher.TeacherMode.ChasingPlayer, moveSpeed * chasingPlayerSpeedModifier}
+        };
     }
 
     void Update()
@@ -44,7 +55,7 @@ public class TeacherMovement : MonoBehaviour
             {
                 direction.Normalize();
 
-                rb.velocity = direction * moveSpeed * Time.deltaTime * 100f;
+                rb.velocity = direction * speed[teacher.mode] * Time.deltaTime * 100f;
             }
             else
             {
@@ -70,7 +81,7 @@ public class TeacherMovement : MonoBehaviour
             {
                 direction.Normalize();
 
-                rb.velocity = direction * moveSpeed * Time.deltaTime * 100f;
+                rb.velocity = direction * speed[teacher.mode] * Time.deltaTime * 100f;
             }
             else
             {

@@ -10,6 +10,8 @@ public class Teacher : MonoBehaviour
     public TextAsset dataJson;
     Dictionary<string, float> delays;
 
+    public TeacherMode mode = TeacherMode.Standard;
+
     void OnEnable()
     {
         EventsManager.Instance.teacherEvents.OnPlayerMadeSound += PlayerMadeSound;
@@ -23,6 +25,7 @@ public class Teacher : MonoBehaviour
     void Start()
     {
         // pathManager.Next();
+        pathManager.teacher = this;
         movement.SetTarget(pathManager.GetPos());
 
         TeacherDataParser dataParser = new(dataJson);
@@ -57,16 +60,24 @@ public class Teacher : MonoBehaviour
     {
         if (!movement.chasingPlayer)
             EventsManager.Instance.teacherEvents.PlayerSpotted();
+
+        pathManager.SetAltRoute(true);
+        mode = TeacherMode.ChasingPlayer;
         movement.SetTarget(position, true);
     }
 
     public void PlayerNotSpotted()
     {
+        mode = TeacherMode.SpottedPlayer;
+
         movement.SetTarget(pathManager.GetPos());
     }
 
     public float GetDelay()
     {
+        if (mode != TeacherMode.Standard)
+            return 0;
+
         TeacherWaypoint waypoint = pathManager.GetWaypoint();
 
         if (delays.ContainsKey(waypoint.id))
@@ -79,5 +90,19 @@ public class Teacher : MonoBehaviour
     {
         Debug.Log("Teacher heard a sound coming from " + room.id);
         pathManager.TargetRoom((room, false));
+
+        mode = TeacherMode.InvestigatingNoise;
+        pathManager.SetAltRoute(false);
+    }
+
+    public void TempAltRouteCompleted() {
+        mode = TeacherMode.Standard;
+    }
+
+    public enum TeacherMode {
+        Standard,
+        InvestigatingNoise,
+        SpottedPlayer,
+        ChasingPlayer
     }
 }
