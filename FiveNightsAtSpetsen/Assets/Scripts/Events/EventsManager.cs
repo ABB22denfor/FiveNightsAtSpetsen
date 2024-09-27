@@ -7,6 +7,7 @@ public class EventsManager : MonoBehaviour
     public PlayerEvents playerEvents;
     public TeacherEvents teacherEvents;
     public TaskEvents taskEvents;
+    public AnimationEvents animationEvents;
 
     private void Awake()
     {
@@ -19,5 +20,6 @@ public class EventsManager : MonoBehaviour
         playerEvents = new();
         teacherEvents = new();
         taskEvents = new();
+        animationEvents = new();
     }
 }

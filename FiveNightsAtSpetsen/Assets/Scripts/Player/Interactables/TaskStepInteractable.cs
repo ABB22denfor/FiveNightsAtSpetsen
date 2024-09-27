@@ -8,9 +8,8 @@ public class TaskStepInteractable : Interactable
     {
         step = GetComponent<TaskStep>();
     }
-
-    public override void Interact()
-    {
+    
+    public override void InteractionCompleted() {
         EventsManager.Instance.taskEvents.CompleteStep(step);
     }
 }
