@@ -80,6 +80,7 @@ MonoBehaviour:
   movement: {fileID: 8288388981843304445}
   raycaster: {fileID: 7864517937106545867}
   dataJson: {fileID: 0}
+  mode: 0
 --- !u!114 &8288388981843304445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +96,10 @@ MonoBehaviour:
   teacher: {fileID: 7221680901188712411}
   target: {x: 0, y: 0, z: 0}
   moveSpeed: 20
+  investigatingSpeedModifier: 1.25
+  spottedPlayerSpeedModifier: 1.5
+  chasingPlayerSpeedModifier: 2
+  rotationSpeed: 10
   chasingPlayer: 0
   steps: []
 --- !u!114 &7864517937106545867
