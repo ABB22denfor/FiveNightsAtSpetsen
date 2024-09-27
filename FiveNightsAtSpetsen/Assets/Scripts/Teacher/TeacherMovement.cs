@@ -83,7 +83,7 @@ public class TeacherMovement : MonoBehaviour
 
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-            if (distanceToTarget > (chasingPlayer ? 1.5f : 0.25f))
+            if (distanceToTarget > (chasingPlayer ? 1.5f : 0.5f))
             {
                 direction.Normalize();
 
