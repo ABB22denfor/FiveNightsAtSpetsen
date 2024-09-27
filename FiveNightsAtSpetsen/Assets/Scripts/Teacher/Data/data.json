@@ -12,10 +12,6 @@
     "routes": {
         "main": [
             {
-                "room": "lararrummet",
-                "repetitions": 2
-            },
-            {
                 "room": "klassrummet"
             },
             {
@@ -23,6 +19,10 @@
             },
             {
                 "room": "random"
+            },
+            {
+                "room": "lararrummet",
+                "repetitions": 2
             }
         ],
         "alt": [

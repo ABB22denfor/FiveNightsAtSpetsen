@@ -132,7 +132,9 @@ public class TeacherPathManager : MonoBehaviour
         lastRoom = room;
         inRoom = false;
         interRoomIndex = interRoomPath.IndexOf(room.exitPoint);
-        TargetRoom(GetRouteTarget(), true);
+        
+        if (target == null)
+            TargetRoom(GetRouteTarget(), true);
     }
 
     public Vector3 GetPos()
