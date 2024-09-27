@@ -16,7 +16,7 @@ using UnityEngine;
 
 public class TeacherAudioManager : MonoBehaviour
 {
-  private string audioFileExtension = "*.mp3";
+  private string audioFileExtension = "*.wav";
 
   private AudioSource audioSource;
 
