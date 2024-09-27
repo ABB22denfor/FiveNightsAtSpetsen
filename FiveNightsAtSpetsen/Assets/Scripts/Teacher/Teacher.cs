@@ -80,6 +80,10 @@ public class Teacher : MonoBehaviour
 
         TeacherWaypoint waypoint = pathManager.GetWaypoint();
 
+        foreach ((string s, float f) in delays) {
+            Debug.Log(s + ": " + f);
+        }
+
         if (delays.ContainsKey(waypoint.id))
             return delays[waypoint.id];
         else
@@ -88,7 +92,6 @@ public class Teacher : MonoBehaviour
 
     void PlayerMadeSound(TeacherRoomPath room)
     {
-        Debug.Log("Teacher heard a sound coming from " + room.id);
         pathManager.TargetRoom((room, false));
 
         mode = TeacherMode.InvestigatingNoise;

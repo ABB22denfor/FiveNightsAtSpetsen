@@ -52,10 +52,10 @@ public class TeacherMovement : MonoBehaviour
             Vector3 direction = steps[^1] - transform.position;
             float distanceToTarget = direction.magnitude;
 
-            if (distanceToTarget > 0.5f || targetRotation == null)
+            if (distanceToTarget > 2.5f || targetRotation == null)
                 targetRotation = Quaternion.LookRotation(direction);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
             if (distanceToTarget > 0.25f)
             {
@@ -78,12 +78,12 @@ public class TeacherMovement : MonoBehaviour
             Vector3 direction = target - transform.position;
             float distanceToTarget = direction.magnitude;
 
-            if (distanceToTarget > 0.5f || targetRotation == null)
+            if (distanceToTarget > 2.5f || targetRotation == null)
                 targetRotation = Quaternion.LookRotation(direction);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-            if (distanceToTarget > (chasingPlayer ? 1.5f : 0.5f))
+            if (distanceToTarget > (chasingPlayer ? 2.5f : 1f))
             {
                 direction.Normalize();
 

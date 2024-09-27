@@ -32567,7 +32567,7 @@ PrefabInstance:
     - target: {fileID: 8519644604963522507, guid: 01cabe32bad9cf64bb723a06479da275,
         type: 3}
       propertyPath: id
-      value: 3d_printers-1
+      value: 3dprinters1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -43732,10 +43732,25 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 627466802}
+    - target: {fileID: 7864517937106545867, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      propertyPath: drawVision
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864517937106545867, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      propertyPath: detectionRange
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8288388981843304445, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
       propertyPath: moveSpeed
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8288388981843304445, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8858455319096676717, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
