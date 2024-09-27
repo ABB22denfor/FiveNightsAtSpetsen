@@ -3,52 +3,52 @@
     "klassrummet": [
       {
         "text": "De här eleverna är verkligen något speciellt. Deras kreativitet och nyfikenhet inspirerar mig varje dag.",
-        "audio": "jocke-rooms-klassrummet-line-0.mp3"
+        "audio": "jocke-rooms-klassrummet-line-0"
       },
       {
         "text": "Det är frustrerande att vi inte fick tillåtelse att låta eleverna skapa sina egna språkmodeller. Det hade varit en fantastisk möjlighet för dem att lära sig mer om AI.",
-        "audio": "jocke-rooms-klassrummet-line-1.mp3"
+        "audio": "jocke-rooms-klassrummet-line-1"
       }
     ],
     "korridoren": [
       {
         "text": "Kanske jag ska överväga att använda digitala anslagstavlor för att göra det mer interaktivt.",
-        "audio": "jocke-rooms-korridoren-line-0.mp3"
+        "audio": "jocke-rooms-korridoren-line-0"
       }
     ]
   },
   "general": [
     {
       "text": "Ibland undrar jag om vi verkligen kan lyckas med EHT Kollen, men då tänker jag på alla framsteg vi redan har gjort. Vi är på rätt väg.",
-      "audio": "jocke-general-line-0.mp3"
+      "audio": "jocke-general-line-0"
     },
     {
       "text": "Just det, jag måste komma ihåg att uppdatera superdatorns firmware nästa vecka. Det får inte glömmas bort.",
-      "audio": "jocke-general-line-1.mp3"
+      "audio": "jocke-general-line-1"
     },
     {
       "text": "Jag kallar dem ‘hackerman’ på skoj, men tänk om det finns en riktig ‘hackerman’ där ute?",
-      "audio": "jocke-general-line-2.mp3"
+      "audio": "jocke-general-line-2"
     },
     {
       "text": "Byggare Bob verkar alltid arbeta för det gemensamma bästa och inte för egen vinning. Kan han vara en kommunist?",
-      "audio": "jocke-general-line-3.mp3"
+      "audio": "jocke-general-line-3"
     },
     {
       "text": "Men han driver ju också sitt eget företag och tar på sig olika projekt. Är han en kapitalist då?",
-      "audio": "jocke-general-line-4.mp3"
+      "audio": "jocke-general-line-4"
     },
     {
       "text": "Våra elever bygger riktiga appar och spel, medan NTI-elever bara gör PowerPoint-presentationer.",
-      "audio": "jocke-general-line-5.mp3"
+      "audio": "jocke-general-line-5"
     },
     {
       "text": "Måste fixa med tekniken så allt fungerar smidigt för morgondagen.",
-      "audio": "jocke-general-line-6.mp3"
+      "audio": "jocke-general-line-6"
     },
     {
       "text": "Hoppas att våra planerade projekt verkligen engagerar alla elever.",
-      "audio": "jocke-general-line-7.mp3"
+      "audio": "jocke-general-line-7"
     }
   ]
 }

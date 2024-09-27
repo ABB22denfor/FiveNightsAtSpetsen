@@ -3,154 +3,154 @@
     "klassrummet": [
       {
         "text": "Oj oj oj... Här skulle mina logistiska legionärer behöva sättas till.",
-        "audio": "lars-rooms-klassrummet-line-0.mp3"
+        "audio": "lars-rooms-klassrummet-line-0"
       }
     ],
     "terrariet": [
       {
         "text": "Ska jag smacka in en 3:e mattelektion åt 2:orna på fredag? Ja, varför inte?",
-        "audio": "lars-rooms-terrariet-line-0.mp3"
+        "audio": "lars-rooms-terrariet-line-0"
       }
     ],
     "koket": [
       {
         "text": "Nej, funkar inte kaffemaskinen, fy skäms Forslund",
-        "audio": "lars-rooms-koket-line-0.mp3"
+        "audio": "lars-rooms-koket-line-0"
       }
     ],
     "pingisrummet": [
       {
         "text": "När jag gick i gymnasiet, då var jag skolmästare på pingis, helt oslagbar",
-        "audio": "lars-rooms-pingisrummet-line-0.mp3"
+        "audio": "lars-rooms-pingisrummet-line-0"
       }
     ],
     "vardagsrummet": [
       {
         "text": "Nääejj, har 3:orna fortfarande inte städat härinne, efter allt skäll så lyssnar de ändå inte!",
-        "audio": "lars-rooms-vardagsrummet-line-0.mp3"
+        "audio": "lars-rooms-vardagsrummet-line-0"
       }
     ]
   },
   "general": [
     {
       "text": "Kom ihåg, cos står för cozy! Den närliggande kateten är den mysiga sidan.",
-      "audio": "lars-general-line-0.mp3"
+      "audio": "lars-general-line-0"
     },
     {
       "text": "Sin är sinful, den onskefulla sidan som jag gärna håller mig borta ifrån.",
-      "audio": "lars-general-line-1.mp3"
+      "audio": "lars-general-line-1"
     },
     {
       "text": "Jag hoppas verkligen att den nya lektionsplanen kommer att fungera.",
-      "audio": "lars-general-line-2.mp3"
+      "audio": "lars-general-line-2"
     }
   ],
   "moving": [
     {
       "text": "[Hostar]",
-      "audio": "lars-moving-line-0.mp3"
+      "audio": "lars-moving-line-0"
     },
     {
       "text": "[Harklar sig]",
-      "audio": "lars-moving-line-1.mp3"
+      "audio": "lars-moving-line-1"
     },
     {
       "text": "Whop Whop",
-      "audio": "lars-moving-line-2.mp3"
+      "audio": "lars-moving-line-2"
     },
     {
       "text": "Men.. strumpan skaver igen.. lite typiskt oskönt.",
-      "audio": "lars-moving-line-3.mp3"
+      "audio": "lars-moving-line-3"
     }
   ],
   "spotting": [
     {
       "text": "Ser ut som jag har fått sällskap, tittut vem där?",
-      "audio": "lars-spotting-line-0.mp3"
+      "audio": "lars-spotting-line-0"
     },
     {
       "text": "[Skrattar] jag ser ju dig, sluta lek nu.",
-      "audio": "lars-spotting-line-1.mp3"
+      "audio": "lars-spotting-line-1"
     },
     {
       "text": "Nämen hallå där, är du fortfarande kvar?",
-      "audio": "lars-spotting-line-2.mp3"
+      "audio": "lars-spotting-line-2"
     },
     {
       "text": "Hurru duru! Vad gör du kvar här så sent?",
-      "audio": "lars-spotting-line-3.mp3"
+      "audio": "lars-spotting-line-3"
     },
     {
       "text": "Va gör du här?  Jag trodde du hade gått hem.",
-      "audio": "lars-spotting-line-4.mp3"
+      "audio": "lars-spotting-line-4"
     },
     {
       "text": "Där är du ju! Jag som undrade vad det var som lät.",
-      "audio": "lars-spotting-line-5.mp3"
+      "audio": "lars-spotting-line-5"
     }
   ],
   "hearing": [
     {
       "text": "Märkligt, vad var det där för ljud?",
-      "audio": "lars-hearing-line-0.mp3"
+      "audio": "lars-hearing-line-0"
     },
     {
       "text": "Nej, det här måste undersökas",
-      "audio": "lars-hearing-line-1.mp3"
+      "audio": "lars-hearing-line-1"
     },
     {
       "text": "Jag måste komma till botten med vad som gör allt ljud.",
-      "audio": "lars-hearing-line-2.mp3"
+      "audio": "lars-hearing-line-2"
     },
     {
       "text": "Men va faan?",
-      "audio": "lars-hearing-line-3.mp3"
+      "audio": "lars-hearing-line-3"
     }
   ],
   "alert": [
     {
       "text": "Jaså, det är du som står för allt oväsen här",
-      "audio": "lars-alert-line-0.mp3"
+      "audio": "lars-alert-line-0"
     },
     {
       "text": "Din lilla råtta, kom fram, kom fram, jag kan höra dig",
-      "audio": "lars-alert-line-1.mp3"
+      "audio": "lars-alert-line-1"
     },
     {
       "text": "Verkar som att någon är kass på kurragömma, jag hör dig överallt",
-      "audio": "lars-alert-line-2.mp3"
+      "audio": "lars-alert-line-2"
     }
   ],
   "capturing": [
     {
       "text": "Haha, nu är du fast",
-      "audio": "lars-capturing-line-0.mp3"
+      "audio": "lars-capturing-line-0"
     },
     {
       "text": "Äntligen har jag dig",
-      "audio": "lars-capturing-line-1.mp3"
+      "audio": "lars-capturing-line-1"
     },
     {
       "text": "Nu kommer du inte undan",
-      "audio": "lars-capturing-line-2.mp3"
+      "audio": "lars-capturing-line-2"
     }
   ],
   "chasing": [
     {
       "text": "Stanna där du är. Jag kommer till dig dig.",
-      "audio": "lars-chasing-line-0.mp3"
+      "audio": "lars-chasing-line-0"
     },
     {
       "text": "Jag vill bara prata med dig. Så spring inte ifrån mig.",
-      "audio": "lars-chasing-line-1.mp3"
+      "audio": "lars-chasing-line-1"
     },
     {
       "text": "Nej, stick inte nu!",
-      "audio": "lars-chasing-line-2.mp3"
+      "audio": "lars-chasing-line-2"
     },
     {
       "text": "Nemen.. så där får du ju inte göra!",
-      "audio": "lars-chasing-line-3.mp3"
+      "audio": "lars-chasing-line-3"
     }
   ]
 }
