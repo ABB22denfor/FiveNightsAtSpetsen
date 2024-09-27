@@ -5569,6 +5569,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: HidingSpot
       objectReference: {fileID: 0}
+    - target: {fileID: 5504613787200076167, guid: 5e4f291c1c8823e4b811fe141de98702,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504613787200076167, guid: 5e4f291c1c8823e4b811fe141de98702,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5850171984357317487, guid: 5e4f291c1c8823e4b811fe141de98702,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6698,6 +6708,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HidingSpot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504613787200076167, guid: 5e4f291c1c8823e4b811fe141de98702,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504613787200076167, guid: 5e4f291c1c8823e4b811fe141de98702,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5850171984357317487, guid: 5e4f291c1c8823e4b811fe141de98702,
         type: 3}
