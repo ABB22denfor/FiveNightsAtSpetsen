@@ -37,11 +37,11 @@
       "audio": "lars-general-line-0.mp3"
     },
     {
-      "text": "Sin är sinful, den motstående kateten är den ondskefulla sidan som vi bör distansera oss från",
+      "text": "Sin är sinful, den onskefulla sidan som jag gärna håller mig borta ifrån.",
       "audio": "lars-general-line-1.mp3"
     },
     {
-      "text": "Jag hoppas att den nya lektionsplanen verkligen kommer att fungera.",
+      "text": "Jag hoppas verkligen att den nya lektionsplanen kommer att fungera.",
       "audio": "lars-general-line-2.mp3"
     }
   ],
@@ -59,7 +59,7 @@
       "audio": "lars-moving-line-2.mp3"
     },
     {
-      "text": "Men vad är det som skaver? Något i strumpan igen… det var lite typiskt oskönt!",
+      "text": "Men.. strumpan skaver igen.. lite typiskt oskönt.",
       "audio": "lars-moving-line-3.mp3"
     }
   ],
@@ -75,6 +75,18 @@
     {
       "text": "Nämen hallå där, är du fortfarande kvar?",
       "audio": "lars-spotting-line-2.mp3"
+    },
+    {
+      "text": "Hurru duru! Vad gör du kvar här så sent?",
+      "audio": "lars-spotting-line-3.mp3"
+    },
+    {
+      "text": "Va gör du här?  Jag trodde du hade gått hem.",
+      "audio": "lars-spotting-line-4.mp3"
+    },
+    {
+      "text": "Där är du ju! Jag som undrade vad det var som lät.",
+      "audio": "lars-spotting-line-5.mp3"
     }
   ],
   "hearing": [
@@ -121,6 +133,24 @@
     {
       "text": "Nu kommer du inte undan",
       "audio": "lars-capturing-line-2.mp3"
+    }
+  ],
+  "chasing": [
+    {
+      "text": "Stanna där du är. Jag kommer till dig dig.",
+      "audio": "lars-chasing-line-0.mp3"
+    },
+    {
+      "text": "Jag vill bara prata med dig. Så spring inte ifrån mig.",
+      "audio": "lars-chasing-line-1.mp3"
+    },
+    {
+      "text": "Nej, stick inte nu!",
+      "audio": "lars-chasing-line-2.mp3"
+    },
+    {
+      "text": "Nemen.. så där får du ju inte göra!",
+      "audio": "lars-chasing-line-3.mp3"
     }
   ]
 }
