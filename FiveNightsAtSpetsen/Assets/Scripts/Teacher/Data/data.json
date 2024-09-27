@@ -9,16 +9,41 @@
             "delay": 2.0
         }
     ],
-    "route": [
-        {
-            "room": "lararrummet",
-            "repetitions": 2
-        },
-        {
-            "room": "klassrummet"
-        },
-        {
-            "room": "kafeterian"
-        }
-    ]
+    "routes": {
+        "main": [
+            {
+                "room": "klassrummet"
+            },
+            {
+                "room": "kafeterian"
+            },
+            {
+                "room": "random"
+            },
+            {
+                "room": "lararrummet",
+                "repetitions": 2
+            }
+        ],
+        "alt": [
+            {
+                "room": "lararrummet"
+            },
+            {
+                "room": "klassrummet"
+            },
+            {
+                "room": "kafeterian"
+            },
+            {
+                "room": "biblioteket"
+            },
+            {
+                "room": "vaxthuset"
+            },
+            {
+                "room": "hallonrummet"
+            }
+        ]
+    }
 }

@@ -1420,7 +1420,7 @@ def teacher_json_load(teacher_name):
 #
 def teacher_room_lines_format(teacher_name, room_name, room_lines):
     for index, room_line in enumerate(room_lines):
-        audio_file = "%s-rooms-%s-line-%d.mp3" % (teacher_name, room_name, index)
+        audio_file = "%s-rooms-%s-line-%d" % (teacher_name, room_name, index)
 
         # room_lines[index]["audio"] = ""
         room_lines[index]["audio"] = audio_file
@@ -1453,7 +1453,7 @@ def teacher_rooms_json_format(teacher_name, rooms_json):
 #
 def teacher_other_lines_format(teacher_name, line_type, other_lines):
     for index, other_line in enumerate(other_lines):
-        audio_file = "%s-%s-line-%d.mp3" % (teacher_name, line_type, index)
+        audio_file = "%s-%s-line-%d" % (teacher_name, line_type, index)
 
         # other_lines[index]["audio"] = ""
         other_lines[index]["audio"] = audio_file

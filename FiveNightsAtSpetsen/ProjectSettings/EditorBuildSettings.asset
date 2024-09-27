@@ -11,4 +11,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/LarsScene.unity
+    guid: fc3f420a491c20740b1b2bac438322d9
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/JoakimScene.unity
+    guid: f4f82ca73d5e7b14da28fc4ebe6715e0
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/JonasScene.unity
+    guid: 5e75e24064e941645b405e53ce587ec7
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/AndreasScene.unity
+    guid: b87e311346748f04a9c954eb38c2119a
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/JetonScene.unity
+    guid: a622ff201beb1c945bb482a6fe92f171
   m_configObjects: {}
