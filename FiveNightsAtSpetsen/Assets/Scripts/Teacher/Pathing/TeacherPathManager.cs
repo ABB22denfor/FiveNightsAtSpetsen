@@ -36,7 +36,11 @@ public class TeacherPathManager : MonoBehaviour
         rooms.Clear();
 
         foreach (Transform child in transform)
-            rooms.Add(child.GetComponent<TeacherRoomPath>());
+        {
+            TeacherRoomPath room = child.GetComponent<TeacherRoomPath>();
+            rooms.Add(room);
+            room.manager = this;
+        }
     }
 
     public void SetRoute(Dictionary<string, List<(string rid, int reps)>> routeData)

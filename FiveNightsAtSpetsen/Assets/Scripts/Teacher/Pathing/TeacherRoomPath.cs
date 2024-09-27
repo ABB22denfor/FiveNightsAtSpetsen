@@ -27,7 +27,7 @@ public class TeacherRoomPath : MonoBehaviour
     {
         if (pathIndex >= path.Count - 1)
         {
-            pathIndex = (path[0] == path[^1] ? 0 : -1);
+            pathIndex = (repetitions == 0 ? -1 : (path[0] == path[^1] ? 0 : -1));
             if (repetitions == 0)
                 manager.RoomFinished(this);
             else
