@@ -3,38 +3,38 @@
     "klassrummet": [
       {
         "text": "Dessa 3D-skrivare är verkligen fantastiska. Eleverna kan förvandla sina idéer till verklighet på nolltid. Det är som att ha en liten fabrik i klassrummet.",
-        "voice": "andreas-rooms-klassrummet-line-0.mp3"
+        "audio": "andreas-rooms-klassrummet-line-0.mp3"
       },
       {
         "text": "Jag heter Lars och är i Klassrum 1, igen",
-        "voice": "andreas-rooms-klassrummet-line-1.mp3"
+        "audio": "andreas-rooms-klassrummet-line-1.mp3"
       }
     ],
     "tekniklabbet": [
       {
         "text": "Jag älskar hur varje liten bit kan bli en del av något stort. LEGO är verkligen en ingenjörs dröm.",
-        "voice": "andreas-rooms-tekniklabbet-line-0.mp3"
+        "audio": "andreas-rooms-tekniklabbet-line-0.mp3"
       },
       {
         "text": "Med LEGO kan jag visa mina elever hur man går från idé till verklighet. Det är som att ha en hel värld av möjligheter i mina händer.",
-        "voice": "andreas-rooms-tekniklabbet-line-1.mp3"
+        "audio": "andreas-rooms-tekniklabbet-line-1.mp3"
       }
     ],
     "koket": [
       {
         "text": "Som vanligt är disken inte gjord. Disciplin och ordning, det är vad saknas i den nya generationens vokabulär.",
-        "voice": "andreas-rooms-koket-line-0.mp3"
+        "audio": "andreas-rooms-koket-line-0.mp3"
       }
     ]
   },
   "general": [
     {
       "text": "Jag har alltid sagt att med rätt lärare kan eleverna nå hur långt som helst, ja till och med till CAD-SM.",
-      "voice": "andreas-general-line-0.mp3"
+      "audio": "andreas-general-line-0.mp3"
     },
     {
       "text": "Vad ska jag äta imorgon?... Kanske sushi? Nej, vem försöker jag lura, det blir ju BK så klart.",
-      "voice": "andreas-general-line-1.mp3"
+      "audio": "andreas-general-line-1.mp3"
     }
   ]
 }

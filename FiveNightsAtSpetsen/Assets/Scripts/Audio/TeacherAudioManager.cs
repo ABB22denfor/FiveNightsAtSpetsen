@@ -85,10 +85,10 @@ public class TeacherAudioManager : MonoBehaviour
     
     foreach(string file in files)
     {
-      string fileName = Path.GetFileNameWithoutExtension(file);
+      string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
 
-      // Audio/Sound/Teachers/lars/test
-      string resourcesFileName = teacherResourcesFolder + "/" + fileName;
+      // Audio/Sound/Teachers/lars/lars-alert-line-0
+      string resourcesFileName = teacherResourcesFolder + "/" + fileNameWithoutExtension;
 
       Debug.Log($"Loading audio file: '{resourcesFileName}'");
 
@@ -97,6 +97,10 @@ public class TeacherAudioManager : MonoBehaviour
       if(clip != null)
       {
         Debug.Log($"Loaded audio file: '{resourcesFileName}'");
+
+        string fileName = Path.GetFileName(file);
+
+        Debug.Log($"Storing audio file as: '{fileName}'");
 
         audioClips[fileName] = clip;
       }

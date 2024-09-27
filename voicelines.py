@@ -290,7 +290,7 @@ def command_print_rooms_all_print(teacher_name, rooms_json):
         for index, room_line in enumerate(room_lines):
             print("  - \033[0;36m%02d\033[0m: %s" % (index, room_line["text"]))
             if(should_print_lines):
-                print("        (%s)" % room_line["voice"])
+                print("        (%s)" % room_line["audio"])
 
         print("")
 
@@ -309,7 +309,7 @@ def command_print_room_handler(teacher_name, room_name, room_lines):
     for index, room_line in enumerate(room_lines):
         print("- \033[0;36m%02d\033[0m: %s" % (index, room_line["text"]))
         if(should_print_lines):
-            print("      (%s)" % room_line["voice"])
+            print("      (%s)" % room_line["audio"])
 
     print("")
 
@@ -328,7 +328,7 @@ def command_print_other_lines_handler(teacher_name, line_type, other_lines):
     for index, other_line in enumerate(other_lines):
         print("- \033[0;36m%02d\033[0m: %s" % (index, other_line["text"]))
         if(should_print_lines):
-            print("      (%s)" % other_line["voice"])
+            print("      (%s)" % other_line["audio"])
 
     print("")
 
@@ -357,7 +357,7 @@ def command_print_all_rooms_print(rooms_json):
         for index, room_line in enumerate(room_lines):
             print("  - \033[0;36m%02d\033[0m: %s" % (index, room_line["text"]))
             if(should_print_lines):
-                print("        (%s)" % room_line["voice"])
+                print("        (%s)" % room_line["audio"])
 
         print("")
 
@@ -370,7 +370,7 @@ def command_print_all_other_lines_print(line_type, other_lines):
     for index, other_line in enumerate(other_lines):
         print("- \033[0;36m%02d\033[0m: %s" % (index, other_line["text"]))
         if(should_print_lines):
-            print("      (%s)" % other_line["voice"])
+            print("      (%s)" % other_line["audio"])
 
     print("")
 
@@ -1420,10 +1420,10 @@ def teacher_json_load(teacher_name):
 #
 def teacher_room_lines_format(teacher_name, room_name, room_lines):
     for index, room_line in enumerate(room_lines):
-        line_voice = "%s-rooms-%s-line-%d.mp3" % (teacher_name, room_name, index)
+        audio_file = "%s-rooms-%s-line-%d.mp3" % (teacher_name, room_name, index)
 
-        # room_lines[index]["voice"] = ""
-        room_lines[index]["voice"] = line_voice
+        # room_lines[index]["audio"] = ""
+        room_lines[index]["audio"] = audio_file
         room_lines[index]["text"]  = room_lines[index]["text"].strip()
 
     return room_lines
@@ -1453,10 +1453,10 @@ def teacher_rooms_json_format(teacher_name, rooms_json):
 #
 def teacher_other_lines_format(teacher_name, line_type, other_lines):
     for index, other_line in enumerate(other_lines):
-        line_voice = "%s-%s-line-%d.mp3" % (teacher_name, line_type, index)
+        audio_file = "%s-%s-line-%d.mp3" % (teacher_name, line_type, index)
 
-        # other_lines[index]["voice"] = ""
-        other_lines[index]["voice"] = line_voice
+        # other_lines[index]["audio"] = ""
+        other_lines[index]["audio"] = audio_file
         other_lines[index]["text"]  = other_line["text"].strip()
 
     return other_lines

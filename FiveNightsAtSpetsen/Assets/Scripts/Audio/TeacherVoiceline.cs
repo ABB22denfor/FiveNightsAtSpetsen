@@ -72,8 +72,7 @@ public class TeacherVoiceline : MonoBehaviour
 
     Debug.Log("Starting voiceline");
 
-    // audioManager.Play(voiceline.audio);
-    audioManager.Play("test");
+    audioManager.Play(voiceline.audio);
 
     animator?.SetBool("isTalking", true);
 
@@ -134,7 +133,7 @@ public class TeacherVoiceline : MonoBehaviour
         isProcessRunning = false;
       }
 
-      yield return new WaitForSeconds((float) 0.05);
+      yield return new WaitForSeconds((float) 0.075);
     }
 
     // Display the subtitle for 1 extra second
