@@ -1,19 +1,19 @@
 {
   "rooms": {
-    "classroom-1": [
+    "klassrummet": [
       {
         "text": "De här eleverna är verkligen något speciellt. Deras kreativitet och nyfikenhet inspirerar mig varje dag.",
-        "voice": "jocke-rooms-classroom-1-line-0.mp3"
+        "voice": "jocke-rooms-klassrummet-line-0.mp3"
       },
       {
         "text": "Det är frustrerande att vi inte fick tillåtelse att låta eleverna skapa sina egna språkmodeller. Det hade varit en fantastisk möjlighet för dem att lära sig mer om AI.",
-        "voice": "jocke-rooms-classroom-1-line-1.mp3"
+        "voice": "jocke-rooms-klassrummet-line-1.mp3"
       }
     ],
-    "corridor": [
+    "korridoren": [
       {
         "text": "Kanske jag ska överväga att använda digitala anslagstavlor för att göra det mer interaktivt.",
-        "voice": "jocke-rooms-corridor-line-0.mp3"
+        "voice": "jocke-rooms-korridoren-line-0.mp3"
       }
     ]
   },

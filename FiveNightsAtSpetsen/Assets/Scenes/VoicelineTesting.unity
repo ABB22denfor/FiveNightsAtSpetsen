@@ -1890,7 +1890,7 @@ PrefabInstance:
     - target: {fileID: 7221680901188712411, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
       propertyPath: teacherName
-      value: lars
+      value: jonas
       objectReference: {fileID: 0}
     - target: {fileID: 7864517937106545867, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}

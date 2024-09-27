@@ -1,37 +1,37 @@
 {
   "rooms": {
-    "classroom-1": [
+    "klassrummet": [
       {
         "text": "Det här rummet behöver verkligen en makeover. Dags att mobilisera Lars logistiska legionärer för att få det skinande rent!",
-        "voice": "lars-rooms-classroom-1-line-0.mp3"
+        "voice": "lars-rooms-klassrummet-line-0.mp3"
       },
       {
         "text": "Oj, det här rummet behöver verkligen en uppfräschning. Lars logistiska legionärer, var är ni när man behöver er?",
-        "voice": "lars-rooms-classroom-1-line-1.mp3"
+        "voice": "lars-rooms-klassrummet-line-1.mp3"
       }
     ],
-    "classroom-2": [
+    "terrariet": [
       {
         "text": "Det ser ut som om jag har schemalagt två mattelektioner på fredagsmorgonen. Kan det räcka, eller ska jag smacka in en tredje på eftermiddagen?",
-        "voice": "lars-rooms-classroom-2-line-0.mp3"
+        "voice": "lars-rooms-terrariet-line-0.mp3"
       }
     ],
-    "kitchen": [
+    "koket": [
       {
         "text": "Nej, funkar inte kaffemaskinen, fy skäms Forslund",
-        "voice": "lars-rooms-kitchen-line-0.mp3"
+        "voice": "lars-rooms-koket-line-0.mp3"
       }
     ],
-    "pingis": [
+    "pingisrummet": [
       {
         "text": "När jag gick i gymnasiet, då var jag skolmästare på pingis, helt oslagbar",
-        "voice": "lars-rooms-pingis-line-0.mp3"
+        "voice": "lars-rooms-pingisrummet-line-0.mp3"
       }
     ],
-    "classroom-3": [
+    "vardagsrummet": [
       {
         "text": "Nääejj, har 3:orna fortfarande inte städat härinne, efter allt skäll så lyssnar de ändå inte!",
-        "voice": "lars-rooms-classroom-3-line-0.mp3"
+        "voice": "lars-rooms-vardagsrummet-line-0.mp3"
       }
     ]
   },
