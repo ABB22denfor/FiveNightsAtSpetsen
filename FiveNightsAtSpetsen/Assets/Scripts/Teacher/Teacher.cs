@@ -80,10 +80,6 @@ public class Teacher : MonoBehaviour
 
         TeacherWaypoint waypoint = pathManager.GetWaypoint();
 
-        foreach ((string s, float f) in delays) {
-            Debug.Log(s + ": " + f);
-        }
-
         if (delays.ContainsKey(waypoint.id))
             return delays[waypoint.id];
         else
