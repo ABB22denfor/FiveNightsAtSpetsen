@@ -39,6 +39,8 @@ public class Teacher : MonoBehaviour
         {
             EventsManager.Instance.teacherEvents.WaypointReached(pathManager.GetWaypoint());
             StartCoroutine(MoveToNext(GetDelay()));
+        } else {
+            EventsManager.Instance.teacherEvents.PlayerCaptured();
         }
     }
 

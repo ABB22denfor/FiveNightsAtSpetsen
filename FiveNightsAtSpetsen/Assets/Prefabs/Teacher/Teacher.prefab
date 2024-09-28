@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teacher: {fileID: 7221680901188712411}
   target: {x: 0, y: 0, z: 0}
-  moveSpeed: 20
+  moveSpeed: 3.5
   investigatingSpeedModifier: 1.25
   spottedPlayerSpeedModifier: 1.5
   chasingPlayerSpeedModifier: 2
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rbTeacher: {fileID: 4253633807342040710}
   dir: -90
-  forceStrength: 100
+  forceStrength: 350
   layerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rbTeacher: {fileID: 4253633807342040710}
   dir: 90
-  forceStrength: 100
+  forceStrength: 350
   layerMask:
     serializedVersion: 2
     m_Bits: 8

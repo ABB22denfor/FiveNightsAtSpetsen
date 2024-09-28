@@ -41,8 +41,8 @@ public class PlayerCamera : MonoBehaviour
             return;
 
         if (!hidden) {
-            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+            float mouseX = Input.GetAxis("Mouse X") * sensX;
+            float mouseY = Input.GetAxis("Mouse Y") * sensY;
 
             yRotation += mouseX;
 
@@ -54,7 +54,7 @@ public class PlayerCamera : MonoBehaviour
         } 
         else
         {
-            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensY / 2;
+            float mouseX = Input.GetAxis("Mouse X") * sensY / 2;
 
             hiddenYRotation += mouseX;
             hiddenYRotation = Mathf.Clamp(hiddenYRotation, 
@@ -81,7 +81,7 @@ public class PlayerCamera : MonoBehaviour
 
     void Captured() {
         Vector3 teacherPos = GameObject.Find("Teacher").transform.position;
-        transform.LookAt(teacherPos + new Vector3(0, 1, 0));
+        transform.LookAt(teacherPos + new Vector3(0, 5, 0));
         immobile = true;
     }
 }

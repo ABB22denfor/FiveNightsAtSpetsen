@@ -40,7 +40,7 @@ public class TeacherMovement : MonoBehaviour
         };
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (immobile)
             return;
@@ -52,7 +52,7 @@ public class TeacherMovement : MonoBehaviour
             Vector3 direction = steps[^1] - transform.position;
             float distanceToTarget = direction.magnitude;
 
-            if (distanceToTarget > 2.5f || targetRotation == null)
+            if (distanceToTarget > 5f || targetRotation == null)
                 targetRotation = Quaternion.LookRotation(direction);
 
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -78,12 +78,12 @@ public class TeacherMovement : MonoBehaviour
             Vector3 direction = target - transform.position;
             float distanceToTarget = direction.magnitude;
 
-            if (distanceToTarget > 2.5f || targetRotation == null)
+            if (distanceToTarget > 5f || targetRotation == null)
                 targetRotation = Quaternion.LookRotation(direction);
 
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-            if (distanceToTarget > (chasingPlayer ? 2.5f : 1f))
+            if (distanceToTarget > (chasingPlayer ? 5f : 1f))
             {
                 direction.Normalize();
 
@@ -99,6 +99,7 @@ public class TeacherMovement : MonoBehaviour
                 if (chasingPlayer) {
                     immobile = true;
                     transform.LookAt(teacher.raycaster.player.transform.position);
+                    transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
                 }
             }
         }
@@ -107,9 +108,7 @@ public class TeacherMovement : MonoBehaviour
     public void SetTarget(Vector3 target, bool isPlayer = false)
     {
         if (!isPlayer)
-        {
             EventsManager.Instance.animationEvents.StartWalking();
-        }
 
         chasingPlayer = isPlayer;
 
@@ -124,6 +123,6 @@ public class TeacherMovement : MonoBehaviour
         if (target == null) return;
 
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(target, 0.5f);
+        Gizmos.DrawLine(startPosition, target);
     }
 }

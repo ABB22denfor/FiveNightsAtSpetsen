@@ -39021,6 +39021,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9222282174122724914, guid: 55179d2391ce56f439e899513ee0f6ef,
         type: 3}
+      propertyPath: sensX
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222282174122724914, guid: 55179d2391ce56f439e899513ee0f6ef,
+        type: 3}
+      propertyPath: sensY
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222282174122724914, guid: 55179d2391ce56f439e899513ee0f6ef,
+        type: 3}
       propertyPath: orientation
       value: 
       objectReference: {fileID: 627466800}
@@ -43662,6 +43672,11 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1520885702254313708, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      propertyPath: forceStrength
+      value: 350
+      objectReference: {fileID: 0}
     - target: {fileID: 3706857700551815687, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
       propertyPath: m_Enabled
@@ -43742,6 +43757,11 @@ PrefabInstance:
       propertyPath: pathManager
       value: 
       objectReference: {fileID: 1048263194}
+    - target: {fileID: 7541755868295207995, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      propertyPath: forceStrength
+      value: 350
+      objectReference: {fileID: 0}
     - target: {fileID: 7864517937106545867, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
       propertyPath: target
@@ -43760,12 +43780,12 @@ PrefabInstance:
     - target: {fileID: 8288388981843304445, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
       propertyPath: moveSpeed
-      value: 2.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8288388981843304445, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
       propertyPath: rotationSpeed
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8555041830869618638, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
