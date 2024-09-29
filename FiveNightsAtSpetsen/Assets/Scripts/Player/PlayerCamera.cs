@@ -16,6 +16,7 @@ public class PlayerCamera : MonoBehaviour
     Vector3 oldPos;
     float initialHiddenYRotation;
     float hiddenYRotation;
+    float hiddenBounds;
 
     void OnEnable() {
         EventsManager.Instance.playerEvents.OnPlayerHid += Hide;
@@ -58,23 +59,24 @@ public class PlayerCamera : MonoBehaviour
 
             hiddenYRotation += mouseX;
             hiddenYRotation = Mathf.Clamp(hiddenYRotation, 
-                                          initialHiddenYRotation - 60f, 
-                                          initialHiddenYRotation + 60f);
+                                          initialHiddenYRotation - hiddenBounds, 
+                                          initialHiddenYRotation + hiddenBounds);
 
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, hiddenYRotation, 0);
         }
     }
 
-    void Hide(GameObject go) {
+    void Hide(HidingSpot spot) {
         oldPos = transform.position;
-        transform.position = go.transform.position;
+        transform.position = spot.transform.position + spot.offset;
+        hiddenBounds = spot.bounds;
         hidden = true;
-        transform.LookAt(go.transform.Find("CameraDirection").position);
+        transform.LookAt(spot.transform.Find("CameraDirection").position);
         initialHiddenYRotation = transform.eulerAngles.y;
         hiddenYRotation = transform.eulerAngles.y;
     }
 
-    void Emerge(GameObject go) {
+    void Emerge(HidingSpot spot) {
         transform.position = oldPos;
         hidden = false;
     }

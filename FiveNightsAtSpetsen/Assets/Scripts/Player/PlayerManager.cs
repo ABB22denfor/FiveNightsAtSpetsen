@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     Renderer playerRenderer;
-    GameObject hidingSpot = null;
+    HidingSpot hidingSpot = null;
 
     void OnEnable()
     {
@@ -28,16 +28,14 @@ public class PlayerManager : MonoBehaviour
             EventsManager.Instance.playerEvents.RevealPlayer(hidingSpot);
     }
 
-    void HidePlayer(GameObject location)
+    void HidePlayer(HidingSpot spot)
     {
-        Debug.Log("Hiding player in " + location.name);
-        hidingSpot = location;
+        hidingSpot = spot;
         playerRenderer.enabled = false;
     }
 
-    void RevealPlayer(GameObject location)
+    void RevealPlayer(HidingSpot spot)
     {
-        Debug.Log("Player emerged from " + location.name);
         hidingSpot = null;
         playerRenderer.enabled = true;
     }

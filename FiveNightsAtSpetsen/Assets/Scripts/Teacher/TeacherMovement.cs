@@ -21,6 +21,7 @@ public class TeacherMovement : MonoBehaviour
     Rigidbody rb;
 
     public bool chasingPlayer = false;
+    public bool movingToLastSpotted = false;
 
     public List<Vector3> steps;
 
@@ -29,7 +30,6 @@ public class TeacherMovement : MonoBehaviour
         startPosition = transform.position;
 
         rb = GetComponent<Rigidbody>();
-
         rb.isKinematic = false;
 
         speed = new() {
@@ -45,7 +45,7 @@ public class TeacherMovement : MonoBehaviour
         if (immobile)
             return;
 
-        if (steps.Count > 0 && !chasingPlayer)
+        if (steps.Count > 0 && !chasingPlayer && !movingToLastSpotted)
         {
             if (startPosition == steps[^1]) return;
 
@@ -96,7 +96,7 @@ public class TeacherMovement : MonoBehaviour
 
                 teacher.ReachedTarget();
 
-                if (chasingPlayer) {
+                if (chasingPlayer && !movingToLastSpotted) {
                     immobile = true;
                     transform.LookAt(teacher.raycaster.player.transform.position);
                     transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
@@ -123,6 +123,6 @@ public class TeacherMovement : MonoBehaviour
         if (target == null) return;
 
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(startPosition, target);
+        Gizmos.DrawSphere(target, 2f);
     }
 }
