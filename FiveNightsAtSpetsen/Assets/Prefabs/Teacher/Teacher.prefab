@@ -118,7 +118,7 @@ MonoBehaviour:
   drawVision: 0
   teacher: {fileID: 7221680901188712411}
   target: {fileID: 0}
-  detectionRange: 12
+  detectionRange: 75
   detectionLayer:
     serializedVersion: 2
     m_Bits: 72
