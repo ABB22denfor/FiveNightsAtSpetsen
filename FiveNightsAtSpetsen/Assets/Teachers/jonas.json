@@ -12,11 +12,11 @@
         "audio": "jonas-rooms-biblioteket-line-0"
       },
       {
-        "text": "Gud, vad jag älskar böcker, inte minst historiaböcker.",
+        "text": "Gud, vad jag älskar böcker, inte minst historieböcker.",
         "audio": "jonas-rooms-biblioteket-line-1"
       },
       {
-        "text": "Det är superbra att det finns ett tyst rum, bara det det kunde vara just... tyst.",
+        "text": "Det är superbra att det finns ett tyst rum, om det bara kunde vara just... tyst.",
         "audio": "jonas-rooms-biblioteket-line-2"
       },
       {
@@ -34,7 +34,7 @@
         "audio": "jonas-rooms-klassrummet-line-1"
       },
       {
-        "text": "De små gruppborden bara kallar på diskutioner. Jag som älskar diskutioner.",
+        "text": "De små gruppborden bara kallar på diskussioner. Jag som älskar diskussioner.",
         "audio": "jonas-rooms-klassrummet-line-2"
       },
       {
@@ -48,7 +48,7 @@
         "audio": "jonas-rooms-terrariet-line-0"
       },
       {
-        "text": "Här finns det mer utrymme än i Klarummet, men det är fortfarande inte så öppet.",
+        "text": "Här finns det mer utrymme än i Klassrummet, men det är fortfarande inte så öppet.",
         "audio": "jonas-rooms-terrariet-line-1"
       },
       {
@@ -70,7 +70,7 @@
         "audio": "jonas-rooms-vardagsrummet-line-1"
       },
       {
-        "text": "Det här känns som det bästa klassrummet? Kan det vara 3:orna som sitter här?",
+        "text": "Det här är det bästa klassrummet. Kan det vara 3:orna som sitter här?",
         "audio": "jonas-rooms-vardagsrummet-line-2"
       },
       {
@@ -231,7 +231,7 @@
       "audio": "jonas-alert-line-0"
     },
     {
-      "text": "Vad var det där? Jag kan svära på att nyss hörde något.",
+      "text": "Vad var det där? Jag kan svära på att jag nyss hörde något.",
       "audio": "jonas-alert-line-1"
     },
     {
@@ -279,24 +279,20 @@
       "audio": "jonas-hearing-line-0"
     },
     {
-      "text": "Stanna nu för guds skull! Jag vill bara prata med dig.",
+      "text": "Jag vet du gömmer dig här någonstans... Kom fram och visa dig!",
       "audio": "jonas-hearing-line-1"
     },
     {
-      "text": "Jag vet du är här någonstans... Kom fram och visa dig!",
+      "text": "Har du hört om elever som stannat kvar efter skolan. Inte?",
       "audio": "jonas-hearing-line-2"
     },
     {
-      "text": "Har du hört om elever som stannat kvar efter skolan. Inte?",
+      "text": "Sluta gömma dig för mig! Vi är ju kompisar, eller kanske... kamrater?",
       "audio": "jonas-hearing-line-3"
     },
     {
-      "text": "Sluta gömma dig för mig! Vi är ju kompisar, eller kanske... kamrater?",
-      "audio": "jonas-hearing-line-4"
-    },
-    {
       "text": "Även fast jag inte ser dig kan jag fortfarande höra dig.",
-      "audio": "jonas-hearing-line-5"
+      "audio": "jonas-hearing-line-4"
     }
   ],
   "spotting": [
@@ -335,6 +331,32 @@
     {
       "text": "Ser ut som om jag fått sällskap...",
       "audio": "jonas-spotting-line-8"
+    }
+  ],
+  "chasing": [
+    {
+      "text": "Stanna nu för guds skull! Jag vill bara prata med dig.",
+      "audio": "jonas-chasing-line-0"
+    },
+    {
+      "text": "Spring inte ifrån mig!",
+      "audio": "jonas-chasing-line-1"
+    },
+    {
+      "text": "Nu kommer jag och tar dig, ditt lilla SD-troll!",
+      "audio": "jonas-chasing-line-2"
+    },
+    {
+      "text": "Jag kommer snart ikapp dig!",
+      "audio": "jonas-chasing-line-3"
+    },
+    {
+      "text": "Snubbla inte.. får då kommer jag och tar dig!",
+      "audio": "jonas-chasing-line-4"
+    },
+    {
+      "text": "Stanna! Vänta tills Polisen kommer. Du kan ju ramla.",
+      "audio": "jonas-chasing-line-5"
     }
   ]
 }
