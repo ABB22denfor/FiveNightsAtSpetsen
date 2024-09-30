@@ -8,8 +8,10 @@ public class SoundTrigger : Interactable
 
     public override void InteractionCompleted() {
         float distanceToTeacher = Vector3.Distance(teacher.position, transform.position);
-        if (distanceToTeacher <= soundRange)
+        if (distanceToTeacher <= soundRange) {
             EventsManager.Instance.teacherEvents.PlayerMadeSound(room);
+            Destroy(this.gameObject);
+        }
     }
 
     void OnDrawGizmosSelected()
