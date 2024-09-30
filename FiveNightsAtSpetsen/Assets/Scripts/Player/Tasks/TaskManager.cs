@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class TaskManager : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class TaskManager : MonoBehaviour
     public Color lineColor = Color.blue;
     public Color firstColor = Color.yellow;
     public Color lastColor = Color.red;
+
+    TaskUIManager ui;
 
     void OnEnable()
     {
@@ -18,19 +21,17 @@ public class TaskManager : MonoBehaviour
         EventsManager.Instance.taskEvents.OnStepCompleted -= StepCompleted;
     }
 
-    void OnValidate()
+    void Start() 
     {
-        steps.Clear();
-
-        foreach (Transform goStep in transform)
-            steps.Add(goStep.GetComponent<TaskStep>());
+        steps = steps.OrderBy(s => s.stepIndex).ToList();
+        ui = GetComponent<TaskUIManager>();
     }
 
     void StepCompleted(TaskStep step)
     {
-        if (steps[0] == step)
+        if (steps[0].stepIndex == step.stepIndex)
         {
-            steps.RemoveAt(0);
+            steps.Remove(step);
             Debug.Log("Completed step " + step.id);
             Destroy(step.gameObject);
 
@@ -40,12 +41,18 @@ public class TaskManager : MonoBehaviour
             }
             else
             {
-                steps[0].gameObject.SetActive(true);
+                foreach (TaskStep ts in steps) {
+                    if (ts.stepIndex == steps[0].stepIndex) {
+                        ts.gameObject.SetActive(true);
+                    }
+                }
             }
         }
         else
         {
-            Debug.Log("Attempted to complete step " + step.id + " out of order");
+            Debug.Log("Attempted to complete step " + step.id + 
+                      " out of order\n(Current step index: " + steps[0].stepIndex +
+                      ", attempted to complete step of index " + step.stepIndex);
         }
     }
 
