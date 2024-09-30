@@ -528,6 +528,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teacher
       objectReference: {fileID: 0}
+    - target: {fileID: 566564891133530414, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 768281367973197017, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
       propertyPath: m_UseGravity
@@ -44445,6 +44450,11 @@ PrefabInstance:
       objectReference: {fileID: 2039555320}
     - target: {fileID: 1343881008787883988, guid: 42eb70526a2063445b31e2fb47fe898f,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343881008787883988, guid: 42eb70526a2063445b31e2fb47fe898f,
+        type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1338687831}
@@ -44471,7 +44481,7 @@ PrefabInstance:
     - target: {fileID: 3997377191912201758, guid: 42eb70526a2063445b31e2fb47fe898f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.82
+      value: 36.8
       objectReference: {fileID: 0}
     - target: {fileID: 3997377191912201758, guid: 42eb70526a2063445b31e2fb47fe898f,
         type: 3}
@@ -44481,7 +44491,7 @@ PrefabInstance:
     - target: {fileID: 3997377191912201758, guid: 42eb70526a2063445b31e2fb47fe898f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -31.6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3997377191912201758, guid: 42eb70526a2063445b31e2fb47fe898f,
         type: 3}
