@@ -13,8 +13,7 @@ public class TeacherMovement : MonoBehaviour
     public float chasingPlayerSpeedModifier = 2.0f;
     Dictionary<Teacher.TeacherMode, float> speed;
     public float rotationDuration = 0.5f;
-    float timeSinceRotationStarted;
-
+    float timeSinceRotationStarted = 0f;
 
     Vector3 startPosition;
     Quaternion targetRotation;
@@ -52,12 +51,15 @@ public class TeacherMovement : MonoBehaviour
         };
     }
 
+    void Update() 
+    {
+        timeSinceRotationStarted = Mathf.Clamp(timeSinceRotationStarted + Time.deltaTime, 0, rotationDuration);
+    }
+
     void FixedUpdate()
     {
         if (immobile)
             return;
-
-        timeSinceRotationStarted += Time.deltaTime;
 
         if (steps.Count > 0 && !chasingPlayer && !movingToLastSpotted)
         {
@@ -68,8 +70,11 @@ public class TeacherMovement : MonoBehaviour
 
             if (distanceToTarget > 5f || targetRotation == null)
             {
-                timeSinceRotationStarted = 0;
-                targetRotation = Quaternion.LookRotation(direction);
+                Quaternion newTargetRotation = Quaternion.LookRotation(direction);
+                if (targetRotation != newTargetRotation) {
+                    timeSinceRotationStarted = 0;
+                    targetRotation = newTargetRotation;
+                }
             }
 
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, timeSinceRotationStarted / rotationDuration);
@@ -97,8 +102,11 @@ public class TeacherMovement : MonoBehaviour
 
             if (distanceToTarget > 5f || targetRotation == null)
             {
-                timeSinceRotationStarted = 0;
-                targetRotation = Quaternion.LookRotation(direction);
+                Quaternion newTargetRotation = Quaternion.LookRotation(direction);
+                if (targetRotation != newTargetRotation) {
+                    timeSinceRotationStarted = 0;
+                    targetRotation = newTargetRotation;
+                }
             }
 
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, timeSinceRotationStarted / rotationDuration);
