@@ -25,6 +25,16 @@ public class TeacherMovement : MonoBehaviour
 
     public List<Vector3> steps;
 
+    void OnEnable() 
+    {
+        EventsManager.Instance.teacherEvents.OnPlayerCaptured += PlayerCaptured;
+    }
+
+    void OnDisable() 
+    {
+        EventsManager.Instance.teacherEvents.OnPlayerCaptured -= PlayerCaptured;
+    }
+
     void Start()
     {
         startPosition = transform.position;
@@ -95,12 +105,6 @@ public class TeacherMovement : MonoBehaviour
                 startPosition = target;
 
                 teacher.ReachedTarget();
-
-                if (chasingPlayer && !movingToLastSpotted) {
-                    immobile = true;
-                    transform.LookAt(teacher.raycaster.player.transform.position);
-                    transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
-                }
             }
         }
     }
@@ -116,6 +120,15 @@ public class TeacherMovement : MonoBehaviour
             steps.Add(transform.position);
 
         this.target = new Vector3(target.x, startPosition.y, target.z);
+    }
+
+    void PlayerCaptured() {
+        immobile = true;
+        if (teacher.raycaster.playerHiding)
+            transform.LookAt(teacher.raycaster.hidingSpot);
+        else
+            transform.LookAt(teacher.raycaster.player.transform.position);
+        transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
     }
 
     void OnDrawGizmosSelected()

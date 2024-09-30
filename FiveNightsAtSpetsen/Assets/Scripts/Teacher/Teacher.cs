@@ -24,7 +24,6 @@ public class Teacher : MonoBehaviour
 
     void Start()
     {
-        // pathManager.Next();
         pathManager.teacher = this;
         movement.SetTarget(pathManager.GetPos());
 
