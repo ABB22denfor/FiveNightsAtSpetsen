@@ -36,7 +36,7 @@ public class TaskManager : MonoBehaviour
 
             if (steps.Count == 0)
             {
-                Debug.Log("All task steps completed");
+                EventsManager.Instance.taskEvents.CompletedAllTasks();
             }
             else
             {
