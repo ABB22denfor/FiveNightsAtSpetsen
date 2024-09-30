@@ -21,7 +21,7 @@ public class AnimationController : MonoBehaviour
         EventsManager.Instance.animationEvents.OnSetIdle -= SetIdle;
     }
 
-    void Start()
+    void Awake()
     {
         animator = GetComponentInChildren<Animator>();
     }

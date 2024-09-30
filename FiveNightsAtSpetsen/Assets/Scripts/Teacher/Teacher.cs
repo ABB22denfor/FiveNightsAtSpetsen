@@ -39,7 +39,13 @@ public class Teacher : MonoBehaviour
 
     public void ReachedTarget()
     {
-        if (raycaster.player == null)
+        if (movement.movingToLastSpotted) 
+        {
+            mode = TeacherMode.SpottedPlayer;
+            movement.movingToLastSpotted = false;
+            movement.SetTarget(pathManager.GetPos());
+        }
+        else if (raycaster.player == null)
         {
             EventsManager.Instance.teacherEvents.WaypointReached(pathManager.GetWaypoint());
 
@@ -53,6 +59,10 @@ public class Teacher : MonoBehaviour
             */
 
             StartCoroutine(MoveToNext(GetDelay()));
+        }
+        else 
+        {
+            EventsManager.Instance.teacherEvents.PlayerCaptured();
         }
     }
 
@@ -82,9 +92,8 @@ public class Teacher : MonoBehaviour
 
     public void PlayerNotSpotted()
     {
-        mode = TeacherMode.SpottedPlayer;
-
-        movement.SetTarget(pathManager.GetPos());
+        movement.movingToLastSpotted = true;
+        movement.chasingPlayer = false;
     }
 
     public float GetDelay()
@@ -102,7 +111,6 @@ public class Teacher : MonoBehaviour
 
     void PlayerMadeSound(TeacherRoomPath room)
     {
-        Debug.Log("Teacher heard a sound coming from " + room.id);
         pathManager.TargetRoom((room, false));
 
         mode = TeacherMode.InvestigatingNoise;

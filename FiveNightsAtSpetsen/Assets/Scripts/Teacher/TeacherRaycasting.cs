@@ -33,9 +33,6 @@ public class TeacherRaycasting : MonoBehaviour
             {
                 if (hit.collider.gameObject == target && targetRenderer.enabled)
                 {
-                    if (directionToTarget.magnitude < 2.5f)
-                        EventsManager.Instance.teacherEvents.PlayerCaptured();
-
                     if (timeSincePlayerSpotted >= 0.5f)
                     {
                         timeSincePlayerSpotted = 0f;

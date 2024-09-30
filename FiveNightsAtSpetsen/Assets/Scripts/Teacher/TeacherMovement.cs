@@ -21,6 +21,7 @@ public class TeacherMovement : MonoBehaviour
     Rigidbody rb;
 
     public bool chasingPlayer = false;
+    public bool movingToLastSpotted = false;
 
     public List<Vector3> steps;
 
@@ -29,7 +30,6 @@ public class TeacherMovement : MonoBehaviour
         startPosition = transform.position;
 
         rb = GetComponent<Rigidbody>();
-
         rb.isKinematic = false;
 
         speed = new() {
@@ -40,22 +40,22 @@ public class TeacherMovement : MonoBehaviour
         };
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (immobile)
             return;
 
-        if (steps.Count > 0 && !chasingPlayer)
+        if (steps.Count > 0 && !chasingPlayer && !movingToLastSpotted)
         {
             if (startPosition == steps[^1]) return;
 
             Vector3 direction = steps[^1] - transform.position;
             float distanceToTarget = direction.magnitude;
 
-            if (distanceToTarget > 0.5f || targetRotation == null)
+            if (distanceToTarget > 5f || targetRotation == null)
                 targetRotation = Quaternion.LookRotation(direction);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
             if (distanceToTarget > 0.25f)
             {
@@ -78,12 +78,12 @@ public class TeacherMovement : MonoBehaviour
             Vector3 direction = target - transform.position;
             float distanceToTarget = direction.magnitude;
 
-            if (distanceToTarget > 0.5f || targetRotation == null)
+            if (distanceToTarget > 5f || targetRotation == null)
                 targetRotation = Quaternion.LookRotation(direction);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-            if (distanceToTarget > (chasingPlayer ? 1.5f : 0.25f))
+            if (distanceToTarget > (chasingPlayer ? 5f : 1f))
             {
                 direction.Normalize();
 
@@ -96,9 +96,10 @@ public class TeacherMovement : MonoBehaviour
 
                 teacher.ReachedTarget();
 
-                if (chasingPlayer) {
+                if (chasingPlayer && !movingToLastSpotted) {
                     immobile = true;
                     transform.LookAt(teacher.raycaster.player.transform.position);
+                    transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
                 }
             }
         }
@@ -107,9 +108,7 @@ public class TeacherMovement : MonoBehaviour
     public void SetTarget(Vector3 target, bool isPlayer = false)
     {
         if (!isPlayer)
-        {
             EventsManager.Instance.animationEvents.StartWalking();
-        }
 
         chasingPlayer = isPlayer;
 
@@ -124,6 +123,6 @@ public class TeacherMovement : MonoBehaviour
         if (target == null) return;
 
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(target, 0.5f);
+        Gizmos.DrawSphere(target, 2f);
     }
 }
