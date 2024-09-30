@@ -10,6 +10,7 @@ public class AnimationController : MonoBehaviour
     void OnEnable()
     {
         EventsManager.Instance.teacherEvents.OnPlayerSpotted += OnPlayerSpotted;
+        EventsManager.Instance.teacherEvents.OnPlayerCaptured += SetIdle;
         EventsManager.Instance.animationEvents.OnStartWalking += StartWalking;
         EventsManager.Instance.animationEvents.OnSetIdle += SetIdle;
     }
@@ -17,6 +18,7 @@ public class AnimationController : MonoBehaviour
     void OnDisable()
     {
         EventsManager.Instance.teacherEvents.OnPlayerSpotted -= OnPlayerSpotted;
+        EventsManager.Instance.teacherEvents.OnPlayerCaptured -= SetIdle;
         EventsManager.Instance.animationEvents.OnStartWalking -= StartWalking;
         EventsManager.Instance.animationEvents.OnSetIdle -= SetIdle;
     }

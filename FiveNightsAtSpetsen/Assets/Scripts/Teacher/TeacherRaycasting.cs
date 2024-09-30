@@ -14,6 +14,19 @@ public class TeacherRaycasting : MonoBehaviour
 
     public float timeSincePlayerSpotted = 0;
 
+    public bool playerHiding;
+    public Vector3 hidingSpot;
+
+    void OnEnable() {
+        EventsManager.Instance.playerEvents.OnPlayerHid += PlayerHid;
+        EventsManager.Instance.playerEvents.OnPlayerRevealed += PlayerRevealed;
+    }
+
+    void OnDisable() {
+        EventsManager.Instance.playerEvents.OnPlayerHid -= PlayerHid;
+        EventsManager.Instance.playerEvents.OnPlayerRevealed -= PlayerRevealed;
+    }
+
     void Start()
     {
         targetRenderer = target.GetComponentInChildren<Renderer>();
@@ -24,6 +37,9 @@ public class TeacherRaycasting : MonoBehaviour
         timeSincePlayerSpotted += Time.deltaTime;
 
         Vector3 directionToTarget = target.transform.position - transform.position;
+
+        if (playerHiding && Vector3.Distance(transform.position, hidingSpot) < 10f && Random.value < 0.2f)
+            EventsManager.Instance.teacherEvents.PlayerCaptured();
 
         if (directionToTarget.magnitude <= detectionRange)
         {
@@ -66,6 +82,15 @@ public class TeacherRaycasting : MonoBehaviour
                 teacher.PlayerNotSpotted();
             }
         }
+    }
+
+    void PlayerHid(HidingSpot spot) {
+        hidingSpot = spot.transform.position;
+        playerHiding = true;
+    }
+
+    void PlayerRevealed(HidingSpot spot) {
+        playerHiding = false;
     }
 
     void OnDrawGizmosSelected()
