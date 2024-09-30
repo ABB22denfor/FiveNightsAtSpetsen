@@ -7,6 +7,7 @@ public class PauseManager : MonoBehaviour
 {
     public string MainMenuSceneName;
     public GameObject Canvas;
+    public GameObject PausePanel;
     public GameObject PauseMenu;
     public GameObject Confirm;
     public GameObject SettingsMenu;
@@ -20,6 +21,7 @@ public class PauseManager : MonoBehaviour
         Static.SetActive(true);
         Confirm.SetActive(false);
         SettingsMenu.SetActive(false);
+        PausePanel.SetActive(false);
         Canvas.SetActive(false);
     }
 
@@ -30,11 +32,12 @@ public class PauseManager : MonoBehaviour
             if (Canvas.activeSelf == false)
             {
                 Canvas.SetActive(true);
+                PausePanel.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 Time.timeScale = 0;
             }
-            else if (Canvas.activeSelf == true)
+            else if (Canvas.activeSelf == true && PausePanel.activeSelf == true)
             {
                 if (SettingsMenu.activeSelf == true)
                 {
@@ -56,6 +59,7 @@ public class PauseManager : MonoBehaviour
 
     public void Resume()
     {
+        PausePanel.SetActive(false);
         Canvas.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
