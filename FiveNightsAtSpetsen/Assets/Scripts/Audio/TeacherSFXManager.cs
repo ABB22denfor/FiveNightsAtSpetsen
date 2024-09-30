@@ -36,6 +36,11 @@ public class TeacherSFXManager : MonoBehaviour
        if(isWalking && noSound){
          audioSource.clip = walkingSFX;
          audioSource.loop = true;
+         audioSource.volume = 1f;
+         audioSource.spatialBlend = 0.75f;
+         audioSource.spread = 10f;
+         audioSource.maxDistance = 10f;
+         audioSource.pitch = 0.75f;
          audioSource.Play();
 
          noSound = false;
