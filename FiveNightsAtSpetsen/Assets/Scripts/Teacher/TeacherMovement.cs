@@ -12,7 +12,9 @@ public class TeacherMovement : MonoBehaviour
     public float spottedPlayerSpeedModifier = 1.5f;
     public float chasingPlayerSpeedModifier = 2.0f;
     Dictionary<Teacher.TeacherMode, float> speed;
-    public float rotationSpeed = 1f;
+    public float rotationDuration = 0.5f;
+    float timeSinceRotationStarted;
+
 
     Vector3 startPosition;
     Quaternion targetRotation;
@@ -55,6 +57,8 @@ public class TeacherMovement : MonoBehaviour
         if (immobile)
             return;
 
+        timeSinceRotationStarted += Time.deltaTime;
+
         if (steps.Count > 0 && !chasingPlayer && !movingToLastSpotted)
         {
             if (startPosition == steps[^1]) return;
@@ -63,9 +67,12 @@ public class TeacherMovement : MonoBehaviour
             float distanceToTarget = direction.magnitude;
 
             if (distanceToTarget > 5f || targetRotation == null)
+            {
+                timeSinceRotationStarted = 0;
                 targetRotation = Quaternion.LookRotation(direction);
+            }
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, timeSinceRotationStarted / rotationDuration);
 
             if (distanceToTarget > 0.25f)
             {
@@ -89,9 +96,12 @@ public class TeacherMovement : MonoBehaviour
             float distanceToTarget = direction.magnitude;
 
             if (distanceToTarget > 5f || targetRotation == null)
+            {
+                timeSinceRotationStarted = 0;
                 targetRotation = Quaternion.LookRotation(direction);
+            }
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, timeSinceRotationStarted / rotationDuration);
 
             if (distanceToTarget > (chasingPlayer ? 5f : 1f))
             {
