@@ -24,8 +24,9 @@
 /[Aa]ssets/Plugins/Editor/JetBrains*
 
 /[Aa]ssets/[Rr]esources
-
 /[Aa]ssets/Resources.meta
+
+/[Aa]ssets/Prefabs/Map/
 
 # Visual Studio cache directory
 .vs/
