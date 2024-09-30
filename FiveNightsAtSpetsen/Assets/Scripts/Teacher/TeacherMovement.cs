@@ -6,10 +6,17 @@ public class TeacherMovement : MonoBehaviour
     public Teacher teacher;
 
     public Vector3 target;
+
     public float moveSpeed = 5.0f;
+    public float investigatingSpeedModifier = 1.25f;
+    public float spottedPlayerSpeedModifier = 1.5f;
+    public float chasingPlayerSpeedModifier = 2.0f;
+    Dictionary<Teacher.TeacherMode, float> speed;
     public float rotationSpeed = 1f;
+
     Vector3 startPosition;
     Quaternion targetRotation;
+    bool immobile = false;
 
     Rigidbody rb;
 
@@ -24,10 +31,20 @@ public class TeacherMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         rb.isKinematic = false;
+
+        speed = new() {
+            {Teacher.TeacherMode.Standard, moveSpeed},
+            {Teacher.TeacherMode.InvestigatingNoise, moveSpeed * investigatingSpeedModifier},
+            {Teacher.TeacherMode.SpottedPlayer, moveSpeed * spottedPlayerSpeedModifier},
+            {Teacher.TeacherMode.ChasingPlayer, moveSpeed * chasingPlayerSpeedModifier}
+        };
     }
 
     void Update()
     {
+        if (immobile)
+            return;
+
         if (steps.Count > 0 && !chasingPlayer)
         {
             if (startPosition == steps[^1]) return;
@@ -40,11 +57,11 @@ public class TeacherMovement : MonoBehaviour
 
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-            if (distanceToTarget > 0.1f)
+            if (distanceToTarget > 0.25f)
             {
                 direction.Normalize();
 
-                rb.velocity = direction * moveSpeed * Time.deltaTime * 100f;
+                rb.velocity = direction * speed[teacher.mode] * Time.deltaTime * 100f;
             }
             else
             {
@@ -66,11 +83,11 @@ public class TeacherMovement : MonoBehaviour
 
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-            if (distanceToTarget > 0.1f)
+            if (distanceToTarget > (chasingPlayer ? 1.5f : 0.25f))
             {
                 direction.Normalize();
 
-                rb.velocity = direction * moveSpeed * Time.deltaTime * 100f;
+                rb.velocity = direction * speed[teacher.mode] * Time.deltaTime * 100f;
             }
             else
             {
@@ -78,6 +95,11 @@ public class TeacherMovement : MonoBehaviour
                 startPosition = target;
 
                 teacher.ReachedTarget();
+
+                if (chasingPlayer) {
+                    immobile = true;
+                    transform.LookAt(teacher.raycaster.player.transform.position);
+                }
             }
         }
     }

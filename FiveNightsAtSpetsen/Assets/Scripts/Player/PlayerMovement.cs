@@ -19,12 +19,14 @@ public class PlayerMovement : MonoBehaviour
     {
         EventsManager.Instance.playerEvents.OnPlayerHid += HidePlayer;
         EventsManager.Instance.playerEvents.OnPlayerRevealed += RevealPlayer;
+        EventsManager.Instance.teacherEvents.OnPlayerCaptured += Captured;
     }
 
     void OnDisable()
     {
         EventsManager.Instance.playerEvents.OnPlayerHid -= HidePlayer;
         EventsManager.Instance.playerEvents.OnPlayerRevealed -= RevealPlayer;
+        EventsManager.Instance.teacherEvents.OnPlayerCaptured -= Captured;
     }
 
     void Start()
@@ -80,5 +82,9 @@ public class PlayerMovement : MonoBehaviour
     void RevealPlayer(GameObject location)
     {
         immobile = false;
+    }
+
+    void Captured() {
+        immobile = true;
     }
 }

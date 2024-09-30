@@ -1,0 +1,28 @@
+{
+    "delays": [
+        {
+            "id": "placeholder",
+            "delay": 0.5
+        }
+    ],
+    "routes": {
+        "main": [
+            {
+                "room": "temp1",
+                "repetitions": 1
+            },
+            {
+                "room": "temp2"
+            }
+        ],
+        "alt": [
+            {
+                "room": "temp1",
+                "repetitions": 1
+            },
+            {
+                "room": "temp2"
+            }
+        ]
+    }
+}

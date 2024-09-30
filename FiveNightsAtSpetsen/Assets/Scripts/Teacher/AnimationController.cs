@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour
 {
     private Animator animator;
+    public float WalkMultiplier;
 
     void OnEnable()
     {
@@ -59,5 +60,10 @@ public class AnimationController : MonoBehaviour
     void Running(bool state)
     {
         animator.SetBool("isRunning", state);
+    }
+
+    void SetWalkMultiplier()
+    {
+        animator.SetFloat("WalkingMultiplier", WalkMultiplier);
     }
 }

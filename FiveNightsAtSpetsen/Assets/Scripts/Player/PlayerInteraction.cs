@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
 {
     public float interactionRange = 5f;
     public Camera playerCamera;
+    public Slider slider;
 
     Interactable currentInteractable;
+    bool interacting = false;
     GameObject playerObject;
 
     void Start()
@@ -27,17 +30,27 @@ public class PlayerInteraction : MonoBehaviour
                 if (currentInteractable != interactable)
                 {
                     if (currentInteractable != null)
-                    {
                         currentInteractable.HighlightObject(false);
-                    }
 
                     currentInteractable = interactable;
+                    interacting = false;
                     currentInteractable.HighlightObject(true);
                 }
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKey(KeyCode.E))
                 {
-                    currentInteractable.Interact();
+                    if (!interacting) 
+                    {
+                        currentInteractable.Interact();
+                        InitSlider();
+                        interacting = true;
+                    }
+                    currentInteractable.Interacting(Time.deltaTime);
+                } 
+                else 
+                {
+                    currentInteractable.StoppedInteracting();
+                    interacting = false;
                 }
             }
             else
@@ -45,6 +58,8 @@ public class PlayerInteraction : MonoBehaviour
                 if (currentInteractable != null)
                 {
                     currentInteractable.HighlightObject(false);
+                    currentInteractable.StoppedInteracting();
+                    interacting = false;
                     currentInteractable = null;
                 }
             }
@@ -54,8 +69,30 @@ public class PlayerInteraction : MonoBehaviour
             if (currentInteractable != null)
             {
                 currentInteractable.HighlightObject(false);
+                currentInteractable.StoppedInteracting();
+                interacting = false;
                 currentInteractable = null;
             }
         }
+
+        UpdateSlider();
+    }
+
+    void InitSlider() {
+        if (currentInteractable.interactionDuration == 0)
+            return;
+            
+        slider.gameObject.SetActive(true);
+        slider.maxValue = currentInteractable.interactionDuration;
+        slider.value = 0;
+    }
+
+    void UpdateSlider() {
+        if (!interacting || currentInteractable.interactionProgress >= currentInteractable.interactionDuration) {
+            slider.gameObject.SetActive(false);
+            return;
+        }
+
+        slider.value = currentInteractable.interactionProgress;
     }
 }

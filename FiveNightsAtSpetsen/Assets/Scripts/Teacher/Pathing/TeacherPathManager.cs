@@ -6,6 +6,8 @@ public class TeacherPathManager : MonoBehaviour
 {
     public TeacherWaypointsManager waypoints;
 
+    public Teacher teacher;
+
     public List<TeacherRoomPath> rooms = new();
     public int currentRoom = 0;
 
@@ -24,17 +26,27 @@ public class TeacherPathManager : MonoBehaviour
     public int routeIndex = 0;
     public TeacherRoomPath tempRoomTarget;
 
+    List<(TeacherRoomPath room, int repetitions)> altRoute = new();
+    bool useAltRoute = false;
+    bool useAltRoutePermanent = false;
+    int initialAltRouteIndex;
+
     void OnValidate()
     {
         rooms.Clear();
 
         foreach (Transform child in transform)
-            rooms.Add(child.GetComponent<TeacherRoomPath>());
+        {
+            TeacherRoomPath room = child.GetComponent<TeacherRoomPath>();
+            rooms.Add(room);
+            room.manager = this;
+        }
     }
 
-    public void SetRoute(List<(string rid, int reps)> routeData)
+    public void SetRoute(Dictionary<string, List<(string rid, int reps)>> routeData)
     {
-        routeData.ForEach(e => route.Add((GetRoom(e.rid), e.reps)));
+        routeData["Main"].ForEach(e => route.Add((GetRoom(e.rid), e.reps)));
+        routeData["Alt"].ForEach(e => altRoute.Add((GetRoom(e.rid), e.reps)));
     }
 
     public void Next()
@@ -49,7 +61,7 @@ public class TeacherPathManager : MonoBehaviour
                     {
                         inRoom = true;
                         currentRoom = rooms.IndexOf(tempRoomTarget);
-                        rooms[currentRoom].repetitions = route[routeIndex].repetitions;
+                        rooms[currentRoom].repetitions = GetRoute()[routeIndex].repetitions;
                         EventsManager.Instance.teacherEvents.TeacherEnteredRoom(tempRoomTarget, false);
 
                         routeIndex = (routeIndex + 1) % route.Count;
@@ -57,14 +69,18 @@ public class TeacherPathManager : MonoBehaviour
                         return;
                     }
                 }
-                else if (route[routeIndex].room.exitPoint == interRoomPath[interRoomIndex])
+                else if (GetRoute()[routeIndex].room.exitPoint == interRoomPath[interRoomIndex])
                 {
                     inRoom = true;
-                    currentRoom = rooms.IndexOf(route[routeIndex].room);
-                    rooms[currentRoom].repetitions = route[routeIndex].repetitions;
-                    EventsManager.Instance.teacherEvents.TeacherEnteredRoom(route[routeIndex].room, false);
+                    currentRoom = rooms.IndexOf(GetRoute()[routeIndex].room);
+                    rooms[currentRoom].repetitions = GetRoute()[routeIndex].repetitions;
+                    EventsManager.Instance.teacherEvents.TeacherEnteredRoom(GetRoute()[routeIndex].room, false);
 
-                    routeIndex = (routeIndex + 1) % route.Count;
+                    routeIndex = (routeIndex + 1) % GetRoute().Count;
+                    if (useAltRoute && !useAltRoutePermanent && routeIndex == initialAltRouteIndex) {
+                        teacher.TempAltRouteCompleted();
+                        SetMainRoute();
+                    }
                     return;
                 }
             }
@@ -116,7 +132,9 @@ public class TeacherPathManager : MonoBehaviour
         lastRoom = room;
         inRoom = false;
         interRoomIndex = interRoomPath.IndexOf(room.exitPoint);
-        TargetRoom(GetRouteTarget(), true);
+        
+        if (target == null)
+            TargetRoom(GetRouteTarget(), true);
     }
 
     public Vector3 GetPos()
@@ -142,17 +160,61 @@ public class TeacherPathManager : MonoBehaviour
         return null;
     }
 
+    public void SetAltRoute(bool permanent) {
+        if (useAltRoute) {
+            useAltRoutePermanent = permanent;
+            return;
+        }
+
+        useAltRoute = true;
+        useAltRoutePermanent = permanent;
+
+        (int i, float dist) closest = (-1, 0);
+        for (int j = 0; j < altRoute.Count; j++) {
+            TeacherRoomPath room = altRoute[j].room;
+            float distance = Vector3.Distance(waypoints.waypoints[room.exitPoint].transform.position,
+                                              teacher.transform.position);
+
+            if (distance < closest.dist || closest.i == -1)
+                closest = (j, distance);
+        }
+
+        routeIndex = closest.i;
+        initialAltRouteIndex = routeIndex;
+    }
+
+    public void SetMainRoute() {
+        useAltRoute = false;
+
+        (int i, float dist) closest = (-1, 0);
+        for (int j = 0; j < route.Count; j++) {
+            TeacherRoomPath room = route[j].room;
+            if (room == null) continue;
+            float distance = Vector3.Distance(waypoints.waypoints[room.exitPoint].transform.position,
+                                              teacher.transform.position);
+
+            if (distance < closest.dist || closest.i == -1)
+                closest = (j, distance);
+        }
+
+        routeIndex = closest.i;
+    }
+
+    List<(TeacherRoomPath room, int repetitions)> GetRoute() {
+        return (!useAltRoute ? route : altRoute);
+    } 
+
     (TeacherRoomPath room, bool isRandom) GetRouteTarget()
     {
-        if (route[routeIndex].room != null)
-            return (route[routeIndex].room, false);
+        if (GetRoute()[routeIndex].room != null)
+            return (GetRoute()[routeIndex].room, false);
 
         // pos = average of last room's exitpoint and next room's exit point,
         // or just last room's exitpoint if the next room also is random
         Vector3 pos = waypoints.waypoints[lastRoom.exitPoint].transform.position
-                     + (route[(routeIndex + 1) % route.Count].room == null
+                     + (GetRoute()[(routeIndex + 1) % GetRoute().Count].room == null
                      ? waypoints.waypoints[lastRoom.exitPoint].transform.position
-                     : waypoints.waypoints[route[(routeIndex + 1) % route.Count].room.exitPoint].transform.position)
+                     : waypoints.waypoints[GetRoute()[(routeIndex + 1) % GetRoute().Count].room.exitPoint].transform.position)
                      / 2;
 
         List<(TeacherRoomPath room, float distance)> dists = rooms.Select(r => (r, Vector3.Distance(pos, r.pos))).ToList();
@@ -178,9 +240,9 @@ public class TeacherPathManager : MonoBehaviour
         selected ??= dists.OrderBy(d => d.distance).ToList()[0].room;
 
         // if selected room is next on the route, ignore this random step
-        if (selected == route[(routeIndex + 1) % route.Count].room)
+        if (selected == GetRoute()[(routeIndex + 1) % GetRoute().Count].room)
         {
-            routeIndex = (routeIndex + 1) % route.Count;
+            routeIndex = (routeIndex + 1) % GetRoute().Count;
             return (selected, false);
         }
 

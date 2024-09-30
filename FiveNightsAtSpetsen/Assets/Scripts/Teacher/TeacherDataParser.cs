@@ -19,12 +19,17 @@ public class TeacherDataParser
         return result;
     }
 
-    public List<(string room, int repetitions)> GetRoute()
+    public Dictionary<string, List<(string room, int repetitions)>> GetRoute()
     {
-        List<(string room, int repetitions)> result = new();
+        Dictionary<string, List<(string room, int repetitions)>> result = new() {
+            {"Main", new()},
+            {"Alt", new()}
+        };
 
-        foreach (var entry in data.route)
-            result.Add((entry.room, entry.repetitions));
+        foreach (var entry in data.routes.main)
+            result["Main"].Add((entry.room, entry.repetitions));
+        foreach (var entry in data.routes.alt)
+            result["Alt"].Add((entry.room, entry.repetitions));
 
         return result;
     }
@@ -34,7 +39,7 @@ public class TeacherDataParser
     public class Container
     {
         public List<DelayEntry> delays;
-        public List<RouteEntry> route;
+        public Routes routes;
     }
 
     [System.Serializable]
@@ -45,8 +50,14 @@ public class TeacherDataParser
     }
 
     [System.Serializable]
-    public class RouteEntry
+    public class Routes
     {
+        public List<RouteEntry> main;
+        public List<RouteEntry> alt;
+    }
+
+    [System.Serializable]
+    public class RouteEntry {
         public string room;
         public int repetitions;
     }
