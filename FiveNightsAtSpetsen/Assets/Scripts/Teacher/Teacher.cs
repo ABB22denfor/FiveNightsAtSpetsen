@@ -4,6 +4,10 @@ using System.Linq;
 
 public class Teacher : MonoBehaviour
 {
+    public bool isAlert;
+    public bool hasSeenPlayer;
+    public string teacherName;
+
     public TeacherPathManager pathManager;
     public TeacherMovement movement;
     public TeacherRaycasting raycaster;
@@ -11,6 +15,7 @@ public class Teacher : MonoBehaviour
     Dictionary<string, float> delays;
 
     public TeacherMode mode = TeacherMode.Standard;
+    public bool hasSpottedPlayer = false;
 
     void OnEnable()
     {
@@ -24,7 +29,6 @@ public class Teacher : MonoBehaviour
 
     void Start()
     {
-        // pathManager.Next();
         pathManager.teacher = this;
         movement.SetTarget(pathManager.GetPos());
 
@@ -35,10 +39,30 @@ public class Teacher : MonoBehaviour
 
     public void ReachedTarget()
     {
-        if (raycaster.player == null)
+        if (movement.movingToLastSpotted) 
+        {
+            mode = TeacherMode.SpottedPlayer;
+            movement.movingToLastSpotted = false;
+            movement.SetTarget(pathManager.GetPos());
+        }
+        else if (raycaster.player == null)
         {
             EventsManager.Instance.teacherEvents.WaypointReached(pathManager.GetWaypoint());
+
+            /*
+            if(pathManager.inRoom)
+            {
+              string roomName = pathManager.rooms[pathManager.currentRoom].id;
+
+              EventsManager.Instance.teacherEvents.RoomEntered(roomName);
+            }
+            */
+
             StartCoroutine(MoveToNext(GetDelay()));
+        }
+        else 
+        {
+            EventsManager.Instance.teacherEvents.PlayerCaptured();
         }
     }
 
@@ -61,16 +85,16 @@ public class Teacher : MonoBehaviour
         if (!movement.chasingPlayer)
             EventsManager.Instance.teacherEvents.PlayerSpotted();
 
-        pathManager.SetAltRoute(true);
+        pathManager.SetAltRoute();
         mode = TeacherMode.ChasingPlayer;
+        hasSpottedPlayer = true;
         movement.SetTarget(position, true);
     }
 
     public void PlayerNotSpotted()
     {
-        mode = TeacherMode.SpottedPlayer;
-
-        movement.SetTarget(pathManager.GetPos());
+        movement.movingToLastSpotted = true;
+        movement.chasingPlayer = false;
     }
 
     public float GetDelay()
@@ -88,15 +112,9 @@ public class Teacher : MonoBehaviour
 
     void PlayerMadeSound(TeacherRoomPath room)
     {
-        Debug.Log("Teacher heard a sound coming from " + room.id);
         pathManager.TargetRoom((room, false));
 
         mode = TeacherMode.InvestigatingNoise;
-        pathManager.SetAltRoute(false);
-    }
-
-    public void TempAltRouteCompleted() {
-        mode = TeacherMode.Standard;
     }
 
     public enum TeacherMode {

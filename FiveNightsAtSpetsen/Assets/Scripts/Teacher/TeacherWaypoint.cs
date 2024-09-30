@@ -8,13 +8,13 @@ public class TeacherWaypoint : MonoBehaviour
     {
         Gizmos.color = (id == "") ? Color.blue : Color.red;
 
-        Gizmos.DrawSphere(transform.position, (id == "") ? 0.2f : 0.25f);
+        Gizmos.DrawSphere(transform.position, (id == "") ? 0.5f : 0.75f);
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = (id == "") ? Color.blue : Color.red;
 
-        Gizmos.DrawSphere(transform.position, ((id == "") ? 0.2f : 0.25f) * 2f);
+        Gizmos.DrawSphere(transform.position, ((id == "") ? 0.5f : 0.75f) * 2f);
     }
 }

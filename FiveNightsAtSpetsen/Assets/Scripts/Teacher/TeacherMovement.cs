@@ -12,7 +12,8 @@ public class TeacherMovement : MonoBehaviour
     public float spottedPlayerSpeedModifier = 1.5f;
     public float chasingPlayerSpeedModifier = 2.0f;
     Dictionary<Teacher.TeacherMode, float> speed;
-    public float rotationSpeed = 1f;
+    public float rotationDuration = 0.5f;
+    float timeSinceRotationStarted = 0f;
 
     Vector3 startPosition;
     Quaternion targetRotation;
@@ -21,15 +22,25 @@ public class TeacherMovement : MonoBehaviour
     Rigidbody rb;
 
     public bool chasingPlayer = false;
+    public bool movingToLastSpotted = false;
 
     public List<Vector3> steps;
+
+    void OnEnable() 
+    {
+        EventsManager.Instance.teacherEvents.OnPlayerCaptured += PlayerCaptured;
+    }
+
+    void OnDisable() 
+    {
+        EventsManager.Instance.teacherEvents.OnPlayerCaptured -= PlayerCaptured;
+    }
 
     void Start()
     {
         startPosition = transform.position;
 
         rb = GetComponent<Rigidbody>();
-
         rb.isKinematic = false;
 
         speed = new() {
@@ -40,22 +51,33 @@ public class TeacherMovement : MonoBehaviour
         };
     }
 
-    void Update()
+    void Update() 
+    {
+        timeSinceRotationStarted = Mathf.Clamp(timeSinceRotationStarted + Time.deltaTime, 0, rotationDuration);
+    }
+
+    void FixedUpdate()
     {
         if (immobile)
             return;
 
-        if (steps.Count > 0 && !chasingPlayer)
+        if (steps.Count > 0 && !chasingPlayer && !movingToLastSpotted)
         {
             if (startPosition == steps[^1]) return;
 
             Vector3 direction = steps[^1] - transform.position;
             float distanceToTarget = direction.magnitude;
 
-            if (distanceToTarget > 0.5f || targetRotation == null)
-                targetRotation = Quaternion.LookRotation(direction);
+            if (distanceToTarget > 5f || targetRotation == null)
+            {
+                Quaternion newTargetRotation = Quaternion.LookRotation(direction);
+                if (targetRotation != newTargetRotation) {
+                    timeSinceRotationStarted = 0;
+                    targetRotation = newTargetRotation;
+                }
+            }
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, timeSinceRotationStarted / rotationDuration);
 
             if (distanceToTarget > 0.25f)
             {
@@ -78,12 +100,18 @@ public class TeacherMovement : MonoBehaviour
             Vector3 direction = target - transform.position;
             float distanceToTarget = direction.magnitude;
 
-            if (distanceToTarget > 0.5f || targetRotation == null)
-                targetRotation = Quaternion.LookRotation(direction);
+            if (distanceToTarget > 5f || targetRotation == null)
+            {
+                Quaternion newTargetRotation = Quaternion.LookRotation(direction);
+                if (targetRotation != newTargetRotation) {
+                    timeSinceRotationStarted = 0;
+                    targetRotation = newTargetRotation;
+                }
+            }
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, timeSinceRotationStarted / rotationDuration);
 
-            if (distanceToTarget > (chasingPlayer ? 1.5f : 0.25f))
+            if (distanceToTarget > (chasingPlayer ? 5f : 1f))
             {
                 direction.Normalize();
 
@@ -95,11 +123,6 @@ public class TeacherMovement : MonoBehaviour
                 startPosition = target;
 
                 teacher.ReachedTarget();
-
-                if (chasingPlayer) {
-                    immobile = true;
-                    transform.LookAt(teacher.raycaster.player.transform.position);
-                }
             }
         }
     }
@@ -107,9 +130,7 @@ public class TeacherMovement : MonoBehaviour
     public void SetTarget(Vector3 target, bool isPlayer = false)
     {
         if (!isPlayer)
-        {
             EventsManager.Instance.animationEvents.StartWalking();
-        }
 
         chasingPlayer = isPlayer;
 
@@ -119,11 +140,20 @@ public class TeacherMovement : MonoBehaviour
         this.target = new Vector3(target.x, startPosition.y, target.z);
     }
 
+    void PlayerCaptured() {
+        immobile = true;
+        if (teacher.raycaster.playerHiding)
+            transform.LookAt(teacher.raycaster.hidingSpot);
+        else
+            transform.LookAt(teacher.raycaster.player.transform.position);
+        transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
+    }
+
     void OnDrawGizmosSelected()
     {
         if (target == null) return;
 
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(target, 0.5f);
+        Gizmos.DrawSphere(target, 2f);
     }
 }

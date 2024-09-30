@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class PlayerEvents
 {
-    public event Action<GameObject> OnPlayerHid;
-    public void HidePlayer(GameObject gameObject)
+    public event Action<HidingSpot> OnPlayerHid;
+    public void HidePlayer(HidingSpot spot)
     {
-        OnPlayerHid?.Invoke(gameObject);
+        OnPlayerHid?.Invoke(spot);
     }
 
-    public event Action<GameObject> OnPlayerRevealed;
-    public void RevealPlayer(GameObject gameObject)
+    public event Action<HidingSpot> OnPlayerRevealed;
+    public void RevealPlayer(HidingSpot spot)
     {
-        OnPlayerRevealed?.Invoke(gameObject);
+        OnPlayerRevealed?.Invoke(spot);
     }
 }

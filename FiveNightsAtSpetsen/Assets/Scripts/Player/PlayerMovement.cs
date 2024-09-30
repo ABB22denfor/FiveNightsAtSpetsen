@@ -74,12 +74,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void HidePlayer(GameObject location)
+    void HidePlayer(HidingSpot spot)
     {
         immobile = true;
     }
 
-    void RevealPlayer(GameObject location)
+    void RevealPlayer(HidingSpot spot)
     {
         immobile = false;
     }

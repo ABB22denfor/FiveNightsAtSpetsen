@@ -16,6 +16,7 @@ public class PlayerCamera : MonoBehaviour
     Vector3 oldPos;
     float initialHiddenYRotation;
     float hiddenYRotation;
+    float hiddenBounds;
 
     void OnEnable() {
         EventsManager.Instance.playerEvents.OnPlayerHid += Hide;
@@ -41,8 +42,8 @@ public class PlayerCamera : MonoBehaviour
             return;
 
         if (!hidden) {
-            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+            float mouseX = Input.GetAxis("Mouse X") * sensX;
+            float mouseY = Input.GetAxis("Mouse Y") * sensY;
 
             yRotation += mouseX;
 
@@ -54,34 +55,35 @@ public class PlayerCamera : MonoBehaviour
         } 
         else
         {
-            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensY / 2;
+            float mouseX = Input.GetAxis("Mouse X") * sensY / 2;
 
             hiddenYRotation += mouseX;
             hiddenYRotation = Mathf.Clamp(hiddenYRotation, 
-                                          initialHiddenYRotation - 60f, 
-                                          initialHiddenYRotation + 60f);
+                                          initialHiddenYRotation - hiddenBounds, 
+                                          initialHiddenYRotation + hiddenBounds);
 
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, hiddenYRotation, 0);
         }
     }
 
-    void Hide(GameObject go) {
+    void Hide(HidingSpot spot) {
         oldPos = transform.position;
-        transform.position = go.transform.position;
+        transform.position = spot.transform.position + spot.offset;
+        hiddenBounds = spot.bounds;
         hidden = true;
-        transform.LookAt(go.transform.Find("CameraDirection").position);
+        transform.LookAt(spot.transform.Find("CameraDirection").position);
         initialHiddenYRotation = transform.eulerAngles.y;
         hiddenYRotation = transform.eulerAngles.y;
     }
 
-    void Emerge(GameObject go) {
+    void Emerge(HidingSpot spot) {
         transform.position = oldPos;
         hidden = false;
     }
 
     void Captured() {
         Vector3 teacherPos = GameObject.Find("Teacher").transform.position;
-        transform.LookAt(teacherPos + new Vector3(0, 1, 0));
+        transform.LookAt(teacherPos + new Vector3(0, 5, 0));
         immobile = true;
     }
 }
