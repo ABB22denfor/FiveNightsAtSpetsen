@@ -25,6 +25,7 @@ public class TaskManager : MonoBehaviour
     {
         steps = steps.OrderBy(s => s.stepIndex).ToList();
         ui = GetComponent<TaskUIManager>();
+        ui.Init(steps[0].taskString);
     }
 
     void StepCompleted(TaskStep step)
@@ -32,7 +33,7 @@ public class TaskManager : MonoBehaviour
         if (steps[0].stepIndex == step.stepIndex)
         {
             steps.Remove(step);
-            Debug.Log("Completed step " + step.id);
+            ui.UpdateTask(step, steps.Count == 0 ? null : steps[0]);
             Destroy(step.gameObject);
 
             if (steps.Count == 0)

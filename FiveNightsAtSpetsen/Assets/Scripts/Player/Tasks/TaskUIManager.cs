@@ -1,17 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TaskUIManager : MonoBehaviour
 {
-    private GameObject Canvas;
-    private GameObject TipsObject;
-    private GameObject ObjectiveObject;
+    public RectTransform rect;
+    TextMeshProUGUI tmp;
 
-    void Start()
+    void Awake() 
     {
-        Transform Canvas = GameObject.Find("Canvas").transform;
-        TipsObject = Canvas.Find("Tips").gameObject;
-        ObjectiveObject = Canvas.Find("Objectives").gameObject;
+        tmp = rect.Find("Info").GetComponent<TextMeshProUGUI>();
+    }
+
+    public void Init(string initialString) 
+    {
+        tmp.text = initialString;
+        SetRect();
+    }
+    
+    public void UpdateTask(TaskStep lastStep, TaskStep nextStep) 
+    {
+        if (nextStep != null) 
+        {
+            tmp.text = lastStep.completionString + "\n" + nextStep.taskString;
+            StartCoroutine(RemoveCompletionText(nextStep.taskString));
+        } 
+        else
+        {
+            tmp.text = "Alla uppgifter utförda!!";
+        }
+        SetRect();
+    }
+
+    IEnumerator RemoveCompletionText(string taskString) 
+    {
+        yield return new WaitForSeconds(5f);
+
+        tmp.text = taskString;
+        SetRect();
+    }
+
+    void SetRect() 
+    {
+        rect.sizeDelta = new Vector2(rect.sizeDelta.x, tmp.preferredHeight + 50 + 20);
     }
 }
