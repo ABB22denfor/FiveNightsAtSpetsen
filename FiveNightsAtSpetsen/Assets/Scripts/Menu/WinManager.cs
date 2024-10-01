@@ -57,6 +57,7 @@ public class WinManager : MonoBehaviour
 
     public void NextDay()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
