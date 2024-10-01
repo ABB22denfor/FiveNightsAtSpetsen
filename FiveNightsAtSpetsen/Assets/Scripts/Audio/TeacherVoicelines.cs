@@ -21,11 +21,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(TeacherVoiceline))]
 public class TeacherVoicelines : MonoBehaviour
 {
-  [SerializeField]
-  private TextMeshProUGUI subtitleText = default;
-
   private Teacher teacher;
 
   private TeacherLinesManager linesManager;
@@ -41,14 +39,7 @@ public class TeacherVoicelines : MonoBehaviour
 
     teacher = gameObject.GetComponent<Teacher>();
 
-    teacherVoiceline = gameObject.AddComponent<TeacherVoiceline>();
-
-    if(subtitleText)
-    {
-      subtitleText.text = "";
-
-      teacherVoiceline.subtitleText = subtitleText;
-    }
+    teacherVoiceline = gameObject.GetComponent<TeacherVoiceline>();
 
     // Adding handlers for teacher's events
     EventsManager.Instance.teacherEvents.OnTeacherEnteredRoom += OnTeacherEnteredRoom;
@@ -66,8 +57,6 @@ public class TeacherVoicelines : MonoBehaviour
   void OnDisable()
   {
     Debug.Log("TeacherVoicelines.cs disabled");
-
-    Destroy(gameObject.GetComponent<TeacherVoiceline>());
 
     // Removing handlers for teacher's events
     EventsManager.Instance.teacherEvents.OnTeacherEnteredRoom -= OnTeacherEnteredRoom;

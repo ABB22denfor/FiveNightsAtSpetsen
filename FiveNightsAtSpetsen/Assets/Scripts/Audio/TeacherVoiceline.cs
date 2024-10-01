@@ -15,7 +15,14 @@ using System.Collections;
 
 public class TeacherVoiceline : MonoBehaviour
 {
-  public  TextMeshProUGUI subtitleText  = null;
+  [SerializeField]
+  private float subtitleLetterDelay = 0.05f; // Delay between each letter
+
+  [SerializeField]
+  private float subtitleStayDelay   = 1.0f;  // Delay after subtitle has been printed
+
+  [SerializeField]
+  private TextMeshProUGUI subtitleText  = null;
   private int             subtitleIndex = 0;
 
   private TeacherAudioManager audioManager;
@@ -35,6 +42,11 @@ public class TeacherVoiceline : MonoBehaviour
     audioManager = gameObject.AddComponent<TeacherAudioManager>();
 
     animator = gameObject.GetComponentInChildren<Animator>();
+
+    if(subtitleText)
+    {
+      subtitleText.text = "";
+    }
   }
 
   /*
@@ -133,11 +145,11 @@ public class TeacherVoiceline : MonoBehaviour
         isProcessRunning = false;
       }
 
-      yield return new WaitForSeconds((float) 0.075);
+      yield return new WaitForSeconds(subtitleLetterDelay);
     }
 
     // Display the subtitle for 1 extra second
-    yield return new WaitForSeconds((float) 1.0);
+    yield return new WaitForSeconds(subtitleStayDelay);
 
     OnProcessStopped();
   }
