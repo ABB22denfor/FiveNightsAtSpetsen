@@ -17,7 +17,7 @@ using System.Globalization;
 
 public class TeacherAudioManager : MonoBehaviour
 {
-  private AudioSource audioSource;
+  public AudioSource audioSource;
 
   private Dictionary<string, AudioClip> audioClips;
 

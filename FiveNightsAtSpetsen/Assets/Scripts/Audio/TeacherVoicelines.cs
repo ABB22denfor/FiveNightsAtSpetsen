@@ -12,7 +12,7 @@
  * Created by Oliver Sarebro
  * Written by Hampus Fridholm
  *
- * Last updated: 2024-09-18
+ * Last updated: 2024-10-01
  */
 
 using System.IO;
