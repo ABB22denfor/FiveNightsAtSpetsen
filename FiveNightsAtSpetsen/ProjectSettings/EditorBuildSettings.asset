@@ -26,10 +26,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/GameplayScenes/JetonScene.unity
     guid: a622ff201beb1c945bb482a6fe92f171
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Nights/LarsCopy.unity
     guid: 2bf48d5e838a87344b2064a0e8b16e6e
   - enabled: 1
     path: Assets/Scenes/Nights/Jonas.unity
     guid: 6b3dfd429f9c92749bb5e6f388e977a9
+  - enabled: 1
+    path: Assets/Scenes/Nights/Lars_Working.unity
+    guid: b870d7a427c9e32498072d9714db6dca
   m_configObjects: {}
