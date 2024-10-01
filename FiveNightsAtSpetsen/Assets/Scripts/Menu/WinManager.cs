@@ -32,10 +32,6 @@ public class WinManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            WinGame();
-        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Canvas.activeSelf == true && WinPanel.activeSelf == true)

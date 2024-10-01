@@ -67,6 +67,7 @@ public class PauseManager : MonoBehaviour
     }
     public void QuitMainMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(MainMenuSceneName);
     }
 }
