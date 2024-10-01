@@ -6,7 +6,7 @@
  *
  * Written by Hampus Fridholm
  *
- * Last updated: 2024-09-24
+ * Last updated: 2024-10-01
  */
 
 using TMPro;
@@ -34,7 +34,7 @@ public class TeacherVoiceline : MonoBehaviour
 
     audioManager = gameObject.AddComponent<TeacherAudioManager>();
 
-    animator     = gameObject.GetComponentInChildren<Animator>();
+    animator = gameObject.GetComponentInChildren<Animator>();
   }
 
   /*

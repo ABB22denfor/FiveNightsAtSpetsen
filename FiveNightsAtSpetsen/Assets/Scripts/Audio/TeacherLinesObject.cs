@@ -3,7 +3,7 @@
  *
  * Written by Hampus Fridholm
  *
- * Last updated: 2024-09-18
+ * Last updated: 2024-10-01
  */
 
 using System.IO;
@@ -40,26 +40,39 @@ public class TeacherLinesObject
   public Dictionary<string, List<Voiceline>> rooms;
 
   /*
+   * Get the teacher's voicelines json file name
+   */
+  private static string GetJsonFileName(string teacherName)
+  {
+    return teacherName + "-voicelines";
+  }
+
+  /*
+   * Get the serialized json text asset (file)
+   */
+  private static TextAsset GetJsonTextAsset(string teacherName)
+  {
+    string fileName = GetJsonFileName(teacherName);
+
+    return Resources.Load<TextAsset>(fileName);
+  }
+
+  /*
    * This is the load method, to load a teacher's json voicelines
    */
-  private static string teachersFolder  = "Teachers";
-
   public static TeacherLinesObject Load(string teacherName)
   {
-    string fileName = teacherName + ".json";
-    string filePath = Path.Combine(Application.dataPath, teachersFolder, fileName).Replace('\\', '/');
+    TextAsset textAsset = GetJsonTextAsset(teacherName);
 
-    if(File.Exists(filePath))
+    if(textAsset)
     {
-      Debug.Log($"Loading teacher '{teacherName}' json file");
+      Debug.Log($"Loading teacher '{teacherName}' voiceline json file");
 
-      string jsonString = File.ReadAllText(filePath);
-
-      return JsonConvert.DeserializeObject<TeacherLinesObject>(jsonString);
+      return JsonConvert.DeserializeObject<TeacherLinesObject>(textAsset.text);
     }
     else
     {
-      Debug.Log($"Teacher '{teacherName}' json file doesn't exist");
+      Debug.Log($"Teacher '{teacherName}' voiceline json file doesn't exist");
 
       return null;
     }
