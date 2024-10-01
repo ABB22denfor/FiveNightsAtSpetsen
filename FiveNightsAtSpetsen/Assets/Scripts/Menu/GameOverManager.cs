@@ -62,7 +62,7 @@ public class GameOverManager : MonoBehaviour
         GameOverPanel.SetActive(true);
         Static.SetActive(true);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(4f);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
