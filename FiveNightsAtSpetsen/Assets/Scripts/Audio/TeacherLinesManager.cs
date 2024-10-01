@@ -73,6 +73,8 @@ public class TeacherLinesManager
    */
   public Voiceline GetRoomVoiceline(string roomName)
   {
+    Debug.Log("Getting room voiceline");
+
     if(teacherLines == null)
     {
       Debug.LogWarning("Teacher's voicelines are not loaded");
@@ -120,6 +122,8 @@ public class TeacherLinesManager
    */
   public Voiceline GetGeneralVoiceline()
   {
+    Debug.Log("Getting general voiceline");
+
     if(teacherLines == null || workingLines == null)
     {
       Debug.LogWarning("Teacher's voicelines are not loaded");
@@ -157,6 +161,8 @@ public class TeacherLinesManager
    */
   public Voiceline GetSpottingVoiceline()
   {
+    Debug.Log("Getting spotting voiceline");
+
     if(teacherLines == null || workingLines == null)
     {
       Debug.LogWarning("Teacher's voicelines are not loaded");
@@ -194,6 +200,8 @@ public class TeacherLinesManager
    */
   public Voiceline GetCapturingVoiceline()
   {
+    Debug.Log("Getting capturing voiceline");
+
     if(teacherLines == null || workingLines == null)
     {
       Debug.LogWarning("Teacher's voicelines are not loaded");
@@ -231,6 +239,8 @@ public class TeacherLinesManager
    */
   public Voiceline GetHearingVoiceline()
   {
+    Debug.Log("Getting hearing voiceline");
+
     if(teacherLines == null || workingLines == null)
     {
       Debug.LogWarning("Teacher's voicelines are not loaded");
@@ -267,6 +277,8 @@ public class TeacherLinesManager
    */
   public Voiceline GetAlertVoiceline()
   {
+    Debug.Log("Getting alert voiceline");
+
     if(teacherLines == null || workingLines == null)
     {
       Debug.LogWarning("Teacher's voicelines are not loaded");
