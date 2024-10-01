@@ -32,6 +32,7 @@ public class TeacherLinesObject
    * The deserialized json object
    */
   public List<Voiceline> spotting;
+  public List<Voiceline> chasing;
   public List<Voiceline> general;
   public List<Voiceline> capturing;
   public List<Voiceline> hearing;

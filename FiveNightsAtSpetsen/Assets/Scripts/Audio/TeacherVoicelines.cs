@@ -25,7 +25,8 @@ using UnityEngine;
 [RequireComponent(typeof(TeacherPlayerMemory))]
 public class TeacherVoicelines : MonoBehaviour
 {
-  private Teacher teacher;
+  private Teacher         teacher;
+  private TeacherMovement teacherMovement;
 
   private TeacherLinesManager linesManager;
   private TeacherVoiceline    teacherVoiceline;
@@ -41,6 +42,7 @@ public class TeacherVoicelines : MonoBehaviour
     Debug.Log("TeacherVoicelines.cs enabled");
 
     teacher          = gameObject.GetComponent<Teacher>();
+    teacherMovement  = gameObject.GetComponent<TeacherMovement>();
     teacherVoiceline = gameObject.GetComponent<TeacherVoiceline>();
     teacherMemory    = gameObject.GetComponent<TeacherPlayerMemory>();
 
@@ -90,12 +92,7 @@ public class TeacherVoicelines : MonoBehaviour
 
     Voiceline voiceline = linesManager.GetRoomEnteredVoiceline(roomName);
 
-    if(voiceline != null)
-    {
-      teacherVoiceline.StopVoiceline();
-
-      teacherVoiceline.StartVoiceline(voiceline);
-    }
+    teacherVoiceline.StartVoiceline(voiceline);
   }
 
   /*
@@ -115,10 +112,32 @@ public class TeacherVoicelines : MonoBehaviour
     // Say the spotting voiceline
     Voiceline voiceline = linesManager.GetSpottingVoiceline();
 
-    if(voiceline != null)
-    {
-      teacherVoiceline.StopVoiceline();
+    teacherVoiceline.StartVoiceline(voiceline);
 
+    StartCoroutine(MaybeSayChasingVoiceline());
+  }
+
+  /*
+   * After the teacher has said that he spotted the player,
+   * he might also say that he is chasing the player
+   */
+  private IEnumerator MaybeSayChasingVoiceline()
+  {
+    Debug.Log("Waiting to say chasing voiceline");
+
+    // Wait until the audio has stopped playing
+    while(teacherVoiceline?.isTalking ?? true)
+    {
+      yield return new WaitForSeconds(0.1f);
+    }
+
+    // If the player has not yet been captured,
+    // say a chasing voiceline
+    if(teacherMovement.chasingPlayer &&
+      !teacherMemory.hasCapturedPlayer)
+    {
+      Voiceline voiceline = linesManager.GetChasingVoiceline();
+      
       teacherVoiceline.StartVoiceline(voiceline);
     }
   }
@@ -139,12 +158,7 @@ public class TeacherVoicelines : MonoBehaviour
 
     Voiceline voiceline = linesManager.GetCapturingVoiceline();
 
-    if(voiceline != null)
-    {
-      teacherVoiceline.StopVoiceline();
-
-      teacherVoiceline.StartVoiceline(voiceline);
-    }
+    teacherVoiceline.StartVoiceline(voiceline);
   }
 
   /*
@@ -174,11 +188,6 @@ public class TeacherVoicelines : MonoBehaviour
 
     teacherMemory.HearSound();
 
-    if(voiceline != null)
-    {
-      teacherVoiceline.StopVoiceline();
-
-      teacherVoiceline.StartVoiceline(voiceline);
-    }
+    teacherVoiceline.StartVoiceline(voiceline);
   }
 }

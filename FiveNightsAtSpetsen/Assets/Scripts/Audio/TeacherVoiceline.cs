@@ -25,6 +25,7 @@ public class TeacherVoiceline : MonoBehaviour
   private Animator            animator;
 
   private Coroutine talkingCoroutine;
+  public  bool      isTalking = false;
 
   /*
    * When this component is enabled,
@@ -77,11 +78,20 @@ public class TeacherVoiceline : MonoBehaviour
       return;
     }
 
+    // If the teacher is already talking,
+    // stop (continuing) saying whatever it said before
+    if (talkingCoroutine != null)
+    {
+      StopCoroutine(talkingCoroutine);
+    }
+
     Debug.Log("Starting voiceline: " + voiceline.text);
 
     audioManager.Play(voiceline.audio);
 
     animator?.SetBool("isTalking", true);
+
+    this.isTalking = true;
 
     talkingCoroutine = StartCoroutine(TalkingVoiceline(voiceline.text));
   }
@@ -98,8 +108,6 @@ public class TeacherVoiceline : MonoBehaviour
       StopCoroutine(talkingCoroutine);
 
       AfterTeacherHasTalked();
-
-      talkingCoroutine = null;
     }
   }
 
@@ -129,7 +137,7 @@ public class TeacherVoiceline : MonoBehaviour
     // Wait until the audio has stopped playing
     while(audioManager?.audioSource?.isPlaying ?? true)
     {
-      yield return null;
+      yield return new WaitForSeconds(0.1f);
     }
 
     AfterTeacherHasTalked();
@@ -142,6 +150,10 @@ public class TeacherVoiceline : MonoBehaviour
   private void AfterTeacherHasTalked()
   {
     Debug.Log("Teacher stopped talking");
+
+    this.isTalking   = false;
+    talkingCoroutine = null;
+
 
     audioManager.Stop();
 
