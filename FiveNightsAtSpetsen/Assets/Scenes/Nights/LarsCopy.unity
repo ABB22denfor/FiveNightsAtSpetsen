@@ -545,12 +545,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: trashcan2 task string eaaaaaaaaaaa
+      value: Find trashcan with password clue #2
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: trashcan2 tasl completed
+      value: Task Completed
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -4589,12 +4589,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: laptop2 task string
+      value: Edit the schedule
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: dea
+      value: Task Completed
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -11630,12 +11630,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: trashcan3 task string daaaaaau
+      value: Find trashcan with password clue #3
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: trashcan3 tasl completed
+      value: Task Completed!
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -14980,12 +14980,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: laptop1 task string ejanianiejnaijdnaiendeandi
+      value: Go to Lars Laptop
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: laptop1 task completed!!
+      value: Task completed!!
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -29249,12 +29249,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: trashcan1 task string eeeeeeeeeeeeeeeeeeeee
+      value: Find trashcan with password clue #1
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: trashcan1 tasl completed
+      value: Task Completed
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
