@@ -63,49 +63,17 @@ public class TeacherAudioManager : MonoBehaviour
     // Audio/Sound/Teachers/lars
     string teacherResourcesFolder = "Audio/Sound/Teachers/" + teacherName;
 
-    string audioFolderPath = Application.dataPath + "/Resources/" + teacherResourcesFolder;
-
-
-    Debug.Log($"Searching for audio files in: '{audioFolderPath}'");
-
-    if(!Directory.Exists(audioFolderPath))
-    {
-      Debug.LogWarning($"'{teacherName}' doesn't have an audio folder");
-
-      return;
-    }
-
 
     Debug.Log($"Loading '{teacherName}'s audio files");
 
     audioClips = new Dictionary<string, AudioClip>();
 
 
-    string[] files = Directory.GetFiles(audioFolderPath, audioFileExtension);
-    
-    foreach(string file in files)
+    foreach(AudioClip clip in Resources.LoadAll<AudioClip>(teacherResourcesFolder))
     {
-      string fileName = Path.GetFileNameWithoutExtension(file);
+      Debug.Log($"Loaded audio file: '{clip.name}'");
 
-      // Audio/Sound/Teachers/lars/lars-alert-line-0
-      string resourcesFileName = teacherResourcesFolder + "/" + fileName;
-
-      Debug.Log($"Loading audio file: '{resourcesFileName}'");
-
-      AudioClip clip = Resources.Load<AudioClip>(resourcesFileName);
-
-      if(clip != null)
-      {
-        Debug.Log($"Loaded audio file: '{resourcesFileName}'");
-
-        Debug.Log($"Storing audio file as: '{fileName}'");
-
-        audioClips[fileName] = clip;
-      }
-      else
-      {
-        Debug.LogError($"Failed to load audio file: '{resourcesFileName}'");
-      }
+      audioClips[clip.name] = clip;
     }
   }
 
