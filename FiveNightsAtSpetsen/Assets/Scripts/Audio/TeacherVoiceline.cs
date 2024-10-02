@@ -6,23 +6,27 @@
  *
  * Written by Hampus Fridholm
  *
- * Last updated: 2024-09-24
+ * Last updated: 2024-10-01
  */
 
 using TMPro;
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(TeacherAudioManager))]
 public class TeacherVoiceline : MonoBehaviour
 {
-  public  TextMeshProUGUI subtitleText  = null;
-  private int             subtitleIndex = 0;
+  [SerializeField]
+  private float subtitleLetterDelay = 0.05f; // Delay between each letter
+
+  [SerializeField]
+  private TextMeshProUGUI subtitleText  = null;
 
   private TeacherAudioManager audioManager;
   private Animator            animator;
 
-  private Coroutine processCoroutine;
-  private bool      isProcessRunning = false;
+  private Coroutine talkingCoroutine;
+  public  bool      isTalking = false;
 
   /*
    * When this component is enabled,
@@ -32,9 +36,13 @@ public class TeacherVoiceline : MonoBehaviour
   {
     Debug.Log("TeacherVoiceline.cs enabled");
 
-    audioManager = gameObject.AddComponent<TeacherAudioManager>();
-
+    audioManager = gameObject.GetComponent<TeacherAudioManager>();
     animator     = gameObject.GetComponentInChildren<Animator>();
+
+    if(subtitleText)
+    {
+      subtitleText.text = "";
+    }
   }
 
   /*
@@ -44,8 +52,6 @@ public class TeacherVoiceline : MonoBehaviour
   void OnDisable()
   {
     Debug.Log("TeacherVoiceline.cs disabled");
-
-    Destroy(gameObject.GetComponent<TeacherAudioManager>());
   }
 
   /*
@@ -70,21 +76,22 @@ public class TeacherVoiceline : MonoBehaviour
       return;
     }
 
-    Debug.Log("Starting voiceline");
+    // If the teacher is already talking,
+    // stop (continuing) saying whatever it said before
+    if (talkingCoroutine != null)
+    {
+      StopCoroutine(talkingCoroutine);
+    }
+
+    Debug.Log("Starting voiceline: " + voiceline.text);
 
     audioManager.Play(voiceline.audio);
 
     animator?.SetBool("isTalking", true);
 
-    Debug.Log("Voiceline: " + voiceline.text);
+    this.isTalking = true;
 
-    // If subtitles has been setup, assign the voiceline text to it
-    if(subtitleText)
-    {
-      subtitleText.text = voiceline.text;
-    }
-
-    processCoroutine = StartCoroutine(Process(voiceline.text));
+    talkingCoroutine = StartCoroutine(TalkingVoiceline(voiceline.text));
   }
 
   /*
@@ -92,17 +99,13 @@ public class TeacherVoiceline : MonoBehaviour
    */
   public void StopVoiceline()
   {
-    Debug.Log("Stopping voiceline");
+    Debug.Log("Stopping teacher from talking");
 
-    if (processCoroutine != null)
+    if (talkingCoroutine != null)
     {
-      isProcessRunning = false;
+      StopCoroutine(talkingCoroutine);
 
-      StopCoroutine(processCoroutine);
-
-      OnProcessStopped();
-
-      processCoroutine = null;
+      AfterTeacherHasTalked();
     }
   }
 
@@ -112,43 +115,43 @@ public class TeacherVoiceline : MonoBehaviour
    * Fix: Either commit to only use this Coroutine for subtitles,
    * or add something else in it.
    */
-  private IEnumerator Process(string voicelineText)
+  private IEnumerator TalkingVoiceline(string voicelineText)
   {
-    isProcessRunning = true;
-
     if(subtitleText)
     {
       subtitleText.text = "";
-      subtitleIndex = 0;
     }
 
-    while(isProcessRunning)
+    for(int index = 0; index < voicelineText.Length; index++)
     {
-      if(subtitleText && subtitleIndex < voicelineText.Length)
+      if(subtitleText)
       {
-        subtitleText.text += voicelineText[subtitleIndex++];
-      }
-      else
-      {
-        isProcessRunning = false;
+        subtitleText.text += voicelineText[index];
       }
 
-      yield return new WaitForSeconds((float) 0.075);
+      yield return new WaitForSeconds(subtitleLetterDelay);
     }
 
-    // Display the subtitle for 1 extra second
-    yield return new WaitForSeconds((float) 1.0);
+    // Wait until the audio has stopped playing
+    while(audioManager?.audioSource?.isPlaying ?? true)
+    {
+      yield return new WaitForSeconds(0.1f);
+    }
 
-    OnProcessStopped();
+    AfterTeacherHasTalked();
   }
 
   /*
    * This is ran after the voiceline has stopped
    * - stop talking animation
    */
-  private void OnProcessStopped()
+  private void AfterTeacherHasTalked()
   {
-    Debug.Log("Voiceline process stopped");
+    Debug.Log("Teacher stopped talking");
+
+    this.isTalking   = false;
+    talkingCoroutine = null;
+
 
     audioManager.Stop();
 
@@ -157,7 +160,6 @@ public class TeacherVoiceline : MonoBehaviour
     if(subtitleText)
     {
       subtitleText.text = "";
-      subtitleIndex = 0;
     }
   }
 }

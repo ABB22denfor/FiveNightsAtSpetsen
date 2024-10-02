@@ -12,7 +12,7 @@
  * Created by Oliver Sarebro
  * Written by Hampus Fridholm
  *
- * Last updated: 2024-09-18
+ * Last updated: 2024-10-01
  */
 
 using System.IO;
@@ -21,15 +21,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(TeacherVoiceline))]
+[RequireComponent(typeof(TeacherPlayerMemory))]
+[RequireComponent(typeof(TeacherAudioManager))]
 public class TeacherVoicelines : MonoBehaviour
 {
-  [SerializeField]
-  private TextMeshProUGUI subtitleText = default;
-
-  private Teacher teacher;
+  private Teacher         teacher;
+  private TeacherMovement teacherMovement;
 
   private TeacherLinesManager linesManager;
   private TeacherVoiceline    teacherVoiceline;
+
+  private TeacherPlayerMemory teacherMemory;
 
   /*
    * When the script is enabled,
@@ -39,25 +42,19 @@ public class TeacherVoicelines : MonoBehaviour
   {
     Debug.Log("TeacherVoicelines.cs enabled");
 
-    teacher = gameObject.GetComponent<Teacher>();
+    teacher          = gameObject.GetComponent<Teacher>();
+    teacherMovement  = gameObject.GetComponent<TeacherMovement>();
+    teacherVoiceline = gameObject.GetComponent<TeacherVoiceline>();
+    teacherMemory    = gameObject.GetComponent<TeacherPlayerMemory>();
 
-    teacherVoiceline = gameObject.AddComponent<TeacherVoiceline>();
-
-    if(subtitleText)
-    {
-      subtitleText.text = "";
-
-      teacherVoiceline.subtitleText = subtitleText;
-    }
+    // Initializing teacher's voiceline manager
+    linesManager = new TeacherLinesManager(teacher.teacherName);
 
     // Adding handlers for teacher's events
     EventsManager.Instance.teacherEvents.OnTeacherEnteredRoom += OnTeacherEnteredRoom;
     EventsManager.Instance.teacherEvents.OnPlayerSpotted      += OnPlayerSpotted;
     EventsManager.Instance.teacherEvents.OnPlayerCaptured     += OnPlayerCaptured;
     EventsManager.Instance.teacherEvents.OnPlayerMadeSound    += OnPlayerMadeSound;
-
-    // Initializing teacher's voiceline manager
-    linesManager = new TeacherLinesManager(teacher.teacherName);
   }
 
   /*
@@ -66,8 +63,6 @@ public class TeacherVoicelines : MonoBehaviour
   void OnDisable()
   {
     Debug.Log("TeacherVoicelines.cs disabled");
-
-    Destroy(gameObject.GetComponent<TeacherVoiceline>());
 
     // Removing handlers for teacher's events
     EventsManager.Instance.teacherEvents.OnTeacherEnteredRoom -= OnTeacherEnteredRoom;
@@ -98,12 +93,7 @@ public class TeacherVoicelines : MonoBehaviour
 
     Voiceline voiceline = linesManager.GetRoomEnteredVoiceline(roomName);
 
-    if(voiceline != null)
-    {
-      teacherVoiceline.StopVoiceline();
-
-      teacherVoiceline.StartVoiceline(voiceline);
-    }
+    teacherVoiceline.StartVoiceline(voiceline);
   }
 
   /*
@@ -111,19 +101,47 @@ public class TeacherVoicelines : MonoBehaviour
    */
   private void OnPlayerSpotted()
   {
+    // If the teacher knows where the player are,
+    // and now spotts the player again,
+    // he should not say anything extra
+    if(teacherMemory.knowsWherePlayerIs) return;
+
+    teacherMemory.SpottPlayer();
+
     Debug.Log("Teacher spotted player");
 
+    // Say the spotting voiceline
     Voiceline voiceline = linesManager.GetSpottingVoiceline();
 
-    if(voiceline != null)
-    {
-      teacherVoiceline.StopVoiceline();
+    teacherVoiceline.StartVoiceline(voiceline);
 
+    StartCoroutine(MaybeSayChasingVoiceline());
+  }
+
+  /*
+   * After the teacher has said that he spotted the player,
+   * he might also say that he is chasing the player
+   */
+  private IEnumerator MaybeSayChasingVoiceline()
+  {
+    Debug.Log("Waiting to say chasing voiceline");
+
+    // Wait until the audio has stopped playing
+    while(teacherVoiceline?.isTalking ?? true)
+    {
+      yield return new WaitForSeconds(0.1f);
+    }
+
+    // If the player has not yet been captured,
+    // say a chasing voiceline
+    if(teacherMovement.chasingPlayer &&
+      !teacherMemory.hasCapturedPlayer)
+    {
+      Voiceline voiceline = linesManager.GetChasingVoiceline();
+      
       teacherVoiceline.StartVoiceline(voiceline);
     }
   }
-
-  private bool playerHasBeenCaptured = false;
 
   /*
    * When the teacher captures the player
@@ -133,22 +151,15 @@ public class TeacherVoicelines : MonoBehaviour
    */
   private void OnPlayerCaptured()
   {
-    // If teacher already has captured the player
-    if(playerHasBeenCaptured) return;
+    if(teacherMemory.hasCapturedPlayer) return;
 
-    playerHasBeenCaptured = true;
-
+    teacherMemory.CapturePlayer();
 
     Debug.Log("Teacher captured player");
 
     Voiceline voiceline = linesManager.GetCapturingVoiceline();
 
-    if(voiceline != null)
-    {
-      teacherVoiceline.StopVoiceline();
-
-      teacherVoiceline.StartVoiceline(voiceline);
-    }
+    teacherVoiceline.StartVoiceline(voiceline);
   }
 
   /*
@@ -156,21 +167,28 @@ public class TeacherVoicelines : MonoBehaviour
    *
    * If the teacher is aware of the player, he should say a hearing-voiceline
    * Else, he should say an alert-voiceline
+   *
+   * If the teacher knows where the player are,
+   * and now spotts the player again,
+   * he should not say anything extra
    */
   private void OnPlayerMadeSound(TeacherRoomPath room)
   {
-    string roomName = room.id;
-
     Debug.Log("Teacher heard a sound");
 
-    // Voiceline voiceline = linesManager.GetHearingVoiceline();
-    Voiceline voiceline = linesManager.GetAlertVoiceline();
+    Voiceline voiceline = null;
 
-    if(voiceline != null)
+    if(teacherMemory.knowsAboutPlayer)
     {
-      teacherVoiceline.StopVoiceline();
-
-      teacherVoiceline.StartVoiceline(voiceline);
+      voiceline = linesManager.GetHearingVoiceline();
     }
+    else
+    {
+      voiceline = linesManager.GetAlertVoiceline();
+    }
+
+    teacherMemory.HearSound();
+
+    teacherVoiceline.StartVoiceline(voiceline);
   }
 }

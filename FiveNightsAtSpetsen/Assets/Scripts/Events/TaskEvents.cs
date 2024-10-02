@@ -7,4 +7,16 @@ public class TaskEvents
     {
         OnStepCompleted?.Invoke(step);
     }
+
+    public event Action<TaskStep, TaskStep> OnStepCompletionAccepted;
+    public void AcceptStepCompletion(TaskStep lastStep, TaskStep nextStep) 
+    {
+        OnStepCompletionAccepted?.Invoke(lastStep, nextStep);
+    }
+
+    public event Action OnAllTasksCompleted;
+    public void CompletedAllTasks()
+    {
+        OnAllTasksCompleted?.Invoke();
+    }
 }

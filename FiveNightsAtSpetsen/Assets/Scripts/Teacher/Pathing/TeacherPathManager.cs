@@ -26,9 +26,10 @@ public class TeacherPathManager : MonoBehaviour
     public int routeIndex = 0;
     public TeacherRoomPath tempRoomTarget;
 
+    TeacherRoomPath roomToInvestigate;
+
     List<(TeacherRoomPath room, int repetitions)> altRoute = new();
     bool useAltRoute = false;
-    bool useAltRoutePermanent = false;
     int initialAltRouteIndex;
 
     void OnValidate()
@@ -77,10 +78,6 @@ public class TeacherPathManager : MonoBehaviour
                     EventsManager.Instance.teacherEvents.TeacherEnteredRoom(GetRoute()[routeIndex].room, false);
 
                     routeIndex = (routeIndex + 1) % GetRoute().Count;
-                    if (useAltRoute && !useAltRoutePermanent && routeIndex == initialAltRouteIndex) {
-                        teacher.TempAltRouteCompleted();
-                        SetMainRoute();
-                    }
                     return;
                 }
             }
@@ -92,6 +89,7 @@ public class TeacherPathManager : MonoBehaviour
                     currentRoom = rooms.IndexOf(target);
                     EventsManager.Instance.teacherEvents.TeacherEnteredRoom(rooms[currentRoom], true);
                     target = null;
+                    teacher.mode = teacher.hasSpottedPlayer ? Teacher.TeacherMode.SpottedPlayer : Teacher.TeacherMode.Standard;
                     return;
                 }
             }
@@ -132,7 +130,7 @@ public class TeacherPathManager : MonoBehaviour
         lastRoom = room;
         inRoom = false;
         interRoomIndex = interRoomPath.IndexOf(room.exitPoint);
-        
+
         if (target == null)
             TargetRoom(GetRouteTarget(), true);
     }
@@ -160,14 +158,11 @@ public class TeacherPathManager : MonoBehaviour
         return null;
     }
 
-    public void SetAltRoute(bool permanent) {
-        if (useAltRoute) {
-            useAltRoutePermanent = permanent;
+    public void SetAltRoute() {
+        if (useAltRoute)
             return;
-        }
 
         useAltRoute = true;
-        useAltRoutePermanent = permanent;
 
         (int i, float dist) closest = (-1, 0);
         for (int j = 0; j < altRoute.Count; j++) {
@@ -181,23 +176,6 @@ public class TeacherPathManager : MonoBehaviour
 
         routeIndex = closest.i;
         initialAltRouteIndex = routeIndex;
-    }
-
-    public void SetMainRoute() {
-        useAltRoute = false;
-
-        (int i, float dist) closest = (-1, 0);
-        for (int j = 0; j < route.Count; j++) {
-            TeacherRoomPath room = route[j].room;
-            if (room == null) continue;
-            float distance = Vector3.Distance(waypoints.waypoints[room.exitPoint].transform.position,
-                                              teacher.transform.position);
-
-            if (distance < closest.dist || closest.i == -1)
-                closest = (j, distance);
-        }
-
-        routeIndex = closest.i;
     }
 
     List<(TeacherRoomPath room, int repetitions)> GetRoute() {

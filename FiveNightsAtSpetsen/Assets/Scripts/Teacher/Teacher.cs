@@ -15,6 +15,7 @@ public class Teacher : MonoBehaviour
     Dictionary<string, float> delays;
 
     public TeacherMode mode = TeacherMode.Standard;
+    public bool hasSpottedPlayer = false;
 
     void OnEnable()
     {
@@ -84,8 +85,9 @@ public class Teacher : MonoBehaviour
         if (!movement.chasingPlayer)
             EventsManager.Instance.teacherEvents.PlayerSpotted();
 
-        pathManager.SetAltRoute(true);
+        pathManager.SetAltRoute();
         mode = TeacherMode.ChasingPlayer;
+        hasSpottedPlayer = true;
         movement.SetTarget(position, true);
     }
 
@@ -113,11 +115,6 @@ public class Teacher : MonoBehaviour
         pathManager.TargetRoom((room, false));
 
         mode = TeacherMode.InvestigatingNoise;
-        pathManager.SetAltRoute(false);
-    }
-
-    public void TempAltRouteCompleted() {
-        mode = TeacherMode.Standard;
     }
 
     public enum TeacherMode {

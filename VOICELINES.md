@@ -1,5 +1,7 @@
 # Voicelines
 
+## Initial plan
+
 At start of game:
 1. Initialize arrays of lines for every room, "room-lines"
 2. Initialize array of general lines, "general-lines"

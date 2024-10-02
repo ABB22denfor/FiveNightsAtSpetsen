@@ -6,19 +6,24 @@
  *
  * Written by Hampus Fridholm
  *
- * Last updated: 2024-09-24
+ * Last updated: 2024-10-01
  */
 
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Globalization;
 
 public class TeacherAudioManager : MonoBehaviour
 {
-  private string audioFileExtension = "*.wav";
+  [SerializeField]
+  private float audioMinDistance =  1.0f;
+  
+  [SerializeField]
+  private float audioMaxDistance = 50.0f;
 
-  private AudioSource audioSource;
+  public AudioSource audioSource;
 
   private Dictionary<string, AudioClip> audioClips;
 
@@ -35,13 +40,28 @@ public class TeacherAudioManager : MonoBehaviour
 
     audioSource = gameObject.AddComponent<AudioSource>();
 
+    ConfigureAudioSource();
+
     // If the teacher has a name to work with, start the audio manager
     if(teacher != null && teacher.teacherName != null)
     {
-      Debug.Log("Loading audio clips for teacher: " + teacher.teacherName);
-
       LoadAudioClips(teacher.teacherName);
     }
+  }
+
+  /*
+   *
+   */
+  private void ConfigureAudioSource()
+  {
+    // Set the spatial blend to 3D
+    audioSource.spatialBlend = 1.0f;
+
+    // Set the volume rolloff mode to Linear
+    audioSource.rolloffMode = AudioRolloffMode.Linear;
+
+    audioSource.minDistance = audioMinDistance;  // Full volume at this distance
+    audioSource.maxDistance = audioMaxDistance; // Volume will be zero at this distance
   }
 
   /*
@@ -56,56 +76,32 @@ public class TeacherAudioManager : MonoBehaviour
   }
 
   /*
+   * Get teacher's voiceline audio clips folder name
+   */
+  private static string GetAudioClipsFolder(string teacherName)
+  {
+    TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+
+    return textInfo.ToTitleCase(teacherName) + "Voicelines";
+  }
+
+  /*
    * Load AudioClips for the teacher's voicelines
    */
   private void LoadAudioClips(string teacherName)
   {
-    // Audio/Sound/Teachers/lars
-    string teacherResourcesFolder = "Audio/Sound/Teachers/" + teacherName;
-
-    string audioFolderPath = Application.dataPath + "/Resources/" + teacherResourcesFolder;
-
-
-    Debug.Log($"Searching for audio files in: '{audioFolderPath}'");
-
-    if(!Directory.Exists(audioFolderPath))
-    {
-      Debug.LogWarning($"'{teacherName}' doesn't have an audio folder");
-
-      return;
-    }
-
-
     Debug.Log($"Loading '{teacherName}'s audio files");
+
+    string audioClipsFolder = GetAudioClipsFolder(teacherName);
+
 
     audioClips = new Dictionary<string, AudioClip>();
 
-
-    string[] files = Directory.GetFiles(audioFolderPath, audioFileExtension);
-    
-    foreach(string file in files)
+    foreach(AudioClip clip in Resources.LoadAll<AudioClip>(audioClipsFolder))
     {
-      string fileName = Path.GetFileNameWithoutExtension(file);
+      Debug.Log($"Loaded audio file: '{clip.name}'");
 
-      // Audio/Sound/Teachers/lars/lars-alert-line-0
-      string resourcesFileName = teacherResourcesFolder + "/" + fileName;
-
-      Debug.Log($"Loading audio file: '{resourcesFileName}'");
-
-      AudioClip clip = Resources.Load<AudioClip>(resourcesFileName);
-
-      if(clip != null)
-      {
-        Debug.Log($"Loaded audio file: '{resourcesFileName}'");
-
-        Debug.Log($"Storing audio file as: '{fileName}'");
-
-        audioClips[fileName] = clip;
-      }
-      else
-      {
-        Debug.LogError($"Failed to load audio file: '{resourcesFileName}'");
-      }
+      audioClips[clip.name] = clip;
     }
   }
 
@@ -123,14 +119,14 @@ public class TeacherAudioManager : MonoBehaviour
 
     if(fileName == null)
     {
-      Debug.LogWarning("No voiceline audio file was supplied");
+      Debug.LogWarning("No audio file was supplied");
 
       return;
     }
 
     if(audioClips.TryGetValue(fileName, out AudioClip clip))
     {
-      Debug.Log($"Started playing voiceline audio: '{fileName}'");
+      Debug.Log($"Start playing audio: '{fileName}'");
 
       audioSource.clip = clip;
 
@@ -147,7 +143,7 @@ public class TeacherAudioManager : MonoBehaviour
    */
   public void Stop()
   {
-    Debug.Log($"Stopped playing voiceline audio: '{audioSource.clip}'");
+    Debug.Log($"Stop playing audio: '{audioSource.clip}'");
 
     audioSource.Stop();
   }

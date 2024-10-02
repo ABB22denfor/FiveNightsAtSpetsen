@@ -18,26 +18,26 @@ public class PauseManager : MonoBehaviour
     {
         PauseMenu.SetActive(true);
         Background.SetActive(true);
-        Static.SetActive(true);
+        Static.SetActive(false);
         Confirm.SetActive(false);
         SettingsMenu.SetActive(false);
         PausePanel.SetActive(false);
-        Canvas.SetActive(false);
+        Canvas.SetActive(true);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Canvas.activeSelf == false)
+            if (Static.activeSelf == false)
             {
-                Canvas.SetActive(true);
+                Static.SetActive(true);
                 PausePanel.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 Time.timeScale = 0;
             }
-            else if (Canvas.activeSelf == true && PausePanel.activeSelf == true)
+            else if (Static.activeSelf == true && PausePanel.activeSelf == true)
             {
                 if (SettingsMenu.activeSelf == true)
                 {
@@ -60,13 +60,14 @@ public class PauseManager : MonoBehaviour
     public void Resume()
     {
         PausePanel.SetActive(false);
-        Canvas.SetActive(false);
+        Static.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1;
     }
     public void QuitMainMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(MainMenuSceneName);
     }
 }

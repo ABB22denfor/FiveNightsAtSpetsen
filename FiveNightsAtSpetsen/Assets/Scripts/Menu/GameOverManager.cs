@@ -12,9 +12,11 @@ public class GameOverManager : MonoBehaviour
     public GameObject GameOverMenu;
     public GameObject Confirm;
     public GameObject Image;
+    public GameObject Static;
 
     void Awake()
     {
+        Canvas.SetActive(true);
         Image.SetActive(true);
         Background.SetActive(true);
         GameOverMenu.SetActive(false);
@@ -36,7 +38,7 @@ public class GameOverManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Canvas.activeSelf == true && GameOverPanel.activeSelf == true)
+            if (Static.activeSelf == true && GameOverPanel.activeSelf == true)
             {
                 if (Confirm.activeSelf == true)
                 {
@@ -54,16 +56,16 @@ public class GameOverManager : MonoBehaviour
 
     IEnumerator GameOver()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
 
         Canvas.SetActive(true);
         GameOverPanel.SetActive(true);
+        Static.SetActive(true);
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4f);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Time.timeScale = 0;
         GameOverMenu.SetActive(true);
     }
 
