@@ -29152,8 +29152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0e4b818dd222548b1911bc265c8d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subtitleDelay: 0.05
-  subtitleText: {fileID: 0}
+  subtitleLetterDelay: 0.05
+  subtitleText: {fileID: 1372127630}
   isTalking: 0
 --- !u!114 &882541152
 MonoBehaviour:
@@ -40123,7 +40123,7 @@ GameObject:
   - component: {fileID: 1372127631}
   - component: {fileID: 1372127630}
   m_Layer: 5
-  m_Name: Subtitles
+  m_Name: Subtitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

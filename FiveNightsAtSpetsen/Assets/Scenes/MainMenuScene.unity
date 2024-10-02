@@ -227,7 +227,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: LarsCopy
+          m_StringArgument: JockeLoadingScene
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &17956831
@@ -447,7 +447,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Lars_Working
+          m_StringArgument: LarsLoadingScene
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &55075188
@@ -1306,7 +1306,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: LarsCopy
+          m_StringArgument: JetonLoadingScene
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &382956043
@@ -2726,7 +2726,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: LarsCopy
+          m_StringArgument: AndreasLoadingScene
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1050860105
@@ -3835,7 +3835,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Jonas
+          m_StringArgument: JonasLoadingScene
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1281507577
