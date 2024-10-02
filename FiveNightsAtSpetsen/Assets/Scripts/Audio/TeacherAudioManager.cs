@@ -17,6 +17,12 @@ using System.Globalization;
 
 public class TeacherAudioManager : MonoBehaviour
 {
+  [SerializeField]
+  private float audioMinDistance =  1.0f;
+  
+  [SerializeField]
+  private float audioMaxDistance = 50.0f;
+
   public AudioSource audioSource;
 
   private Dictionary<string, AudioClip> audioClips;
@@ -34,11 +40,28 @@ public class TeacherAudioManager : MonoBehaviour
 
     audioSource = gameObject.AddComponent<AudioSource>();
 
+    ConfigureAudioSource();
+
     // If the teacher has a name to work with, start the audio manager
     if(teacher != null && teacher.teacherName != null)
     {
       LoadAudioClips(teacher.teacherName);
     }
+  }
+
+  /*
+   *
+   */
+  private void ConfigureAudioSource()
+  {
+    // Set the spatial blend to 3D
+    audioSource.spatialBlend = 1.0f;
+
+    // Set the volume rolloff mode to Linear
+    audioSource.rolloffMode = AudioRolloffMode.Linear;
+
+    audioSource.minDistance = audioMinDistance;  // Full volume at this distance
+    audioSource.maxDistance = audioMaxDistance; // Volume will be zero at this distance
   }
 
   /*

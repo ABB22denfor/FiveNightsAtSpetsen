@@ -29079,6 +29079,18 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 882541144}
+    - targetCorrespondingSourceObject: {fileID: 566564891133530414, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 882541146}
+    - targetCorrespondingSourceObject: {fileID: 566564891133530414, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 882541145}
+    - targetCorrespondingSourceObject: {fileID: 566564891133530414, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 882541152}
   m_SourcePrefab: {fileID: 100100000, guid: 53ea1ad0507c5434392aa68d1516acce, type: 3}
 --- !u!4 &882541137 stripped
 Transform:
@@ -29098,7 +29110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deba6941c9eeade4dab7c66147b1b81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subtitleText: {fileID: 1372127630}
 --- !u!114 &882541144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29112,6 +29123,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSFX: {fileID: 8300000, guid: 2f1340ae5b23b8744abd7e638fb9417d, type: 3}
+--- !u!114 &882541145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690990200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360b26171414fbf47892ee73cb5668e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knowsAboutPlayer: 0
+  knowsWherePlayerIs: 0
+  hasCapturedPlayer: 0
+  trackingPlayerTime: 5
+  forgetPlayerTime: 60
+--- !u!114 &882541146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690990200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f0e4b818dd222548b1911bc265c8d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subtitleDelay: 0.05
+  subtitleText: {fileID: 0}
+  isTalking: 0
+--- !u!114 &882541152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690990200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd849abbfd9f7164db878fe1504066ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMinDistance: 1
+  audioMaxDistance: 40
+  audioSource: {fileID: 0}
 --- !u!1001 &883820503
 PrefabInstance:
   m_ObjectHideFlags: 0

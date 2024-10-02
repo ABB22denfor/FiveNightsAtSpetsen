@@ -23,6 +23,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(TeacherVoiceline))]
 [RequireComponent(typeof(TeacherPlayerMemory))]
+[RequireComponent(typeof(TeacherAudioManager))]
 public class TeacherVoicelines : MonoBehaviour
 {
   private Teacher         teacher;

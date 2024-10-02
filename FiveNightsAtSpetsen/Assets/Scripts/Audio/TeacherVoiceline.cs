@@ -13,6 +13,7 @@ using TMPro;
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(TeacherAudioManager))]
 public class TeacherVoiceline : MonoBehaviour
 {
   [SerializeField]
@@ -35,9 +36,8 @@ public class TeacherVoiceline : MonoBehaviour
   {
     Debug.Log("TeacherVoiceline.cs enabled");
 
-    audioManager = gameObject.AddComponent<TeacherAudioManager>();
-
-    animator = gameObject.GetComponentInChildren<Animator>();
+    audioManager = gameObject.GetComponent<TeacherAudioManager>();
+    animator     = gameObject.GetComponentInChildren<Animator>();
 
     if(subtitleText)
     {
@@ -52,8 +52,6 @@ public class TeacherVoiceline : MonoBehaviour
   void OnDisable()
   {
     Debug.Log("TeacherVoiceline.cs disabled");
-
-    Destroy(gameObject.GetComponent<TeacherAudioManager>());
   }
 
   /*
