@@ -17,7 +17,7 @@ using System.Collections;
 public class TeacherVoiceline : MonoBehaviour
 {
   [SerializeField]
-  private float subtitleDelay = 0.05f; // Delay between each letter
+  private float subtitleLetterDelay = 0.05f; // Delay between each letter
 
   [SerializeField]
   private TextMeshProUGUI subtitleText  = null;
@@ -129,7 +129,7 @@ public class TeacherVoiceline : MonoBehaviour
         subtitleText.text += voicelineText[index];
       }
 
-      yield return new WaitForSeconds(subtitleDelay);
+      yield return new WaitForSeconds(subtitleLetterDelay);
     }
 
     // Wait until the audio has stopped playing

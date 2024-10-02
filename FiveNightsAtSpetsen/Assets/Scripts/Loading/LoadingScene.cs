@@ -8,102 +8,235 @@ using TMPro;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class LoadingScene : MonoBehaviour
 {
-
-  private Coroutine processCoroutine;
-  private bool      isProcessRunning = false;
+  [SerializeField]
+  private float backstoryLetterDelay = 0.05f; // Delay between each letter
 
   [SerializeField]
-  private string backstoryText;
-  private int backstoryIndex = 0;
+  private TextMeshProUGUI backstoryTextField;
+  private string          backstoryText;
 
   [SerializeField]
-  private TextMeshProUGUI backstoryTextField  = null;
+  private TextMeshProUGUI loadingTextField;
+  private string          loadingText;
 
   [SerializeField]
-  private string loadingText;
-  private int loadingIndex = 0;
-  private int loadingDots  = 3;
+  private AudioClip backstoryAudioClip;
 
   [SerializeField]
-  private TextMeshProUGUI loadingTextField = null;
+  private string playSceneName;
 
+  [SerializeField]
+  private Button skipButton;
+
+  [SerializeField]
+  private Button playButton;
+
+
+  private AudioSource audioSource;
+
+  private AsyncOperation sceneLoad;
+
+  /*
+   *
+   */
+  void OnEnable()
+  {
+    Debug.Log("LoadingScene.cs enabled");
+
+    audioSource = gameObject.GetComponent<AudioSource>();
+
+    // Add onClick events to buttons
+    if(skipButton != null)
+    {
+      skipButton.onClick.AddListener(OnSkipClick);
+      
+      skipButton.gameObject.SetActive(false);
+    }
+
+    if(playButton != null)
+    {
+      playButton.onClick.AddListener(OnPlayClick);
+
+      playButton.gameObject.SetActive(false);
+    }
+
+    loadingTextField?.gameObject.SetActive(false);
+  }
+
+  /*
+   *
+   */
+  void OnDisable()
+  {
+    // Remove onClick events to buttons
+    skipButton?.onClick.RemoveListener(OnSkipClick);
+
+    playButton?.onClick.RemoveListener(OnPlayClick);
+  }
+
+  /*
+   * When the scene starts, begin with:
+   * start loading the play scene
+   * start playing the audio
+   */
   void Start()
   {
-    loadingTextField.text   = "";
-    backstoryTextField.text = "";
+    Debug.Log("Start loading scene");
+
+    // Start loading scene, but not activating it, yet
+    if(playSceneName != null && playSceneName.Length > 0)
+    {
+      sceneLoad = SceneManager.LoadSceneAsync(playSceneName);
+    }
+
+    if(sceneLoad != null)
+    {
+      sceneLoad.allowSceneActivation = false;
+    }
+
+    // Store the texts
+    backstoryText = backstoryTextField?.text;
+    loadingText   = loadingTextField?.text;
+
+    // If an AudioSource has been supplied, play the audio clip
+    if(audioSource)
+    {
+      audioSource.clip = backstoryAudioClip;
+
+      audioSource.Play();
+    }
   
-    StartCoroutine(AnimateBackstory());
+    if(backstoryTextField != null)
+    {
+      backstoryRoutine = StartCoroutine(ReadBackstory());
+      
+      skipButton?.gameObject.SetActive(true);
+    }
+    // If no backstory exists
+    // continue like the backstory has been read
+    else
+    {
+      AfterBackstoryHasBeenRead();
+    }
   }
 
   /*
    *
    */
-  private IEnumerator AnimateBackstory()
+  private void OnSkipClick()
   {
-    Debug.Log("Started animated backstory");
+    Debug.Log("Skipping backstory");
 
-    isProcessRunning = true;
-
-    if(backstoryTextField)
+    if(backstoryRoutine != null)
     {
-      backstoryTextField.text = "";
-      backstoryIndex          = 0;
+      StopCoroutine(backstoryRoutine);
     }
 
-    while(isProcessRunning)
-    {
-      if(backstoryTextField && backstoryIndex < backstoryText.Length)
-      {
-        backstoryTextField.text += backstoryText[backstoryIndex++];
-      }
-      else
-      {
-        isProcessRunning = false;
-      }
+    backstoryTextField.text = backstoryText;
 
-      yield return new WaitForSeconds(0.075f);
+    AfterBackstoryHasBeenRead();
+  }
+
+  /*
+   * Read the backstory, by:
+   * playing the audio recording, and
+   * revealing letter by letter
+   */
+  private Coroutine backstoryRoutine;
+
+  private IEnumerator ReadBackstory()
+  {
+    Debug.Log("Started reading backstory");
+
+    backstoryTextField.text = "";
+
+    for(int index = 0; index < backstoryText.Length; index++)
+    {
+      backstoryTextField.text += backstoryText[index];
+
+      yield return new WaitForSeconds(backstoryLetterDelay);
     }
 
-    StartCoroutine(OnBackstoryStopped());
+    // Wait until the audio has stopped playing
+    while(audioSource != null && (audioSource?.isPlaying ?? true))
+    {
+      yield return new WaitForSeconds(0.1f);
+    }
+
+    AfterBackstoryHasBeenRead();
   }
 
   /*
-   *
+   * After the backstory has been read,
+   * the audio should stop
+   * the play button should appear
+   * the skip button should disappear
    */
-  private IEnumerator OnBackstoryStopped()
+  private void AfterBackstoryHasBeenRead()
   {
-    Debug.Log("Done animating backstory");
+    Debug.Log("After backstory has been read");
 
-    StartCoroutine(AnimateLoading());
+    skipButton?.gameObject.SetActive(false);
 
-    yield return new WaitForSeconds(2.0f);
+    if(audioSource != null && (audioSource?.isPlaying ?? true))
+    {
+      audioSource?.Stop();
+    }
 
-    SceneManager.LoadScene("JonasNight");
+    if(playButton != null)
+    {
+      playButton.gameObject.SetActive(true);
+    }
+    else
+    {
+      StartCoroutine(LoadScene());
+    }
   }
 
   /*
-   *
+   * When the player clicks on the play button,
+   * the play button should disappear
+   * the scene should be loaded
    */
-  private IEnumerator AnimateLoading()
+  private void OnPlayClick()
+  {
+    Debug.Log("Play button has been clicked");
+
+    playButton?.gameObject.SetActive(false);
+
+    StartCoroutine(LoadScene());
+  }
+
+  /*
+   * Animate the loading text,
+   * by cycling 3 dots after the text...
+   */
+  private IEnumerator LoadScene()
   {
     Debug.Log("Started animating loading");
 
-    while(true)
+    loadingTextField?.gameObject.SetActive(true);
+
+    for(int index = 0;
+        (sceneLoad == null) || (sceneLoad.progress < 0.9f);
+        index = (index % 3) + 1)
     {
       if(loadingTextField)
       {
-        loadingTextField.text = loadingText + new string('.', loadingIndex);
-
-        loadingIndex = (loadingIndex % loadingDots) + 1;
-
-        Debug.Log("Loading Index: " + loadingIndex);
+        loadingTextField.text = loadingText + new string('.', index);
       }
 
       yield return new WaitForSeconds(0.5f);
     }
-  }
 
+    if(sceneLoad != null)
+    {
+      sceneLoad.allowSceneActivation = true;
+    }
+  }
 }
