@@ -20,16 +20,13 @@ public class TeacherVoiceline : MonoBehaviour
   private float subtitleLetterDelay = 0.05f; // Delay between each letter
 
   [SerializeField]
-  private TextMeshProUGUI subtitleText  = null;
+  private TextMeshProUGUI subtitleText = null;
 
   private TeacherAudioManager audioManager;
   private Animator            animator;
 
   private Coroutine talkingCoroutine;
   public  bool      isTalking = false;
-
-  [SerializeField]
-  private AudioListener playerAudioListener;
 
   /*
    * When this component is enabled,
@@ -113,58 +110,6 @@ public class TeacherVoiceline : MonoBehaviour
   }
 
   /*
-   * Get the distance between the audio source and listener
-   * That should be the same as the distance between the teacher and the player
-   */
-  private float GetAudioDistance()
-  {
-    // Check if the 2 gameobjects are assigned
-    if((audioManager?.audioSource != null) &&
-       (playerAudioListener       != null))
-    {
-      Vector3 teacherPosition = audioManager.audioSource.transform.position;
-      Vector3 playerPosition  = playerAudioListener.transform.position;
-
-      return Vector3.Distance(teacherPosition, playerPosition);
-    }
-    else return float.MaxValue;
-  }
-
-  /*
-   *
-   */
-  private float GetMaxAudioDistance()
-  {
-    if(audioManager?.audioSource)
-    {
-      return audioManager.audioSource.maxDistance;
-    }
-    else return 0.0f;
-  }
-
-  /*
-   * Check if the player is hearing teacher
-   *
-   * If the audioSource or the audioListener is not correctly supplied,
-   * the subtitle should print, for debugging reasons
-   */
-  private bool PlayerIsHearingTeacher()
-  {
-    if((audioManager             == null) ||
-       (audioManager.audioSource == null) ||
-       (playerAudioListener      == null))
-    {
-      return true;
-    }
-
-    float audioDistance    = GetAudioDistance();
-    float maxAudioDistance = GetMaxAudioDistance();
-
-    return ((audioDistance <= maxAudioDistance) &&
-            (audioManager?.audioSource?.isPlaying ?? true));
-  }
-
-  /*
    * This is the process that is ran when the voiceline is being said
    *
    * The neat part is, that only the text that the player is hearing,
@@ -181,7 +126,8 @@ public class TeacherVoiceline : MonoBehaviour
 
     for(int index = 0; index < voicelineText.Length; index++)
     {
-      if(PlayerIsHearingTeacher() && subtitleText)
+      if(subtitleText &&
+        (audioManager?.PlayerIsHearingTeacher() ?? false))
       {
         subtitleText.text += voicelineText[index];
       }

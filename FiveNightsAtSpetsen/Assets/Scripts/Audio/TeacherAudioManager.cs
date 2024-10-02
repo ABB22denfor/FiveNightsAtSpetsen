@@ -21,7 +21,10 @@ public class TeacherAudioManager : MonoBehaviour
   private float audioMinDistance =  1.0f;
   
   [SerializeField]
-  private float audioMaxDistance = 50.0f;
+  private float audioMaxDistance = 80.0f;
+
+  [SerializeField]
+  private AudioListener audioListener;
 
   public AudioSource audioSource;
 
@@ -146,5 +149,29 @@ public class TeacherAudioManager : MonoBehaviour
     Debug.Log($"Stop playing audio: '{audioSource.clip}'");
 
     audioSource.Stop();
+  }
+
+  /*
+   * Check if the player is hearing teacher
+   *
+   * If the audioSource or the audioListener is not correctly supplied,
+   * the subtitle should print, for debugging reasons
+   */
+  public bool PlayerIsHearingTeacher()
+  {
+    if((audioSource == null) || (audioListener == null))
+    {
+      Debug.LogWarning("AudioSource or AudioListener not configured");
+
+      return true;
+    }
+
+    Vector3 teacherPosition = audioSource.transform.position;
+    Vector3 playerPosition  = audioListener.transform.position;
+
+    float audioDistance = Vector3.Distance(teacherPosition, playerPosition);
+
+    // return (audioSource.isPlaying) &&
+    return (audioDistance <= audioSource.maxDistance);
   }
 }

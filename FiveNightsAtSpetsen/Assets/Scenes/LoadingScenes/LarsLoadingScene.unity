@@ -171,7 +171,7 @@ MonoBehaviour:
   backstoryLetterDelay: 0.05
   backstoryTextField: {fileID: 751794924}
   loadingTextField: {fileID: 532749421}
-  backstoryAudioClip: {fileID: 8300000, guid: 87de0bec00836ec4bb2cd3d0ab823732, type: 3}
+  backstoryAudioClip: {fileID: 8300000, guid: 709cd5a8dcbe5f14689f943fb76a9c84, type: 3}
   playSceneName: Lars_Working
   skipButton: {fileID: 338386113}
   playButton: {fileID: 405599846}

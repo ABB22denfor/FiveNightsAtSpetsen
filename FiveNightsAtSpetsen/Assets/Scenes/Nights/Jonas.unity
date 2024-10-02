@@ -546,6 +546,12 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 11569107}
   m_PrefabAsset: {fileID: 0}
+--- !u!81 &11569109 stripped
+AudioListener:
+  m_CorrespondingSourceObject: {fileID: 7462259795775819062, guid: 55179d2391ce56f439e899513ee0f6ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 11569107}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &16377245 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8856916482769721425, guid: 9d35a9912b93b3241873d9a5f78517ad,
@@ -29169,6 +29175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMinDistance: 1
   audioMaxDistance: 40
+  audioListener: {fileID: 11569109}
   audioSource: {fileID: 0}
 --- !u!1001 &883820503
 PrefabInstance:

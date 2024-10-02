@@ -41124,7 +41124,7 @@ MonoBehaviour:
   knowsAboutPlayer: 0
   knowsWherePlayerIs: 0
   hasCapturedPlayer: 0
-  trackingPlayerTime: 5
+  trackingPlayerTime: 15
   forgetPlayerTime: 60
 --- !u!114 &1377549881
 MonoBehaviour:
@@ -41141,7 +41141,6 @@ MonoBehaviour:
   subtitleLetterDelay: 0.05
   subtitleText: {fileID: 1372127630}
   isTalking: 0
-  playerAudioListener: {fileID: 1109858711}
 --- !u!114 &1377549882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41156,6 +41155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMinDistance: 1
   audioMaxDistance: 50
+  audioListener: {fileID: 1109858711}
   audioSource: {fileID: 0}
 --- !u!1001 &1378912827
 PrefabInstance:
