@@ -7,6 +7,9 @@ public class PlayerCamera : MonoBehaviour
 
     public Transform orientation;
 
+    public GameObject TeacherCamera;
+    public GameObject TeacherLight;
+
     float xRotation;
     float yRotation = -180f;
 
@@ -18,13 +21,15 @@ public class PlayerCamera : MonoBehaviour
     float hiddenYRotation;
     float hiddenBounds;
 
-    void OnEnable() {
+    void OnEnable()
+    {
         EventsManager.Instance.playerEvents.OnPlayerHid += Hide;
         EventsManager.Instance.playerEvents.OnPlayerRevealed += Emerge;
         EventsManager.Instance.teacherEvents.OnPlayerCaptured += Captured;
     }
 
-    void OnDisable() {
+    void OnDisable()
+    {
         EventsManager.Instance.playerEvents.OnPlayerHid -= Hide;
         EventsManager.Instance.playerEvents.OnPlayerRevealed -= Emerge;
         EventsManager.Instance.teacherEvents.OnPlayerCaptured -= Captured;
@@ -32,16 +37,19 @@ public class PlayerCamera : MonoBehaviour
 
     void Start()
     {
+        TeacherLight.SetActive(false);
+        TeacherCamera.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     void Update()
     {
-        if (immobile) 
+        if (immobile)
             return;
 
-        if (!hidden) {
+        if (!hidden)
+        {
             float mouseX = Input.GetAxis("Mouse X") * sensX;
             float mouseY = Input.GetAxis("Mouse Y") * sensY;
 
@@ -52,21 +60,22 @@ public class PlayerCamera : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-        } 
+        }
         else
         {
             float mouseX = Input.GetAxis("Mouse X") * sensY / 2;
 
             hiddenYRotation += mouseX;
-            hiddenYRotation = Mathf.Clamp(hiddenYRotation, 
-                                          initialHiddenYRotation - hiddenBounds, 
+            hiddenYRotation = Mathf.Clamp(hiddenYRotation,
+                                          initialHiddenYRotation - hiddenBounds,
                                           initialHiddenYRotation + hiddenBounds);
 
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, hiddenYRotation, 0);
         }
     }
 
-    void Hide(HidingSpot spot) {
+    void Hide(HidingSpot spot)
+    {
         oldPos = transform.position;
         transform.position = spot.transform.position + spot.offset;
         hiddenBounds = spot.bounds;
@@ -76,14 +85,19 @@ public class PlayerCamera : MonoBehaviour
         hiddenYRotation = transform.eulerAngles.y;
     }
 
-    void Emerge(HidingSpot spot) {
+    void Emerge(HidingSpot spot)
+    {
         transform.position = oldPos;
         hidden = false;
     }
 
-    void Captured() {
+    void Captured()
+    {
         Vector3 teacherPos = GameObject.Find("Teacher").transform.position;
         transform.LookAt(teacherPos + new Vector3(0, 5, 0));
         immobile = true;
+        TeacherLight.SetActive(true);
+        TeacherCamera.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 }
