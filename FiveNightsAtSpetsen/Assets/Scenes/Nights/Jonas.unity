@@ -29039,8 +29039,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864517937106545867, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
+      propertyPath: detectionArc
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864517937106545867, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
       propertyPath: detectionRange
-      value: 75
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 8288388981843304445, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
@@ -29155,6 +29160,7 @@ MonoBehaviour:
   subtitleLetterDelay: 0.05
   subtitleText: {fileID: 1372127630}
   isTalking: 0
+  playerAudioListener: {fileID: 0}
 --- !u!114 &882541152
 MonoBehaviour:
   m_ObjectHideFlags: 0

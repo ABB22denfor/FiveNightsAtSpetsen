@@ -7391,8 +7391,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864517937106545867, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
+      propertyPath: detectionArc
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864517937106545867, guid: 53ea1ad0507c5434392aa68d1516acce,
+        type: 3}
       propertyPath: detectionRange
-      value: 1000
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 7864517937106545867, guid: 53ea1ad0507c5434392aa68d1516acce,
         type: 3}
