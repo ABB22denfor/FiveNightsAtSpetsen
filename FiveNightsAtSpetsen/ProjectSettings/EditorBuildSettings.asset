@@ -15,18 +15,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Nights/Lars_Working.unity
     guid: b870d7a427c9e32498072d9714db6dca
   - enabled: 1
-    path: Assets/Scenes/LoadingScenes/LarsLoadingScene.unity
+    path: Assets/Scenes/LoadingScenes/lars.unity
     guid: fbb55de6a963281488161dd5808be924
   - enabled: 1
     path: Assets/Scenes/LoadingScenes/JonasLoadingScene.unity
     guid: 2101f1c0855ae714a83a60a13e960c9a
   - enabled: 1
-    path: Assets/Scenes/LoadingScenes/AndreasLoadingScene.unity
+    path: Assets/Scenes/LoadingScenes/andreas.unity
     guid: 54188bfd28b018644a333567ac133442
   - enabled: 1
-    path: Assets/Scenes/LoadingScenes/JockeLoadingScene.unity
+    path: Assets/Scenes/LoadingScenes/jocke.unity
     guid: d57f71078127f044faaa5e7853d0ffc7
   - enabled: 1
-    path: Assets/Scenes/LoadingScenes/JetonLoadingScene.unity
+    path: Assets/Scenes/LoadingScenes/jeton.unity
     guid: 039ee4fa82a6fbc4991da7ead4276bf7
   m_configObjects: {}
