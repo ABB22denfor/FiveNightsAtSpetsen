@@ -7,22 +7,25 @@ public class TeacherRaycasting : MonoBehaviour
 
     public GameObject target;
     public float detectionRange = 10f;
+    public float detectionArc = 180f;
     public LayerMask detectionLayer;
     Renderer targetRenderer;
 
-    public GameObject player;
+    public GameObject player { get; private set; }
 
     public float timeSincePlayerSpotted = 0;
 
     public bool playerHiding;
     public Vector3 hidingSpot;
 
-    void OnEnable() {
+    void OnEnable()
+    {
         EventsManager.Instance.playerEvents.OnPlayerHid += PlayerHid;
         EventsManager.Instance.playerEvents.OnPlayerRevealed += PlayerRevealed;
     }
 
-    void OnDisable() {
+    void OnDisable()
+    {
         EventsManager.Instance.playerEvents.OnPlayerHid -= PlayerHid;
         EventsManager.Instance.playerEvents.OnPlayerRevealed -= PlayerRevealed;
     }
@@ -41,7 +44,9 @@ public class TeacherRaycasting : MonoBehaviour
         if (playerHiding && Vector3.Distance(transform.position, hidingSpot) < 10f && Random.value < 0.2f)
             EventsManager.Instance.teacherEvents.PlayerCaptured();
 
-        if (directionToTarget.magnitude <= detectionRange)
+        float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
+
+        if (angleToTarget <= detectionArc / 2f && directionToTarget.magnitude <= detectionRange)
         {
             RaycastHit hit;
 
@@ -84,19 +89,32 @@ public class TeacherRaycasting : MonoBehaviour
         }
     }
 
-    void PlayerHid(HidingSpot spot) {
+    void PlayerHid(HidingSpot spot)
+    {
         hidingSpot = spot.transform.position;
         playerHiding = true;
     }
 
-    void PlayerRevealed(HidingSpot spot) {
+    void PlayerRevealed(HidingSpot spot)
+    {
         playerHiding = false;
     }
 
     void OnDrawGizmosSelected()
     {
         if (!drawVision) return;
+
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
+
+        Vector3 forward = transform.forward;
+
+        Quaternion leftRayRotation = Quaternion.Euler(0, -detectionArc / 2f, 0);
+        Vector3 leftRayDirection = leftRayRotation * forward;
+
+        Quaternion rightRayRotation = Quaternion.Euler(0, detectionArc / 2f, 0);
+        Vector3 rightRayDirection = rightRayRotation * forward;
+
+        Gizmos.DrawLine(transform.position, transform.position + leftRayDirection * detectionRange);
+        Gizmos.DrawLine(transform.position, transform.position + rightRayDirection * detectionRange);
     }
 }

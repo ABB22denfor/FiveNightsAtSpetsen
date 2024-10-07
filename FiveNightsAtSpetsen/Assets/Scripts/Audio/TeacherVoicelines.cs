@@ -19,6 +19,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(TeacherVoiceline))]
@@ -72,6 +73,23 @@ public class TeacherVoicelines : MonoBehaviour
   }
 
   /*
+   * Get the room name from the TeacherRoomPath object
+   *
+   * Some of the room ids have a digit in the end,
+   * that have to be removed to get the room name
+   */
+  private string GetRoomName(TeacherRoomPath roomPath)
+  {
+    string roomId = roomPath.id;
+
+    if(roomId.Any(char.IsDigit) && roomId.Length > 1)
+    {
+      return roomId.Substring(0, roomId.Length - 1).ToLower();
+    }
+    else return roomId.ToLower();
+  }
+
+  /*
    * When the teacher enters a room
    *
    * The teacher shouldn't say a room voiceline,
@@ -79,11 +97,11 @@ public class TeacherVoicelines : MonoBehaviour
    *
    * Note: Ask Oliver to create this event
    */
-  private void OnTeacherEnteredRoom(TeacherRoomPath room, bool isTarget)
+  private void OnTeacherEnteredRoom(TeacherRoomPath roomPath, bool isTarget)
   {
-    string roomName = room.id;
+    string roomName = GetRoomName(roomPath);
 
-    Debug.Log("Teacher entered room: " + roomName);
+    Debug.Log($"Teacher entered room: '{roomName}'");
 
     if(teacher.isAlert || teacher.hasSeenPlayer)
     {
