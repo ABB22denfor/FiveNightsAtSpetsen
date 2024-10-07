@@ -23,7 +23,12 @@ public class TaskUIManager : MonoBehaviour
     {
         if (nextStep != null)
         {
-            tmp.text = lastStep.completionString + "\n\n" + nextStep.taskString;
+            string completionString = (lastStep.stepIndex == nextStep.stepIndex)
+                                    ? lastStep.stepCompletionString : lastStep.indexCompletionString;
+
+            completionString += (completionString == "") ? "" : "\n\n";
+
+            tmp.text = completionString + nextStep.taskString;
             StartCoroutine(RemoveCompletionText(nextStep.taskString));
         }
         else
