@@ -977,20 +977,17 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: clueString
-      value: "Rymmer inte bara skr\xE4p, utan kanske ocks\xE5 hemligheter. D\xE4r
-        l\xE4raren aldrig skulle titta, men d\xE4r elever g\xF6mmer mer \xE4n sina
-        misstag. P\xE5 en plats d\xE4r m\xF6rka minnen blandas med bortgl\xF6mda
-        skolkataloger."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: trashcan2 task string eaaaaaaaaaaa
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: trashcan2 tasl completed
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -11085,12 +11082,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: laptop2 task string
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: dea
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -26928,20 +26925,17 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: clueString
-      value: "Rymmer inte bara skr\xE4p, utan kanske ocks\xE5 hemligheter. D\xE4r
-        l\xE4raren aldrig skulle titta, men d\xE4r elever g\xF6mmer mer \xE4n sina
-        misstag. P\xE5 en plats d\xE4r m\xF6rka minnen blandas med bortgl\xF6mda
-        skolkataloger."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: trashcan1 task string eeeeeeeeeeeeeeeeeeeee
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: trashcan1 tasl completed
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -40534,12 +40528,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: laptop1 task string ejanianiejnaijdnaiendeandi
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: laptop1 task completed!!
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -46400,20 +46394,17 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: clueString
-      value: "Rymmer inte bara skr\xE4p, utan kanske ocks\xE5 hemligheter. D\xE4r
-        l\xE4raren aldrig skulle titta, men d\xE4r elever g\xF6mmer mer \xE4n sina
-        misstag. P\xE5 en plats d\xE4r m\xF6rka minnen blandas med bortgl\xF6mda
-        skolkataloger."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: trashcan3 task string daaaaaau
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: trashcan3 tasl completed
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}

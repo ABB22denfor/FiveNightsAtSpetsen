@@ -960,12 +960,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: Find password clue #2 in other trashcan
+      value: "Hitta fler tecken till l\xF6senordet."
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: Clue #2 found!
+      value: Du hittade ytterligare 2 tecken!
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -11241,12 +11241,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: Edit the schedule!
+      value: "Logga in p\xE5 datorn och \xE4ndra schemat."
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: Task Completed!
+      value: "Du \xE4ndrade p\xE5 schemat!"
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -27541,12 +27541,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: Find password clue #1 in trashcan
+      value: "Hitta en lapp med l\xF6senordet p\xE5."
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: Clue #1 found!
+      value: "Du hittade de 2 f\xF6rsta tecknen!"
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -41269,13 +41269,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
+      propertyPath: clueString
+      value: "Lars hade sitt l\xF6senord nerskrivet."
+      objectReference: {fileID: 0}
+    - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
+        type: 3}
       propertyPath: taskString
-      value: Unlock Lars Laptop!
+      value: Ta dig till lars dator.
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: Get his password!
+      value: "Du beh\xF6ver ett l\xF6senord p\xE5 6 tecken."
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -47663,12 +47668,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: taskString
-      value: Find password clue #3 in final trashcan
+      value: "Hitta den sista delen av l\xF6senordet."
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: completionString
-      value: Clue #3 found!
+      value: "Du har nu l\xF6senordet till Lars dator!"
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
