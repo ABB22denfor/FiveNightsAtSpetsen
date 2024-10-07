@@ -171,7 +171,7 @@ MonoBehaviour:
   backstoryLetterDelay: 0.05
   backstoryTextField: {fileID: 751794924}
   loadingTextField: {fileID: 532749421}
-  backstoryAudioClip: {fileID: 8300000, guid: 3140f5e5c494f974bb6d825bfd22fd68, type: 3}
+  backstoryAudioClip: {fileID: 8300000, guid: ac95e8cc7029557479551a975641a392, type: 3}
   playSceneName: Jonas
   skipButton: {fileID: 338386113}
   playButton: {fileID: 405599846}
