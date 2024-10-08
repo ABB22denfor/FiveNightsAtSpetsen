@@ -17,6 +17,15 @@ using System.Globalization;
 
 public class TeacherAudioManager : MonoBehaviour
 {
+  [SerializeField]
+  private float audioMinDistance =  1.0f;
+  
+  [SerializeField]
+  private float audioMaxDistance = 80.0f;
+
+  [SerializeField]
+  private AudioListener audioListener;
+
   public AudioSource audioSource;
 
   private Dictionary<string, AudioClip> audioClips;
@@ -34,11 +43,28 @@ public class TeacherAudioManager : MonoBehaviour
 
     audioSource = gameObject.AddComponent<AudioSource>();
 
+    ConfigureAudioSource();
+
     // If the teacher has a name to work with, start the audio manager
     if(teacher != null && teacher.teacherName != null)
     {
       LoadAudioClips(teacher.teacherName);
     }
+  }
+
+  /*
+   *
+   */
+  private void ConfigureAudioSource()
+  {
+    // Set the spatial blend to 3D
+    audioSource.spatialBlend = 1.0f;
+
+    // Set the volume rolloff mode to Linear
+    audioSource.rolloffMode = AudioRolloffMode.Linear;
+
+    audioSource.minDistance = audioMinDistance;  // Full volume at this distance
+    audioSource.maxDistance = audioMaxDistance; // Volume will be zero at this distance
   }
 
   /*
@@ -123,5 +149,29 @@ public class TeacherAudioManager : MonoBehaviour
     Debug.Log($"Stop playing audio: '{audioSource.clip}'");
 
     audioSource.Stop();
+  }
+
+  /*
+   * Check if the player is hearing teacher
+   *
+   * If the audioSource or the audioListener is not correctly supplied,
+   * the subtitle should print, for debugging reasons
+   */
+  public bool PlayerIsHearingTeacher()
+  {
+    if((audioSource == null) || (audioListener == null))
+    {
+      Debug.LogWarning("AudioSource or AudioListener not configured");
+
+      return true;
+    }
+
+    Vector3 teacherPosition = audioSource.transform.position;
+    Vector3 playerPosition  = audioListener.transform.position;
+
+    float audioDistance = Vector3.Distance(teacherPosition, playerPosition);
+
+    // return (audioSource.isPlaying) &&
+    return (audioDistance <= audioSource.maxDistance);
   }
 }

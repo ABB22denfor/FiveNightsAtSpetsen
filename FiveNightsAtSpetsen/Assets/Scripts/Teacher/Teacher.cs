@@ -39,7 +39,7 @@ public class Teacher : MonoBehaviour
 
     public void ReachedTarget()
     {
-        if (movement.movingToLastSpotted) 
+        if (movement.movingToLastSpotted)
         {
             mode = TeacherMode.SpottedPlayer;
             movement.movingToLastSpotted = false;
@@ -60,7 +60,7 @@ public class Teacher : MonoBehaviour
 
             StartCoroutine(MoveToNext(GetDelay()));
         }
-        else 
+        else
         {
             EventsManager.Instance.teacherEvents.PlayerCaptured();
         }
@@ -117,7 +117,8 @@ public class Teacher : MonoBehaviour
         mode = TeacherMode.InvestigatingNoise;
     }
 
-    public enum TeacherMode {
+    public enum TeacherMode
+    {
         Standard,
         InvestigatingNoise,
         SpottedPlayer,

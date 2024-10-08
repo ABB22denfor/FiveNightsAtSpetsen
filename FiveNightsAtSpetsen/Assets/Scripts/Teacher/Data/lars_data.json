@@ -1,62 +1,41 @@
 {
     "delays": [
         {
-            "id": "3dprinters2",
-            "delay": 1.5
+            "id": "larsskrivbord",
+            "delay": 7.5
         }
     ],
     "routes": {
         "main": [
             {
+                "room": "biblioteket"
+            },
+            {
                 "room": "klassrummet1"
-            },
-            {
-                "room": "random"
-            },
-            {
-                "room": "kafeterian"
-            },
-            {
-                "room": "random"
-            },
-            {
-                "room": "lararrummet",
-                "repetitions": 2
-            }
-        ],
-        "alt": [
-            {
-                "room": "kafeterian"
             },
             {
                 "room": "kapprummet"
             },
             {
-                "room": "vaxthuset"
+                "room": "terrariet1"
+            },
+            {
+                "room": "vardagsrummet"
             },
             {
                 "room": "lararrummet"
-            },
-            {
-                "room": "hallonrummet"
-            },
-            {
-                "room": "klassrummet1"
-            },
-            {
-                "room": "biblioteket"
-            },
+            }
+        ],
+        "alt": [
             {
                 "room": "klassrummet2"
             },
             {
-                "room": "terrariet1"
+                "room": "teknikarbetsplats1",
+                "repetitions": 1
             },
             {
-                "room": "teknikarbetsplats1"
-            },
-            {
-                "room": "terrariet2"
+                "room": "vardagsrummet"
             },
             {
                 "room": "affisch"
@@ -65,7 +44,26 @@
                 "room": "teknikarbetsplats2"
             },
             {
+                "room": "terrariet2"
+            },
+            {
+                "room": "biblioteket"
+            },
+            {
+                "room": "hallonrummet"
+            },
+            {
                 "room": "vardagsrummet"
+            },
+            {
+                "room": "kafeterian",
+                "repetitions": 1
+            },
+            {
+                "room": "kapprummet"
+            },
+            {
+                "room": "lararrummet"
             }
         ]
     }

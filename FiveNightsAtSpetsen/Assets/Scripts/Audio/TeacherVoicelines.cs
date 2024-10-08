@@ -19,13 +19,16 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(TeacherVoiceline))]
 [RequireComponent(typeof(TeacherPlayerMemory))]
+[RequireComponent(typeof(TeacherAudioManager))]
 public class TeacherVoicelines : MonoBehaviour
 {
-  private Teacher teacher;
+  private Teacher         teacher;
+  private TeacherMovement teacherMovement;
 
   private TeacherLinesManager linesManager;
   private TeacherVoiceline    teacherVoiceline;
@@ -41,6 +44,7 @@ public class TeacherVoicelines : MonoBehaviour
     Debug.Log("TeacherVoicelines.cs enabled");
 
     teacher          = gameObject.GetComponent<Teacher>();
+    teacherMovement  = gameObject.GetComponent<TeacherMovement>();
     teacherVoiceline = gameObject.GetComponent<TeacherVoiceline>();
     teacherMemory    = gameObject.GetComponent<TeacherPlayerMemory>();
 
@@ -69,6 +73,23 @@ public class TeacherVoicelines : MonoBehaviour
   }
 
   /*
+   * Get the room name from the TeacherRoomPath object
+   *
+   * Some of the room ids have a digit in the end,
+   * that have to be removed to get the room name
+   */
+  private string GetRoomName(TeacherRoomPath roomPath)
+  {
+    string roomId = roomPath.id;
+
+    if(roomId.Any(char.IsDigit) && roomId.Length > 1)
+    {
+      return roomId.Substring(0, roomId.Length - 1).ToLower();
+    }
+    else return roomId.ToLower();
+  }
+
+  /*
    * When the teacher enters a room
    *
    * The teacher shouldn't say a room voiceline,
@@ -76,11 +97,11 @@ public class TeacherVoicelines : MonoBehaviour
    *
    * Note: Ask Oliver to create this event
    */
-  private void OnTeacherEnteredRoom(TeacherRoomPath room, bool isTarget)
+  private void OnTeacherEnteredRoom(TeacherRoomPath roomPath, bool isTarget)
   {
-    string roomName = room.id;
+    string roomName = GetRoomName(roomPath);
 
-    Debug.Log("Teacher entered room: " + roomName);
+    Debug.Log($"Teacher entered room: '{roomName}'");
 
     if(teacher.isAlert || teacher.hasSeenPlayer)
     {
@@ -90,12 +111,7 @@ public class TeacherVoicelines : MonoBehaviour
 
     Voiceline voiceline = linesManager.GetRoomEnteredVoiceline(roomName);
 
-    if(voiceline != null)
-    {
-      teacherVoiceline.StopVoiceline();
-
-      teacherVoiceline.StartVoiceline(voiceline);
-    }
+    teacherVoiceline.StartVoiceline(voiceline);
   }
 
   /*
@@ -115,10 +131,32 @@ public class TeacherVoicelines : MonoBehaviour
     // Say the spotting voiceline
     Voiceline voiceline = linesManager.GetSpottingVoiceline();
 
-    if(voiceline != null)
-    {
-      teacherVoiceline.StopVoiceline();
+    teacherVoiceline.StartVoiceline(voiceline);
 
+    StartCoroutine(MaybeSayChasingVoiceline());
+  }
+
+  /*
+   * After the teacher has said that he spotted the player,
+   * he might also say that he is chasing the player
+   */
+  private IEnumerator MaybeSayChasingVoiceline()
+  {
+    Debug.Log("Waiting to say chasing voiceline");
+
+    // Wait until the audio has stopped playing
+    while(teacherVoiceline?.isTalking ?? true)
+    {
+      yield return new WaitForSeconds(0.1f);
+    }
+
+    // If the player has not yet been captured,
+    // say a chasing voiceline
+    if(teacherMovement.chasingPlayer &&
+      !teacherMemory.hasCapturedPlayer)
+    {
+      Voiceline voiceline = linesManager.GetChasingVoiceline();
+      
       teacherVoiceline.StartVoiceline(voiceline);
     }
   }
@@ -139,12 +177,7 @@ public class TeacherVoicelines : MonoBehaviour
 
     Voiceline voiceline = linesManager.GetCapturingVoiceline();
 
-    if(voiceline != null)
-    {
-      teacherVoiceline.StopVoiceline();
-
-      teacherVoiceline.StartVoiceline(voiceline);
-    }
+    teacherVoiceline.StartVoiceline(voiceline);
   }
 
   /*
@@ -174,11 +207,6 @@ public class TeacherVoicelines : MonoBehaviour
 
     teacherMemory.HearSound();
 
-    if(voiceline != null)
-    {
-      teacherVoiceline.StopVoiceline();
-
-      teacherVoiceline.StartVoiceline(voiceline);
-    }
+    teacherVoiceline.StartVoiceline(voiceline);
   }
 }

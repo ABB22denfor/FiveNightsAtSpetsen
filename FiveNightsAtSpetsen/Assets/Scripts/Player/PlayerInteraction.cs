@@ -11,6 +11,20 @@ public class PlayerInteraction : MonoBehaviour
     bool interacting = false;
     GameObject playerObject;
 
+    bool isActive = true;
+
+    void OnEnable()
+    {
+        EventsManager.Instance.playerEvents.OnPlayerHid += PlayerHid;
+        EventsManager.Instance.playerEvents.OnPlayerRevealed += PlayerRevealed;
+    }
+
+    void OnDisable()
+    {
+        EventsManager.Instance.playerEvents.OnPlayerHid -= PlayerHid;
+        EventsManager.Instance.playerEvents.OnPlayerRevealed -= PlayerRevealed;
+    }
+
     void Start()
     {
         playerObject = transform.Find("PlayerObject").gameObject;
@@ -18,6 +32,8 @@ public class PlayerInteraction : MonoBehaviour
 
     void Update()
     {
+        if (!isActive) return;
+
         Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         RaycastHit hit;
 
@@ -39,15 +55,15 @@ public class PlayerInteraction : MonoBehaviour
 
                 if (Input.GetKey(KeyCode.E))
                 {
-                    if (!interacting) 
+                    if (!interacting)
                     {
                         currentInteractable.Interact();
                         InitSlider();
                         interacting = true;
                     }
                     currentInteractable.Interacting(Time.deltaTime);
-                } 
-                else 
+                }
+                else
                 {
                     currentInteractable.StoppedInteracting();
                     interacting = false;
@@ -78,21 +94,34 @@ public class PlayerInteraction : MonoBehaviour
         UpdateSlider();
     }
 
-    void InitSlider() {
+    void InitSlider()
+    {
         if (currentInteractable.interactionDuration == 0)
             return;
-            
+
         slider.gameObject.SetActive(true);
         slider.maxValue = currentInteractable.interactionDuration;
         slider.value = 0;
     }
 
-    void UpdateSlider() {
-        if (!interacting || currentInteractable.interactionProgress >= currentInteractable.interactionDuration) {
+    void UpdateSlider()
+    {
+        if (!interacting || currentInteractable.interactionProgress >= currentInteractable.interactionDuration)
+        {
             slider.gameObject.SetActive(false);
             return;
         }
 
         slider.value = currentInteractable.interactionProgress;
+    }
+
+    void PlayerHid(HidingSpot spot)
+    {
+        isActive = false;
+    }
+
+    void PlayerRevealed(HidingSpot spot)
+    {
+        isActive = true;
     }
 }

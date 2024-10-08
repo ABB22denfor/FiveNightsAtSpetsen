@@ -11,13 +11,11 @@ public class GameOverManager : MonoBehaviour
     public GameObject Background;
     public GameObject GameOverMenu;
     public GameObject Confirm;
-    public GameObject Image;
     public GameObject Static;
 
     void Awake()
     {
         Canvas.SetActive(true);
-        Image.SetActive(true);
         Background.SetActive(true);
         GameOverMenu.SetActive(false);
         Confirm.SetActive(false);
