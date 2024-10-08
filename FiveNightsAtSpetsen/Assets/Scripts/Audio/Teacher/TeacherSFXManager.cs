@@ -22,6 +22,10 @@ public class TeacherSFXManager : MonoBehaviour
        EventsManager.Instance.animationEvents.OnStartWalking += () => {
          isWalking = true;
        }; 
+
+       EventsManager.Instance.teacherEvents.OnPlayerCaptured += () => {
+         Destroy(audioSource);
+       };
     }
 
     void OnDisable(){
@@ -40,7 +44,7 @@ public class TeacherSFXManager : MonoBehaviour
          audioSource.spatialBlend = 0.75f;
          audioSource.spread = 10f;
          audioSource.maxDistance = 10f;
-         audioSource.pitch = 0.75f;
+         audioSource.pitch = 0.9f;
          audioSource.Play();
 
          noSound = false;
