@@ -805,8 +805,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
+      propertyPath: stepCompletionString
+      value: "Du hittade 2 tecken till l\xF6senordet!"
+      objectReference: {fileID: 0}
+    - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
+        type: 3}
       propertyPath: indexCompletionString
-      value: eee
+      value: "Du har nu l\xF6senordet till Lars dator."
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -1576,7 +1581,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -18528,12 +18533,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: stepCompletionString
-      value: daeda
+      value: "Du hittade 2 tecken till l\xF6senordet!"
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: indexCompletionString
-      value: aaa
+      value: "Du har nu l\xF6senordet till Lars dator."
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -43115,12 +43120,12 @@ PrefabInstance:
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: stepCompletionString
-      value: bap
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
       propertyPath: indexCompletionString
-      value: bee
+      value: "Du beh\xF6ver ett l\xF6senord p\xE5 6 tecken."
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
@@ -48774,8 +48779,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
+      propertyPath: stepCompletionString
+      value: "Du hittade 2 tecken till l\xF6senordet."
+      objectReference: {fileID: 0}
+    - target: {fileID: -3573825393585980001, guid: c126294c51e7bb540bca50217d113cf5,
+        type: 3}
       propertyPath: indexCompletionString
-      value: uuu
+      value: "Du har nu l\xF6senordet till Lars dator."
       objectReference: {fileID: 0}
     - target: {fileID: 1648309680976137596, guid: c126294c51e7bb540bca50217d113cf5,
         type: 3}
