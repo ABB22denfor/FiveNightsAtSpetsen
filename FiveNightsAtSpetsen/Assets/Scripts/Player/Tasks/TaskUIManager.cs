@@ -8,24 +8,24 @@ public class TaskUIManager : MonoBehaviour
     public RectTransform rect;
     TextMeshProUGUI tmp;
 
-    void Awake() 
+    void Awake()
     {
         tmp = rect.Find("Info").GetComponent<TextMeshProUGUI>();
     }
 
-    public void Init(string initialString) 
+    public void Init(string initialString)
     {
         tmp.text = initialString;
         SetRect();
     }
-    
-    public void UpdateTask(TaskStep lastStep, TaskStep nextStep) 
+
+    public void UpdateTask(TaskStep lastStep, TaskStep nextStep)
     {
-        if (nextStep != null) 
+        if (nextStep != null)
         {
-            tmp.text = lastStep.completionString + "\n" + nextStep.taskString;
+            tmp.text = lastStep.completionString + "\n\n" + nextStep.taskString;
             StartCoroutine(RemoveCompletionText(nextStep.taskString));
-        } 
+        }
         else
         {
             tmp.text = "Alla uppgifter utförda!!";
@@ -33,7 +33,7 @@ public class TaskUIManager : MonoBehaviour
         SetRect();
     }
 
-    IEnumerator RemoveCompletionText(string taskString) 
+    IEnumerator RemoveCompletionText(string taskString)
     {
         yield return new WaitForSeconds(5f);
 
@@ -41,7 +41,7 @@ public class TaskUIManager : MonoBehaviour
         SetRect();
     }
 
-    void SetRect() 
+    void SetRect()
     {
         rect.sizeDelta = new Vector2(rect.sizeDelta.x, tmp.preferredHeight + 50 + 20);
     }

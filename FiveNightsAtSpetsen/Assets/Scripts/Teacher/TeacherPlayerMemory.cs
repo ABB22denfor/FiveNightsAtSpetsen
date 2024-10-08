@@ -10,7 +10,7 @@
  *
  * Written by Hampus Fridholm
  *
- * Last updated: 2024-10-01
+ * Last updated: 2024-10-02
  */
 
 using System.IO;
@@ -26,7 +26,7 @@ public class TeacherPlayerMemory : MonoBehaviour
 
   // The amount of seconds the teacher remembers the player's position
   [SerializeField]
-  private float trackingPlayerTime = 5.0f;
+  private float trackingPlayerTime = 15.0f;
 
   // The amount of seconds the teacher remembers the player
   [SerializeField]

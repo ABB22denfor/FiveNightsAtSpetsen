@@ -20,7 +20,7 @@ public class TeacherVoiceline : MonoBehaviour
   private float subtitleLetterDelay = 0.05f; // Delay between each letter
 
   [SerializeField]
-  private TextMeshProUGUI subtitleText  = null;
+  private TextMeshProUGUI subtitleText = null;
 
   private TeacherAudioManager audioManager;
   private Animator            animator;
@@ -112,11 +112,13 @@ public class TeacherVoiceline : MonoBehaviour
   /*
    * This is the process that is ran when the voiceline is being said
    *
-   * Fix: Either commit to only use this Coroutine for subtitles,
-   * or add something else in it.
+   * The neat part is, that only the text that the player is hearing,
+   * gets outputted as the subtitle
    */
   private IEnumerator TalkingVoiceline(string voicelineText)
   {
+    Debug.Log("Start animating voiceline subtitle");
+
     if(subtitleText)
     {
       subtitleText.text = "";
@@ -124,7 +126,8 @@ public class TeacherVoiceline : MonoBehaviour
 
     for(int index = 0; index < voicelineText.Length; index++)
     {
-      if(subtitleText)
+      if(subtitleText &&
+        (audioManager?.PlayerIsHearingTeacher() ?? false))
       {
         subtitleText.text += voicelineText[index];
       }

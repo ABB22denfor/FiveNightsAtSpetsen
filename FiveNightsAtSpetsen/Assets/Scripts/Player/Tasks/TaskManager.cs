@@ -21,7 +21,7 @@ public class TaskManager : MonoBehaviour
         EventsManager.Instance.taskEvents.OnStepCompleted -= StepCompleted;
     }
 
-    void Start() 
+    void Start()
     {
         steps = steps.OrderBy(s => s.stepIndex).ToList();
         ui = GetComponent<TaskUIManager>();
@@ -42,8 +42,10 @@ public class TaskManager : MonoBehaviour
             }
             else
             {
-                foreach (TaskStep ts in steps) {
-                    if (ts.stepIndex == steps[0].stepIndex) {
+                foreach (TaskStep ts in steps)
+                {
+                    if (ts.stepIndex == steps[0].stepIndex)
+                    {
                         ts.gameObject.SetActive(true);
                     }
                 }
@@ -51,7 +53,7 @@ public class TaskManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Attempted to complete step " + step.id + 
+            Debug.Log("Attempted to complete step " + step.id +
                       " out of order\n(Current step index: " + steps[0].stepIndex +
                       ", attempted to complete step of index " + step.stepIndex);
         }

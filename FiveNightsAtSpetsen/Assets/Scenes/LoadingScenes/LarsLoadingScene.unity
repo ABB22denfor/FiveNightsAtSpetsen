@@ -171,8 +171,8 @@ MonoBehaviour:
   backstoryLetterDelay: 0.05
   backstoryTextField: {fileID: 751794924}
   loadingTextField: {fileID: 532749421}
-  backstoryAudioClip: {fileID: 8300000, guid: ac95e8cc7029557479551a975641a392, type: 3}
-  playSceneName: Jonas
+  backstoryAudioClip: {fileID: 8300000, guid: 709cd5a8dcbe5f14689f943fb76a9c84, type: 3}
+  playSceneName: Lars_Working
   skipButton: {fileID: 338386113}
   playButton: {fileID: 405599846}
 --- !u!82 &183993102
@@ -983,11 +983,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Skoldagen \xE4r \xF6ver, men Jonas \xE4r fortfarande kvar och filosoferar
-    f\xF6r sig sj\xE4lv. Du har \xE5terv\xE4nt till skolan och har nu som uppgift
-    att beg\xE5 ett politiskt spratt genom att byta ut hans favoritb\xF6cker. Vad
-    du \xE4n g\xF6r, bli inte uppt\xE4ckt av Jonas, d\xE5 f\xE5r du enkelresa till
-    Sibirien."
+  m_text: "Skolan har slutat f\xF6r dagen, men l\xE4raren Lars har stannat kvar sj\xE4lv
+    och arbetar med att l\xE4gga schema f\xF6r kommande veckor. Du har tagit dig
+    tillbaka till skolan och har nu som uppgift att ta bort tr\xE5kiga lektioner
+    fr\xE5n schemat. Vad du \xE4n g\xF6r, bli inte uppt\xE4ckt! F\xF6r d\xE5 kommer
+    Lars att bryta benen av dig."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 126fd1b30de51c745869bc95139ed412, type: 2}
   m_sharedMaterial: {fileID: 7380749153068600961, guid: 126fd1b30de51c745869bc95139ed412,
@@ -1619,7 +1619,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00076675, y: 0}
+  m_AnchoredPosition: {x: 0.0010033, y: 0}
   m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1940409286
