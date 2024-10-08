@@ -27,6 +27,12 @@ using UnityEngine;
 [RequireComponent(typeof(TeacherAudioManager))]
 public class TeacherVoicelines : MonoBehaviour
 {
+  [SerializeField]
+  private float movingVoicelineDelayMin = 5.0f;
+
+  [SerializeField]
+  private float movingVoicelineDelayMax = 10.0f;
+
   private Teacher         teacher;
   private TeacherMovement teacherMovement;
 
@@ -70,6 +76,71 @@ public class TeacherVoicelines : MonoBehaviour
     EventsManager.Instance.teacherEvents.OnPlayerSpotted      -= OnPlayerSpotted;
     EventsManager.Instance.teacherEvents.OnPlayerCaptured     -= OnPlayerCaptured;
     EventsManager.Instance.teacherEvents.OnPlayerMadeSound    -= OnPlayerMadeSound;
+  }
+
+  /*
+   * When the scene starts,
+   * start a routine, which makes the teacher sometimes say a moving voiceline
+   */
+  void Start()
+  {
+    StartCoroutine(SometimesSayMovingVoiceline());
+  }
+
+  /*
+   * Start a routine, which sometimes say a moving voiceline,
+   * when the teacher is not saying anything else
+   */
+  private IEnumerator SometimesSayMovingVoiceline()
+  {
+    while(true)
+    {
+      // Wait until the teacher is not talking
+      while(teacherVoiceline?.isTalking ?? true)
+      {
+        yield return new WaitForSeconds(0.1f);
+      }
+      
+      Debug.Log("Starting moving voiceline countdown");
+
+      movingVoicelineRoutine = StartCoroutine(WaitToSayMovingVoiceline());
+
+      // Wait until the teacher starts talking
+      while(!teacherVoiceline?.isTalking ?? false)
+      {
+        yield return new WaitForSeconds(0.1f);
+      }
+      
+      // Cancel the moving voicline routine
+      if(movingVoicelineRoutine != null)
+      {
+        Debug.Log("Canceling moving voiceline countdown");
+
+        StopCoroutine(movingVoicelineRoutine);
+      }
+    }
+  }
+
+  /*
+   * As long as the teacher is not talking,
+   * say a moving voiceline after some random delay
+   *
+   * If the teacher starts saying something else,
+   * the moving voiceline won't be played
+   */
+  private Coroutine movingVoicelineRoutine = null;
+
+  private IEnumerator WaitToSayMovingVoiceline()
+  {
+    float randomDelay = Random.Range(movingVoicelineDelayMin, movingVoicelineDelayMax);
+
+    Debug.Log($"Saying moving voiceline in: {randomDelay}s");
+
+    yield return new WaitForSeconds(randomDelay);
+
+    Voiceline voiceline = linesManager.GetMovingVoiceline();
+
+    teacherVoiceline.StartVoiceline(voiceline);
   }
 
   /*

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class TeacherSFXManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class TeacherSFXManager : MonoBehaviour
     bool noSound = true;
 
     public AudioClip walkingSFX;
+    public AudioMixerGroup audioMixerGroup;
 
 
     private AudioSource audioSource;
@@ -36,11 +38,11 @@ public class TeacherSFXManager : MonoBehaviour
        if(isWalking && noSound){
          audioSource.clip = walkingSFX;
          audioSource.loop = true;
-         audioSource.volume = 1f;
-         audioSource.spatialBlend = 0.75f;
-         audioSource.spread = 10f;
-         audioSource.maxDistance = 10f;
-         audioSource.pitch = 0.75f;
+         audioSource.volume = 10f;
+         audioSource.spatialBlend = 1f;
+         audioSource.pitch = 1f;
+         audioSource.minDistance = 5f;
+         audioSource.outputAudioMixerGroup = audioMixerGroup;
          audioSource.Play();
 
          noSound = false;
