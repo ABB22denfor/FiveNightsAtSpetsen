@@ -158,14 +158,16 @@ public class TeacherPathManager : MonoBehaviour
         return null;
     }
 
-    public void SetAltRoute() {
+    public void SetAltRoute()
+    {
         if (useAltRoute)
             return;
 
         useAltRoute = true;
 
         (int i, float dist) closest = (-1, 0);
-        for (int j = 0; j < altRoute.Count; j++) {
+        for (int j = 0; j < altRoute.Count; j++)
+        {
             TeacherRoomPath room = altRoute[j].room;
             float distance = Vector3.Distance(waypoints.waypoints[room.exitPoint].transform.position,
                                               teacher.transform.position);
@@ -178,9 +180,10 @@ public class TeacherPathManager : MonoBehaviour
         initialAltRouteIndex = routeIndex;
     }
 
-    List<(TeacherRoomPath room, int repetitions)> GetRoute() {
+    List<(TeacherRoomPath room, int repetitions)> GetRoute()
+    {
         return (!useAltRoute ? route : altRoute);
-    } 
+    }
 
     (TeacherRoomPath room, bool isRandom) GetRouteTarget()
     {
