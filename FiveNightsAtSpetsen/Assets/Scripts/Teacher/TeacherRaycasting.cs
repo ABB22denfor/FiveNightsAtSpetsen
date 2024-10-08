@@ -41,8 +41,6 @@ public class TeacherRaycasting : MonoBehaviour
 
         Vector3 directionToTarget = target.transform.position - transform.position;
 
-        if (playerHiding && Vector3.Distance(transform.position, hidingSpot) < 10f && Random.value < 0.2f)
-            EventsManager.Instance.teacherEvents.PlayerCaptured();
 
         float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
 
@@ -60,6 +58,10 @@ public class TeacherRaycasting : MonoBehaviour
                         player = target;
                         teacher.PlayerSpotted(player.transform.position);
                     }
+
+                    if (playerHiding && Vector3.Distance(transform.position, hidingSpot) < 10f)
+                        EventsManager.Instance.teacherEvents.PlayerCaptured();
+
                 }
                 else
                 {
