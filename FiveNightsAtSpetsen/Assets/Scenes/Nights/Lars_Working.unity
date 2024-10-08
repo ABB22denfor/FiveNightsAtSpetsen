@@ -12149,10 +12149,11 @@ AudioSource:
   m_GameObject: {fileID: 502441999}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 19ee7f2216614c648b0ede60c5e88734,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: f06f800f76e48d043b023eb6e039508a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.063
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -43244,6 +43245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSFX: {fileID: 8300000, guid: 2f1340ae5b23b8744abd7e638fb9417d, type: 3}
+  audioMixerGroup: {fileID: 24300002, guid: 237ebf7819762524c8b9e90edad49d02, type: 2}
 --- !u!64 &1378430502
 MeshCollider:
   m_ObjectHideFlags: 0
