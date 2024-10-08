@@ -28,10 +28,10 @@ using UnityEngine;
 public class TeacherVoicelines : MonoBehaviour
 {
   [SerializeField]
-  private float movingVoicelineDelayMin = 15.0f;
+  private float movingVoicelineDelayMin = 5.0f;
 
   [SerializeField]
-  private float movingVoicelineDelayMax = 30.0f;
+  private float movingVoicelineDelayMax = 10.0f;
 
   private Teacher         teacher;
   private TeacherMovement teacherMovement;
@@ -101,6 +101,8 @@ public class TeacherVoicelines : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
       }
       
+      Debug.Log("Starting moving voiceline countdown");
+
       movingVoicelineRoutine = StartCoroutine(WaitToSayMovingVoiceline());
 
       // Wait until the teacher starts talking
@@ -112,6 +114,8 @@ public class TeacherVoicelines : MonoBehaviour
       // Cancel the moving voicline routine
       if(movingVoicelineRoutine != null)
       {
+        Debug.Log("Canceling moving voiceline countdown");
+
         StopCoroutine(movingVoicelineRoutine);
       }
     }
@@ -129,6 +133,8 @@ public class TeacherVoicelines : MonoBehaviour
   private IEnumerator WaitToSayMovingVoiceline()
   {
     float randomDelay = Random.Range(movingVoicelineDelayMin, movingVoicelineDelayMax);
+
+    Debug.Log($"Saying moving voiceline in: {randomDelay}s");
 
     yield return new WaitForSeconds(randomDelay);
 
