@@ -348,4 +348,42 @@ public class TeacherLinesManager
 
     return voiceline;
   }
+
+  /*
+   *
+   */
+  public Voiceline GetMovingVoiceline()
+  {
+    Debug.Log("Getting moving voiceline");
+
+    if(teacherLines == null || workingLines == null)
+    {
+      Debug.LogWarning("Teacher's voicelines are not loaded");
+
+      return null;
+    }
+
+    // If the teacher doesn't have hearing voicelines
+    if(teacherLines.moving.Count == 0)
+    {
+      Debug.LogWarning("Teacher doesn't have moving voicelines");
+      
+      return null;
+    }
+
+    // Refill the working voicelines if it is empty
+    if(workingLines.moving.Count == 0)
+    {
+      workingLines.moving.AddRange(teacherLines.moving);
+    }
+
+    // Pop a random working voiceline
+    int index = Random.Range(0, workingLines.moving.Count);
+
+    Voiceline voiceline = workingLines.moving[index];
+
+    workingLines.moving.RemoveAt(index);
+
+    return voiceline;
+  }
 }

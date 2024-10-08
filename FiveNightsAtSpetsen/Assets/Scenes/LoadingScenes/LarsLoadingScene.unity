@@ -172,7 +172,7 @@ MonoBehaviour:
   backstoryTextField: {fileID: 751794924}
   loadingTextField: {fileID: 532749421}
   backstoryAudioClip: {fileID: 8300000, guid: 709cd5a8dcbe5f14689f943fb76a9c84, type: 3}
-  playSceneName: Lars_Working
+  playSceneName: Lars
   skipButton: {fileID: 338386113}
   playButton: {fileID: 405599846}
 --- !u!82 &183993102
